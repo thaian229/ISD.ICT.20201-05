@@ -7,7 +7,8 @@ Write use case specifications and draw activity diagrams for most use cases of t
 
 ## Contributions
 #### 1. Nguyen Thai An:
-Use case "Create EBR account" and "Setup Payment Method"
+Use case "Create EBR account" and "Setup Payment Method"\
+Assemble the "SRS - Eco Bike Rental software" and write non functional requirements
 
 #### 2. Bui Tu Hoang
 Use case "View dock's detail information" and "View bike's information"
