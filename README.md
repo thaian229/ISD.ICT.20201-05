@@ -3,7 +3,8 @@
 
 # LAB 02 - SOFTWARE REQUIREMENT SPECIFICATION
 ## Tasks
-Write use case specifications and draw activity diagrams for most use cases of the Eco Bike Rental software
+Write use case specifications and draw activity diagrams for most use cases of the Eco Bike Rental software\
+Fill in the Software Requirement Specification based on the given template.
 
 ## Contributions
 #### 1. Nguyen Thai An:
