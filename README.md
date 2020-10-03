@@ -16,6 +16,7 @@ Use case "View dock's detail information" and "View bike's information"
 
 #### 3. Vu Minh Hoang
 Use case "Rent a bike" and "Pay deposit"
+Write 1.Introdiction in "SRS - Eco Bike Rental software"
 
 #### 4. Nguyen Manh Khang
 Use case "Return a bike" and "Refund deposit after deduct rental fees"
