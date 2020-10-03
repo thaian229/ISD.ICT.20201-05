@@ -15,7 +15,7 @@ Assemble the "SRS - Eco Bike Rental software" and write non functional requireme
 Use case "View dock's detail information" and "View bike's information"
 
 #### 3. Vu Minh Hoang
-Use case "Rent a bike" and "Pay deposit"
+Use case "Rent a bike" and "Pay deposit"\
 Write 1.Introdiction in "SRS - Eco Bike Rental software"
 
 #### 4. Nguyen Manh Khang
