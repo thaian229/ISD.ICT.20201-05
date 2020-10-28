@@ -1,3 +1,27 @@
+---
+
+# LAB 03 - Interaction Diagrams
+## Tasks
+Draw sequence diagrams and Communication diagrams for Eco Bike Rental software
+
+## Contributions
+#### 1. Nguyen Thai An:
+Use case "Create EBR account" and "Setup Payment Method"
+
+#### 2. Bui Tu Hoang
+Use case "View dock's detail information" and "View bike's information"
+
+#### 3. Vu Minh Hoang
+Use case "Rent a bike" and "Pay deposit""
+
+#### 4. Nguyen Manh Khang
+Use case "Return a bike" and "Refund deposit after deduct rental fees"
+
+## Revisions
+An reviews Tu Hoang\
+Tu Hoang reviews Minh Hoang\
+Minh Hoang reviews Khang\
+Khang reviews An
 
 ---
 
