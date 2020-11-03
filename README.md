@@ -1,5 +1,34 @@
 ---
 
+# LAB 04 - Analysis Class Diagram
+## Tasks
+At this point, our group decided to shift to MVC pattern. Hence, for this week, we've done:/
+Re-design the interaction diagrams
+Draws analysis class diagram for each use-cases
+Make the merged analysis class diagram.
+
+## Contributions
+#### 1. Nguyen Thai An:
+Use case "Create EBR account" and "Setup Payment Method"/
+Make the merged analysis class diagram.
+
+#### 2. Bui Tu Hoang
+Use case "View dock's detail information" and "View bike's information"
+
+#### 3. Vu Minh Hoang
+Use case "Rent a bike" and "Pay deposit""
+
+#### 4. Nguyen Manh Khang
+Use case "Return a bike" and "Refund deposit after deduct rental fees"
+
+## Revisions
+An reviews Khang\
+Tu Hoang reviews An\
+Minh Hoang reviews Tu Hoang\
+Khang reviews Minh Hoang
+
+---
+
 # LAB 03 - Interaction Diagrams
 ## Tasks
 Draw sequence diagrams and Communication diagrams for Eco Bike Rental software
