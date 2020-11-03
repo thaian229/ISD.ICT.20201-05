@@ -1,6 +1,6 @@
 ---
 
-# LAB 04 - Analysis Class Diagram
+# LAB 04 - ANALYSIS CLASS DIAGRAM
 ## Tasks
 At this point, our group decided to shift to MVC pattern. Hence, for this week, we've done:\
 Re-design the interaction diagrams\
@@ -29,7 +29,7 @@ Khang reviews Minh Hoang
 
 ---
 
-# LAB 03 - Interaction Diagrams
+# LAB 03 - INTERACTION DIAGRAM
 ## Tasks
 Draw sequence diagrams and Communication diagrams for Eco Bike Rental software
 
