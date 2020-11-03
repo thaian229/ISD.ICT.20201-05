@@ -2,14 +2,14 @@
 
 # LAB 04 - Analysis Class Diagram
 ## Tasks
-At this point, our group decided to shift to MVC pattern. Hence, for this week, we've done:/
-Re-design the interaction diagrams
-Draws analysis class diagram for each use-cases
+At this point, our group decided to shift to MVC pattern. Hence, for this week, we've done:\
+Re-design the interaction diagrams\
+Draws analysis class diagram for each use-cases\
 Make the merged analysis class diagram.
 
 ## Contributions
 #### 1. Nguyen Thai An:
-Use case "Create EBR account" and "Setup Payment Method"/
+Use case "Create EBR account" and "Setup Payment Method"\
 Make the merged analysis class diagram.
 
 #### 2. Bui Tu Hoang
