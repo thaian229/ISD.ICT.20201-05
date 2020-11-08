@@ -1,5 +1,3 @@
----
-
 # LAB 05 - INTERFACE DESIGN
 ## Tasks
 Create user interface design documents.\
@@ -8,7 +6,7 @@ Design software interface: subsystem design.
 ## Contributions
 #### 1. Nguyen Thai An:
 Write interface standardlization documentation and screen transition diagrams.\
-Screen specification for Home and Payment Screen\
+Screen specification for Home and Payment Screen.\
 Draw subsystem design documentation.
 
 #### 2. Bui Tu Hoang
