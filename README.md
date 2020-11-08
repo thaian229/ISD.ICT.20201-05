@@ -1,5 +1,33 @@
 ---
 
+# LAB 05 - INTERFACE DESIGN
+## Tasks
+Create user interface design documents.\
+Design software interface: subsystem design.
+
+## Contributions
+#### 1. Nguyen Thai An:
+Write interface standardlization documentation and screen transition diagrams.\
+Screen specification for Home and Payment Screen\
+Draw subsystem design documentation.
+
+#### 2. Bui Tu Hoang
+Screen mockups for Dock View Screen.\
+Screen specification for Dock View and Bike View Screen.
+
+#### 3. Vu Minh Hoang
+Design the screen mockups for EBR - including modify Dock View Screen.\
+Updating previous Astah design diagrams to match with newly added subsystem design.
+
+#### 4. Nguyen Manh Khang
+Screen specification documentation for all other 5 screens:\ 
+Splash, Renting Session, Invoice, Barcode and Confirmation sreens.
+
+## Revisions
+Most tasks of this lab were under revision, supervision of all 4 members.
+
+---
+
 # LAB 04 - ANALYSIS CLASS DIAGRAM
 ## Tasks
 At this point, our group decided to shift to MVC pattern. Hence, for this week, we've done:\
