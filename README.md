@@ -1,3 +1,29 @@
+# LAB 06 - CLASS DESIGN
+## Tasks
+Designing the detailed classes design for the EBR software
+
+## Contributions
+#### 1. Nguyen Thai An:
+Detail class design for Dock package and general class design.\
+Initial Design Class, Package and Relationship design.\
+
+#### 2. Bui Tu Hoang
+Detail class design for Bike package.\
+Class diagram for package Managing bike and dock
+
+#### 3. Vu Minh Hoang
+Detail class design for Rent package.\
+Class diagram for Renting
+
+#### 4. Nguyen Manh Khang
+Detail class design for Return package.\
+Class diagram for Returning
+
+## Revisions
+All tasks of this lab were under supervision of all 4 members.
+
+---
+
 # LAB 05 - INTERFACE DESIGN
 ## Tasks
 Create user interface design documents.\
