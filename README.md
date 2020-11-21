@@ -1,3 +1,29 @@
+# LAB 07 - DATA MODELING
+## Tasks
+Designing the database design for the EBR software.\
+Make the Software Design Document by using given template.
+
+## Contributions
+#### 1. Nguyen Thai An:
+Draw ER Diagram for the software.\
+Part of the Relational Database Diagram and part of the SDD file.
+
+#### 2. Bui Tu Hoang
+Write the logical database design document.\
+Part of the SDD file.
+
+#### 3. Vu Minh Hoang
+Part of the Relational Database Diagram.\
+Part of the SDD file.
+
+#### 4. Nguyen Manh Khang
+Write the .sql code for creating database table and constraints.
+
+## Revisions
+An and Minh Hoang supervised the works of Khang and Tu Hoang\
+to ensures the logical design document and the creation code match the conceptual and logical design diagrams.\
+The work on the SDD file is under discussion between 3 related members.
+
 # LAB 06 - CLASS DESIGN
 ## Tasks
 Designing the detailed classes design for the EBR software
