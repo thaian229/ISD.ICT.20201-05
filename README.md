@@ -24,6 +24,8 @@ An and Minh Hoang supervised the works of Khang and Tu Hoang\
 to ensures the logical design document and the creation code match the conceptual and logical design diagrams.\
 The work on the SDD file is under discussion between 3 related members.
 
+---
+
 # LAB 06 - CLASS DESIGN
 ## Tasks
 Designing the detailed classes design for the EBR software
