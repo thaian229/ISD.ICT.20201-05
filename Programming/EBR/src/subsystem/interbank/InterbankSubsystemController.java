@@ -26,7 +26,37 @@ public class InterbankSubsystemController {
 		return ((MyMap) data).toJSON();
 	}
 
-	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
+	public PaymentTransaction payDeposit(CreditCard card, int amount, String contents) {
+		Map<String, Object> transaction = new MyMap();
+
+		try {
+			transaction.putAll(MyMap.toMyMap(card));
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			throw new InvalidCardException();
+		}
+		transaction.put("command", PAY_COMMAND);
+		transaction.put("transactionContent", contents);
+		transaction.put("amount", amount);
+		transaction.put("createdAt", Utils.getToday());
+
+		Map<String, Object> requestMap = new MyMap();
+		requestMap.put("version", VERSION);
+		requestMap.put("transaction", transaction);
+
+		String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
+		MyMap response = null;
+		try {
+			response = MyMap.toMyMap(responseText, 0);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			throw new UnrecognizedException();
+		}
+
+		return makePaymentTransaction(response);
+	}
+
+	public PaymentTransaction returnDeposit(CreditCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
 
 		try {
