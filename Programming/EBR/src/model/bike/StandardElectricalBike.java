@@ -4,7 +4,7 @@ public class StandardElectricalBike extends Bike {
     private int battery;
     private String timeLeft;
 
-    StandardElectricalBike(int barcode){
+    public StandardElectricalBike(int barcode){
         this.barcode = barcode;
         this.saddle = 1;
         this.rearSeat = 1;
@@ -15,7 +15,7 @@ public class StandardElectricalBike extends Bike {
         this. timeLeft = "6 hours";
     }
 
-    StandardElectricalBike(int barcode, int deposit, int charge){
+    public StandardElectricalBike(int barcode, int deposit, int charge){
         this.barcode = barcode;
         this.saddle = 1;
         this.rearSeat = 1;
