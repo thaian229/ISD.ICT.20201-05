@@ -4,7 +4,7 @@ public class TwinElectricalBike extends Bike{
     private int battery;
     private String timeLeft;
 
-    TwinElectricalBike(int barcode){
+    public TwinElectricalBike(int barcode){
         this.barcode = barcode;
         this.saddle = 2;
         this.rearSeat = 1;

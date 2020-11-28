@@ -10,7 +10,7 @@ public class SessionManager {
     private static SessionManager instance; //singleton
     private ArrayList<Session> sessions = new ArrayList<>();
 
-    public SessionManager() {
+    private SessionManager() {
     }
 
     public SessionManager getInstance() {
