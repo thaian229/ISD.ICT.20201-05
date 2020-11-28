@@ -1,9 +1,11 @@
 package model.bike;
 
 public class Bike {
-
-    public int getBarcode() {
-        return 0;
+    public String getBarcode() {
+        return null;
     }
 
+    public int getCharge() {
+        return 10;
+    }
 }

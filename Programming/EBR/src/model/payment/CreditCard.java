@@ -1,16 +1,20 @@
 package model.payment;
 
 public class CreditCard {
-	private String cardCode;
-	private String owner;
-	private int cvvCode;
-	private String dateExpired;
+	private String cardNum;
+	private String cardOwner;
+	private int securityCode;
+	private String expDate;
 
-	public CreditCard(String cardCode, String owner, int cvvCode, String dateExpired) {
+	public CreditCard(String cardNum, String cardOwner, int securityCode, String expDate) {
 		super();
-		this.cardCode = cardCode;
-		this.owner = owner;
-		this.cvvCode = cvvCode;
-		this.dateExpired = dateExpired;
+		this.cardNum = cardNum;
+		this.cardOwner = cardOwner;
+		this.securityCode = securityCode;
+		this.expDate = expDate;
+	}
+
+	public String getCardNum() {
+		return cardNum;
 	}
 }
