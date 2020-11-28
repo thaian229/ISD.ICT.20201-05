@@ -1,3 +1,29 @@
+# LAB 08 - UNIT TEST
+## Tasks
+Design Unit Test plan for EBR software.\
+Implement unit test and needed models, controllers, ...
+
+## Contributions
+#### 1. Nguyen Thai An:
+Dock and DockList models, Unit Test and implementation of PaymentScreenController
+
+#### 2. Bui Tu Hoang
+All bikes models, Unit Test and implementation of BarcodeController
+
+#### 3. Vu Minh Hoang
+Session and SessionManager models, update Utils, Unit Test and implementation of SessionScreenController
+
+#### 4. Nguyen Manh Khang
+Invoice and InvoiceHistory models,  Unit Test and implementation of InvoiceScreenController
+
+## Revisions
+An reviews Tu Hoang\
+Tu Hoang reviews Khang\
+Minh Hoang reviews An\
+Khang reviews Minh Hoang.
+
+---
+
 # LAB 07 - DATA MODELING
 ## Tasks
 Designing the database design for the EBR software.\
