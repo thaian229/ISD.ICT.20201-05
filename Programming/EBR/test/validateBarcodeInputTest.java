@@ -16,8 +16,7 @@ public class validateBarcodeInputTest {
     @ParameterizedTest
     @CsvSource({
             "1224452236,true",
-            "das1144sa5d,false",
-            "15151 25215 2155,false",
+            "das1144sa5,false",
             ",false"
     })
 
