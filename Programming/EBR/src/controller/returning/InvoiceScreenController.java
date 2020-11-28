@@ -14,6 +14,8 @@ public class InvoiceScreenController extends BaseController {
     public void confirmInvoice(Invoice invoice) throws SQLException {
         //user clicked to confirm invoice
     }
+   // private int isValidReturned = 0;
+
 
     public int calculateReturned(Invoice invoice) {
        // Bike bike = Invoice.getBike();
@@ -22,6 +24,12 @@ public class InvoiceScreenController extends BaseController {
         int deposit = invoice.getDeposit();
         int totalFees = invoice.getTotalFees();
         int returned = deposit - totalFees;
+        invoice.setReturned();
         return returned;
     }
+    public boolean validateReturned(int returned){
+        if(returned < 0 ) return false;
+        return true;
+    }
+
 }

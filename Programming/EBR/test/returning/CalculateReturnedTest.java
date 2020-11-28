@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class calculateReturnedTest {
+public class CalculateReturnedTest {
     InvoiceScreenController invoiceScreenController;
     PaymentTransaction tmpTransaction;
     CreditCard card;
@@ -49,8 +49,8 @@ public class calculateReturnedTest {
         Bike bike = new Bike();
         Session session = new Session(bike, card, tmpTransaction);
         Invoice invoice = new Invoice(session,bike, card, tmpTransaction);
-        invoice.setTotalFees(invoice.getDeposit()-30000);
-        assertEquals(30000, invoiceScreenController.calculateReturned(invoice));
+        invoice.setTotalFees(invoice.getDeposit()+30000);
+        assertEquals(-30000, invoiceScreenController.calculateReturned(invoice));
     }
 
     
