@@ -54,6 +54,14 @@ public class Session {
         return endTime;
     }
 
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
     private void complete(LocalDateTime endTime) {
         this.endTime = endTime;
     }
@@ -72,7 +80,7 @@ public class Session {
 
     public HashMap<String, String> getSessionInfo() {
         HashMap<String, String> info = new HashMap<String, String>();
-        info.put("bike", bike.getBarcode());
+        info.put("bike", "" + bike.getBarcode());
         info.put("card", card.getCardNum());
         info.put("startTime", startTime.format(Utils.DATE_FORMATER));
         info.put("endTime", endTime.format(Utils.DATE_FORMATER));
