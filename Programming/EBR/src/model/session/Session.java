@@ -58,6 +58,10 @@ public class Session {
         this.endTime = endTime;
     }
 
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
     private void complete(LocalDateTime endTime) {
         this.endTime = endTime;
     }
