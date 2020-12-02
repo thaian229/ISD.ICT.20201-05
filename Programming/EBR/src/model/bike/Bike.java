@@ -1,15 +1,16 @@
 package model.bike;
 
-import model.bike.Dock;
-
-import java.util.Objects;
+import model.dock.Dock;
 
 public class Bike {
+
+    protected String id;
     protected int barcode;
     protected int saddle;
     protected int rearSeat;
     protected int pairOfPedals;
     protected Dock dock;
+    protected String dockId;
     protected int deposit;
     protected int charge;
 
@@ -44,6 +45,22 @@ public class Bike {
 
     public void setDock(Dock dock) { this.dock = dock; }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDockId() {
+        return dockId;
+    }
+
+    public void setDockId(String dockId) {
+        this.dockId = dockId;
+    }
+
     public int getDeposit() { return deposit; }
 
     public void setDeposit(int deposit) { this.deposit = deposit; }
@@ -53,15 +70,12 @@ public class Bike {
     public void setCharge(int charge) { this.charge = charge; }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Bike bike = (Bike) o;
-        return barcode == bike.barcode;
+    public boolean equals(Object obj) {
+        if (obj instanceof Bike) {
+            Bike bike = (Bike) obj;
+            return bike.getId().equals(this.id);
+        }
+        return false;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(barcode);
-    }
 }

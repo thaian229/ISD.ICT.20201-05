@@ -2,11 +2,10 @@ package controller.renting;
 
 import controller.BaseController;
 import model.bike.Bike;
-import model.bike.Dock;
+import model.dock.Dock;
 import model.session.Session;
 import utils.Utils;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class RentingSessionController extends BaseController {
