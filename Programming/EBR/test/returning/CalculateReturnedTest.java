@@ -11,35 +11,35 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculateReturnedTest {
     InvoiceScreenController invoiceScreenController;
-
+    String invoiceId;
+    String sessionId;
 
     @BeforeEach
     void Setup() {
-        Bike bike = new Bike();
+
         invoiceScreenController = new InvoiceScreenController();
-        String invoiceIdTest = "001";
-        String sessionIdTest = "001";
-        bike.setDeposit(100000);
-        //SessionManager.getInstance().getSessionById("001").getBike().setDeposit(100000);
 
     }
 
     @Test
     public void Test1() {
-        Invoice invoice = new Invoice("001","001",20000);
-        assertEquals(10000, invoiceScreenController.calculateReturned(invoice));
+        Invoice invoice = new Invoice(invoiceId,sessionId,20000);
+        invoice.setDepositForTest(100000);
+        assertEquals(80000, invoiceScreenController.calculateReturned(invoice));
     }
 
     @Test
     public void Test2() {
-        Invoice invoice = new Invoice("001","001",50000);
-        assertEquals(10000, invoiceScreenController.calculateReturned(invoice));
+        Invoice invoice = new Invoice(invoiceId,sessionId,50000);
+        invoice.setDepositForTest(100000);
+        assertEquals(50000, invoiceScreenController.calculateReturned(invoice));
     }
 
     @Test
     public void Test3() {
-        Invoice invoice = new Invoice("001","001",30000);
-        assertEquals(10000, invoiceScreenController.calculateReturned(invoice));
+        Invoice invoice = new Invoice(invoiceId,sessionId,30000);
+        invoice.setDepositForTest(100000);
+        assertEquals(70000, invoiceScreenController.calculateReturned(invoice));
     }
 
     

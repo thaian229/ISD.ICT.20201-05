@@ -2,21 +2,23 @@ package model.invoice;
 
 
 
+import model.bike.Bike;
 import model.db.EBRDB;
+import model.payment.creditCard.CreditCard;
+import model.payment.transaction.PaymentTransaction;
+import model.session.Session;
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDateTime;
+import java.sql.*;
+
 import java.util.ArrayList;
 
 public class InvoiceManager {
     private static InvoiceManager instance;
-    private ArrayList<Invoice> invoiceHistory;
+    private ArrayList<Invoice> invoiceHistory = new ArrayList<>();
+
     public InvoiceManager(){
-        this.invoiceHistory = new ArrayList<>();
+        this.refreshInvoiceHistory();
     }
 
     public InvoiceManager getInstance(){
@@ -25,10 +27,31 @@ public class InvoiceManager {
         }
         return instance;
     }
+
+    public Invoice createInvoice(String id, String session_id, int total_charge) {
+        Invoice newInvoice = new Invoice(id,session_id,total_charge);
+        this.updateInvoiceHistory(newInvoice);
+        return newInvoice;
+    }
+
+    private void updateInvoiceHistory(Invoice newInvoice) {
+        String SQL = "INSERT INTO invoice(id, session_id, total_charge) "
+                + "VALUES(?,?,?)";
+        try{
+            PreparedStatement prestm = EBRDB.getConnection().prepareStatement(SQL);
+            prestm.setString(1, newInvoice.getId());
+            prestm.setString(2, newInvoice.getSessionId());
+            prestm.setInt(3, newInvoice.getTotalFees());
+            ResultSet res = prestm.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public void refreshInvoiceHistory() {
         this.invoiceHistory.clear();
 
-        // query for all Docks
+        // query for invoice history
         String SQL = "SELECT * FROM invoice";
 
         try (Connection conn = EBRDB.getConnection();

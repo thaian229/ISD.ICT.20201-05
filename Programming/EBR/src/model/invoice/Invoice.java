@@ -17,27 +17,15 @@ public class Invoice {
 
 
 
-
-//    public Invoice(Session session, Bike bike, CreditCard card, PaymentTransaction returnPaymentTransaction) {
-//        this.id = "Id return from db";
-//        //need invoice id
-//        this.session = session;
-//        this.bike = bike;
-//        this.card = card;
-//        this.returnPaymentTransaction = returnPaymentTransaction;
-//        this.deposit = 1;
-//        this.totalFees =1;
-//        this.rentingFees =1;
-   // }
-
-    public Invoice(String id, String session_id, int total_charge) {
-        this.id =id;
+   public Invoice(String id, String session_id, int total_charge) {
+        this.id = id;
         this.sessionId = session_id;
         this.totalFees = total_charge;
     }
-   public Session getSession(){
+
+    public Session getSession(){
         return SessionManager.getInstance().getSessionById(sessionId);
-   }
+    }
 
     public Bike getBike(){
         return SessionManager.getInstance().getSessionById(sessionId).getBike();
@@ -58,6 +46,9 @@ public class Invoice {
     public String getId(){
        return id;
     }
+    public String getSessionId(){
+        return sessionId;
+    }
     public LocalDateTime getEndTime() {
         return SessionManager.getInstance().getSessionById(sessionId).getEndTime();
     }
@@ -71,6 +62,7 @@ public class Invoice {
        return totalFees;
     }
 
+
     public PaymentTransaction getReturnPaymentTransaction() {
         return SessionManager.getInstance().getSessionById(sessionId).getReturnTransaction();
     }
@@ -79,8 +71,8 @@ public class Invoice {
         return returned;
     }
 
-    public void setReturned() {
-        this.returned = this.getDeposit() - this.totalFees;
+    public void setReturned(int returned) {
+        this.returned = returned;
     }
 
 
@@ -93,5 +85,48 @@ public class Invoice {
                 sessionId.equals(invoice.sessionId) &&
                 totalFees == invoice.totalFees;
     }
+
+
+
+    //For test
+
+
+    private int depositForTest;
+    private Bike bikeForTest;
+    private LocalDateTime startTimeForTest;
+    private LocalDateTime endTimeForTest;
+
+    public void setDepositForTest(int depositForTest){
+        this.depositForTest = depositForTest;
+    }
+    public int getDepositForTest(){
+        return depositForTest;
+    }
+    public void setBikeForTest(Bike bikeForTest){
+        this.bikeForTest = bikeForTest;
+    }
+
+    public Bike getBikeForTest(){
+        return bikeForTest;
+    }
+
+    public LocalDateTime getStartTimeForTest() {
+        return startTimeForTest;
+    }
+
+    public void setStartTimeForTest(LocalDateTime startTimeForTest) {
+        this.startTimeForTest = startTimeForTest;
+    }
+
+    public LocalDateTime getEndTimeForTest() {
+        return endTimeForTest;
+    }
+
+    public void setEndTimeForTest(LocalDateTime endTimeForTest) {
+        this.endTimeForTest = endTimeForTest;
+    }
+
+
+
 
 }
