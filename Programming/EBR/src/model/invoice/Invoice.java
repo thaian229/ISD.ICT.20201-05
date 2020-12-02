@@ -2,10 +2,8 @@ package model.invoice;
 
 import model.session.Session;
 import model.bike.Bike;
-import model.payment.CreditCard;
-import model.session.Session;
-import utils.Utils;
-import model.payment.PaymentTransaction;
+import model.payment.creditCard.CreditCard;
+import model.payment.transaction.PaymentTransaction;
 
 import java.time.LocalDateTime;
 

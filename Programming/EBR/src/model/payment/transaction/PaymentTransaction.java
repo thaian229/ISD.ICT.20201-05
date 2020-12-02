@@ -1,4 +1,6 @@
-package model.payment;
+package model.payment.transaction;
+
+import model.payment.creditCard.CreditCard;
 
 public class PaymentTransaction {
 	private String errorCode;

@@ -1,8 +1,8 @@
 package model.session;
 
 import model.bike.Bike;
-import model.payment.CreditCard;
-import model.payment.PaymentTransaction;
+import model.payment.creditCard.CreditCard;
+import model.payment.transaction.PaymentTransaction;
 import utils.Utils;
 
 import java.time.LocalDateTime;
@@ -18,6 +18,24 @@ public class Session {
     private PaymentTransaction returnTransaction;
 
     public Session(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
+        this.bike = bike;
+        this.card = card;
+        this.rentTransaction = rentTransaction;
+        this.startTime = LocalDateTime.now();
+        //TODO: DB CREATE NEW SESSION ROW AND RETURN ID
+        this.id = "id returned from db";
+    }
+
+    public Session(String id, Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
+        this.bike = bike;
+        this.card = card;
+        this.rentTransaction = rentTransaction;
+        this.startTime = LocalDateTime.now();
+        //TODO: DB CREATE NEW SESSION ROW AND RETURN ID
+        this.id = "id returned from db";
+    }
+
+    public Session(String id, Bike bike, CreditCard card, LocalDateTime startTime, LocalDateTime endTime, PaymentTransaction rentTransaction, PaymentTransaction returnTransaction) {
         this.bike = bike;
         this.card = card;
         this.rentTransaction = rentTransaction;

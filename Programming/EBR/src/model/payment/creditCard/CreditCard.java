@@ -1,4 +1,4 @@
-package model.payment;
+package model.payment.creditCard;
 
 public class CreditCard {
 	private String cardNum;
