@@ -41,7 +41,7 @@ public class SessionManager {
         //TODO: DB access here
     }
 
-    public Session findSessionById(String id) {
+    public Session getSessionById(String id) {
         //TODO: DB access for find sessions by id;
 //        for(Session session : sessions) {
 //            if (session.getId().equals(id)) {

@@ -1,11 +1,15 @@
 package model.invoice;
 
 
-import model.bike.Bike;
-import model.payment.CreditCard;
-import model.payment.PaymentTransaction;
-import model.session.Session;
 
+import model.db.EBRDB;
+
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class InvoiceManager {
@@ -21,20 +25,35 @@ public class InvoiceManager {
         }
         return instance;
     }
+    public void refreshInvoiceHistory() {
+        this.invoiceHistory.clear();
+
+        // query for all Docks
+        String SQL = "SELECT * FROM invoice";
+
+        try (Connection conn = EBRDB.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)) {
+            while (rs.next()) {
+                Invoice newInvoice = new Invoice(rs.getString("id"),
+                        rs.getString("session_id"),
+                        rs.getInt("total_charge"));
+                invoiceHistory.add(newInvoice);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
     public ArrayList<Invoice> getInvoiceHistory(){
         return invoiceHistory;
     }
-    public Invoice createInvoice(Session session, Bike bike, CreditCard card, PaymentTransaction returnPaymentTransaction){
-        Invoice newInvoice = new Invoice(session,bike,card,returnPaymentTransaction);
-        this.addInvoice(newInvoice);
-        return newInvoice;
-    }
+
     public void setInvoiceHistory(ArrayList<Invoice> invoiceHistory) {
         this.invoiceHistory = invoiceHistory;
     }
-    public void addInvoice(Invoice newInvoice){
-        invoiceHistory.add(newInvoice);
-    }
+
     public void removeInvoice(Invoice invoice){
         invoiceHistory.remove(invoice);
     }
