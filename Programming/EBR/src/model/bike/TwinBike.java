@@ -10,12 +10,24 @@ public class TwinBike extends Bike{
         this.charge = 20000;
     }
 
-    public TwinBike(int barcode, int deposit, int charge) {
+    public TwinBike(int barcode, int value, int charge) {
         this.barcode = barcode;
         this.saddle = 2;
         this.rearSeat = 1;
         this.pairOfPedals = 2;
-        this.deposit = deposit;
+        this.value = value;
+        this.deposit = value/10;
+        this.charge = charge;
+    }
+
+    public TwinBike(String id, int barcode, int value, int charge) {
+        this.id = id;
+        this.barcode = barcode;
+        this.saddle = 2;
+        this.rearSeat = 1;
+        this.pairOfPedals = 2;
+        this.value = value;
+        this.deposit = value/10;
         this.charge = charge;
     }
 }

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class EBRDB {
 
-    private static final String url = "jdbc:postgresql://localhost/EBR";
+    private static final String url = "jdbc:postgresql://localhost/postgres";
     private static final String user = "postgres";
-    private static final String password = "22114455";
+    private static final String password = "ben10154111999";
 
     /**
      * Connect to the PostgreSQL database

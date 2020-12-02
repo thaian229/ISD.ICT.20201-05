@@ -1,19 +1,21 @@
-package model.bike;
+package model.dock;
+
+import model.bike.Bike;
 
 import java.util.ArrayList;
 
-public class DockList {
+public class DockManager {
 
-    private static DockList instance;   // singleton
+    private static DockManager instance;   // singleton
     private ArrayList<Dock> dockList;
 
-    public DockList() {
+    public DockManager() {
         this.dockList = new ArrayList<>();
     }
 
-    public DockList getInstance() {
+    public DockManager getInstance() {
         if (instance == null) {
-            instance = new DockList();
+            instance = new DockManager();
         }
 
         return instance;

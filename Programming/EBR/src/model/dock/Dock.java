@@ -1,4 +1,6 @@
-package model.bike;
+package model.dock;
+
+import model.bike.Bike;
 
 import java.util.ArrayList;
 
@@ -8,6 +10,8 @@ public class Dock {
     private String location;
     private int capacity;
     private int numberOfAvailableBike;
+    private String id;
+    private String imageUrl;
 
     private ArrayList<Bike> bikeList;
 
