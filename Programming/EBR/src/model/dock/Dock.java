@@ -1,4 +1,6 @@
-package model.bike;
+package model.dock;
+
+import model.bike.Bike;
 
 import java.util.ArrayList;
 
@@ -8,23 +10,18 @@ public class Dock {
     private String location;
     private int capacity;
     private int numberOfAvailableBike;
+    private String id;
+    private String imageURL;
 
-    private ArrayList<Bike> bikeList;
+    private final ArrayList<Bike> bikeList;
 
-    public Dock() {
-        this.name = "unknown";
-        this.location = "unknown";
-        this.capacity = 200;
-        this.numberOfAvailableBike = 0;
-        this.bikeList = new ArrayList<>();
-    }
-
-    public Dock(String name, String location, int capacity, ArrayList<Bike> bikeList) {
+    public Dock(String id, String name, String location, int capacity, String imageURL) {
+        this.id = id;
         this.name = name;
         this.location = location;
         this.capacity = capacity;
-        this.bikeList = bikeList;
-        this.numberOfAvailableBike = bikeList.size();
+        this.imageURL = imageURL;
+        this.bikeList = new ArrayList<>();
     }
 
     public String getName() {
@@ -55,13 +52,24 @@ public class Dock {
         return numberOfAvailableBike;
     }
 
-    public ArrayList<Bike> getBikeList() {
-        return bikeList;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setBikeList(ArrayList<Bike> bikeList) {
-        this.bikeList = bikeList;
-        this.numberOfAvailableBike = bikeList.size();
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ArrayList<Bike> getBikeList() {
+        return bikeList;
     }
 
     public void addBike(Bike bike) {
@@ -78,7 +86,7 @@ public class Dock {
     public boolean equals(Object obj) {
         if (obj instanceof Dock) {
             Dock dock = (Dock) obj;
-            return dock.getName().equals(this.name) && dock.getLocation().equals(this.location);
+            return dock.getId().equals(this.id);
         }
         return false;
     }
