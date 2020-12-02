@@ -2,8 +2,8 @@ package subsystem;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
-import model.payment.CreditCard;
-import model.payment.PaymentTransaction;
+import model.payment.creditCard.CreditCard;
+import model.payment.transaction.PaymentTransaction;
 
 /**
  * The {@code InterbankInterface} class is used to communicate with the
@@ -20,7 +20,7 @@ public interface InterbankInterface {
 	 * @param card     - the credit card used for payment
 	 * @param amount   - the amount to pay
 	 * @param contents - the transaction contents
-	 * @return {@link model.payment.PaymentTransaction PaymentTransaction} - if the
+	 * @return {@link PaymentTransaction PaymentTransaction} - if the
 	 *         payment is successful
 	 * @throws PaymentException      if responded with a pre-defined error code
 	 * @throws UnrecognizedException if responded with an unknown error code or
@@ -35,7 +35,7 @@ public interface InterbankInterface {
 	 * @param card     - the credit card which would be refunded to
 	 * @param amount   - the amount to refund
 	 * @param contents - the transaction contents
-	 * @return {@link model.payment.PaymentTransaction PaymentTransaction} - if the
+	 * @return {@link PaymentTransaction PaymentTransaction} - if the
 	 *         payment is successful
 	 * @throws PaymentException      if responded with a pre-defined error code
 	 * @throws UnrecognizedException if responded with an unknown error code or

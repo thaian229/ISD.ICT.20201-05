@@ -3,15 +3,11 @@ package returning;
 import controller.returning.InvoiceScreenController;
 import model.bike.*;
 import model.invoice.Invoice;
-import model.payment.CreditCard;
-import model.payment.PaymentTransaction;
+import model.payment.creditCard.CreditCard;
+import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculateReturnedTest {

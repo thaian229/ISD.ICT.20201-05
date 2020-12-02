@@ -1,7 +1,7 @@
 package subsystem;
 
-import model.payment.CreditCard;
-import model.payment.PaymentTransaction;
+import model.payment.creditCard.CreditCard;
+import model.payment.transaction.PaymentTransaction;
 import subsystem.interbank.InterbankSubsystemController;
 
 /***
@@ -28,7 +28,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	}
 
 	/**
-	 * @see InterbankInterface#payOrder(model.payment.CreditCard, int,
+	 * @see InterbankInterface#payOrder(CreditCard, int,
 	 *      String)
 	 */
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
@@ -37,7 +37,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	}
 
 	/**
-	 * @see InterbankInterface#refund(model.payment.CreditCard, int,
+	 * @see InterbankInterface#refund(CreditCard, int,
 	 *      String)
 	 */
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
