@@ -1,31 +1,37 @@
 package model.db;
 
-import utils.Utils;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.logging.Logger;
+import java.sql.SQLException;
 
 public class EBRDB {
 
-	private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
-	private static Connection connect;
+    private static final String url = "jdbc:postgresql://localhost/EBR";
+    private static final String user = "postgres";
+    private static final String password = "22114455";
 
+    /**
+     * Connect to the PostgreSQL database
+     *
+     * @return a Connection object
+     */
     public static Connection getConnection() {
-        if (connect != null) return connect;
+        Connection conn = null;
         try {
-			Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:assets/db/aims.db";
-            connect = DriverManager.getConnection(url);
-            LOGGER.info("Connect database successfully");
-        } catch (Exception e) {
-            LOGGER.info(e.getMessage());
-        } 
-        return connect;
-    }
-    
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to the PostgreSQL server successfully.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
+        return conn;
+    }
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         EBRDB.getConnection();
     }
+
 }
