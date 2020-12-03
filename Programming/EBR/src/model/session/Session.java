@@ -26,26 +26,21 @@ public class Session {
         this.id = "id returned from db";
     }
 
-    public Session(String id, Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
-        this.bike = bike;
-        this.card = card;
-        this.rentTransaction = rentTransaction;
-        this.startTime = LocalDateTime.now();
-        //TODO: DB CREATE NEW SESSION ROW AND RETURN ID
-        this.id = "id returned from db";
-    }
-
     public Session(String id, Bike bike, CreditCard card, LocalDateTime startTime, LocalDateTime endTime, PaymentTransaction rentTransaction, PaymentTransaction returnTransaction) {
         this.bike = bike;
         this.card = card;
         this.rentTransaction = rentTransaction;
-        this.startTime = LocalDateTime.now();
-        //TODO: DB CREATE NEW SESSION ROW AND RETURN ID
-        this.id = "id returned from db";
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.returnTransaction = returnTransaction;
     }
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Bike getBike() {
@@ -78,10 +73,6 @@ public class Session {
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
-    }
-
-    private void complete(LocalDateTime endTime) {
-        this.endTime = endTime;
     }
 
     public PaymentTransaction getRentTransaction() {

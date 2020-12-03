@@ -8,7 +8,7 @@ import utils.Utils;
 
 import java.time.LocalDateTime;
 
-public class RentingSessionController extends BaseController {
+public class SessionScreenController extends BaseController {
     public boolean returnBike(Session session, Dock dock) {
         try {
             dock.addBike(session.getBike());

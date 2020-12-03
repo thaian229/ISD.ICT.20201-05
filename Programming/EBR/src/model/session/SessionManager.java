@@ -31,38 +31,87 @@ public class SessionManager {
 
     public Session createSession(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
         Session newSession = new Session(bike, card, rentTransaction);
-        this.updateSessionsData(newSession);
+        String sessionId = this.insertNewSessions(newSession);
+        newSession.setId(sessionId);
+        refreshSessionsList();
         return newSession;
     }
 
-    private void updateSessionsData(Session newSession) {
-        String SQL = "INSERT INTO session(bikeId, cardId, rentTransactionId) "
-                + "VALUES(?,?,?)";
-        try{
-            PreparedStatement prestm = EBRDB.getConnection().prepareStatement(SQL);
-            prestm.setString(1, newSession.getBike().getId());
-            prestm.setString(2, newSession.getCard().getId());
-            prestm.setString(3, newSession.getRentTransaction().getId());
-            ResultSet res = prestm.executeQuery();
+    public int endSession(Session session, PaymentTransaction returnTransaction) {
+        session.setEndTime(LocalDateTime.now());
+        session.setReturnTransaction(returnTransaction);
+
+        String SQL = "UPDATE session "
+                + "SET (end_time, return_transactionid) = (?, ?) "
+                + "WHERE id = ? ";
+
+        int affectedrows = 0;
+
+        try (
+                PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
+        ) {
+            pstmt.setString(1, session.getEndTime().format(Utils.DATE_FORMATER));
+            pstmt.setString(2, returnTransaction.getId());
+            pstmt.setString(3, session.getId());
+
+            affectedrows = pstmt.executeUpdate();
+
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
+        return affectedrows;
     }
 
     public Session getSessionById(String id) {
-        for (Session session: sessions) {
+        for (Session session : sessions) {
             if (session.getId().equals(id))
                 return session;
         }
         return null;
     }
 
+    private String insertNewSessions(Session newSession) {
+        String SQL = "INSERT INTO session(bike_id, card_id, rent_transactionid, start_time) "
+                + "VALUES(?,?,?,?)";
+        String id = "";
+
+        // Insert new row
+        try (
+                PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
+        ) {
+            // Set up parameters
+            pstmt.setString(1, newSession.getBike().getId());
+            pstmt.setString(2, newSession.getCard().getId());
+            pstmt.setString(3, newSession.getRentTransaction().getId());
+            pstmt.setString(4, newSession.getStartTime().format(Utils.DATE_FORMATER));
+            // Handle update
+            int affectedRows = pstmt.executeUpdate();
+            // check the affected rows
+            if (affectedRows > 0) {
+                // get the ID back
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        id = rs.getString(1);
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return id;
+    }
+
     private void refreshSessionsList() {
         sessions.clear();
         String SQL = "SELECT * FROM session";
-        try (Connection conn = EBRDB.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(SQL)) {
+
+        // Get All Rows
+        try (
+                Statement stmt = EBRDB.getConnection().createStatement();
+                ResultSet rs = stmt.executeQuery(SQL)
+        ) {
             while (rs.next()) {
                 String id = rs.getString("id");
                 String bike_id = rs.getString("bike_id");
@@ -83,7 +132,7 @@ public class SessionManager {
                 sessions.add(session);
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
 
     }
