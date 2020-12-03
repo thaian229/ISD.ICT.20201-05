@@ -19,7 +19,7 @@
         <content>
           <AnchorPane prefHeight="505.0" prefWidth="756.0" style="-fx-background-radius: 5; -fx-background-color: #F5F5F5;">
                <children>
-                  <VBox layoutX="46.0" layoutY="14.0" prefHeight="455.0" prefWidth="665.0" />
+                   <VBox fx:id="vboxDockItem" minHeight="-Infinity" minWidth="-Infinity" prefWidth="756.0" />
                </children>
             </AnchorPane>
         </content>
