@@ -20,7 +20,7 @@ public class SplashScreenHandler implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        File file = new File("file:assets/images/BigLOGO.png");
+        File file = new File("assets/images/BigLOGO.png");
         Image image = new Image(file.toURI().toString());
         System.out.println(image.getHeight());
         bigLogo.setImage(image);

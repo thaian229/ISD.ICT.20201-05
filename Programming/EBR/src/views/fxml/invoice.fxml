@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1366.0" style="-fx-background-color: #8C36C0;">
             <items>
@@ -23,35 +23,25 @@
                         <Image url="@../../../assets/images/LOGO.png" />
                     </image>
                 </ImageView>
-                <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="170.0" minWidth="170.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: #FAE715; -fx-cursor: hand;" text="ENTER BARCODE" textAlignment="CENTER" textFill="#8c36c0" translateX="930.0">
-                    <font>
-                        <Font name="Arial Bold" size="14.0" />
-                    </font>
-                </Button>
-                <ImageView fx:id="back" fitHeight="60.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" translateX="946.0">
-                    <image>
-                        <Image url="@../../../assets/images/backButton.png" />
-                    </image>
-                </ImageView>
             </items>
-         <effect>
-            <DropShadow />
-         </effect>
+            <effect>
+                <DropShadow />
+            </effect>
         </ToolBar>
         <Pane layoutX="245.0" layoutY="123.0" prefHeight="570.0" prefWidth="875.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 15; -fx-border-style: solid; -fx-border-color: FAE715; -fx-border-width: 3;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="123.0">
             <children>
-                <Text fill="#8c36c0" layoutX="189.0" layoutY="81.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="RENTING SESSION" textAlignment="CENTER">
-                    <font>
-                        <Font name="Arial Black" size="48.0" />
-                    </font>
+                <Text fill="#8c36c0" layoutX="340.0" layoutY="96.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="INVOICE" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="48.0" />
+               </font>
                 </Text>
                 <Pane layoutX="77.0" layoutY="108.0" prefHeight="355.0" prefWidth="723.0" style="-fx-background-color: white;">
                     <children>
                         <ImageView fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
                         <GridPane layoutX="66.0" layoutY="37.0" prefHeight="201.0" prefWidth="311.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="187.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="124.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="154.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="157.0" />
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -62,7 +52,7 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BIKE CODE">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CARD NUMBER" wrappingWidth="120.6552734375">
                                     <font>
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
@@ -72,32 +62,50 @@
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SESSION LENGTH" GridPane.rowIndex="2">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="END TIME" GridPane.rowIndex="2">
                                     <font>
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BATTERY" GridPane.rowIndex="3">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SESSION TIME" GridPane.rowIndex="3">
                                     <font>
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="USAGE" GridPane.rowIndex="4">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DEPOSIT" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font>
+                                </Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL FEES" GridPane.rowIndex="5">
                                     <font>
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CHARGE" GridPane.rowIndex="5">
-                                    <font>
-                                        <Font name="Arial Black" size="14.0" />
-                                    </font>
-                                </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1111 2222 3333 XXXX" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="10:20 PM 11/11/2020" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="01:50 AM 12/11/2020" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="03:30:42" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="100,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Text>
                             </children>
                         </GridPane>
                         <Line endX="305.0" layoutX="362.0" layoutY="274.0" startX="-305.0" />
@@ -110,12 +118,12 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RENTING FEES:">
-                                    <font>
-                                        <Font name="Arial Black" size="24.0" />
-                                    </font>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RETURNED">
+                           <font>
+                              <Font name="Arial Bold" size="24.0" />
+                           </font>
                                 </Text>
-                                <Text fill="#15b82f" strokeType="OUTSIDE" strokeWidth="0.0" text="75000 VND" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
+                                <Text fill="#16b85ff3" strokeType="OUTSIDE" strokeWidth="0.0" text="9,900,000 VND" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
                                     <font>
                                         <Font name="Arial" size="36.0" />
                                     </font>
@@ -124,15 +132,10 @@
                         </GridPane>
                     </children>
                 </Pane>
-                <Button alignment="CENTER" layoutX="180.0" layoutY="472.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #8c36c0; -fx-border-style: solid; -fx-border-radius: 6; -fx-border-width: 2; -fx-cursor: hand;" text="CLOSE" textAlignment="CENTER" textFill="#8c36c0">
-                    <font>
-                        <Font name="Arial Black" size="24.0" />
-                    </font>
-                </Button>
-                <Button alignment="CENTER" layoutX="392.0" layoutY="471.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RETURN BIKE" textAlignment="CENTER" textFill="WHITE">
-                    <font>
-                        <Font name="Arial Black" size="24.0" />
-                    </font>
+                <Button alignment="CENTER" layoutX="287.0" layoutY="463.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RETURN HOME" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
                 </Button>
             </children>
         </Pane>
