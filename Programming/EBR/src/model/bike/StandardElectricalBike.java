@@ -1,7 +1,7 @@
 package model.bike;
 
 public class StandardElectricalBike extends Bike {
-    private int battery;
+    private float battery;
     private String timeLeft;
 
     public StandardElectricalBike(int barcode){
@@ -11,24 +11,38 @@ public class StandardElectricalBike extends Bike {
         this.pairOfPedals = 1;
         this.deposit = 4000000;
         this.charge = 50000;
-        this.battery = 100;
+        this.battery = (float) 100;
         this. timeLeft = "6 hours";
     }
 
-    public StandardElectricalBike(int barcode, int deposit, int charge){
+    public StandardElectricalBike(int barcode, int value, int charge){
         this.barcode = barcode;
         this.saddle = 1;
         this.rearSeat = 1;
         this.pairOfPedals = 1;
-        this.deposit = deposit;
+        this.value = value;
+        this.deposit = value/10;
         this.charge = charge;
         this.battery = 100;
         this. timeLeft = "6 hours";
     }
 
-    public int getBattery() { return battery; }
+    public StandardElectricalBike(String id, int barcode, int value, int charge){
+        this.id = id;
+        this.barcode = barcode;
+        this.saddle = 1;
+        this.rearSeat = 1;
+        this.pairOfPedals = 1;
+        this.value = value;
+        this.deposit = value/10;
+        this.charge = charge;
+        this.battery = (float) 100;
+        this. timeLeft = "6 hours";
+    }
 
-    public void setBattery(int battery) { this.battery = battery; }
+    public float getBattery() { return battery; }
+
+    public void setBattery(float battery) { this.battery = battery; }
 
     public String getTimeLeft() { return timeLeft; }
 
