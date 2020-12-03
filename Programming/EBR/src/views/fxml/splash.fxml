@@ -12,7 +12,7 @@
             <children>
                 <ImageView fx:id="bigLogo" fitHeight="276.0" fitWidth="810.0" layoutX="278.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="246.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="246.0">
                     <image>
-                        <Image url="@../../../assests/images/BigLOGO.png" />
+                        <Image url="@../../../assets/images/BigLOGO.png" />
                     </image>
                 </ImageView>
                 <Button fx:id="start" layoutX="478.0" layoutY="609.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="411.0" style="-fx-background-color: #F2c94c; -fx-border-radius: 6;" text="LET'S RIDE" textAlignment="CENTER" textFill="WHITE">

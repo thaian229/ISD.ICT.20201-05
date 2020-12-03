@@ -20,7 +20,7 @@
             <items>
                 <ImageView fx:id="logo" fitHeight="60.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                     <image>
-                        <Image url="@../../../assests/images/LOGO.png" />
+                        <Image url="@../../../assets/images/LOGO.png" />
                     </image>
                 </ImageView>
                 <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="170.0" minWidth="170.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: #FAE715; -fx-cursor: hand;" text="ENTER BARCODE" textAlignment="CENTER" textFill="#8c36c0" translateX="930.0">
@@ -30,7 +30,7 @@
                 </Button>
                 <ImageView fx:id="back" fitHeight="60.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" translateX="946.0">
                     <image>
-                        <Image url="@../../../assests/images/backButton.png" />
+                        <Image url="@../../../assets/images/backButton.png" />
                     </image>
                 </ImageView>
             </items>
