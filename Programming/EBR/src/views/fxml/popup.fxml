@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-          <ImageView fx:id="logo" fitHeight="60.0" fitWidth="176.0" layoutX="155.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+          <ImageView fx:id="logo" fitHeight="60.0" fitWidth="176.0" layoutX="163.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
               <image>
                   <Image url="@../../../assets/images/LOGO_R.png" />
               </image>
           </ImageView>
+          <TextField layoutX="103.0" layoutY="108.0" prefHeight="31.0" prefWidth="294.0" promptText="Barcode" style="-fx-border-color: #AAAAAA; -fx-border-width: 2; -fx-border-radius: 3;">
+            <font>
+                <Font size="15.0" />
+            </font>
+          </TextField>
+          <Button layoutX="182.0" layoutY="175.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="139.0" style="-fx-background-color: #8C36C0; -fx-border-radius: 6; -fx-background-radius: 6;" text="CONTINUE" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+          </Button>
     </children>
 </AnchorPane>
