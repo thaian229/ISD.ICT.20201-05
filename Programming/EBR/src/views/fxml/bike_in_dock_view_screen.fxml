@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="158.0" prefWidth="1232.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="14.0" layoutY="11.0" prefHeight="137.0" prefWidth="203.0">
+         <children>
+            <ImageView fitHeight="138.0" fitWidth="208.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/images/StandardBike.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="32.0" fitWidth="93.0" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/images/Standard_Bike_outlined.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="276.0" layoutY="44.0" opacity="0.75" strokeType="OUTSIDE" strokeWidth="0.0" text="Standard Bike 1">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <GridPane layoutX="233.0" layoutY="52.0" prefHeight="91.0" prefWidth="85.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0000244140625" minWidth="10.0" prefWidth="64.59998779296876" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.4000244140625" minWidth="10.0" prefWidth="33.600012207031256" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saddle" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pedal" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rear Seat" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.columnIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1029.0" layoutY="57.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="115.0" style="-fx-background-color: #8C36C0; -fx-cursor: hand;" text="RENT BIKE" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <GridPane hgap="10.0" layoutX="865.0" layoutY="53.0" prefHeight="61.0" prefWidth="136.0" vgap="5.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="72.86668701171875" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.93332519531249" minWidth="10.0" prefWidth="62.73331298828124" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="75%" textAlignment="CENTER" GridPane.halignment="RIGHT">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4h30p" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../../../assets/images/battery_std_24px_outlined.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../../assets/images/watch_later_24px_outlined.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
