@@ -29,10 +29,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     private Label numMediaInCart;
 
     @FXML
-    private ImageView aimsImage;
+    private ImageView logo;
 
     @FXML
-    private ImageView cartImage;
+    private ImageView back;
 
     @FXML
     private VBox vboxMedia1;
@@ -57,24 +57,19 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
 
     @Override
-    public void show() {
-
-    }
-
-    @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
     }
 
     public void setImage() {
         // fix image path caused by fxml
-        File file1 = new File(Configs.IMAGE_PATH + "/" + "Logo.png");
+        File file1 = new File(Configs.IMAGE_PATH + "/" + "LOGO.png");
         Image img1 = new Image(file1.toURI().toString());
-        aimsImage.setImage(img1);
+        logo.setImage(img1);
 
-        File file2 = new File(Configs.IMAGE_PATH + "/" + "cart.png");
+        File file2 = new File(Configs.IMAGE_PATH + "/" + "backButton.png");
         Image img2 = new Image(file2.toURI().toString());
-        cartImage.setImage(img2);
+        back.setImage(img2);
     }
 
     public void addMediaHome(List items) {

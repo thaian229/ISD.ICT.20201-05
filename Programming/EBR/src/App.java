@@ -1,14 +1,10 @@
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import utils.Configs;
-import views.screen.home.HomeScreenHandler;
+import views.screen.splash.SplashScreenHandler;
 
 import java.io.IOException;
 
@@ -17,11 +13,21 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+
             // initialize the scene
-            StackPane root = (StackPane) FXMLLoader.load(getClass().getResource(Configs.SPLASH_SCREEN_PATH));
+            StackPane root = (StackPane) FXMLLoader.load(getClass().getResource(Configs.BLANK_SCREEN_PATH));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
+
+            try {
+                SplashScreenHandler splashScreenHandler = new SplashScreenHandler(primaryStage, Configs.SPLASH_SCREEN_PATH);
+                splashScreenHandler.setScreenTitle("Home Screen");
+                splashScreenHandler.setImage();
+                splashScreenHandler.show();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
