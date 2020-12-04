@@ -6,24 +6,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.screen.splash.SplashScreenHandler">
-    <children>
-        <AnchorPane style="-fx-background-color: #8C36C0;">
-            <children>
-                <ImageView fx:id="bigLogo" fitHeight="276.0" fitWidth="810.0" layoutX="278.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="246.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="246.0">
-                    <image>
-                        <Image url="@../../../assets/images/BigLOGO.png" />
-                    </image>
-                </ImageView>
-                <Button fx:id="start" layoutX="478.0" layoutY="609.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="411.0" style="-fx-background-color: #F2c94c; -fx-border-radius: 6;" text="LET'S RIDE" textAlignment="CENTER" textFill="WHITE">
-                    <font>
-                        <Font name="Arial Bold Italic" size="36.0" />
-                    </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </Button>
-            </children>
-        </AnchorPane>
-    </children>
-</StackPane>
+
+  <AnchorPane style="-fx-background-color: #8C36C0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <children>
+          <ImageView fx:id="bigLogo" fitHeight="276.0" fitWidth="810.0" layoutX="278.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="246.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="246.0">
+              <image>
+                  <Image url="@../../../assets/images/BigLOGO.png" />
+              </image>
+          </ImageView>
+          <Button fx:id="start" layoutX="478.0" layoutY="609.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="411.0" style="-fx-background-color: #F2c94c; -fx-border-radius: 6;" text="LET'S RIDE" textAlignment="CENTER" textFill="WHITE">
+              <font>
+                  <Font name="Arial Bold Italic" size="36.0" />
+              </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+          </Button>
+      </children>
+  </AnchorPane>

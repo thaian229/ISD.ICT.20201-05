@@ -29,7 +29,7 @@
         </ToolBar>
         <Pane layoutX="448.0" layoutY="148.0" prefHeight="570.0" prefWidth="470.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 15;">
             <children>
-            <ImageView fitHeight="150.0" layoutX="91.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paymentConfirmationBikeImage" fitHeight="150.0" layoutX="91.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../assets/images/xe-dap-1-159482394547294562988-51-0-526-908-crop-1594824063607285632499.png" />
                </image></ImageView>
@@ -55,7 +55,7 @@
                      </children></Pane>
                   <Pane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
                      <children>
-                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXX">
+                        <Text fx:id="barcode" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXX">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -73,7 +73,7 @@
                   </Pane>
                   <Pane layoutX="10.0" layoutY="44.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="121139_group5_2020">
+                        <Text fx:id="cardNumber" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="121139_group5_2020">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -91,7 +91,7 @@
                   </Pane>
                   <Pane layoutX="10.0" layoutY="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Text fill="#15b82f" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND">
+                        <Text fx:id="deposit" fill="#15b82f" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -109,7 +109,7 @@
                   </Pane>
                   <Pane layoutX="10.0" layoutY="113.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <Text fill="#15b82f" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h">
+                        <Text fx:id="rentalFee" fill="#15b82f" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -138,7 +138,7 @@
                      </children></Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Text fill="#15b82f" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND">
+                        <Text fx:id="hold" fill="#15b82f" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -157,7 +157,7 @@
                     <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                             <children>
-                                <Button layoutX="-1.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0" style="-fx-border-color: #8C36C0; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-color: #FFFFFF;" />
+                                <Button fx:id="paymentConfirmationCancelButton" layoutX="-1.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0" style="-fx-border-color: #8C36C0; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-color: #FFFFFF;" />
                                 <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="13.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../../../assets/images/rotate-ccw.png" />
@@ -167,7 +167,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="275.0" style="-fx-background-color: #8C36C0; -fx-border-radius: 6; -fx-background-radius: 6;" text="CONTINUE" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="paymentConfirmationConfirmButton" mnemonicParsing="false" prefHeight="52.0" prefWidth="275.0" style="-fx-background-color: #8C36C0; -fx-border-radius: 6; -fx-background-radius: 6;" text="CONTINUE" textAlignment="CENTER" textFill="WHITE">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
