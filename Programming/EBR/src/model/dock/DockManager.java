@@ -28,7 +28,7 @@ public class DockManager {
 
     public void refreshDockList() {
         this.dockList.clear();
-
+        System.out.println("refreshing");
         // query for all Docks
         String SQL = "SELECT * FROM dock";
 
