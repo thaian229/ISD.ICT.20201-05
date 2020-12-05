@@ -80,6 +80,15 @@ public class Utils {
 
     public static DateTimeFormatter DATE_FORMATER_FOR_DISPLAY = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * calculate duration in minutes
+     *
+     * @author mHoang
+     * @param before
+     * @param after
+     *
+     * @return minutes Long
+     */
     public static long minusLocalDateTime(LocalDateTime before, LocalDateTime after) {
         Duration duration = Duration.between(before, after);
 //        System.out.println(duration.toMinutes());

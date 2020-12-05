@@ -11,11 +11,17 @@ import java.util.Hashtable;
 public class BaseScreenHandler extends views.screen.FXMLScreenHandler {
 
 	private Scene scene;
+
 	private BaseScreenHandler prev;
 	protected final Stage stage;
 	protected HomeScreenHandler homeScreenHandler;
 	protected Hashtable<String, String> messages;
 	private BaseController bController;
+	protected String screenTitle = "";
+
+	public String getScreenTitle() {
+		return this.screenTitle;
+	}
 
 	private BaseScreenHandler(String screenPath) throws IOException {
 		super(screenPath);

@@ -47,7 +47,11 @@
                 </Text>
                 <Pane layoutX="77.0" layoutY="108.0" prefHeight="355.0" prefWidth="723.0" style="-fx-background-color: white;">
                     <children>
-                        <ImageView fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../assets/images/xe-dap-1-159482394547294562988-51-0-526-908-crop-1594824063607285632499.png" />
+                            </image>
+                        </ImageView>
                         <GridPane layoutX="66.0" layoutY="37.0" prefHeight="201.0" prefWidth="311.0">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="187.0" />
