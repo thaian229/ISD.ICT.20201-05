@@ -16,6 +16,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handler for the Splash Screen
+ *
+ * @author mHoang
+ * <p>
+ * created_at: 4/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
+
 public class SplashScreenHandler extends BaseScreenHandler implements Initializable {
 
     @FXML
@@ -46,6 +62,10 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
         });
     }
 
+    /**
+     * set image for the splash screen
+     * @author mHoang
+     */
     private void setImage() {
         File file = new File(Configs.IMAGE_PATH + "/BigLOGO.png");
         Image image = new Image(file.toURI().toString());

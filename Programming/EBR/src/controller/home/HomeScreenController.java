@@ -7,7 +7,7 @@ import model.dock.DockManager;
 import java.util.ArrayList;
 
 /**
- * class for ...
+ * class for controller of the home screen
  *
  * @author mHoang
  * <p>
@@ -25,8 +25,12 @@ public class HomeScreenController extends BaseController {
     public HomeScreenController() {
     }
 
+    /**
+     * This method is used to get list of docks for the home screen to display
+     * @author mHoang
+     * @return ArrayList<Dock> list of dock
+     */
     public ArrayList<Dock> getDockList() {
-        DockManager.getInstance().refreshDockList();
         return DockManager.getInstance().getDockList();
     }
 }

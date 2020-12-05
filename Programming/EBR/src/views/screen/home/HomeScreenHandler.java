@@ -25,6 +25,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Handler for home screen
+ *
+ * @author mHoang
+ * <p>
+ * created_at: 4/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable {
 
@@ -74,6 +89,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         displayDockList();
     }
 
+    /**
+     * set image for home screen
+     */
     private void setImage() {
         // fix image path caused by fxml
         File file1 = new File(Configs.IMAGE_PATH + "/" + "LOGO.png");
@@ -89,6 +107,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         searchImg.setImage(img3);
     }
 
+    /**
+     * @author mHoang
+     * display list of docks in the home screen
+     */
     private void displayDockList() {
         // clear all old cartMedia
         vboxDockList.getChildren().clear();

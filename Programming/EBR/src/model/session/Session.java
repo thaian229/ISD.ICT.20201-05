@@ -8,6 +8,22 @@ import utils.Utils;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+/**
+ * class for the model Session
+ *
+ * @author mHoang
+ * <p>
+ * created_at: 4/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
+
 public class Session {
     private String id;
     private Bike bike;
@@ -22,8 +38,6 @@ public class Session {
         this.card = card;
         this.rentTransaction = rentTransaction;
         this.startTime = LocalDateTime.now();
-        //TODO: DB CREATE NEW SESSION ROW AND RETURN ID
-        this.id = "id returned from db";
     }
 
     public Session(String id, Bike bike, CreditCard card, LocalDateTime startTime, LocalDateTime endTime, PaymentTransaction rentTransaction, PaymentTransaction returnTransaction) {
@@ -87,6 +101,12 @@ public class Session {
         this.returnTransaction = returnTransaction;
     }
 
+    /**
+     * this method is to provide structured string map for display
+     *
+     * @return info HashMap of information
+     * @author mHoang
+     */
     public HashMap<String, String> getSessionInfo() {
         HashMap<String, String> info = new HashMap<String, String>();
         info.put("bike", "" + bike.getBarcode());
@@ -96,6 +116,13 @@ public class Session {
         return info;
     }
 
+    /**
+     * This method is for comparing 2 Session objects
+     *
+     * @param o object
+     * @return true if equals
+     * @author mHoang
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

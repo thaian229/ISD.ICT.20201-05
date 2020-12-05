@@ -12,6 +12,9 @@
               <image>
                   <Image url="@../../../assets/images/LOGO_R.png" />
               </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
           </ImageView>
           <TextField fx:id="barcodeInput" layoutX="103.0" layoutY="114.0" prefHeight="31.0" prefWidth="294.0" promptText="Barcode" style="-fx-border-color: #AAAAAA; -fx-border-width: 2; -fx-border-radius: 3;">
             <font>

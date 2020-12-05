@@ -8,9 +8,9 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <ScrollPane layoutX="305.0" layoutY="225.0" prefHeight="505.0" prefWidth="756.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5;">
+      <ScrollPane layoutX="305.0" layoutY="225.0" prefHeight="505.0" prefWidth="756.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 6;">
         <content>
-          <AnchorPane prefHeight="505.0" prefWidth="756.0" style="-fx-background-radius: 5; -fx-background-color: #F5F5F5;">
+          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="756.0" style="-fx-background-radius: 6; -fx-background-color: #F5F5F5;">
                <children>
                    <VBox fx:id="vboxDockList" minHeight="-Infinity" minWidth="-Infinity" prefWidth="756.0" />
                </children>
