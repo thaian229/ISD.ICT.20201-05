@@ -1,14 +1,15 @@
 package model.db;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class EBRDB {
 
-    private static final String url = "jdbc:postgresql://localhost:3333/EBR DB";
+    private static final String url = "jdbc:postgresql://localhost/ebr";
     private static final String user = "postgres";
-    private static final String password = "Bim12345%";
+    private static final String password = "04126152";
 
     /**
      * Connect to the PostgreSQL database

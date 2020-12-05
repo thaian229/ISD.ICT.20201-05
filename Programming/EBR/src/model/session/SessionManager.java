@@ -14,14 +14,40 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * class for accessing DB related functions and managing list of Session
+ *
+ * @author mHoang
+ * <p>
+ * created_at: 4/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
+
 public class SessionManager {
     private static SessionManager instance; //singleton
     private ArrayList<Session> sessions = new ArrayList<>();
 
+    /**
+     * @author mHoang
+     * This constructor will refresh the session list when the object is initialized
+     */
     private SessionManager() {
         this.refreshSessionsList();
     }
 
+    /**
+     * This is the SessionManager provider
+     *
+     * @return instance SessionManager object
+     * @author mHoang
+     */
     public static SessionManager getInstance() {
         if (instance == null) {
             instance = new SessionManager();
@@ -29,6 +55,15 @@ public class SessionManager {
         return instance;
     }
 
+    /**
+     * This method is for create new Session object and update it details to the DB
+     *
+     * @param bike            Bike
+     * @param card            Card
+     * @param rentTransaction PaymentTransaction
+     * @return newSession new Session object
+     * @author mHoang
+     */
     public Session createSession(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
         Session newSession = new Session(bike, card, rentTransaction);
         String sessionId = this.insertNewSessions(newSession);
@@ -37,6 +72,14 @@ public class SessionManager {
         return newSession;
     }
 
+    /**
+     * This method is to end the session and update in DB
+     *
+     * @param session
+     * @param returnTransaction
+     * @return affectedRows number of affected rows in DB
+     * @author mHoang
+     */
     public int endSession(Session session, PaymentTransaction returnTransaction) {
         session.setEndTime(LocalDateTime.now());
         session.setReturnTransaction(returnTransaction);
@@ -45,7 +88,7 @@ public class SessionManager {
                 + "SET (end_time, return_transactionid) = (?, ?) "
                 + "WHERE id = ? ";
 
-        int affectedrows = 0;
+        int affectedRows = 0;
 
         try (
                 PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
@@ -54,14 +97,21 @@ public class SessionManager {
             pstmt.setString(2, returnTransaction.getId());
             pstmt.setString(3, session.getId());
 
-            affectedrows = pstmt.executeUpdate();
+            affectedRows = pstmt.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return affectedrows;
+        return affectedRows;
     }
 
+    /**
+     * get session object by passing an id
+     *
+     * @param id
+     * @return session Session object
+     * @author mHoang
+     */
     public Session getSessionById(String id) {
         for (Session session : sessions) {
             if (session.getId().equals(id))
@@ -70,6 +120,13 @@ public class SessionManager {
         return null;
     }
 
+    /**
+     * for inserting new session to DB
+     *
+     * @param newSession
+     * @return id new record id
+     * @author mHoang
+     */
     private String insertNewSessions(Session newSession) {
         String SQL = "INSERT INTO session(bike_id, card_id, rent_transactionid, start_time) "
                 + "VALUES(?,?,?,?)";
@@ -103,6 +160,10 @@ public class SessionManager {
         return id;
     }
 
+    /**
+     * @author mHoang
+     * get all sessions from DB and store them to the list
+     */
     private void refreshSessionsList() {
         sessions.clear();
         String SQL = "SELECT * FROM session";

@@ -1,5 +1,7 @@
 package utils;
 
+import javafx.stage.Stage;
+
 /**
  * @author nguyenlm Contains the configs for AIMS Project
  */
@@ -31,21 +33,17 @@ public class Configs {
 	public static final String DB_USERNAME = System.getenv("DB_USERNAME");
 	public static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
-	public static String CURRENCY = "VND";
+    public static String CURRENCY = "VND";
 	public static float PERCENT_VAT = 10;
 
 	// static resource
 	public static final String IMAGE_PATH = "assets/images";
 	public static final String BLANK_SCREEN_PATH = "/views/fxml/blank.fxml";
 	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice.fxml";
-	public static final String INVOICE_MEDIA_SCREEN_PATH = "/views/fxml/media_invoice.fxml";
-	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment.fxml";
-	public static final String RESULT_SCREEN_PATH = "/views/fxml/result.fxml";
+	public static final String SESSION_SCREEN_PATH = "/views/fxml/session.fxml";
 	public static final String SPLASH_SCREEN_PATH = "/views/fxml/splash.fxml";
-	public static final String CART_SCREEN_PATH = "/views/fxml/cart.fxml";
-	public static final String SHIPPING_SCREEN_PATH = "/views/fxml/shipping.fxml";
-	public static final String CART_MEDIA_PATH = "/views/fxml/media_cart.fxml";
 	public static final String HOME_PATH  = "/views/fxml/home.fxml";
-	public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
 	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
+	public static final String DOCK_LIST_ITEM_PATH = "/views/fxml/dock_list_item.fxml";
+
 }

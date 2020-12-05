@@ -22,8 +22,7 @@ public class App extends Application {
 
             try {
                 SplashScreenHandler splashScreenHandler = new SplashScreenHandler(primaryStage, Configs.SPLASH_SCREEN_PATH);
-                splashScreenHandler.setScreenTitle("Home Screen");
-                splashScreenHandler.setImage();
+                splashScreenHandler.setScreenTitle(splashScreenHandler.getScreenTitle());
                 splashScreenHandler.show();
             } catch (IOException e1) {
                 e1.printStackTrace();
