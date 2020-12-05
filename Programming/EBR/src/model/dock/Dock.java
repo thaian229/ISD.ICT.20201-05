@@ -4,6 +4,19 @@ import model.bike.Bike;
 
 import java.util.ArrayList;
 
+/**
+ * Model for dock
+ *
+ * @author Nguyen Thai An
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class Dock {
 
     private String name;
@@ -15,6 +28,14 @@ public class Dock {
 
     private final ArrayList<Bike> bikeList;
 
+    /**
+     * most use constructor
+     * @param id dock's uuid
+     * @param name dock's name
+     * @param location dock's address
+     * @param capacity total bike slots
+     * @param imageURL URL to dock's image
+     */
     public Dock(String id, String name, String location, int capacity, String imageURL) {
         this.id = id;
         this.name = name;
@@ -72,11 +93,19 @@ public class Dock {
         return bikeList;
     }
 
+    /**
+     * add a bike to dock
+     * @param bike instance of bike to be put in
+     */
     public void addBike(Bike bike) {
         this.bikeList.add(bike);
         this.numberOfAvailableBike = bikeList.size();
     }
 
+    /**
+     * remove a bike from dock
+     * @param bike instance of bike to be taken out
+     */
     public void removeBike(Bike bike) {
         this.bikeList.remove(bike);
         this.numberOfAvailableBike = bikeList.size();

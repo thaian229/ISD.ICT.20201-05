@@ -8,6 +8,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * Model to manage all docks and handle database connections
+ * that related to docks' info
+ *
+ * @author Nguyen Thai An
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class DockManager {
 
     private static DockManager instance;   // singleton
@@ -18,6 +32,10 @@ public class DockManager {
         refreshDockList();
     }
 
+    /**
+     * get the instance of DockManager
+     * @return DockManager instance
+     */
     public static DockManager getInstance() {
         if (instance == null) {
             instance = new DockManager();
@@ -26,6 +44,9 @@ public class DockManager {
         return instance;
     }
 
+    /**
+     * Updating local dock list with the current info in database
+     */
     public void refreshDockList() {
         this.dockList.clear();
 
@@ -52,6 +73,11 @@ public class DockManager {
         return dockList;
     }
 
+    /**
+     * get dock instance by dock's id
+     * @param id dock's id
+     * @return instance of that Dock, null if id not found
+     */
     public Dock getDockById(String id) {
         for (Dock dock : dockList) {
             if (dock.getId().equals(id))

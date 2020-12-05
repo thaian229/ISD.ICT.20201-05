@@ -4,16 +4,42 @@ import controller.BaseController;
 
 import java.util.HashMap;
 
+/**
+ * Controller to execute all logic required for taking payment method
+ * and start a new renting session
+ *
+ * @author Nguyen Thai An
+ * <p>
+ * creted at: 25/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class PaymentScreenController extends BaseController {
 
+    /**
+     * logic to handle credit card info form submit
+     */
     public void processCreditCardSubmit() {
 
     }
 
+    /**
+     * validating format of card info form
+     * @param creditCardForm all fields of form forward from View
+     */
     public void validateCreditCardForm(HashMap<String, String> creditCardForm) {
 
     }
 
+    /**
+     * validate card number only contains digits, letters and underscore
+     * @param cardNumber string of card number
+     * @return validation result
+     */
     public boolean validateCardNumber(String cardNumber) {
         // check card number is not empty
         if (cardNumber == null) return false;
@@ -23,6 +49,11 @@ public class PaymentScreenController extends BaseController {
         return cardNumber.matches("[0-9a-zA-Z_]+");
     }
 
+    /**
+     * validate card owner only contains digits, letters and spaces
+     * @param cardOwner string of card owner
+     * @return validation result
+     */
     public boolean validateCardOwner(String cardOwner) {
         // check card owner is not empty
         if (cardOwner == null) return false;
@@ -32,6 +63,11 @@ public class PaymentScreenController extends BaseController {
         return cardOwner.matches("[0-9a-zA-Z ]+");
     }
 
+    /**
+     * validate security code only contains digits and length is 3
+     * @param securityCode string of security code
+     * @return validation result
+     */
     public boolean validateSecurityCode(String securityCode) {
         // check security code is not empty
         if (securityCode == null) return false;
@@ -43,6 +79,11 @@ public class PaymentScreenController extends BaseController {
         return securityCode.matches("[0-9]+");
     }
 
+    /**
+     * validate expiration date has correct format MMyy and not yet reached
+     * @param expDate string of expiration date
+     * @return validation result
+     */
     public boolean validateExpDate(String expDate) throws NullPointerException {
         // check expire date is not empty
         if (expDate == null) return false;
