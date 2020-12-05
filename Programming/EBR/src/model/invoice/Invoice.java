@@ -9,6 +9,23 @@ import model.session.SessionManager;
 import java.time.LocalDateTime;
 
 
+
+/**
+ * class for the model Invoice
+ *
+ * @author khang
+ * <p>
+ * created_at: 4/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
+
 public class Invoice {
    private String id;
    private String sessionId;
@@ -23,13 +40,28 @@ public class Invoice {
         this.totalFees = total_charge;
     }
 
+
+    /**
+     * This method is used to get session by using session_id
+     * @return session
+     */
     public Session getSession(){
         return SessionManager.getInstance().getSessionById(sessionId);
     }
 
+
+    /**
+     * This method is used to get bike by using session_id
+     * @return bike
+     */
     public Bike getBike(){
         return SessionManager.getInstance().getSessionById(sessionId).getBike();
     }
+
+    /**
+     * This method is used to get credit card by using session_id
+     * @return card
+     */
     public CreditCard getCard(){
         return SessionManager.getInstance().getSessionById(sessionId).getCard();
     }
@@ -37,7 +69,10 @@ public class Invoice {
         this.totalFees = totalFees;
     }
 
-
+    /**
+     * This method is used to get start time by using session_id
+     * @return startTime
+     */
     public LocalDateTime getStartTime() {
         return SessionManager.getInstance().getSessionById(sessionId).getStartTime();
     }
@@ -49,9 +84,20 @@ public class Invoice {
     public String getSessionId(){
         return sessionId;
     }
+
+
+    /**
+     * This method is used to get end time by using session_id
+     * @return endTime
+     */
     public LocalDateTime getEndTime() {
         return SessionManager.getInstance().getSessionById(sessionId).getEndTime();
     }
+
+    /**
+     * This method is used to get deposit by using session_id
+     * @return deposit
+     */
 
     public int getDeposit() {
         return SessionManager.getInstance().getSessionById(sessionId).getBike().getDeposit();
@@ -62,6 +108,12 @@ public class Invoice {
        return totalFees;
     }
 
+
+
+    /**
+     * This method is used to get return transaction by using session_id
+     * @return returnTransaction
+     */
 
     public PaymentTransaction getReturnPaymentTransaction() {
         return SessionManager.getInstance().getSessionById(sessionId).getReturnTransaction();
@@ -75,7 +127,13 @@ public class Invoice {
         this.returned = returned;
     }
 
-
+    /**
+     * This method is for comparing 2 Invoice objects
+     *
+     * @param o object
+     * @return true if equals
+     * @author khang
+     */
 
     public boolean equals(Object o) {
         if (this == o) return true;
