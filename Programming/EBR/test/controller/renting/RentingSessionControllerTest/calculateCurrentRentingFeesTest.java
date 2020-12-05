@@ -32,7 +32,7 @@ public class calculateCurrentRentingFeesTest {
         Bike bike = new StandardBike(01);
         Session session = new Session(bike, card, tmpTransaction);
         session.setStartTime(now.minusMinutes(59));
-        assertEquals(25000, sessionScreenController.calulateCurrentRentingFees(session));
+        assertEquals(25000, sessionScreenController.calculateCurrentRentingFees(session));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class calculateCurrentRentingFeesTest {
         Bike bike = new StandardElectricalBike(02);
         Session session = new Session(bike, card, tmpTransaction);
         session.setStartTime(now.minusMinutes(61));
-        assertEquals(100000, sessionScreenController.calulateCurrentRentingFees(session));
+        assertEquals(100000, sessionScreenController.calculateCurrentRentingFees(session));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class calculateCurrentRentingFeesTest {
         Bike bike = new TwinBike(03);
         Session session = new Session(bike, card, tmpTransaction);
         session.setStartTime(now.minusMinutes(2400));
-        assertEquals(800000, sessionScreenController.calulateCurrentRentingFees(session));
+        assertEquals(800000, sessionScreenController.calculateCurrentRentingFees(session));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class calculateCurrentRentingFeesTest {
         Bike bike = new TwinElectricalBike(04);
         Session session = new Session(bike, card, tmpTransaction);
         session.setStartTime(now.minusMinutes(320));
-        assertEquals(300000, sessionScreenController.calulateCurrentRentingFees(session));
+        assertEquals(300000, sessionScreenController.calculateCurrentRentingFees(session));
     }
 
     @Test
@@ -64,6 +64,6 @@ public class calculateCurrentRentingFeesTest {
         Bike bike = new StandardBike(01);
         Session session = new Session(bike, card, tmpTransaction);
         session.setStartTime(now.minusMinutes(10));
-        assertEquals(25000, sessionScreenController.calulateCurrentRentingFees(session));
+        assertEquals(25000, sessionScreenController.calculateCurrentRentingFees(session));
     }
 }

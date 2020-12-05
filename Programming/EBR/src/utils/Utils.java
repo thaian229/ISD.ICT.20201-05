@@ -8,7 +8,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
@@ -84,8 +83,8 @@ public class Utils {
      * calculate duration in minutes
      *
      * @author mHoang
-     * @param before
-     * @param after
+     * @param before start time
+     * @param after end time
      *
      * @return minutes Long
      */

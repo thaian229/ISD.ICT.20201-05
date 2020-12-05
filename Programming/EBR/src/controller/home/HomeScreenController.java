@@ -28,7 +28,7 @@ public class HomeScreenController extends BaseController {
     /**
      * This method is used to get list of docks for the home screen to display
      * @author mHoang
-     * @return ArrayList<Dock> list of dock
+     * @return list of dock
      */
     public ArrayList<Dock> getDockList() {
         return DockManager.getInstance().getDockList();

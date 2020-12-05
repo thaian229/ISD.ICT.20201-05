@@ -61,8 +61,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * @param obj - an arbitrary {@link Object Object}.
 	 * @return a {@link Map Map} mapping the attribute names and its
 	 *         values.
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException unauthenticated access
+	 * @throws IllegalArgumentException invalid arguments
 	 */
 	public static Map<String, Object> toMyMap(Object obj) throws IllegalArgumentException, IllegalAccessException {
 		Map<String, Object> map = new MyMap();
@@ -93,7 +93,7 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * str - {@link String String}
 	 * idx - the index of the open quote
 	 * @return the term as {@link String String}
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException invalid arguments
 	 */
 	private static String getNextTerm(String str, int idx) {
 		if (str == null || idx >= str.length() || str.charAt(idx) != '"') {
@@ -122,11 +122,10 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * Return a {@link MyMap MyMap} that represents the interested substring in a {@link String String}.
 	 * 
 	 * @author hieudm
-	 * @param 
-	 * str - {@link String String}
-	 * idx - the index of the first character in the interested substring in the {@link String String}
+	 * @param str - {@link String String}
+	 * @param idx - the index of the first character in the interested substring in the {@link String String}
 	 * @return the term as {@link MyMap MyMap}
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException invalid arguments
 	 */
 	public static MyMap toMyMap(String str, int idx) throws IllegalArgumentException {
 		if (str == null || str.length() < 2 || str.charAt(idx) != '{') {

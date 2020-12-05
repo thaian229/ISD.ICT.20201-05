@@ -3,14 +3,16 @@ package model.session;
 import model.bike.Bike;
 import model.bike.BikeManager;
 import model.db.EBRDB;
-import model.dock.Dock;
 import model.payment.creditCard.CreditCard;
 import model.payment.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import utils.Utils;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -75,8 +77,8 @@ public class SessionManager {
     /**
      * This method is to end the session and update in DB
      *
-     * @param session
-     * @param returnTransaction
+     * @param session session to be ended
+     * @param returnTransaction transaction to refund deposit after deducting rental fee
      * @return affectedRows number of affected rows in DB
      * @author mHoang
      */
@@ -108,7 +110,7 @@ public class SessionManager {
     /**
      * get session object by passing an id
      *
-     * @param id
+     * @param id session's uuid
      * @return session Session object
      * @author mHoang
      */
@@ -123,7 +125,7 @@ public class SessionManager {
     /**
      * for inserting new session to DB
      *
-     * @param newSession
+     * @param newSession instance of session to be inserted
      * @return id new record id
      * @author mHoang
      */

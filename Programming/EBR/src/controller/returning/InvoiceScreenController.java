@@ -1,10 +1,8 @@
 package controller.returning;
 
 import controller.BaseController;
-import model.bike.Bike;
 import model.invoice.Invoice;
 import utils.Utils;
-
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -36,7 +34,7 @@ public class InvoiceScreenController extends BaseController {
     /**
      * This method is for calculating the total renting fees
      *
-     * @param invoice
+     * @param invoice invoice to be computed fee
      * @return totalCharge - the amount of money that customer has to pay until the session end
      * @author khang
      */
@@ -59,7 +57,7 @@ public class InvoiceScreenController extends BaseController {
     /**
      * This method is for calculating the returned deposit
      *
-     * @param invoice
+     * @param invoice invoice to be computed fee
      * @return returned - the amount of money that EBR has to return to user
      * @author khang
      */

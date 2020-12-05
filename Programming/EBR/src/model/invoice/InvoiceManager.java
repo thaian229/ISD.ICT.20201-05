@@ -3,8 +3,6 @@ package model.invoice;
 
 
 import model.db.EBRDB;
-import model.session.Session;
-import utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -140,7 +138,7 @@ public class InvoiceManager {
 
     /**
      * Remove invoice in history
-     * @return invoice
+     * @param invoice invoice to be removed
      */
     public void removeInvoice(Invoice invoice){
         invoiceHistory.remove(invoice);
@@ -149,7 +147,7 @@ public class InvoiceManager {
     /**
      * get invoice object by passing an id
      *
-     * @param invoiceId
+     * @param invoiceId invoice's uuid
      * @return invoice Invoice object
      * @author khang
      */
