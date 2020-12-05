@@ -5,10 +5,27 @@ import model.db.EBRDB;
 
 import java.sql.*;
 
+/**
+ * Model to manage all credit card and handle database access
+ *
+ * @author Vu Minh Hoang, Nguyen Thai An
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class CreditCardManager {
 
-    private static CreditCardManager instance;
+    private static CreditCardManager instance; // singleton
 
+    /**
+     * singleton instance access
+     * @return CreditCardManager instance
+     */
     public static CreditCardManager getInstance() {
         if (instance == null) {
             instance = new CreditCardManager();
@@ -16,6 +33,11 @@ public class CreditCardManager {
         return instance;
     }
 
+    /**
+     * query card info from database via id
+     * @param cardId card's uuid
+     * @return instance of wanted card, null if didn't found
+     */
     public CreditCard getCardById(String cardId) {
         // query the card
         String SQL = "SELECT * FROM card " +
@@ -42,6 +64,11 @@ public class CreditCardManager {
         return null;
     }
 
+    /**
+     * save the card into database
+     * @param creditCard instance of credit card to be saved
+     * @return uuid of the card in the newly created records
+     */
     public String saveCreditCard(CreditCard creditCard) {
         String SQL = "INSERT INTO card(card_num, card_owner, security_code, exp_date) " +
                 "VALUES (?, ?, ?, ?)";

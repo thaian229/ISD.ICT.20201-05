@@ -2,6 +2,19 @@ package model.payment.transaction;
 
 import model.payment.creditCard.CreditCard;
 
+/**
+ * Model to store Payment Transaction's info
+ *
+ * @author Vu Minh Hoang, Nguyen Thai An
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class PaymentTransaction {
 
 	private String errorCode;
@@ -26,6 +39,13 @@ public class PaymentTransaction {
 		this.createdAt = createdAt;
 	}
 
+	/**
+	 * constructor for create from database's info
+	 * @param id transaction's uuid
+	 * @param type its type
+	 * @param amount transfer amount
+	 * @param method payment method
+	 */
 	public PaymentTransaction(String id, String type, int amount, String method) {
 		this.id = id;
 		this.type = type;

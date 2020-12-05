@@ -5,10 +5,27 @@ import model.db.EBRDB;
 
 import java.sql.*;
 
+/**
+ * Model to manage all payment transaction and handle database access
+ *
+ * @author Vu Minh Hoang, Nguyen Thai An
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class PaymentTransactionManager {
 
-    private static PaymentTransactionManager instance;
+    private static PaymentTransactionManager instance;  // singleton
 
+    /**
+     * singleton instance access
+     * @return PaymentTransactionManager instance
+     */
     public static PaymentTransactionManager getInstance() {
         if (instance == null) {
             instance = new PaymentTransactionManager();
@@ -16,6 +33,11 @@ public class PaymentTransactionManager {
         return instance;
     }
 
+    /**
+     * query Payment Transaction info from database via id
+     * @param transactionId transaction's uuid
+     * @return instance of wanted transaction, null if didn't found
+     */
     public PaymentTransaction getTransactionById(String transactionId) {
         // query the card
         String SQL = "SELECT * FROM payment_transaction "
@@ -41,6 +63,11 @@ public class PaymentTransactionManager {
         return null;
     }
 
+    /**
+     * save transaction into database as new record
+     * @param paymentTransaction transaction to be saved
+     * @return uuid of newly added transaction's record
+     */
     public String savePaymentTransaction(PaymentTransaction paymentTransaction) {
         String SQL = "INSERT INTO payment_transaction(type, amount, method) " +
                 "VALUES (?, ?, ?)";

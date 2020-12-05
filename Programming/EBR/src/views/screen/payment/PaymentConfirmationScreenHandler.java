@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * description
+ * handler for Payment Confirmation Screen
  *
  * @author Nguyen Thai An
  * <p>

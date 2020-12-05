@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * description
+ * blank screen init for later screens
  *
  * @author Nguyen Thai An
  * <p>
