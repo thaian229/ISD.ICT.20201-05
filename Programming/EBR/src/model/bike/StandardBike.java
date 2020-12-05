@@ -1,5 +1,18 @@
 package model.bike;
 
+/**
+ * Model for standard bike
+ *
+ * @author Bui Tu Hoang
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class StandardBike extends Bike {
     public StandardBike(int barcode) {
         this.barcode = barcode;
@@ -10,6 +23,12 @@ public class StandardBike extends Bike {
         this.charge = 25000;
     }
 
+    /**
+     * Constructor
+     * @param barcode Standard bike's barcode
+     * @param value Standard bike's value
+     * @param charge Standard bike's renting fee
+     */
     public StandardBike(int barcode, int value, int charge) {
         this.barcode = barcode;
         this.saddle = 1;
@@ -20,6 +39,13 @@ public class StandardBike extends Bike {
         this.charge = charge;
     }
 
+    /**
+     * Most use constructor
+     * @param id Standard bike's uuid
+     * @param barcode Standard bike's barcode
+     * @param value Standard bike's value
+     * @param charge Standard bike's renting fee
+     */
     public StandardBike(String id, int barcode, int value, int charge) {
         this.id = id;
         this.barcode = barcode;

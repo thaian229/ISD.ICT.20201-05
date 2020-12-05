@@ -8,6 +8,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * Model to manage all bikes and handle database connections
+ * that related to bikes' info
+ *
+ * @author Bui Tu Hoang
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class BikeManager {
     private static BikeManager instance;
     private ArrayList<Bike> bikeList;
@@ -17,6 +31,10 @@ public class BikeManager {
         refreshBikeList();
     }
 
+    /**
+     * Get the instance of BikeManager
+     * @return BikeManager instance
+     */
     public static BikeManager getInstance() {
         if(instance == null) {
             instance = new BikeManager();
@@ -30,14 +48,25 @@ public class BikeManager {
         this.bikeList = bikeList;
     }
 
+    /**
+     * Add a bike to bike list
+     * @param bike Instance of bike to be put in
+     */
     public void addBike(Bike bike) {
         bikeList.add(bike);
     }
 
+    /**
+     * Remove a bike from bike list
+     * @param bike Instance of bike to be taken out
+     */
     public void removeBike(Bike bike) {
         bikeList.remove(bike);
     }
 
+    /**
+     * Updating local bike list with the current info in database
+     */
     public void refreshBikeList() {
         String sql = "SELECT * FROM bike";
         try (Connection connection = EBRDB.getConnection();
@@ -55,6 +84,11 @@ public class BikeManager {
         }
     }
 
+    /**
+     * Get bike by bike's id
+     * @param id Bike's id
+     * @return instance of that bike, null if not found
+     */
     public Bike getBikeById(String id){
         for(Bike bike : bikeList){
             if(bike.getId().equals(id)) return bike;
@@ -62,6 +96,11 @@ public class BikeManager {
         return null;
     }
 
+    /**
+     * Get bike by bike's barcode
+     * @param barcode Bike's barcode
+     * @return instance of that bike, null if not found
+     */
     public Bike getBikeByBarcode(int barcode){
         for(Bike bike : bikeList){
             if(bike.getBarcode() == barcode) return bike;

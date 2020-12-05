@@ -1,20 +1,28 @@
 package model.bike;
 
+/**
+ * Model for twin electrical bike
+ *
+ * @author Bui Tu Hoang
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class TwinElectricalBike extends Bike{
     private float battery;
     private String timeLeft;
 
-    public TwinElectricalBike(int barcode){
-        this.barcode = barcode;
-        this.saddle = 2;
-        this.rearSeat = 1;
-        this.pairOfPedals = 2;
-        this.deposit = 5000000;
-        this.charge = 50000;
-        this.battery = 100;
-        this. timeLeft = "6 hours";
-    }
-
+    /**
+     * Constructor
+     * @param barcode Twin electrical bike's barcode
+     * @param value Twin electrical bike's value
+     * @param charge Twin electrical bike's renting fee
+     */
     public TwinElectricalBike(int barcode, int value, int charge){
         this.barcode = barcode;
         this.saddle = 1;
@@ -27,6 +35,13 @@ public class TwinElectricalBike extends Bike{
         this. timeLeft = "6 hours";
     }
 
+    /**
+     * Most use constructor
+     * @param id Twin electrical bike's uuid
+     * @param barcode Twin electrical bike's barcode
+     * @param value Twin electrical bike's value
+     * @param charge Twin electrical bike's renting fee
+     */
     public TwinElectricalBike(String id, int barcode, int value, int charge){
         this.id = id;
         this.barcode = barcode;

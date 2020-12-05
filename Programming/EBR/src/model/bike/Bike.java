@@ -4,6 +4,19 @@ import model.dock.Dock;
 
 import java.util.Objects;
 
+/**
+ * Model for bike
+ *
+ * @author Bui Tu Hoang
+ * <p>
+ * creted at: 24/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class Bike {
     protected String id;
     protected int barcode;
@@ -19,6 +32,12 @@ public class Bike {
 
     public Bike() { }
 
+    /**
+     * Constructor
+     * @param barcode Bike's barcode
+     * @param value Bike's value
+     * @param charge Bike's renting fee
+     */
     public Bike(int barcode, int value, int charge){
         this.barcode = barcode;
         this.saddle = 1;
@@ -29,6 +48,13 @@ public class Bike {
         this.charge = charge;
     }
 
+    /**
+     * Most use constructor
+     * @param id Bike's uuid
+     * @param barcode Bike's barcode
+     * @param value Bike's value
+     * @param charge Bike's renting fee
+     */
     public Bike(String id, int barcode, int value, int charge){
         this.id = id;
         this.barcode = barcode;
