@@ -1,3 +1,32 @@
+# LAB 09 - PROGRAMMING
+## Tasks
+Implementing the EBR software.\
+Generate Javadoc for the software.
+
+## Contributions
+#### 1. Nguyen Thai An:
+Dock, DockManager, EBRDB, CreditCardManger, PaymentTransactionManager.\
+FXML for Payment and PaymentConfirmation screens
+
+#### 2. Bui Tu Hoang
+All bikes models, Bike Manager, Dock's view FXML.
+
+#### 3. Vu Minh Hoang
+Session, PaymentTransaction and SessionManager models, update Utils.\
+Home screen and Barcode FXML, handlers.
+
+#### 4. Nguyen Manh Khang
+Invoice and InvoiceHistory models.\
+Invoice, Bike's view FXML and handlers.
+
+## Revisions
+An reviews Tu Hoang\
+Tu Hoang reviews Khang\
+Minh Hoang reviews An\
+Khang reviews Minh Hoang.
+
+---
+
 # LAB 08 - UNIT TEST
 ## Tasks
 Design Unit Test plan for EBR software.\
