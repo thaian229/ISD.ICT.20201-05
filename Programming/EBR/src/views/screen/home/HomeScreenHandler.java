@@ -1,5 +1,6 @@
 package views.screen.home;
 
+import controller.DockScreenController;
 import controller.home.HomeScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import model.dock.Dock;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.dock.DockScreenHandler;
 import views.screen.popup.PopupScreen;
 
 import java.io.File;
@@ -85,8 +87,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 ioException.printStackTrace();
             }
         });
-
-        displayDockList();
     }
 
     /**
@@ -111,15 +111,12 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
      * @author mHoang
      * display list of docks in the home screen
      */
-    private void displayDockList() {
-        // clear all old cartMedia
+    public void displayDockList() {
         vboxDockList.getChildren().clear();
 
-        // get list media of cart after check availability
-
         try {
-//            dockList = ((HomeScreenController) this.getBController()).getDockList();
-            dockList = (new HomeScreenController()).getDockList();
+            dockList = ((HomeScreenController) this.getBController()).getDockList();
+//            dockList = (new HomeScreenController()).getDockList();
 
             for (Dock dock : dockList) {
 
@@ -134,6 +131,19 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             System.out.println(e.getMessage());
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void onDockListItemClicked(Dock dock) {
+        try {
+            DockScreenHandler dockScreenHandler = new DockScreenHandler(this.stage, Configs.DOCK_PATH, dock);
+            dockScreenHandler.setBController(new DockScreenController());
+            dockScreenHandler.displayBikeList();
+            dockScreenHandler.setScreenTitle(dockScreenHandler.getScreenTitle());
+            dockScreenHandler.setPreviousScreen(this);
+            dockScreenHandler.show();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
     }
 

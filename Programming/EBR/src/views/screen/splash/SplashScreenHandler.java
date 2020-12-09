@@ -53,6 +53,7 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
             try {
                 HomeScreenHandler homeScreenHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
                 homeScreenHandler.setBController(new HomeScreenController());
+                homeScreenHandler.displayDockList();
                 homeScreenHandler.setScreenTitle(homeScreenHandler.getScreenTitle());
                 homeScreenHandler.setPreviousScreen(this);
                 homeScreenHandler.show();

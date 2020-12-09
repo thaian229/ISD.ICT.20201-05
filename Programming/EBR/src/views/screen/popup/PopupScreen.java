@@ -53,7 +53,7 @@ public class PopupScreen extends BaseScreenHandler implements Initializable {
 
     private static PopupScreen popup() throws IOException {
         PopupScreen popup = new PopupScreen(new Stage());
-        popup.stage.initStyle(StageStyle.UNDECORATED);
+        popup.stage.initStyle(StageStyle.DECORATED);
         return popup;
     }
 
