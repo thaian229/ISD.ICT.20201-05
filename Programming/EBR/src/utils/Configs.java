@@ -1,7 +1,5 @@
 package utils;
 
-import javafx.stage.Stage;
-
 /**
  * @author nguyenlm Contains the configs for AIMS Project
  */
@@ -45,5 +43,7 @@ public class Configs {
 	public static final String HOME_PATH  = "/views/fxml/home.fxml";
 	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
 	public static final String DOCK_LIST_ITEM_PATH = "/views/fxml/dock_list_item.fxml";
+	public static final String PAYMENT_CONFIRMATION_SCREEN_PATH = "/views/fxml/payment_confirmation_screen.fxml";
+	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment_screen.fxml";
 
 }

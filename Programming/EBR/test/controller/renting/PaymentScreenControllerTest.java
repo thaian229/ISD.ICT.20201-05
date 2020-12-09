@@ -1,7 +1,7 @@
 package controller.renting;
 
+import model.bike.Bike;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,7 +13,8 @@ public class PaymentScreenControllerTest {
 
     @BeforeEach
     void Setup() {
-        paymentScreenController = new PaymentScreenController();
+        Bike bike = new Bike();
+        paymentScreenController = new PaymentScreenController(bike);
     }
 
     @ParameterizedTest
