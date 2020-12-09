@@ -47,7 +47,7 @@
                 </Text>
                 <Pane layoutX="77.0" layoutY="108.0" prefHeight="355.0" prefWidth="723.0" style="-fx-background-color: white;">
                     <children>
-                        <ImageView fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bikeImage" fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../assets/images/xe-dap-1-159482394547294562988-51-0-526-908-crop-1594824063607285632499.png" />
                             </image>
@@ -90,23 +90,23 @@
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXXXX" GridPane.columnIndex="1">
+                                <Text fx:id="bikeBarcode" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXXXX" GridPane.columnIndex="1">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font></Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DOCK NAME" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Text fx:id="bikeDockName" strokeType="OUTSIDE" strokeWidth="0.0" text="DOCK NAME" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font></Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="75%" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                <Text fx:id="bikeBattery" strokeType="OUTSIDE" strokeWidth="0.0" text="75%" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font></Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6 HOURS LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                <Text fx:id="bikeUsage" strokeType="OUTSIDE" strokeWidth="0.0" text="6 HOURS LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font></Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                <Text fx:id="bikeDeposit" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font></Text>
@@ -127,7 +127,7 @@
                                         <Font name="Arial Bold" size="24.0" />
                                     </font>
                                 </Text>
-                                <Text fill="#16b85ff3" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
+                                <Text fx:id="bikeCharge" fill="#16b85ff3" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
                                     <font>
                                         <Font name="Arial" size="36.0" />
                                     </font>

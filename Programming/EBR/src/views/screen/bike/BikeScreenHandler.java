@@ -4,8 +4,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.Bike;
+import model.dock.Dock;
+import model.dock.DockManager;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
@@ -18,18 +22,40 @@ import java.util.ResourceBundle;
 public class BikeScreenHandler extends BaseScreenHandler implements Initializable {
 
     @FXML
-    private javafx.scene.image.ImageView logo;
+    private ImageView logo;
 
     @FXML
-    private javafx.scene.image.ImageView back;
+    private ImageView back;
 
     @FXML
     private Button barcodeButton;
 
+    @FXML
+    private Text bikeBarcode;
+
+    @FXML
+    private Text bikeDockName;
+
+    @FXML
+    private Text bikeBattery;
+
+    @FXML
+    private Text bikeUsage;
+
+    @FXML
+    private Text bikeDeposit;
+
+    @FXML
+    private Text bikeCharge;
+
+    @FXML
+    private ImageView bikeImage;
+
     private Bike bike;
 
-    public BikeScreenHandler(Stage stage, String screenPath) throws IOException {
+    public BikeScreenHandler(Stage stage, String screenPath, Bike bike) throws IOException {
         super(stage, screenPath);
+        this.bike = bike;
         super.screenTitle = "Bike Screen";
     }
 
@@ -56,17 +82,20 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
 
     private void displayBike() {
         try {
-
+            bikeBarcode.setText(Integer.toString(bike.getBarcode()));
+            bikeDeposit.setText(Integer.toString(bike.getDeposit()));
+            bikeCharge.setText(Integer.toString((bike.getCharge())));
+            Dock dock = new DockManager().getDockById(bike.getDockId());
+            bikeDockName.setText(dock.getName());
+            bikeBattery.setVisible(false);
+            bikeUsage.setVisible(false);
+            File fileBikeImage = new File(bike.getImageURL());
+            Image img = new Image(fileBikeImage.toURI().toString());
+            bikeImage.setImage(img);
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
     }
-
-    public void setBike(Bike bike) {
-        this.bike = bike;
-    }
-
-    private void set
 
     private void setImage() {
         // fix image path caused by fxml
