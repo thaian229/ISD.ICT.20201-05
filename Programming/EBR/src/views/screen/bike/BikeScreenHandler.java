@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.Bike;
+import model.bike.StandardElectricalBike;
+import model.bike.TwinElectricalBike;
 import model.dock.Dock;
 import model.dock.DockManager;
 import utils.Configs;
@@ -109,8 +111,18 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             bikeCharge.setText(Integer.toString((bike.getCharge())));
             Dock dock = new DockManager().getDockById(bike.getDockId());
             bikeDockName.setText(dock.getName());
-            bikeBattery.setVisible(false);
-            bikeUsage.setVisible(false);
+            if (bike instanceof StandardElectricalBike) {
+                bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
+                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes");
+            }
+            else if (bike instanceof TwinElectricalBike){
+                bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
+                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " minutes");
+            }
+            else {
+                bikeBattery.setVisible(false);
+                bikeUsage.setVisible(false);
+            }
             File fileBikeImage = new File(bike.getImageURL());
             Image img = new Image(fileBikeImage.toURI().toString());
             bikeImage.setImage(img);
@@ -120,7 +132,6 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     }
 
     private void setImage() {
-        // fix image path caused by fxml
         File file1 = new File(Configs.IMAGE_PATH + "/" + "LOGO.png");
         Image img1 = new Image(file1.toURI().toString());
         logo.setImage(img1);

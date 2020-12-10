@@ -61,7 +61,7 @@ public class TwinElectricalBike extends Bike{
 
     public int getTimeLeft() { return timeLeft; }
 
-    public void setTimeLeft( int timeLeft) { this.timeLeft = timeLeft; }
+    public void setTimeLeft(int timeLeft) { this.timeLeft = timeLeft; }
 
 }
 
