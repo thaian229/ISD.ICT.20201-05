@@ -20,9 +20,9 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="32.0" fitWidth="93.0" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="bikeIcon" fitHeight="32.0" fitWidth="93.0" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../assets/images/Standard_Bike_outlined.png" />
+                        <Image url="@../../../assets/images/icons/standard_bike_icon.png" />
                      </image>
                   </ImageView>
                   <Text fx:id="bikeName" layoutX="276.0" layoutY="44.0" opacity="0.75" strokeType="OUTSIDE" strokeWidth="0.0" text="Standard Bike 1">
@@ -74,14 +74,14 @@
                               <Font size="24.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                        <ImageView fx:id="batteryIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                            <image>
-                              <Image url="@../../../assets/images/battery_std_24px_outlined.png" />
+                              <Image url="@../../../assets/images/icons/battery_icon.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <ImageView fx:id="clockIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@../../../assets/images/watch_later_24px_outlined.png" />
+                              <Image url="@../../../assets/images/icons/watch_icon.png" />
                            </image>
                         </ImageView>
                      </children>

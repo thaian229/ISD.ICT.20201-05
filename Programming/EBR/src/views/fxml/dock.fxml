@@ -75,22 +75,22 @@
                   </ImageView>
                   <ImageView fitHeight="27.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../assets/images/Standard_Bike_outlined.png" />
+                        <Image url="@../../../assets/images/icons/standard_bike_icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="27.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../../assets/images/Twin_Bike_outlined.png" />
+                        <Image url="@../../../assets/images/icons/twin_bike_icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="27.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../assets/images/E_Bike_outlined.png" />
+                        <Image url="@../../../assets/images/icons/E_Bike_icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="27.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../assets/images/E_Bike_outlined.png" />
+                        <Image url="@../../../assets/images/icons/E_Bike_icon.png" />
                      </image>
                   </ImageView>
                   <Text fx:id="dockCapacity" opacity="0.54" strokeType="OUTSIDE" strokeWidth="0.0" text="200" GridPane.columnIndex="1" GridPane.halignment="RIGHT">

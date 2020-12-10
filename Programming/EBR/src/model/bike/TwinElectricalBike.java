@@ -15,7 +15,7 @@ package model.bike;
  */
 public class TwinElectricalBike extends Bike{
     private float battery;
-    private String timeLeft;
+    private int timeLeft;
 
     /**
      * Constructor
@@ -32,7 +32,7 @@ public class TwinElectricalBike extends Bike{
         this.deposit = value/10;
         this.charge = charge;
         this.battery = 100;
-        this. timeLeft = "6 hours";
+        this.timeLeft = 360;
     }
 
     /**
@@ -52,16 +52,16 @@ public class TwinElectricalBike extends Bike{
         this.deposit = value/10;
         this.charge = charge;
         this.battery = 100;
-        this. timeLeft = "6 hours";
+        this. timeLeft = 360;
     }
 
     public float getBattery() { return battery; }
 
     public void setBattery(float battery) { this.battery = battery; }
 
-    public String getTimeLeft() { return timeLeft; }
+    public int getTimeLeft() { return timeLeft; }
 
-    public void setTimeLeft(String timeLeft) { this.timeLeft = timeLeft; }
+    public void setTimeLeft( int timeLeft) { this.timeLeft = timeLeft; }
 
 }
 

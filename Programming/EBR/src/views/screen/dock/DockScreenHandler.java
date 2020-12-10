@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.Bike;
+import model.bike.StandardBike;
+import model.bike.StandardElectricalBike;
 import model.dock.Dock;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
@@ -80,7 +82,9 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
 
                 // display the attribute of vboxCart media
                 BikeListItemHandler bikeListItem = new BikeListItemHandler(Configs.BIKE_LIST_ITEM_PATH, this);
+
                 bikeListItem.setBike(bike);
+
                 // add spinner
                 vboxBikeList.getChildren().add(bikeListItem.getContent());
             }
