@@ -61,6 +61,6 @@ public class StandardElectricalBike extends Bike {
 
     public String getTimeLeft() { return timeLeft; }
 
-    public void setTimeLeft(String timeLeft) { this.timeLeft = timeLeft; }
+    public void setTimeLeft(int timeLeft) { this.timeLeft = timeLeft; }
 
 }
