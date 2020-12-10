@@ -33,9 +33,6 @@ public class PaymentScreenController extends BaseController {
     public PaymentScreenController(Bike bike) {
         this.bike = bike;
         cardInfo = new HashMap<>();
-        System.out.println(bike.getBarcode());
-        System.out.println(bike.getDeposit());
-        System.out.println(bike.getCharge());
     }
 
     public PaymentScreenController(Bike bike, HashMap<String, String> cardInfo) {
@@ -73,7 +70,7 @@ public class PaymentScreenController extends BaseController {
     public Map<String, String> payDeposit(int amount, String contents, String cardNumber, String cardHolderName,
                                           String expirationDate, String securityCode) {
         Map<String, String> result = new HashMap<String, String>();
-        result.put("RESULT", "F");
+        result.put("RESULT", "PAYMENT FAILED!");
         try {
             CreditCard card = new CreditCard(cardNumber, cardHolderName, Integer.parseInt(securityCode),
                     expirationDate);
@@ -81,8 +78,8 @@ public class PaymentScreenController extends BaseController {
             InterbankSubsystem interbank = new InterbankSubsystem();
             PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
 
-            result.put("RESULT", "S");
-            result.put("MESSAGE", "You have successfully paid the order!");
+            result.put("RESULT", "PAYMENT SUCCESSFUL!");
+            result.put("MESSAGE", "You have successfully paid the deposit!");
         } catch (PaymentException | UnrecognizedException ex) {
             result.put("MESSAGE", ex.getMessage());
         }

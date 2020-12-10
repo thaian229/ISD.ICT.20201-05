@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class InterbankSubsystemController {
 
-	private static final String PUBLIC_KEY = "AQzdE8O/fR8=";
-	private static final String SECRET_KEY = "BUXj/7/gHHI=";
+	private static final String PUBLIC_KEY = "BDcKeK6XjQg=";
+	private static final String SECRET_KEY = "BBbFAE8bdPY=";
 	private static final String PAY_COMMAND = "pay";
 	private static final String VERSION = "1.0.0";
 
-	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
+	private static final InterbankBoundary interbankBoundary = new InterbankBoundary();
 
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		return null;
@@ -29,12 +29,16 @@ public class InterbankSubsystemController {
 	public PaymentTransaction payDeposit(CreditCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
 
-		try {
-			transaction.putAll(MyMap.toMyMap(card));
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			throw new InvalidCardException();
-		}
+		transaction.put("cardCode", card.getCardNum());
+		transaction.put("owner", card.getCardOwner());
+		transaction.put("cvvCode", card.getSecurityCode());
+		transaction.put("dateExpired", card.getExpDate());
+//		try {
+//			transaction.putAll(MyMap.toMyMap(card));
+//		} catch (IllegalArgumentException | IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			throw new InvalidCardException();
+//		}
 		transaction.put("command", PAY_COMMAND);
 		transaction.put("transactionContent", contents);
 		transaction.put("amount", amount);

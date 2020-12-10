@@ -61,7 +61,7 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
                 homeScreenHandler.setPreviousScreen(this);
 //                homeScreenHandler.show();
                 Bike bike = BikeManager.getInstance().getBikeList().get(0);
-                System.out.println(bike.getBarcode());
+
                 PaymentScreenController paymentScreenController = new PaymentScreenController(bike);
                 PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH);
                 paymentScreenHandler.setBController(paymentScreenController);

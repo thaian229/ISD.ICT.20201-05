@@ -104,7 +104,6 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
 
     private void setTextLabels() {
         try {
-            System.out.println(this.controller.getBike().getBarcode());
             barcode.setText(Integer.toString(this.controller.getBike().getBarcode()));
             cardNumber.setText(this.controller.getCardInfo().get("cardNumber"));
             deposit.setText(Integer.toString(this.controller.getBike().getDeposit()));
@@ -117,12 +116,11 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
 
     private void handleRentingConfirmation() {
         String contents = "pay order";
-        System.out.println(controller.getBike().getDeposit());
         Map<String, String> respond = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,
                 this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                 this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
 
-        if (respond.get("RESULT").equalsIgnoreCase("F")) {
+        if (respond.get("RESULT").equalsIgnoreCase("PAYMENT FAILED!")) {
             getPreviousScreen().show();
         } else {
             homeScreenHandler.show();
