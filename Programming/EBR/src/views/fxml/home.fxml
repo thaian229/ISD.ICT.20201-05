@@ -57,7 +57,7 @@
             </TextField>
             <ImageView fx:id="searchImg" fitHeight="24.0" fitWidth="24.0" layoutX="26.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../assets/images/search.png" />
+                  <Image url="@../../../assets/images/icons/search_icon.png" />
                </image>
             </ImageView>
          </children>
