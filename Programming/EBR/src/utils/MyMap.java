@@ -25,31 +25,31 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * @return a {@link String String}.
 	 */
 	public String toJSON() {
-		int max = size() - 1;
-		if (max == -1)
-			return "{}";
+		try {
+			int max = size() - 1;
+			if (max == -1)
+				return "{}";
 
-		StringBuilder sb = new StringBuilder();
-		Iterator<Map.Entry<String, Object>> it = entrySet().iterator();
+			StringBuilder sb = new StringBuilder();
+			Iterator<Map.Entry<String, Object>> it = entrySet().iterator();
 
-		sb.append('{');
-		for (int i = 0;; i++) {
-			Map.Entry<String, Object> e = it.next();
-			String key = e.getKey();
-			Object value = e.getValue();
-			sb.append('"' + key.toString() + '"');
-			sb.append(':');
-			sb.append(value instanceof MyMap ? ((MyMap) value).toJSON() : ('"' + value.toString() + '"'));
+			sb.append('{');
+			for (int i = 0;; i++) {
+				Map.Entry<String, Object> e = it.next();
+				String key = e.getKey();
+				Object value = e.getValue();
+				sb.append('"' + key.toString() + '"');
+				sb.append(':');
+				sb.append(value instanceof MyMap ? ((MyMap) value).toJSON() : ('"' + value.toString() + '"'));
 
-//			if (value instanceof MyMap) {
-//				sb.append(((MyMap) value).toJSON());
-//			} else {
-//				sb.append('"' + value.toString() + '"');
-//			}
-			if (i == max)
-				return sb.append('}').toString();
-			sb.append(",");
+				if (i == max)
+					return sb.append('}').toString();
+				sb.append(",");
+			}
+		} catch (NullPointerException exp) {
+			exp.printStackTrace();
 		}
+		return null;
 	}
 
 	/**

@@ -1,15 +1,19 @@
 package views.screen.splash;
 
 import controller.home.HomeScreenController;
+import controller.renting.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.bike.Bike;
+import model.bike.BikeManager;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.home.HomeScreenHandler;
+import views.screen.payment.PaymentScreenHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,7 +60,16 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
                 homeScreenHandler.displayDockList();
                 homeScreenHandler.setScreenTitle(homeScreenHandler.getScreenTitle());
                 homeScreenHandler.setPreviousScreen(this);
-                homeScreenHandler.show();
+//                homeScreenHandler.show();
+                Bike bike = BikeManager.getInstance().getBikeList().get(0);
+
+                PaymentScreenController paymentScreenController = new PaymentScreenController(bike);
+                PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH);
+                paymentScreenHandler.setBController(paymentScreenController);
+                paymentScreenHandler.setHomeScreenHandler(homeScreenHandler);
+                paymentScreenHandler.setPreviousScreen(this);
+                paymentScreenHandler.setScreenTitle("Payment Screen");
+                paymentScreenHandler.show();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
