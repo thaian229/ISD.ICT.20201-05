@@ -1,25 +1,20 @@
 package views.screen.dock;
 
 import controller.DockScreenController;
-import controller.home.HomeScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.*;
 import model.dock.Dock;
-import model.dock.DockManager;
 import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.bike.BikeScreenHandler;
-import views.screen.home.DockListItemHandler;
-import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
 
 import java.io.File;
@@ -184,7 +179,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         dockTwinEBikeNum.setText("" + teb);
     }
 
-    public void BikeScreenTrasition(Bike bike) {
+    public void BikeScreenTransition(Bike bike) {
         try {
             bike.setDock(dock);
             BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage, Configs.BIKE_PATH, bike);

@@ -64,7 +64,7 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         super(screenPath);
         this.dockScreenHandler = dockScreenHandler;
         rentButton.setOnMouseClicked(e -> {
-            this.dockScreenHandler.BikeScreenTrasition(bike);
+            this.dockScreenHandler.BikeScreenTransition(bike);
         });
     }
 

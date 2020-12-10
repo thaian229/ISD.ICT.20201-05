@@ -64,6 +64,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         super(stage, screenPath);
         this.bike = bike;
         super.screenTitle = "Bike Screen";
+        displayBike();
     }
 
     @Override
@@ -85,7 +86,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             }
         });
 
-        displayBike();
+
 
         rentNowButton.setOnMouseClicked(e -> {
             System.out.println("Button clicked");
