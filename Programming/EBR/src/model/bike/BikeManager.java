@@ -1,11 +1,9 @@
 package model.bike;
 
 import model.db.EBRDB;
+import model.dock.DockManager;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -108,6 +106,45 @@ public class BikeManager {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+    }
+
+    public ArrayList<Bike> getBikeListInDock(String dockId) {
+        String sql = "SELECT * FROM bike\n" +
+                "LEFT JOIN e_bike on bike.id = e_bike.bike_id\n" +
+                "WHERE dock_id = ?::uuid";
+        ArrayList<Bike> bikeListOfDock = new ArrayList<>();
+
+        try (Connection conn = EBRDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, dockId);
+            ResultSet resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                Bike bike = null;
+                switch (resultSet.getInt("type")) {
+                    case (STANDARD_BIKE_CODE):
+                        bike = createStandardBike(resultSet);
+                        break;
+                    case (TWIN_BIKE_CODE):
+                        bike = createTwinBike(resultSet);
+                        break;
+                    case (STANDARD_ELECTRICAL_BIKE_CODE):
+                        bike = createStandardElectricalBike(resultSet);
+                        break;
+                    case (TWIN_ELECTRICAL_BIKE_CODE):
+                        bike = createTwinElectricalBike(resultSet);
+                        break;
+                    default:
+                        break;
+                }
+                if (bike != null) {
+                    bikeListOfDock.add(bike);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return bikeListOfDock;
     }
 
     private StandardBike createStandardBike(ResultSet resultSet) throws SQLException {

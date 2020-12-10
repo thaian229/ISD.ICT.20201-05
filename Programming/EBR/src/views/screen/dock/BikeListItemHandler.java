@@ -50,6 +50,8 @@ public class BikeListItemHandler extends FXMLScreenHandler {
     @FXML
     private ImageView clockIcon;
 
+
+
     private DockScreenHandler dockScreenHandler;
 
     private Bike bike;
@@ -61,7 +63,9 @@ public class BikeListItemHandler extends FXMLScreenHandler {
     public BikeListItemHandler(String screenPath, DockScreenHandler dockScreenHandler) throws IOException {
         super(screenPath);
         this.dockScreenHandler = dockScreenHandler;
-        this.setImage();
+        rentButton.setOnMouseClicked(e -> {
+            this.dockScreenHandler.BikeScreenTrasition(bike);
+        });
     }
 
     private void setImage() {
@@ -91,6 +95,7 @@ public class BikeListItemHandler extends FXMLScreenHandler {
     public void setBike(Bike bike) {
         this.bike = bike;
         this.setBikeInfo();
+        this.setImage();
     }
 
     private void setBikeInfo() {

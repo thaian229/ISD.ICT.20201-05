@@ -46,6 +46,7 @@ public class Configs {
 	public static final String PAYMENT_CONFIRMATION_SCREEN_PATH = "/views/fxml/payment_confirmation_screen.fxml";
 	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment_screen.fxml";
 	public static final String DOCK_PATH = "/views/fxml/dock.fxml";
+	public static final String BIKE_PATH = "/views/fxml/bike.fxml";
 	public static final String BIKE_LIST_ITEM_PATH = "/views/fxml/bike_list_item.fxml";
 
 }

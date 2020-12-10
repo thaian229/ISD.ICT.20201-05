@@ -1,5 +1,6 @@
 package model.dock;
 
+import model.bike.Bike;
 import model.db.EBRDB;
 
 import java.sql.Connection;
@@ -85,6 +86,7 @@ public class DockManager {
         }
         return null;
     }
+
 
     public ArrayList<Dock> searchDockByName(String nameOrAddress) {
         ArrayList<Dock> searchedDock = new ArrayList<>();

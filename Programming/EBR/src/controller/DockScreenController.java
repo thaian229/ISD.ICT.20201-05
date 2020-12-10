@@ -13,4 +13,8 @@ public class DockScreenController extends BaseController {
     public ArrayList<Bike> getBikeList() {
         return BikeManager.getInstance().getBikeList();
     }
+
+    public ArrayList<Bike> getBikeListOfDock(String id) {
+        return BikeManager.getInstance().getBikeListInDock(id);
+    }
 }
