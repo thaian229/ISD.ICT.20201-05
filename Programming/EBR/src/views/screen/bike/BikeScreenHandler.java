@@ -11,8 +11,6 @@ import javafx.stage.Stage;
 import model.bike.Bike;
 import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
-import model.dock.Dock;
-import model.dock.DockManager;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
@@ -110,8 +108,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             bikeBarcode.setText(Integer.toString(bike.getBarcode()));
             bikeDeposit.setText(Integer.toString(bike.getDeposit()));
             bikeCharge.setText(Integer.toString((bike.getCharge())));
-            Dock dock = new DockManager().getDockById(bike.getDockId());
-            bikeDockName.setText(dock.getName());
+            bikeDockName.setText(bike.getDock().getName());
             if (bike instanceof StandardElectricalBike) {
                 bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
                 bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes");
