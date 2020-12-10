@@ -44,7 +44,7 @@
                 </Text>
                 <Pane layoutX="77.0" layoutY="108.0" prefHeight="355.0" prefWidth="723.0" style="-fx-background-color: white;">
                     <children>
-                        <ImageView fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="sessionBikeImage" fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../assets/images/xe-dap-1-159482394547294562988-51-0-526-908-crop-1594824063607285632499.png" />
                             </image>
@@ -93,12 +93,12 @@
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                <Text fx:id="sessionBarcode" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" />
+                                <Text fx:id="sessionStartTime" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Text fx:id="sessionLength" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Text fx:id="sessionBattery" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <Text fx:id="sessionUsage" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                <Text fx:id="sessionCharge" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                             </children>
                         </GridPane>
                         <Line endX="305.0" layoutX="362.0" layoutY="274.0" startX="-305.0" />
@@ -116,7 +116,7 @@
                               <Font name="Arial Bold" size="24.0" />
                            </font>
                                 </Text>
-                                <Text fill="#15b82f" strokeType="OUTSIDE" strokeWidth="0.0" text="75000 VND" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
+                                <Text fx:id="sessionRentingFee" fill="#15b82f" strokeType="OUTSIDE" strokeWidth="0.0" text="75000 VND" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
                                     <font>
                                         <Font name="Arial" size="36.0" />
                                     </font>
@@ -125,12 +125,12 @@
                         </GridPane>
                     </children>
                 </Pane>
-                <Button alignment="CENTER" layoutX="180.0" layoutY="472.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #8c36c0; -fx-border-style: solid; -fx-border-radius: 6; -fx-border-width: 2; -fx-cursor: hand;" text="CLOSE" textAlignment="CENTER" textFill="#8c36c0">
+                <Button fx:id="sessionCloseButton" alignment="CENTER" layoutX="180.0" layoutY="472.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #8c36c0; -fx-border-style: solid; -fx-border-radius: 6; -fx-border-width: 2; -fx-cursor: hand;" text="CLOSE" textAlignment="CENTER" textFill="#8c36c0">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
                 </Button>
-                <Button alignment="CENTER" layoutX="392.0" layoutY="471.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="52.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RETURN BIKE" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="returnBikeButton" alignment="CENTER" layoutX="392.0" layoutY="471.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="52.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RETURN BIKE" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>

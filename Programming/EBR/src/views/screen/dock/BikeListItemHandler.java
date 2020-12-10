@@ -67,7 +67,7 @@ public class BikeListItemHandler extends FXMLScreenHandler {
     private void setImage() {
         this.drawImageView(clockIcon, Path.CLOCK_ICON);
         this.drawImageView(batteryIcon, Path.BATTERY_ICON);
-
+        System.out.println();
         if (bike instanceof StandardBike) {
             this.drawImageView(bikeIcon, Path.STANDARD_BIKE_ICON);
         } else if (bike instanceof TwinBike) {

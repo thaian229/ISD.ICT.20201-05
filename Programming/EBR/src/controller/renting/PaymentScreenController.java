@@ -67,8 +67,9 @@ public class PaymentScreenController extends BaseController {
      * @param securityCode CVV code
      * @return respond
      */
-    public Map<String, String> payDeposit(int amount, String contents, String cardNumber, String cardHolderName,
+    public PaymentTransaction payDeposit(int amount, String contents, String cardNumber, String cardHolderName,
                                           String expirationDate, String securityCode) {
+        PaymentTransaction rentTransaction = null;
         Map<String, String> result = new HashMap<String, String>();
         result.put("RESULT", "PAYMENT FAILED!");
         try {
@@ -76,14 +77,15 @@ public class PaymentScreenController extends BaseController {
                     expirationDate);
 
             InterbankSubsystem interbank = new InterbankSubsystem();
-            PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
+            rentTransaction = interbank.payOrder(card, amount, contents);
 
             result.put("RESULT", "PAYMENT SUCCESSFUL!");
             result.put("MESSAGE", "You have successfully paid the deposit!");
         } catch (PaymentException | UnrecognizedException ex) {
             result.put("MESSAGE", ex.getMessage());
         }
-        return result;
+        System.out.println(result);
+        return rentTransaction;
     }
 
     /**
