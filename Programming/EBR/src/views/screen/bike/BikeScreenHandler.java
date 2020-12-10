@@ -1,5 +1,6 @@
 package views.screen.bike;
 
+import controller.renting.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import model.dock.Dock;
 import model.dock.DockManager;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
+import views.screen.payment.PaymentScreenHandler;
 import views.screen.popup.PopupScreen;
 
 import java.io.File;
@@ -51,6 +53,9 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     @FXML
     private ImageView bikeImage;
 
+    @FXML
+    private Button rentNowButton;
+
     private Bike bike;
 
     public BikeScreenHandler(Stage stage, String screenPath, Bike bike) throws IOException {
@@ -63,6 +68,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.setImage();
 
+        logo.setOnMouseClicked(e -> homeScreenHandler.show());
         back.setOnMouseClicked(e ->{
             BaseScreenHandler previousScreen = this.getPreviousScreen();
             previousScreen.setScreenTitle(previousScreen.getScreenTitle());
@@ -78,6 +84,22 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         });
 
         displayBike();
+
+        rentNowButton.setOnMouseClicked(e -> {
+            System.out.println("Button clicked");
+            try {
+                PaymentScreenController paymentScreenController = new PaymentScreenController(bike);
+                PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH);
+                paymentScreenHandler.setBController(paymentScreenController);
+                paymentScreenHandler.setHomeScreenHandler(homeScreenHandler);
+                paymentScreenHandler.setPreviousScreen(this);
+                paymentScreenHandler.setScreenTitle("Payment Screen");
+                paymentScreenHandler.show();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        });
     }
 
     private void displayBike() {
