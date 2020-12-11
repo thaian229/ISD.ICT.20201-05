@@ -71,9 +71,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
 
         logo.setOnMouseClicked(e -> homeScreenHandler.show());
         back.setOnMouseClicked(e ->{
-            BaseScreenHandler previousScreen = this.getPreviousScreen();
-            previousScreen.setScreenTitle(previousScreen.getScreenTitle());
-            previousScreen.show();
+            getPreviousScreen().show();
         });
 
         barcodeButton.setOnMouseClicked(e -> {
