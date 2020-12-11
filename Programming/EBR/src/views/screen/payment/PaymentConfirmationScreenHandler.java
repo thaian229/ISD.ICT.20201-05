@@ -14,6 +14,7 @@ import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.Session;
 import utils.Configs;
+import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.session.SessionScreenHandler;
 
@@ -69,6 +70,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
     @FXML
     private ImageView back;
 
+    @FXML
+    private ImageView paymentConfirmationCancelButtonImage;
+
     public PaymentConfirmationScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
     }
@@ -78,7 +82,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
         this.setBController(controller);
         this.controller = controller;
         // set all text and image
-        // setBikeImage();
+        setBikeImage();
         setTextLabels();
         // set up extra event
         paymentConfirmationConfirmButton.setOnMouseClicked(e -> {
@@ -103,6 +107,19 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
             File file = new File(this.controller.getBike().getImageURL());
             Image image = new Image(file.toURI().toString());
             paymentConfirmationBikeImage.setImage(image);
+
+            file = new File(Path.LOGO_ICON);
+            image = new Image(file.toURI().toString());
+            logo.setImage(image);
+
+            file = new File(Path.BACK_NAV_ICON);
+            image = new Image(file.toURI().toString());
+            back.setImage(image);
+
+            file = new File(Path.CANCEL_BUTTON_ICON);
+            image = new Image(file.toURI().toString());
+            paymentConfirmationCancelButtonImage.setImage(image);
+
         } catch (Exception exp) {
             exp.printStackTrace();
         }

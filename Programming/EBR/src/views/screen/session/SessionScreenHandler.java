@@ -12,6 +12,7 @@ import model.bike.Bike;
 import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
 import model.session.Session;
+import utils.Path;
 import views.screen.BaseScreenHandler;
 
 import java.io.File;
@@ -104,6 +105,14 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
             File file = new File(this.session.getBike().getImageURL());
             Image image = new Image(file.toURI().toString());
             sessionBikeImage.setImage(image);
+
+            file = new File(Path.LOGO_ICON);
+            image = new Image(file.toURI().toString());
+            logo.setImage(image);
+
+            file = new File(Path.BACK_NAV_ICON);
+            image = new Image(file.toURI().toString());
+            back.setImage(image);
         } catch (Exception exp) {
             exp.printStackTrace();
         }
