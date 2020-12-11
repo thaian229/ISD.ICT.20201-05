@@ -135,7 +135,7 @@ public class SessionManager {
      */
     private String insertNewSessions(Session newSession) {
         String SQL = "INSERT INTO session(bike_id, card_id, rent_transactionid, start_time) "
-                + "VALUES(?,?,?,?)";
+                + "VALUES(?::uuid,?::uuid,?::uuid,?)";
         String id = "";
 
         // Insert new row
@@ -154,7 +154,7 @@ public class SessionManager {
                 // get the ID back
                 try (ResultSet rs = pstmt.getGeneratedKeys()) {
                     if (rs.next()) {
-                        id = rs.getString(1);
+                        id = rs.getString("id");
                     }
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
@@ -163,6 +163,7 @@ public class SessionManager {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        newSession.setId(id);
         return id;
     }
 
@@ -185,8 +186,8 @@ public class SessionManager {
                 String card_id = rs.getString("card_id");
                 String rent_transactionid = rs.getString("rent_transactionid");
                 String return_transactionid = rs.getString("return_transactionid");
-                String start_time = rs.getString("id");
-                String end_time = rs.getString("id");
+                String start_time = rs.getString("start_time");
+                String end_time = rs.getString("end_time");
                 Session session = new Session(
                         id,
                         BikeManager.getInstance().getBikeById(bike_id),
@@ -198,7 +199,7 @@ public class SessionManager {
                 );
                 sessions.add(session);
             }
-        } catch (SQLException ex) {
+        } catch (NullPointerException | SQLException ex) {
             ex.printStackTrace();
         }
 

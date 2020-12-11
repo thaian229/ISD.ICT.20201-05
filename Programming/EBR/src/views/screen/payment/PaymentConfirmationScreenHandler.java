@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.payment.creditCard.CreditCard;
+import model.payment.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.Session;
@@ -162,13 +163,20 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
             // Transition to session screen
             CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                     Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));
+
+            // Save card
+            CreditCardManager.getInstance().saveCreditCard(card);
+
+            // Save Renting Transaction
+            String id = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
+            rentTransaction.setId(id);
+
             Session session = SessionManager.getInstance().createSession(this.controller.getBike(), card, rentTransaction);
             SessionScreenController sessionScreenController = new SessionScreenController();
             SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
                     Configs.SESSION_SCREEN_PATH, session, sessionScreenController);
 
-            // Save Renting Transaction
-            String id = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
+
             sessionScreenHandler.setHomeScreenHandler(homeScreenHandler);
             sessionScreenHandler.setPreviousScreen(homeScreenHandler);
             sessionScreenHandler.setScreenTitle("Session Screen");

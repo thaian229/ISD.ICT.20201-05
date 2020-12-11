@@ -41,7 +41,7 @@ public class CreditCardManager {
     public CreditCard getCardById(String cardId) {
         // query the card
         String SQL = "SELECT * FROM card " +
-                "WHERE id = ?";
+                "WHERE id = ?::uuid";
 
         try (Connection conn = EBRDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL)) {
@@ -101,7 +101,7 @@ public class CreditCardManager {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+        creditCard.setId(id);
         return id;
     }
 

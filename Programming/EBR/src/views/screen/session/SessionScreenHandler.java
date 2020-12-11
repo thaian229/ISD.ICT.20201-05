@@ -80,6 +80,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
     public SessionScreenHandler(Stage stage, String screenPath, Session session, SessionScreenController controller) throws IOException {
         super(stage, screenPath);
         this.session = session;
+        System.out.println(session.getId());
         this.controller = controller;
         this.setImages();
         this.setTextFields();
