@@ -73,7 +73,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        this.setImage();
+        this.setImages();
 
         back.setOnMouseClicked(e -> {
             BaseScreenHandler previousScreen = this.getPreviousScreen();
@@ -93,19 +93,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     /**
      * set image for home screen
      */
-    private void setImage() {
-        // fix image path caused by fxml
-        File file1 = new File(Configs.IMAGE_PATH + "/" + "LOGO.png");
-        Image img1 = new Image(file1.toURI().toString());
-        logo.setImage(img1);
-
-        File file2 = new File(Configs.IMAGE_PATH + "/" + "backButton.png");
-        Image img2 = new Image(file2.toURI().toString());
-        back.setImage(img2);
-
-        File file3 = new File(Path.SEARCH_ICON);
-        Image img3 = new Image(file3.toURI().toString());
-        searchImg.setImage(img3);
+    private void setImages() {
+        setImage(logo, Path.LOGO_ICON);
+        setImage(back, Path.BACK_NAV_ICON);
+        setImage(searchImg, Path.SEARCH_ICON);
     }
 
     /**

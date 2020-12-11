@@ -77,13 +77,6 @@ public class DockListItemHandler extends FXMLScreenHandler {
         dockName.setText(dock.getName());
         dockAddress.setText(dock.getLocation());
         dockBikeNum.setText(dock.getNumberOfAvailableBike() + "/" + dock.getCapacity());
-        setImage();
-    }
-
-    private void setImage() {
-        // fix image path caused by fxml
-        File file = new File(dock.getImageURL());
-        Image img = new Image(file.toURI().toString());
-        dockImg.setImage(img);
+        setImage(dockImg, dock.getImageURL());
     }
 }

@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.Configs;
+import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.home.HomeScreenHandler;
 
@@ -47,7 +48,7 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.setImage();
+        setImage(bigLogo, Path.BIG_LOGO_ICON);
         start.setOnMouseClicked(e -> {
             System.out.println("Button clicked");
             try {
@@ -62,16 +63,5 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
                 e1.printStackTrace();
             }
         });
-    }
-
-    /**
-     * set image for the splash screen
-     * @author mHoang
-     */
-    private void setImage() {
-        File file = new File(Configs.IMAGE_PATH + "/BigLOGO.png");
-        Image image = new Image(file.toURI().toString());
-        System.out.println(image.getHeight());
-        bigLogo.setImage(image);
     }
 }

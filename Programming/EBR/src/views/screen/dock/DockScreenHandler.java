@@ -137,24 +137,18 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         setDockDetail();
     }
 
-    private void drawImageView(ImageView imageView, String imgPath) {
-        File file = new File(imgPath);
-        Image img = new Image(file.toURI().toString());
-        imageView.setImage(img);
-    }
-
     private void setImage() {
-        drawImageView(parkingIcon, Path.PARKING_ICON);
-        drawImageView(standardBikeIcon, Path.STANDARD_BIKE_ICON);
-        drawImageView(twinBikeIcon, Path.TWIN_BIKE_ICON);
-        drawImageView(standardEBikeIcon, Path.STANDARD_BIKE_ICON);
-        drawImageView(twinEBikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
+        setImage(parkingIcon, Path.PARKING_ICON);
+        setImage(standardBikeIcon, Path.STANDARD_BIKE_ICON);
+        setImage(twinBikeIcon, Path.TWIN_BIKE_ICON);
+        setImage(standardEBikeIcon, Path.STANDARD_BIKE_ICON);
+        setImage(twinEBikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
     }
 
     private void setDockDetail() {
         dockName.setText(dock.getName());
         dockAddress.setText(dock.getLocation());
-        drawImageView(dockImg, dock.getImageURL());
+        setImage(dockImg, dock.getImageURL());
         dockCapacity.setText("" + dock.getCapacity());
 
         int sb = 0;

@@ -2,9 +2,12 @@ package views.screen;
 
 import controller.BaseController;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import views.screen.home.HomeScreenHandler;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 
