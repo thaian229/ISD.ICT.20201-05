@@ -61,6 +61,15 @@ public class SessionScreenController extends BaseController {
         } catch (NullPointerException e) {
             return 0;
         }
+    }
 
+    public long calculateSessionLength(Session session) {
+        try {
+            LocalDateTime startTime = session.getStartTime();
+            LocalDateTime currentTime = LocalDateTime.now();
+            return Utils.minusLocalDateTime(startTime, currentTime);
+        } catch (NullPointerException e) {
+            return 0;
+        }
     }
 }

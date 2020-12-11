@@ -52,6 +52,12 @@ public class PaymentTransaction {
 		this.amount = amount;
 		this.method = method;
 	}
+
+	public PaymentTransaction(String type, int amount, String method) {
+		this.type = type;
+		this.amount = amount;
+		this.method = method;
+	}
 	
 	public String getErrorCode() {
 		return errorCode;
@@ -59,6 +65,10 @@ public class PaymentTransaction {
 
 	public String getId() {
 		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getAmount() {
@@ -69,7 +79,15 @@ public class PaymentTransaction {
 		return type;
 	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public String getMethod() {
 		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
 	}
 }

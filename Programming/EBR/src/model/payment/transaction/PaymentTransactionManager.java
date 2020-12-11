@@ -100,6 +100,7 @@ public class PaymentTransactionManager {
             ex.printStackTrace();
         }
 
+        paymentTransaction.setId(id);
         return id;
     }
 
