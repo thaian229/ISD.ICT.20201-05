@@ -1,6 +1,8 @@
 package views.screen.session;
 
+import controller.renting.PaymentScreenController;
 import controller.renting.SessionScreenController;
+import controller.returning.InvoiceScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -11,9 +13,12 @@ import javafx.stage.Stage;
 import model.bike.Bike;
 import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
+import model.invoice.Invoice;
 import model.session.Session;
+import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
+import views.screen.invoice.InvoiceScreenHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -86,7 +91,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
         returnBikeButton.setOnMouseClicked(e -> {
             try {
-                handleReturnBike();
+                goToInvoiceScreen();
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
@@ -145,8 +150,19 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
 
-    private void handleReturnBike() {
-        // TODO
-    }
+    private void goToInvoiceScreen() throws IOException {
+        try {
+            Invoice invoice = new Invoice(this.session.getId());
+            InvoiceScreenController invoiceScreenController = new InvoiceScreenController();
+            InvoiceScreenHandler invoiceScreenHandler = new InvoiceScreenHandler(this.stage,
+                    Configs.INVOICE_SCREEN_PATH, invoice, invoiceScreenController);
+            invoiceScreenHandler.setPreviousScreen(this);
+            invoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
+            invoiceScreenHandler.setScreenTitle("Invoice Screen");
+            invoiceScreenHandler.show();
+        } catch (IOException exp) {
+            exp.printStackTrace();
+        }
 
+    }
 }

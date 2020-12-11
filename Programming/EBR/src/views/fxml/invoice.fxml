@@ -30,7 +30,7 @@
                 </Text>
                 <Pane layoutX="77.0" layoutY="108.0" prefHeight="355.0" prefWidth="723.0" style="-fx-background-color: white;">
                     <children>
-                        <ImageView fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="invoiceBikeImage" fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../../../assets/images/xe-dap-1-159482394547294562988-51-0-526-908-crop-1594824063607285632499.png" />
                         </image>
@@ -79,27 +79,27 @@
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="cardNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="1111 2222 3333 XXXX" GridPane.columnIndex="1">
+                                <Text fx:id="invoiceCardNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="1111 2222 3333 XXXX" GridPane.columnIndex="1">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Text>
-                                <Text fx:id="startTime" strokeType="OUTSIDE" strokeWidth="0.0" text="10:20 PM 11/11/2020" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Text fx:id="invoiceStartTime" strokeType="OUTSIDE" strokeWidth="0.0" text="10:20 PM 11/11/2020" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Text>
-                                <Text fx:id="endTime" strokeType="OUTSIDE" strokeWidth="0.0" text="01:50 AM 12/11/2020" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                <Text fx:id="invoiceEndTime" strokeType="OUTSIDE" strokeWidth="0.0" text="01:50 AM 12/11/2020" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Text>
-                                <Text fx:id="sessionLength" strokeType="OUTSIDE" strokeWidth="0.0" text="03:30:42" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                <Text fx:id="invoiceSessionLength" strokeType="OUTSIDE" strokeWidth="0.0" text="03:30:42" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Text>
-                                <Text fx:id="deposit" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                <Text fx:id="invoiceDeposit" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Text>
-                                <Text fx:id="totalFees" strokeType="OUTSIDE" strokeWidth="0.0" text="100,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                <Text fx:id="invoiceTotalFees" strokeType="OUTSIDE" strokeWidth="0.0" text="100,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Text>
@@ -120,7 +120,7 @@
                               <Font name="Arial Bold" size="24.0" />
                            </font>
                                 </Text>
-                                <Text fx:id="returned" fill="#16b85ff3" strokeType="OUTSIDE" strokeWidth="0.0" text="9,900,000 VND" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
+                                <Text fx:id="invoiceReturned" fill="#16b85ff3" strokeType="OUTSIDE" strokeWidth="0.0" text="9,900,000 VND" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
                                     <font>
                                         <Font name="Arial" size="36.0" />
                                     </font>
@@ -129,7 +129,7 @@
                         </GridPane>
                     </children>
                 </Pane>
-                <Button fx:id="returnHomeButten" alignment="CENTER" layoutX="287.0" layoutY="463.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RETURN HOME" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="returnHomeButton" alignment="CENTER" layoutX="287.0" layoutY="463.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RETURN HOME" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
