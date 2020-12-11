@@ -13,6 +13,7 @@ import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.Session;
+import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
@@ -161,13 +162,13 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
             // Transition to session screen
             CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                     Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));
-            Session session = new Session(this.controller.getBike(), card, rentTransaction);
+            Session session = SessionManager.getInstance().createSession(this.controller.getBike(), card, rentTransaction);
             SessionScreenController sessionScreenController = new SessionScreenController();
             SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
                     Configs.SESSION_SCREEN_PATH, session, sessionScreenController);
+
             // Save Renting Transaction
             String id = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
-            System.out.println(id);
             sessionScreenHandler.setHomeScreenHandler(homeScreenHandler);
             sessionScreenHandler.setPreviousScreen(homeScreenHandler);
             sessionScreenHandler.setScreenTitle("Session Screen");

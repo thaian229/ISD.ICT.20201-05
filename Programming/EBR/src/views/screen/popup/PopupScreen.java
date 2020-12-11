@@ -1,22 +1,27 @@
 package views.screen.popup;
 
-import javafx.animation.PauseTransition;
+import controller.renting.SessionScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
+import model.bike.Bike;
+import model.bike.BikeManager;
+import model.session.Session;
+import model.session.SessionManager;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
+import views.screen.bike.BikeScreenHandler;
+import views.screen.session.SessionScreenHandler;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -71,7 +76,66 @@ public class PopupScreen extends BaseScreenHandler implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.setImage();
         continueBtn.setOnMouseClicked(e -> {
-            //Goto different page
+            handleBarcodeEnter();
         });
+    }
+
+    private void handleBarcodeEnter() {
+        // Take barcode
+        int barcode = Integer.parseInt(barcodeInput.getText().trim());
+        Bike bike = BikeManager.getInstance().getBikeByBarcode(barcode);
+        if (bike == null) {
+            barcodeInput.setText("");
+            return;
+        }
+
+        // Check bike is rented or not
+        ArrayList<Session> sessions = SessionManager.getInstance().getSessions();
+        Session rentedSession = null;
+        boolean isRented = false;
+        for (Session session : sessions) {
+            if (session.getEndTime() == null) {
+                if (session.getBike().getBarcode() == barcode) {
+                    isRented = true;
+                    rentedSession = session;
+                }
+            }
+        }
+
+        // Move to corresponding screen
+        if (isRented) { // rented : to Session View
+            this.moveToSessionScreen(rentedSession);
+        } else {    // not rent yet : to Bike View Screen
+            this.moveToBikeViewScreen(bike);
+        }
+    }
+
+    private void moveToSessionScreen(Session session) {
+        SessionScreenController sessionScreenController = new SessionScreenController();
+        try {
+            SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
+                    Configs.SESSION_SCREEN_PATH, session, sessionScreenController);
+
+            sessionScreenHandler.setHomeScreenHandler(homeScreenHandler);
+            sessionScreenHandler.setPreviousScreen(this.getPreviousScreen());
+            sessionScreenHandler.setScreenTitle("Session Screen");
+            sessionScreenHandler.show();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    private void moveToBikeViewScreen(Bike bike) {
+        try {
+            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage,
+                    Configs.BIKE_VIEW_SCREEN_PATH, bike);
+
+            bikeScreenHandler.setHomeScreenHandler(homeScreenHandler);
+            bikeScreenHandler.setPreviousScreen(this.getPreviousScreen());
+            bikeScreenHandler.setScreenTitle("Bike View Screen");
+            bikeScreenHandler.show();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 }
