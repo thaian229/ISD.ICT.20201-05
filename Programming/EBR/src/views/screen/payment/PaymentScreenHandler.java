@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.Configs;
+import utils.Path;
 import views.screen.BaseScreenHandler;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -52,18 +55,23 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
     private ImageView logo;
 
     @FXML
+    private ImageView backButtonImage;
+
+    @FXML
     private ImageView back;
 
     public PaymentScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         super.screenTitle = "Payment Screen";
+        this.setImages();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logo.setOnMouseClicked(e -> backToHomeScreen());
-        back.setOnMouseClicked(e -> backToPreviousScreen());
-        paymentCancelButton.setOnMouseClicked(e -> backToHomeScreen());
+        logo.setOnMouseClicked(e -> homeScreenHandler.show());
+        back.setOnMouseClicked(e -> getPreviousScreen().show());
+        paymentCancelButton.setOnMouseClicked(e -> homeScreenHandler.show());
+        backButtonImage.setOnMouseClicked(e -> homeScreenHandler.show());
 
         paymentConfirmButton.setOnMouseClicked(e -> {
             try {
@@ -73,6 +81,24 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
                 exp.printStackTrace();
             }
         });
+    }
+
+    private void setImages() {
+        try {
+            File file = new File(Path.LOGO_ICON);
+            Image image = new Image(file.toURI().toString());
+            logo.setImage(image);
+
+            file = new File(Path.BACK_NAV_ICON);
+            image = new Image(file.toURI().toString());
+            back.setImage(image);
+
+            file = new File(Path.CANCEL_BUTTON_ICON);
+            image = new Image(file.toURI().toString());
+            backButtonImage.setImage(image);
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        }
     }
 
     private void handleCardInfoSubmit() {
@@ -102,15 +128,4 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         paymentConfirmationScreenHandler.show();
     }
 
-    private void backToHomeScreen() {
-        try {
-            homeScreenHandler.show();
-        } catch (Exception exp) {
-            exp.printStackTrace();
-        }
-    }
-
-    private void backToPreviousScreen() {
-        getPreviousScreen().show();
-    }
 }
