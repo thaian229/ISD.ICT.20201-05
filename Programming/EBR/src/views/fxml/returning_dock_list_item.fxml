@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="150.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.fxml.ReturningDockListItem">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="320.0" style="-fx-border-color: #FAE715; -fx-background-radius: 5; -fx-background-color: #FFFFFF; -fx-background-radius: 5; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="dockImg" fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <image>
+            <Image url="@../../../assets/images/Dock.jpg" />
+         </image>
+         <viewport>
+            <Rectangle2D height="300.0" width="300.0" />
+         </viewport></ImageView>
+      <Text fx:id="dockName" layoutX="150.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOCK NAME DOCK NAME DOCK NAME" wrappingWidth="150.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="189.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARKING SLOTS">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Text fx:id="dockParkingSlots" fill="#499a16" layoutX="192.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100/200" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>

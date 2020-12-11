@@ -88,7 +88,7 @@ public class DockManager {
     }
 
 
-    public ArrayList<Dock> searchDockByName(String nameOrAddress) {
+    public ArrayList<Dock> searchDockByKeyword(String nameOrAddress) {
         ArrayList<Dock> searchedDock = new ArrayList<>();
         for (Dock dock : dockList) {
             if (dock.getName().trim().toUpperCase().contains(nameOrAddress.trim().toUpperCase()) ||

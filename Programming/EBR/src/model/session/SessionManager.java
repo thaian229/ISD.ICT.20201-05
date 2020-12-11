@@ -87,8 +87,8 @@ public class SessionManager {
         session.setReturnTransaction(returnTransaction);
 
         String SQL = "UPDATE session "
-                + "SET (end_time, return_transactionid) = (?, ?) "
-                + "WHERE id = ? ";
+                + "SET (end_time, return_transactionid) = (?, ?::uuid) "
+                + "WHERE id = ?::uuid ";
 
         int affectedRows = 0;
 
@@ -135,7 +135,7 @@ public class SessionManager {
      */
     private String insertNewSessions(Session newSession) {
         String SQL = "INSERT INTO session(bike_id, card_id, rent_transactionid, start_time) "
-                + "VALUES(?,?,?,?)";
+                + "VALUES(?::uuid,?::uuid,?::uuid,?)";
         String id = "";
 
         // Insert new row
@@ -185,8 +185,8 @@ public class SessionManager {
                 String card_id = rs.getString("card_id");
                 String rent_transactionid = rs.getString("rent_transactionid");
                 String return_transactionid = rs.getString("return_transactionid");
-                String start_time = rs.getString("id");
-                String end_time = rs.getString("id");
+                String start_time = rs.getString("start_time");
+                String end_time = rs.getString("end_time");
                 Session session = new Session(
                         id,
                         BikeManager.getInstance().getBikeById(bike_id),

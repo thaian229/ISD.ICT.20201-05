@@ -49,5 +49,6 @@ public class Configs {
 	public static final String BIKE_PATH = "/views/fxml/bike.fxml";
 	public static final String BIKE_LIST_ITEM_PATH = "/views/fxml/bike_list_item.fxml";
 	public static final String BIKE_VIEW_SCREEN_PATH = "/views/fxml/bike.fxml";
-
+	public static final String RETURNING_DOCK_LIST_ITEM_PATH = "/views/fxml/returning_dock_list_item.fxml";
+	public static final String RETURNING_DOCK_SELECTION_SCREEN_PATH = "/views/fxml/returning_dock_selection.fxml";
 }
