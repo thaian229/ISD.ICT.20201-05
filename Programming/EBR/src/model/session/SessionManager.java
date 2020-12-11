@@ -122,6 +122,10 @@ public class SessionManager {
         return null;
     }
 
+    public ArrayList<Session> getSessions() {
+        return sessions;
+    }
+
     /**
      * for inserting new session to DB
      *
