@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.dock.Dock;
 import utils.Configs;
+import utils.Path;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.dock.DockScreenHandler;
@@ -102,7 +103,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         Image img2 = new Image(file2.toURI().toString());
         back.setImage(img2);
 
-        File file3 = new File(Configs.IMAGE_PATH + "/" + "search_icon.png");
+        File file3 = new File(Path.SEARCH_ICON);
         Image img3 = new Image(file3.toURI().toString());
         searchImg.setImage(img3);
     }
@@ -140,6 +141,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             dockScreenHandler.setBController(new DockScreenController());
             dockScreenHandler.displayBikeList();
             dockScreenHandler.setScreenTitle(dockScreenHandler.getScreenTitle());
+            dockScreenHandler.setHomeScreenHandler(this);
             dockScreenHandler.setPreviousScreen(this);
             dockScreenHandler.show();
         } catch (IOException e1) {

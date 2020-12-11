@@ -183,9 +183,9 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         try {
             bike.setDock(dock);
             BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage, Configs.BIKE_PATH, bike);
-//            bikeScreenHandler.setBController(new ());
             bikeScreenHandler.setScreenTitle(bikeScreenHandler.getScreenTitle());
             bikeScreenHandler.setPreviousScreen(this);
+            bikeScreenHandler.setHomeScreenHandler(homeScreenHandler);
             bikeScreenHandler.show();
         } catch (IOException e1) {
             e1.printStackTrace();

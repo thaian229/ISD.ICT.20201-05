@@ -92,7 +92,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
                 PaymentScreenController paymentScreenController = new PaymentScreenController(bike);
                 PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH);
                 paymentScreenHandler.setBController(paymentScreenController);
-                paymentScreenHandler.setHomeScreenHandler(homeScreenHandler);
+                paymentScreenHandler.setHomeScreenHandler(this.homeScreenHandler);
                 paymentScreenHandler.setPreviousScreen(this);
                 paymentScreenHandler.setScreenTitle("Payment Screen");
                 paymentScreenHandler.show();

@@ -27,4 +27,5 @@ public class Path {
     public static final String LOGO_ICON = "assets/images/LOGO.png";
     public static final String BACK_NAV_ICON = "assets/images/backButton.png";
     public static final String CANCEL_BUTTON_ICON = "assets/images/rotate-ccw.png";
+    public static final String SEARCH_ICON = "assets/images/icons/search_icon.png";
 }
