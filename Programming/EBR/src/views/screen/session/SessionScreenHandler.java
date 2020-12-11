@@ -1,6 +1,9 @@
 package views.screen.session;
 
+import controller.ReturningDockSelectionController;
+import controller.renting.PaymentScreenController;
 import controller.renting.SessionScreenController;
+import controller.returning.InvoiceScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -11,9 +14,14 @@ import javafx.stage.Stage;
 import model.bike.Bike;
 import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
+import model.invoice.Invoice;
 import model.session.Session;
+import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
+import views.screen.invoice.InvoiceScreenHandler;
+import views.screen.returningDock.ReturningDockListItemHandler;
+import views.screen.returningDock.ReturningDockSelectionHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +95,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
         returnBikeButton.setOnMouseClicked(e -> {
             try {
-                handleReturnBike();
+                goToDockSelection();
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
@@ -146,8 +154,16 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
 
-    private void handleReturnBike() {
-        // TODO
-    }
+    private void goToDockSelection() throws IOException {
+        try {
+            ReturningDockSelectionHandler returningDockSelectionHandler = new ReturningDockSelectionHandler(this.stage, Configs.RETURNING_DOCK_SELECTION_SCREEN_PATH, new ReturningDockSelectionController(), session);
+            returningDockSelectionHandler.setPreviousScreen(this);
+            returningDockSelectionHandler.setHomeScreenHandler(homeScreenHandler);
+            returningDockSelectionHandler.setScreenTitle("Returning Dock Selection");
+            returningDockSelectionHandler.show();
+        } catch (IOException exp) {
+            exp.printStackTrace();
+        }
 
+    }
 }

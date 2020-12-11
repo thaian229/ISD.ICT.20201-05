@@ -30,10 +30,14 @@ public class Invoice {
    private String id;
    private String sessionId;
    private int totalFees;
-   private int returned;
+ //  private int returned;
 
 
 
+
+    public Invoice(String session_id){
+        this.sessionId = session_id;
+    }
    public Invoice(String id, String session_id, int total_charge) {
         this.id = id;
         this.sessionId = session_id;
@@ -119,13 +123,13 @@ public class Invoice {
         return SessionManager.getInstance().getSessionById(sessionId).getReturnTransaction();
     }
 
-    public int getReturned() {
-        return returned;
-    }
-
-    public void setReturned(int returned) {
-        this.returned = returned;
-    }
+//    public int getReturned() {
+//        return returned;
+//    }
+//
+//    public void setReturned(int returned) {
+//        this.returned = returned;
+//    }
 
     /**
      * This method is for comparing 2 Invoice objects
@@ -139,9 +143,9 @@ public class Invoice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Invoice invoice = (Invoice) o;
-        return id.equals(invoice.id) &&
-                sessionId.equals(invoice.sessionId) &&
-                totalFees == invoice.totalFees;
+        return
+                sessionId.equals(invoice.sessionId);
+
     }
 
 

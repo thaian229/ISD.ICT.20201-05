@@ -87,8 +87,8 @@ public class SessionManager {
         session.setReturnTransaction(returnTransaction);
 
         String SQL = "UPDATE session "
-                + "SET (end_time, return_transactionid) = (?, ?) "
-                + "WHERE id = ? ";
+                + "SET (end_time, return_transactionid) = (?, ?::uuid) "
+                + "WHERE id = ?::uuid ";
 
         int affectedRows = 0;
 

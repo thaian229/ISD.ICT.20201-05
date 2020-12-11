@@ -23,8 +23,11 @@ public class Path {
     public static final String TWIN_ELECTRICAL_BIKE_ICON = "assets/images/icons/E_Bike_icon.png";
     public static final String CLOCK_ICON = "assets/images/icons/watch_icon.png";
     public static final String BATTERY_ICON = "assets/images/icons/battery_icon.png";
+    public static final String PARKING_ICON = "assets/images/icons/parking_icon.png";
     public static final String LOGO_ICON = "assets/images/LOGO.png";
+    public static final String LOGO_R_ICON = "assets/images/LOGO_R.png";
+    public static final String BIG_LOGO_ICON = "assets/images/BigLOGO.png";
     public static final String BACK_NAV_ICON = "assets/images/backButton.png";
     public static final String CANCEL_BUTTON_ICON = "assets/images/rotate-ccw.png";
-
+    public static final String SEARCH_ICON = "assets/images/icons/search_icon.png";
 }

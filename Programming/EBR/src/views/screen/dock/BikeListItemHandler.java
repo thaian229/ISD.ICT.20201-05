@@ -50,6 +50,8 @@ public class BikeListItemHandler extends FXMLScreenHandler {
     @FXML
     private ImageView clockIcon;
 
+
+
     private DockScreenHandler dockScreenHandler;
 
     private Bike bike;
@@ -61,36 +63,32 @@ public class BikeListItemHandler extends FXMLScreenHandler {
     public BikeListItemHandler(String screenPath, DockScreenHandler dockScreenHandler) throws IOException {
         super(screenPath);
         this.dockScreenHandler = dockScreenHandler;
-        this.setImage();
+        rentButton.setOnMouseClicked(e -> {
+            this.dockScreenHandler.BikeScreenTransition(bike);
+        });
     }
 
     private void setImage() {
-        this.drawImageView(clockIcon, Path.CLOCK_ICON);
-        this.drawImageView(batteryIcon, Path.BATTERY_ICON);
+        setImage(clockIcon, Path.CLOCK_ICON);
+        setImage(batteryIcon, Path.BATTERY_ICON);
         System.out.println();
         if (bike instanceof StandardBike) {
-            this.drawImageView(bikeIcon, Path.STANDARD_BIKE_ICON);
+            setImage(bikeIcon, Path.STANDARD_BIKE_ICON);
         } else if (bike instanceof TwinBike) {
-            this.drawImageView(bikeIcon, Path.TWIN_BIKE_ICON);
+            setImage(bikeIcon, Path.TWIN_BIKE_ICON);
         } else if (bike instanceof StandardElectricalBike) {
-            this.drawImageView(bikeIcon, Path.STANDARD_ELECTRICAL_BIKE_ICON);
+            setImage(bikeIcon, Path.STANDARD_ELECTRICAL_BIKE_ICON);
         } else if (bike instanceof TwinElectricalBike) {
-            this.drawImageView(bikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
+            setImage(bikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
         } else {
-            this.drawImageView(bikeIcon, Path.STANDARD_BIKE_ICON);
+            setImage(bikeIcon, Path.STANDARD_BIKE_ICON);
         }
     }
-
-    private void drawImageView(ImageView imageView, String imgPath) {
-        File file = new File(imgPath);
-        Image img = new Image(file.toURI().toString());
-        imageView.setImage(img);
-    }
-
 
     public void setBike(Bike bike) {
         this.bike = bike;
         this.setBikeInfo();
+        this.setImage();
     }
 
     private void setBikeInfo() {

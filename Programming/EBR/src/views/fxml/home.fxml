@@ -10,7 +10,7 @@
     <children>
       <ScrollPane layoutX="305.0" layoutY="225.0" prefHeight="505.0" prefWidth="756.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 6;">
         <content>
-          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="756.0" style="-fx-background-radius: 6; -fx-background-color: #F5F5F5;">
+          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefWidth="756.0" style="-fx-background-radius: 6; -fx-background-color: #F5F5F5;">
                <children>
                    <VBox fx:id="vboxDockList" minHeight="-Infinity" minWidth="-Infinity" prefWidth="756.0" />
                </children>

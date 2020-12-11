@@ -1,5 +1,6 @@
 package model.dock;
 
+import model.bike.Bike;
 import model.db.EBRDB;
 
 import java.sql.Connection;
@@ -86,7 +87,8 @@ public class DockManager {
         return null;
     }
 
-    public ArrayList<Dock> searchDockByName(String nameOrAddress) {
+
+    public ArrayList<Dock> searchDockByKeyword(String nameOrAddress) {
         ArrayList<Dock> searchedDock = new ArrayList<>();
         for (Dock dock : dockList) {
             if (dock.getName().trim().toUpperCase().contains(nameOrAddress.trim().toUpperCase()) ||
