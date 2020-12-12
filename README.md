@@ -1,3 +1,31 @@
+# LAB 10 - DESIGN CONCEPTS
+## Tasks
+Continue implementing EBR software. (handlers and adding new Screen)\
+Refactoring part of codes to make better designs.
+
+## Contributions
+#### 1. Nguyen Thai An:
+Payment and Payment Confirmation Handlers.\
+Part of Session Handlers, modify SessionManager.
+
+#### 2. Bui Tu Hoang
+Dock View Screen Handler.\ 
+Adding sample data for database.
+
+#### 3. Vu Minh Hoang
+Home Screen, Dock Choose Screen's FXML and Handlers.\
+Refactor part of implemented codes.
+
+#### 4. Nguyen Manh Khang
+Invoice Screen Handlers.\
+Part of Session Screen Handlers.
+
+## Revisions
+An and Khang reviews each other\
+Minh Hoang and Tu Hoang reviews each other\
+
+---
+
 # LAB 09 - PROGRAMMING
 ## Tasks
 Implementing the EBR software.\
