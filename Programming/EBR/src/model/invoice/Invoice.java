@@ -44,7 +44,9 @@ public class Invoice {
         this.totalFees = total_charge;
     }
 
-
+    public void setId(String id) {
+        this.id = id;
+    }
     /**
      * This method is used to get session by using session_id
      * @return session

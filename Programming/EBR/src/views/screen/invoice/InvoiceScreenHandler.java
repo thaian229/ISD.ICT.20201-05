@@ -132,5 +132,6 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
         PaymentTransaction returnTransaction = this.controller.refund(this.controller.calculateReturned(this.invoice), contents,
                 this.invoice.getCard().getCardNum(), this.invoice.getCard().getCardOwner(),
                 this.invoice.getCard().getExpDate(), Integer.toString(this.invoice.getCard().getSecurityCode()));
+
     }
 }
