@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,9 +21,9 @@ import model.dock.Dock;
 import javafx.scene.control.Button;
 import model.dock.DockManager;
 import model.invoice.Invoice;
-import model.invoice.InvoiceManager;
 import model.session.Session;
 import utils.Configs;
+import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.home.DockListItemHandler;
 import views.screen.invoice.InvoiceScreenHandler;
@@ -49,6 +50,8 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     private VBox vboxDockList;
     @FXML
     private AnchorPane dockInfo;
+    @FXML
+    private ImageView searchImg;
 
     private Dock dock;
     private Session session;
@@ -57,8 +60,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dockInfo.setVisible(false);
-        searchField.setOnAction(e -> {
-        });
+        setImage(searchImg, Path.SEARCH_ICON);
     }
 
     public ReturningDockSelectionHandler(Stage stage, String screenPath, ReturningDockSelectionController returningDockSelectionController, Session session) throws IOException {
@@ -67,24 +69,6 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         this.session = session;
         dockList = this.getBController().getDockList();
         displayDockList();
-
-        returnBikeBtn.setOnMouseClicked(e -> {
-            if (dock != null) {
-                Invoice invoice = InvoiceManager.getInstance().createInvoice(this.session.getId());
-                InvoiceScreenController invoiceScreenController = new InvoiceScreenController();
-                InvoiceScreenHandler invoiceScreenHandler = null;
-                try {
-                    invoiceScreenHandler = new InvoiceScreenHandler(this.stage,
-                            Configs.INVOICE_SCREEN_PATH, invoice, invoiceScreenController);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                invoiceScreenHandler.setPreviousScreen(this);
-                invoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
-                invoiceScreenHandler.setScreenTitle("Invoice Screen");
-                invoiceScreenHandler.show();
-            }
-        });
     }
 
     @Override
@@ -133,6 +117,31 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         hbox.setPadding(insets);
         hbox.setSpacing(30);
         return hbox;
+    }
+
+    @FXML
+    void searchImgListener(MouseEvent e) {
+        this.dockList = this.getBController().getDockListByKeyword(searchField.getText());
+        displayDockList();
+    }
+
+    @FXML
+    void returnBikeBtnListener(MouseEvent e) {
+        if (dock != null) {
+            Invoice invoice = new Invoice(this.session.getId());
+            InvoiceScreenController invoiceScreenController = new InvoiceScreenController();
+            InvoiceScreenHandler invoiceScreenHandler = null;
+            try {
+                invoiceScreenHandler = new InvoiceScreenHandler(this.stage,
+                        Configs.INVOICE_SCREEN_PATH, invoice, invoiceScreenController);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            invoiceScreenHandler.setPreviousScreen(this);
+            invoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
+            invoiceScreenHandler.setScreenTitle("Invoice Screen");
+            invoiceScreenHandler.show();
+        }
     }
 
 

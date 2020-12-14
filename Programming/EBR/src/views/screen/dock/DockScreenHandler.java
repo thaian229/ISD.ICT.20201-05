@@ -4,7 +4,6 @@ import controller.DockScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -15,9 +14,7 @@ import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.bike.BikeScreenHandler;
-import views.screen.popup.PopupScreen;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -89,7 +86,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         super(stage, screenPath);
         this.dock = dock;
         super.screenTitle = "Dock Screen";
-        this.setImage();
+        this.setImages();
     }
 
     @Override
@@ -98,14 +95,6 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
             BaseScreenHandler previousScreen = this.getPreviousScreen();
             previousScreen.setScreenTitle(previousScreen.getScreenTitle());
             previousScreen.show();
-        });
-
-        barcodeButton.setOnMouseClicked(e -> {
-            try {
-                PopupScreen.display();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
         });
     }
 
@@ -137,12 +126,15 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         setDockDetail();
     }
 
-    private void setImage() {
+    private void setImages() {
         setImage(parkingIcon, Path.PARKING_ICON);
         setImage(standardBikeIcon, Path.STANDARD_BIKE_ICON);
         setImage(twinBikeIcon, Path.TWIN_BIKE_ICON);
         setImage(standardEBikeIcon, Path.STANDARD_BIKE_ICON);
         setImage(twinEBikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
+        setImage(logo, Path.LOGO_ICON);
+        setImage(back, Path.BACK_NAV_ICON);
+        setImage(dockImg, dock.getImageURL());
     }
 
     private void setDockDetail() {

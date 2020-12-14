@@ -33,4 +33,9 @@ public class HomeScreenController extends BaseController {
     public ArrayList<Dock> getDockList() {
         return DockManager.getInstance().getDockList();
     }
+
+
+    public ArrayList<Dock> getDockListByKeyword(String text) {
+        return DockManager.getInstance().searchDockByKeyword(text);
+    }
 }

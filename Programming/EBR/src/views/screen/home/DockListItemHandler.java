@@ -3,6 +3,8 @@ package views.screen.home;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.dock.Dock;
 import utils.Configs;
@@ -41,6 +43,9 @@ public class DockListItemHandler extends FXMLScreenHandler {
     @FXML
     private ImageView dockImg;
 
+    @FXML
+    private AnchorPane dockPane;
+
     private HomeScreenHandler homeScreen;
     private Dock dock;
 
@@ -48,12 +53,11 @@ public class DockListItemHandler extends FXMLScreenHandler {
         super(screenPath);
     }
 
-    public DockListItemHandler(String screenPath, HomeScreenHandler homeScreen) throws IOException {
+    public DockListItemHandler(String screenPath, HomeScreenHandler homeScreen, Dock dock) throws IOException {
         super(screenPath);
         this.homeScreen = homeScreen;
-        dockImg.setOnMouseClicked(e -> {
-            homeScreen.onDockListItemClicked(dock);
-        });
+        this.dock = dock;
+        this.setDockInfo();
     }
 
 
@@ -78,5 +82,10 @@ public class DockListItemHandler extends FXMLScreenHandler {
         dockAddress.setText(dock.getLocation());
         dockBikeNum.setText(dock.getNumberOfAvailableBike() + "/" + dock.getCapacity());
         setImage(dockImg, dock.getImageURL());
+    }
+
+    @FXML
+    void dockImgCLickListener(MouseEvent e) {
+        homeScreen.onDockListItemClicked(dock);
     }
 }

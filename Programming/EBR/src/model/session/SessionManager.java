@@ -89,15 +89,12 @@ public class SessionManager {
 
         int affectedRows = 0;
 
-        try (
-                PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
-        ) {
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
             pstmt.setString(1, session.getEndTime().format(Utils.DATE_FORMATER));
             pstmt.setString(2, returnTransaction.getId());
             pstmt.setString(3, session.getId());
 
             affectedRows = pstmt.executeUpdate();
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

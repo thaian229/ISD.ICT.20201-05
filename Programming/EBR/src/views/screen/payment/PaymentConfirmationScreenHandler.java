@@ -148,6 +148,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
         if (rentTransaction == null) {
             getPreviousScreen().show();
         } else {
+            // Take bike out of dock
+            this.controller.getBike().takeBikeOutOfDock();
+            // Save then change screen
             rentTransaction.setMethod("Credit Card");
             rentTransaction.setType("rent");
             this.transitionToSessionScreen(rentTransaction);

@@ -52,8 +52,7 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
         start.setOnMouseClicked(e -> {
             System.out.println("Button clicked");
             try {
-                HomeScreenHandler homeScreenHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
-                homeScreenHandler.setBController(new HomeScreenController());
+                HomeScreenHandler homeScreenHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH, new HomeScreenController());
                 homeScreenHandler.displayDockList();
                 homeScreenHandler.setScreenTitle(homeScreenHandler.getScreenTitle());
                 homeScreenHandler.setPreviousScreen(this);
