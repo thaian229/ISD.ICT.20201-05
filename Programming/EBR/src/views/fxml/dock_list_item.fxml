@@ -9,7 +9,7 @@
    <children>
       <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="156.0" prefWidth="600.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 4; -fx-border-color: #FAE715; -fx-background-color: #8C36C0;">
+            <AnchorPane fx:id="dockPane" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#dockImgCLickListener" prefHeight="156.0" prefWidth="600.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 4; -fx-border-color: #FAE715; -fx-background-color: #8C36C0;">
                <children>
                   <ImageView fx:id="dockImg" fitHeight="132.0" fitWidth="171.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>

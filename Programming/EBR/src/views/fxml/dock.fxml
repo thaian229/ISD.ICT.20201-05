@@ -8,32 +8,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ToolBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1366.0" style="-fx-background-color: #8C36C0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="-9.0" layoutY="-9.0" maxHeight="-Infinity" prefHeight="60.0" prefWidth="1376.0" style="-fx-background-color: #8C36C0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="logo" fitHeight="60.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../../../assets/images/LOGO.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="back" fitHeight="60.0" fitWidth="176.0" layoutX="360.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" translateX="946.0">
+               <image>
+                  <Image url="@../../../assets/images/backButton.png" />
+               </image>
+            </ImageView>
+         </children>
          <effect>
             <DropShadow />
          </effect>
-         <items>
-            <AnchorPane prefHeight="60.0" prefWidth="1354.0">
-               <children>
-                  <ImageView fx:id="back" fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.rightAnchor="0.0">
-                     <image>
-                        <Image url="@../../../assets/images/backButton.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="barcodeButton" alignment="CENTER" contentDisplay="CENTER" maxWidth="170.0" minWidth="170.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: #FAE715; -fx-cursor: hand;" text="ENTER BARCODE" textAlignment="CENTER" textFill="#8c36c0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="11.0">
-                     <font>
-                        <Font name="Arial Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <ImageView fx:id="logo" fitHeight="60.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.leftAnchor="0.0">
-                     <image>
-                        <Image url="@../../../assets/images/LOGO.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </items>
-      </ToolBar>
+      </AnchorPane>
       <Pane layoutY="70.0" prefHeight="240.0" prefWidth="1366.0">
          <children>
             <Pane layoutX="133.0" layoutY="35.0" prefHeight="170.0" prefWidth="297.0" style="-fx-border-color: #FAE715;">

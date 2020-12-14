@@ -7,5 +7,4 @@ import java.util.List;
  * @author nguyenlm
  */
 public class BaseController {
-
 }
