@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -50,15 +51,18 @@
         </ToolBar>
       <Pane layoutX="508.0" layoutY="131.0" prefHeight="40.0" prefWidth="556.0" style="-fx-background-color: #F0F0F0; -fx-border-radius: 2;">
          <children>
-            <TextField layoutX="50.0" layoutY="1.0" prefHeight="24.0" prefWidth="444.0" promptText="Search" style="-fx-background-color: #F0F0F0;">
+            <TextField fx:id="searchField" layoutX="50.0" layoutY="1.0" prefHeight="24.0" prefWidth="444.0" promptText="Search" style="-fx-background-color: #F0F0F0;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <ImageView fx:id="searchImg" fitHeight="24.0" fitWidth="24.0" layoutX="26.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="searchImg" fitHeight="24.0" fitWidth="24.0" layoutX="26.0" layoutY="8.0" onMouseClicked="#searchImgListener" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../assets/images/icons/search_icon.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>

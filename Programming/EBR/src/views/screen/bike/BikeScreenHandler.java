@@ -14,7 +14,6 @@ import model.bike.TwinElectricalBike;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
-import views.screen.popup.PopupScreen;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,16 +74,6 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             previousScreen.setScreenTitle(previousScreen.getScreenTitle());
             previousScreen.show();
         });
-
-        barcodeButton.setOnMouseClicked(e -> {
-            try {
-                PopupScreen.display();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-
 
         rentNowButton.setOnMouseClicked(e -> {
             System.out.println("Button clicked");

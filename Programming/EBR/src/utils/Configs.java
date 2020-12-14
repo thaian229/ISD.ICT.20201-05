@@ -41,7 +41,7 @@ public class Configs {
 	public static final String SESSION_SCREEN_PATH = "/views/fxml/session.fxml";
 	public static final String SPLASH_SCREEN_PATH = "/views/fxml/splash.fxml";
 	public static final String HOME_PATH = "/views/fxml/home.fxml";
-	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
+	public static final String POPUP_PATH = "/views/fxml/barcode_popup.fxml";
 	public static final String DOCK_LIST_ITEM_PATH = "/views/fxml/dock_list_item.fxml";
 	public static final String PAYMENT_CONFIRMATION_SCREEN_PATH = "/views/fxml/payment_confirmation_screen.fxml";
 	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment_screen.fxml";
