@@ -13,9 +13,12 @@ import model.bike.Bike;
 import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
 import model.invoice.Invoice;
+import model.invoice.InvoiceManager;
 import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
+import model.payment.transaction.PaymentTransactionManager;
 import model.session.Session;
+import model.session.SessionManager;
 import utils.Path;
 import views.screen.BaseScreenHandler;
 
@@ -132,6 +135,10 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
         PaymentTransaction returnTransaction = this.controller.refund(this.controller.calculateReturned(this.invoice), contents,
                 this.invoice.getCard().getCardNum(), this.invoice.getCard().getCardOwner(),
                 this.invoice.getCard().getExpDate(), Integer.toString(this.invoice.getCard().getSecurityCode()));
-
+        returnTransaction.setMethod("Credit Card");
+        returnTransaction.setType("return");
+        String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
+        SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()),returnTransaction );
+        InvoiceManager.getInstance().finalInvoice(this.invoice,this.controller.calculateTotalFees(this.invoice));
     }
 }

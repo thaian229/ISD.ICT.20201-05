@@ -5,6 +5,7 @@ package model.invoice;
 import model.bike.BikeManager;
 import model.db.EBRDB;
 import model.payment.creditCard.CreditCardManager;
+import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.Session;
 import utils.Utils;
@@ -69,6 +70,26 @@ public class InvoiceManager {
         this.refreshInvoiceHistory();
         return newInvoice;
     }
+
+    public int finalInvoice(Invoice invoice, int total_charge) {
+        invoice.setTotalFees(total_charge);
+
+        String SQL = "UPDATE invoice "
+                + "SET (total_charge) = row(?) "
+                + "WHERE id = ?::uuid ";
+
+        int affectedRows = 0;
+
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+            pstmt.setInt(1, invoice.getTotalFees());
+            pstmt.setString(2, invoice.getId());
+
+            affectedRows = pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return affectedRows;
+    }
     /**
      * for inserting new invoice to DB
      *
@@ -128,25 +149,18 @@ public class InvoiceManager {
                 Invoice invoice ;
                 invoice = new Invoice(id,session_id,total_charge);
 
-//                if (return_transactionid == null || end_time == null) {
-//                    session = new Session(
-//                            id,
-//                            BikeManager.getInstance().getBikeById(bike_id),
-//                            CreditCardManager.getInstance().getCardById(card_id),
-//                            LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
-//                            PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid)
-//                    );
-//                } else {
-//                    session = new Session(
-//                            id,
-//                            BikeManager.getInstance().getBikeById(bike_id),
-//                            CreditCardManager.getInstance().getCardById(card_id),
-//                            LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
-//                            LocalDateTime.parse(end_time, Utils.DATE_FORMATER),
-//                            PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid),
-//                            PaymentTransactionManager.getInstance().getTransactionById(return_transactionid)
-//                    );
-//                }
+                if (total_charge==0) {
+                    invoice = new Invoice(
+                            id,
+                           session_id
+                    );
+                } else {
+                    invoice = new Invoice(
+                            id,
+                            session_id,
+                            total_charge
+                    );
+                }
                 invoiceHistory.add(invoice);
             }
         } catch (NullPointerException | SQLException ex) {

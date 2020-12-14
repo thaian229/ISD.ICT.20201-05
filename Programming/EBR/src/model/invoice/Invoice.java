@@ -33,16 +33,21 @@ public class Invoice {
  //  private int returned;
 
 
-
-
     public Invoice(String session_id){
         this.sessionId = session_id;
     }
+    public Invoice(String id, String sessionId){
+        this.id = id;
+        this.sessionId = sessionId;
+    }
+
    public Invoice(String id, String session_id, int total_charge) {
         this.id = id;
         this.sessionId = session_id;
         this.totalFees = total_charge;
     }
+
+
 
     public void setId(String id) {
         this.id = id;
@@ -97,7 +102,7 @@ public class Invoice {
      * @return endTime
      */
     public LocalDateTime getEndTime() {
-        return SessionManager.getInstance().getSessionById(sessionId).getEndTime();
+        return LocalDateTime.now();
     }
 
     /**

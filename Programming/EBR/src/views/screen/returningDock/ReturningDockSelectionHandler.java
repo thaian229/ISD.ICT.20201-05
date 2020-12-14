@@ -21,6 +21,7 @@ import model.dock.Dock;
 import javafx.scene.control.Button;
 import model.dock.DockManager;
 import model.invoice.Invoice;
+import model.invoice.InvoiceManager;
 import model.session.Session;
 import utils.Configs;
 import utils.Path;
@@ -128,7 +129,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     @FXML
     void returnBikeBtnListener(MouseEvent e) {
         if (dock != null) {
-            Invoice invoice = new Invoice(this.session.getId());
+            Invoice invoice = InvoiceManager.getInstance().createInvoice(this.session.getId());
             InvoiceScreenController invoiceScreenController = new InvoiceScreenController();
             InvoiceScreenHandler invoiceScreenHandler = null;
             try {
