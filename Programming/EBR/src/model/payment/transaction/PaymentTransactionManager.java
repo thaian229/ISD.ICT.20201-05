@@ -43,7 +43,7 @@ public class PaymentTransactionManager {
     public PaymentTransaction getTransactionById(String transactionId) {
         // query the card
         String SQL = "SELECT * FROM payment_transaction "
-                + "WHERE id = ?";
+                + "WHERE id = ?::uuid";
 
         try (Connection conn = EBRDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL)) {

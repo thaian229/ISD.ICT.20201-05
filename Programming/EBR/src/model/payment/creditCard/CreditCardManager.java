@@ -69,7 +69,9 @@ public class CreditCardManager {
     public CreditCard getCardByCardNumber(String cardNumber) {
         // query the card
         String SQL = "SELECT * FROM card " +
-                "WHERE card_num = ?";
+                "WHERE card_num = ? " +
+                "ORDER BY id " +
+                "FETCH FIRST ROW ONLY";
 
         try (Connection conn = EBRDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL)) {
@@ -78,7 +80,6 @@ public class CreditCardManager {
             // Handle result set
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-
             return new CreditCard(
                     rs.getString("id"),
                     rs.getString("card_num"),
