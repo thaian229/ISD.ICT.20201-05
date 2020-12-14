@@ -24,7 +24,7 @@ public class ValidateReturnedTest {
             "-10, false",
             "100000, true"
     })
-    public void validateCardNumberTest(int returned, boolean expected) {
+    public void validateReturnedTest(int returned, boolean expected) {
         assertEquals(expected, invoiceScreenController.validateReturned(returned));
     }
 
