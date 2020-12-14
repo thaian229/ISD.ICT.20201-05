@@ -24,6 +24,7 @@ public class PaymentTransactionManager {
 
     /**
      * singleton instance access
+     *
      * @return PaymentTransactionManager instance
      */
     public static PaymentTransactionManager getInstance() {
@@ -35,6 +36,7 @@ public class PaymentTransactionManager {
 
     /**
      * query Payment Transaction info from database via id
+     *
      * @param transactionId transaction's uuid
      * @return instance of wanted transaction, null if didn't found
      */
@@ -65,6 +67,7 @@ public class PaymentTransactionManager {
 
     /**
      * save transaction into database as new record
+     *
      * @param paymentTransaction transaction to be saved
      * @return uuid of newly added transaction's record
      */
@@ -95,11 +98,9 @@ public class PaymentTransactionManager {
                     ex.printStackTrace();
                 }
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         paymentTransaction.setId(id);
         return id;
     }

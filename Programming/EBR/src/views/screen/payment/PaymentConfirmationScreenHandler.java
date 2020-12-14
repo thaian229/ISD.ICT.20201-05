@@ -145,37 +145,31 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
                 this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                 this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
 
-//        if (respond.get("RESULT").equalsIgnoreCase("PAYMENT FAILED!")) {
-//            getPreviousScreen().show();
-//        } else {
-//            homeScreenHandler.show();
-//        }
-
-        // Fake here
-        PaymentTransaction fakeTransaction = new PaymentTransaction("Pay Deposit",
-                this.controller.getBike().getDeposit(), "Credit Card");
-
-        this.transitionToSessionScreen(fakeTransaction);
+        if (rentTransaction == null) {
+            getPreviousScreen().show();
+        } else {
+            rentTransaction.setMethod("Credit Card");
+            rentTransaction.setType("rent");
+            this.transitionToSessionScreen(rentTransaction);
+        }
     }
 
     private void transitionToSessionScreen(PaymentTransaction rentTransaction) throws IOException {
         try {
-            // Transition to session screen
+            // Create and save card
             CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                     Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));
 
-            // Save card
             CreditCardManager.getInstance().saveCreditCard(card);
 
             // Save Renting Transaction
             String id = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
-            rentTransaction.setId(id);
 
+            // Create new renting session
             Session session = SessionManager.getInstance().createSession(this.controller.getBike(), card, rentTransaction);
             SessionScreenController sessionScreenController = new SessionScreenController();
             SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
                     Configs.SESSION_SCREEN_PATH, session, sessionScreenController);
-
 
             sessionScreenHandler.setHomeScreenHandler(homeScreenHandler);
             sessionScreenHandler.setPreviousScreen(homeScreenHandler);

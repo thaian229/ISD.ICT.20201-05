@@ -9,10 +9,7 @@ import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import utils.Utils;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -33,8 +30,9 @@ import java.util.ArrayList;
  */
 
 public class SessionManager {
+
     private static SessionManager instance; //singleton
-    private ArrayList<Session> sessions = new ArrayList<>();
+    private final ArrayList<Session> sessions = new ArrayList<>();
 
     /**
      * @author mHoang
@@ -68,8 +66,7 @@ public class SessionManager {
      */
     public Session createSession(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
         Session newSession = new Session(bike, card, rentTransaction);
-        String sessionId = this.insertNewSessions(newSession);
-        newSession.setId(sessionId);
+        this.insertNewSessions(newSession);
         refreshSessionsList();
         return newSession;
     }
@@ -77,7 +74,7 @@ public class SessionManager {
     /**
      * This method is to end the session and update in DB
      *
-     * @param session session to be ended
+     * @param session           session to be ended
      * @param returnTransaction transaction to refund deposit after deducting rental fee
      * @return affectedRows number of affected rows in DB
      * @author mHoang
@@ -139,9 +136,9 @@ public class SessionManager {
         String id = "";
 
         // Insert new row
-        try (
-                PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
-        ) {
+        try (Connection conn = EBRDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQL,
+                     Statement.RETURN_GENERATED_KEYS)) {
             // Set up parameters
             pstmt.setString(1, newSession.getBike().getId());
             pstmt.setString(2, newSession.getCard().getId());
@@ -176,10 +173,8 @@ public class SessionManager {
         String SQL = "SELECT * FROM session";
 
         // Get All Rows
-        try (
-                Statement stmt = EBRDB.getConnection().createStatement();
-                ResultSet rs = stmt.executeQuery(SQL)
-        ) {
+        try (Statement stmt = EBRDB.getConnection().createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)) {
             while (rs.next()) {
                 String id = rs.getString("id");
                 String bike_id = rs.getString("bike_id");
@@ -188,15 +183,28 @@ public class SessionManager {
                 String return_transactionid = rs.getString("return_transactionid");
                 String start_time = rs.getString("start_time");
                 String end_time = rs.getString("end_time");
-                Session session = new Session(
-                        id,
-                        BikeManager.getInstance().getBikeById(bike_id),
-                        CreditCardManager.getInstance().getCardById(card_id),
-                        LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
-                        LocalDateTime.parse(end_time, Utils.DATE_FORMATER),
-                        PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid),
-                        PaymentTransactionManager.getInstance().getTransactionById(return_transactionid)
-                );
+
+                Session session;
+
+                if (return_transactionid == null || end_time == null) {
+                    session = new Session(
+                            id,
+                            BikeManager.getInstance().getBikeById(bike_id),
+                            CreditCardManager.getInstance().getCardById(card_id),
+                            LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
+                            PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid)
+                    );
+                } else {
+                    session = new Session(
+                            id,
+                            BikeManager.getInstance().getBikeById(bike_id),
+                            CreditCardManager.getInstance().getCardById(card_id),
+                            LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
+                            LocalDateTime.parse(end_time, Utils.DATE_FORMATER),
+                            PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid),
+                            PaymentTransactionManager.getInstance().getTransactionById(return_transactionid)
+                    );
+                }
                 sessions.add(session);
             }
         } catch (NullPointerException | SQLException ex) {

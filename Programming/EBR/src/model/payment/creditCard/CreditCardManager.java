@@ -24,6 +24,7 @@ public class CreditCardManager {
 
     /**
      * singleton instance access
+     *
      * @return CreditCardManager instance
      */
     public static CreditCardManager getInstance() {
@@ -35,6 +36,7 @@ public class CreditCardManager {
 
     /**
      * query card info from database via id
+     *
      * @param cardId card's uuid
      * @return instance of wanted card, null if didn't found
      */
@@ -64,8 +66,35 @@ public class CreditCardManager {
         return null;
     }
 
+    public CreditCard getCardByCardNumber(String cardNumber) {
+        // query the card
+        String SQL = "SELECT * FROM card " +
+                "WHERE card_num = ?";
+
+        try (Connection conn = EBRDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            // Set up parameters
+            pstmt.setString(1, cardNumber);
+            // Handle result set
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+
+            return new CreditCard(
+                    rs.getString("id"),
+                    rs.getString("card_num"),
+                    rs.getString("card_owner"),
+                    Integer.parseInt(rs.getString("security_code")),
+                    rs.getString("exp_date")
+            );
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * save the card into database
+     *
      * @param creditCard instance of credit card to be saved
      * @return uuid of the card in the newly created records
      */
@@ -74,6 +103,12 @@ public class CreditCardManager {
                 "VALUES (?, ?, ?, ?)";
 
         String id = "save failed";
+
+        CreditCard checkExisted = this.getCardByCardNumber(creditCard.getCardNum());
+        if (checkExisted != null) {
+            creditCard.setId(checkExisted.getId());
+            return checkExisted.getId();
+        }
 
         // Insert new row
         try (Connection conn = EBRDB.getConnection();
@@ -97,7 +132,6 @@ public class CreditCardManager {
                     ex.printStackTrace();
                 }
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
