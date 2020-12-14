@@ -131,6 +131,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
     private void handleReturnHome() throws IOException{
+
         String contents = "refund";
         PaymentTransaction returnTransaction = this.controller.refund(this.controller.calculateReturned(this.invoice), contents,
                 this.invoice.getCard().getCardNum(), this.invoice.getCard().getCardOwner(),
