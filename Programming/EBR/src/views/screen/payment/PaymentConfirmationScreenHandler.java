@@ -5,6 +5,7 @@ import controller.renting.SessionScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -75,6 +76,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
     @FXML
     private ImageView paymentConfirmationCancelButtonImage;
 
+    @FXML
+    private ProgressIndicator submitLoadingIndicator;
+
     public PaymentConfirmationScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
     }
@@ -89,7 +93,11 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
         // set up extra event
         paymentConfirmationConfirmButton.setOnMouseClicked(e -> {
             try {
+                System.out.println("here");
+
                 handleRentingConfirmation();
+//                paymentConfirmationConfirmButton.setDisable(false);
+//                submitLoadingIndicator.setVisible(false);
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
@@ -140,6 +148,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
     }
 
     private void handleRentingConfirmation() throws IOException {
+        paymentConfirmationConfirmButton.setText("Loading");
+        paymentConfirmationConfirmButton.setDisable(true);
+        submitLoadingIndicator.setVisible(true);
         String contents = "pay order";
         PaymentTransaction rentTransaction = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,
                 this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),

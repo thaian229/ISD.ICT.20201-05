@@ -76,7 +76,7 @@ public class InvoiceScreenController extends BaseController {
 
     public int calculateReturned(Invoice invoice) {
     try {
-        int deposit = invoice.getDepositForTest();
+        int deposit = invoice.getSession().getBike().getDeposit();
         int totalFees = invoice.getTotalFees();
         int returned = deposit - totalFees;
        // invoice.setReturned(returned);

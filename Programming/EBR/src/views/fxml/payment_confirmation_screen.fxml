@@ -181,6 +181,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                                 </Button>
+                         <ProgressIndicator fx:id="submitLoadingIndicator" blendMode="ADD" layoutX="212.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" visible="false" />
                             </children>
                         </Pane>
                     </children>
