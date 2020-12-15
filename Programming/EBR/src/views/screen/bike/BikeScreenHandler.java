@@ -70,11 +70,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         this.setImage();
 
         logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e ->{
-            BaseScreenHandler previousScreen = this.getPreviousScreen();
-            previousScreen.setScreenTitle(previousScreen.getScreenTitle());
-            previousScreen.show();
-        });
+        back.setOnMouseClicked(e -> getPreviousScreen().show());
 
         barcodeButton.setOnMouseClicked(e -> {
             try {
@@ -106,16 +102,16 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     private void displayBike() {
         try {
             bikeBarcode.setText(Integer.toString(bike.getBarcode()));
-            bikeDeposit.setText(Integer.toString(bike.getDeposit()));
-            bikeCharge.setText(Integer.toString((bike.getCharge())));
+            bikeDeposit.setText(Integer.toString(bike.getDeposit()) + " VND");
+            bikeCharge.setText(Integer.toString(bike.getCharge()) + " VND");
             bikeDockName.setText(bike.getDock().getName());
             if (bike instanceof StandardElectricalBike) {
                 bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes");
+                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes left");
             }
             else if (bike instanceof TwinElectricalBike){
                 bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " minutes");
+                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " minutes left");
             }
             else {
                 bikeBattery.setVisible(false);
