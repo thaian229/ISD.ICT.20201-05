@@ -66,7 +66,7 @@ public class Bike {
 
     public void takeBikeOutOfDock() {
         this.dock.removeBike(this);
-        BikeManager.getInstance().updateDockOfBike(this, "");
+        // BikeManager.getInstance().updateDockOfBike(this, "");
     }
 
     public void putBikeInDock(Dock dock) {

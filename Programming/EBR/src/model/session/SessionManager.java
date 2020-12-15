@@ -67,7 +67,8 @@ public class SessionManager {
     public Session createSession(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
         Session newSession = new Session(bike, card, rentTransaction);
         this.insertNewSessions(newSession);
-        refreshSessionsList();
+//        refreshSessionsList();
+        sessions.add(newSession);
         return newSession;
     }
 
@@ -117,6 +118,7 @@ public class SessionManager {
     }
 
     public ArrayList<Session> getSessions() {
+        this.refreshSessionsList();
         return sessions;
     }
 

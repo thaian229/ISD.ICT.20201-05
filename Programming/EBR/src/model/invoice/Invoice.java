@@ -65,7 +65,7 @@ public class Invoice {
      * This method is used to get bike by using session_id
      * @return bike
      */
-    public Bike getBike(){
+    public Bike getBike() {
         return SessionManager.getInstance().getSessionById(sessionId).getBike();
     }
 
@@ -73,7 +73,7 @@ public class Invoice {
      * This method is used to get credit card by using session_id
      * @return card
      */
-    public CreditCard getCard(){
+    public CreditCard getCard() {
         return SessionManager.getInstance().getSessionById(sessionId).getCard();
     }
     public void setTotalFees(int totalFees) {
