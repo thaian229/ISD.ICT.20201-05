@@ -74,6 +74,24 @@ public class Utils {
         return digest;
     }
 
+    public static String sha256(String message) {
+        String digest = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
+            // converting byte array to Hexadecimal String
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            digest = sb.toString();
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+            Utils.getLogger(Utils.class.getName());
+            digest = "";
+        }
+        return digest;
+    }
+
 
     public static DateTimeFormatter DATE_FORMATER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

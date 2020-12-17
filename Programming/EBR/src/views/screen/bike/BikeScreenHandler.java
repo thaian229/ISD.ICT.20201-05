@@ -96,8 +96,8 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     private void displayBike() {
         try {
             bikeBarcode.setText(Integer.toString(bike.getBarcode()));
-            bikeDeposit.setText(Integer.toString(bike.getDeposit()) + " " + Configs.CURRENCY);
-            bikeCharge.setText(Integer.toString((bike.getCharge())) + " " + Configs.CURRENCY);
+            bikeDeposit.setText(bike.getDeposit() + " " + Configs.CURRENCY);
+            bikeCharge.setText(bike.getCharge() + " " + Configs.CURRENCY);
             bikeDockName.setText(bike.getDock().getName());
             if (bike instanceof StandardElectricalBike) {
                 bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");

@@ -73,7 +73,6 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         paymentConfirmButton.setOnMouseClicked(e -> {
             try {
                 handleCardInfoSubmit();
-                goToConfirmationScreen();
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
@@ -90,7 +89,7 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
 
-    private void handleCardInfoSubmit() {
+    private void handleCardInfoSubmit() throws IOException {
         // Read in all fields
         HashMap<String, String> cardInfo = new HashMap<>();
         cardInfo.put("cardOwner", cardOwner.getText().trim());
@@ -103,7 +102,9 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
 
         // Validate card info then process to confirmation screen
         paymentScreenController.setCardInfo(cardInfo);
-        paymentScreenController.validateCreditCardForm(cardInfo);
+        if(paymentScreenController.validateCreditCardForm(cardInfo)){
+            this.goToConfirmationScreen();
+        }
     }
 
     private void goToConfirmationScreen() throws IOException {

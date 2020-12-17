@@ -123,8 +123,11 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
         PaymentTransaction returnTransaction = this.controller.refund(this.controller.calculateReturned(this.invoice), contents,
                 this.invoice.getCard().getCardNum(), this.invoice.getCard().getCardOwner(),
                 this.invoice.getCard().getExpDate(), Integer.toString(this.invoice.getCard().getSecurityCode()));
+
         returnTransaction.setMethod("Credit Card");
         returnTransaction.setType("return");
+        returnTransaction.setCard(this.invoice.getCard());
+
         String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
         SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
         InvoiceManager.getInstance().finalInvoice(this.invoice, this.controller.calculateTotalFees(this.invoice));

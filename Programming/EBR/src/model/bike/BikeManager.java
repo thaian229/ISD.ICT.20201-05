@@ -1,6 +1,7 @@
 package model.bike;
 
 import model.db.EBRDB;
+import model.dock.DockManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -250,9 +251,12 @@ public class BikeManager {
             }
             // Handle update
             int affectedRows = pstmt.executeUpdate();
-
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+
+        if (dockId != null && !dockId.equals("")) {
+            DockManager.getInstance().getDockById(dockId).getBikeList().add(bike);
         }
     }
 }

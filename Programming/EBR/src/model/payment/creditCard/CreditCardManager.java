@@ -2,6 +2,7 @@ package model.payment.creditCard;
 
 
 import model.db.EBRDB;
+import utils.Utils;
 
 import java.sql.*;
 
@@ -57,7 +58,7 @@ public class CreditCardManager {
                         cardId,
                         rs.getString("card_num"),
                         rs.getString("card_owner"),
-                        Integer.parseInt(rs.getString("security_code")),
+                        000,
                         rs.getString("exp_date")
                 );
             }
@@ -85,7 +86,7 @@ public class CreditCardManager {
                         rs.getString("id"),
                         rs.getString("card_num"),
                         rs.getString("card_owner"),
-                        Integer.parseInt(rs.getString("security_code")),
+                        000,
                         rs.getString("exp_date")
                 );
             }
@@ -120,7 +121,7 @@ public class CreditCardManager {
             // Set up parameters
             pstmt.setString(1, creditCard.getCardNum());
             pstmt.setString(2, creditCard.getCardOwner());
-            pstmt.setString(3, Integer.toString(creditCard.getSecurityCode()));
+            pstmt.setString(3, Utils.sha256(Integer.toString(creditCard.getSecurityCode())));
             pstmt.setString(4, creditCard.getExpDate());
             // Handle update
             int affectedRows = pstmt.executeUpdate();

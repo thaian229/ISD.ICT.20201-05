@@ -2,10 +2,11 @@ package controller;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
-import controller.BaseController;
 import model.bike.Bike;
 import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
+import model.session.Session;
+import model.session.SessionManager;
 import subsystem.InterbankSubsystem;
 
 import java.util.HashMap;
@@ -92,12 +93,23 @@ public class PaymentScreenController extends BaseController {
      * validating format of card info form
      *
      * @param creditCardForm all fields of form forward from View
+     * @return
      */
-    public void validateCreditCardForm(HashMap<String, String> creditCardForm) {
-        validateCardNumber(creditCardForm.get("cardNumber"));
-        validateCardOwner(creditCardForm.get("cardOwner"));
-        validateExpDate(creditCardForm.get("expDate"));
-        validateSecurityCode(creditCardForm.get("securityCode"));
+    public boolean validateCreditCardForm(HashMap<String, String> creditCardForm) {
+        return( validateCardNumber(creditCardForm.get("cardNumber")) &&
+        validateCardOwner(creditCardForm.get("cardOwner")) &&
+        validateExpDate(creditCardForm.get("expDate")) &&
+        validateSecurityCode(creditCardForm.get("securityCode")) &&
+        validateCardUnused(creditCardForm.get("cardNumber")));
+    }
+
+    public boolean validateCardUnused(String cardNumber) {
+        for(Session session : SessionManager.getInstance().getSessions()) {
+            if(session.getEndTime() == null && session.getCard().getCardNum().equals(cardNumber)){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

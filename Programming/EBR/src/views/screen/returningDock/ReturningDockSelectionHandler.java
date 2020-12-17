@@ -93,7 +93,6 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         setImage(dockImg, dock.getImageURL());
         dockAddress.setText(dock.getLocation());
         dockEmptySlots.setText(Integer.toString(dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
-        BikeManager.getInstance().getBikeById(this.session.getBike().getId()).putBikeInDock(this.dock);
     }
 
     public void displayDockList() {
@@ -140,8 +139,8 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     @FXML
     void returnBikeBtnListener(MouseEvent e) {
         if (dock != null) {
-
-            Invoice invoice = InvoiceManager.getInstance().createInvoice(this.session.getId());
+            BikeManager.getInstance().getBikeById(this.session.getBike().getId()).putBikeInDock(this.dock);
+            Invoice invoice = InvoiceManager.getInstance().createInvoice(session.getId());
             InvoiceScreenController invoiceScreenController = new InvoiceScreenController();
             InvoiceScreenHandler invoiceScreenHandler = null;
             try {
