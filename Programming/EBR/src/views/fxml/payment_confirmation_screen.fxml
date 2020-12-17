@@ -29,9 +29,9 @@
         </AnchorPane>
         <Pane layoutX="448.0" layoutY="148.0" prefHeight="570.0" prefWidth="470.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 15;">
             <children>
-            <ImageView fx:id="paymentConfirmationBikeImage" fitHeight="150.0" layoutX="91.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paymentConfirmationBikeImage" fitWidth="250.0" layoutX="110.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../assets/images/xe-dap-1-159482394547294562988-51-0-526-908-crop-1594824063607285632499.png" />
+                  <Image url="@../../../assets/images/bikes/StandardBike.png" />
                </image></ImageView>
                 <GridPane layoutX="63.0" layoutY="215.0" prefHeight="138.0" prefWidth="343.0">
                     <columnConstraints>
@@ -118,11 +118,11 @@
                   </Pane>
                     </children>
                 </GridPane>
-                <Line endX="168.5999755859375" layoutX="233.0" layoutY="370.0" startX="-165.0" />
-            <GridPane layoutX="67.0" layoutY="398.0" prefHeight="50.0" prefWidth="335.0">
+                <Line endX="168.5999755859375" layoutX="233.0" layoutY="379.0" startX="-165.0" />
+            <GridPane layoutX="68.0" layoutY="394.0" prefHeight="50.0" prefWidth="335.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.2" minWidth="10.0" prefWidth="161.2" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.20001220703125" minWidth="10.0" prefWidth="173.8" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="90.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="245.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -138,9 +138,9 @@
                      </children></Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Text fx:id="hold" fill="#15b82f" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND">
+                        <Text fx:id="hold" fill="#15b82f" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" textAlignment="CENTER" wrappingWidth="245.0000000000001">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                         </Text>
                      </children></Pane>

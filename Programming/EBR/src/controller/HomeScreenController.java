@@ -1,4 +1,4 @@
-package controller.home;
+package controller;
 
 import controller.BaseController;
 import model.dock.Dock;

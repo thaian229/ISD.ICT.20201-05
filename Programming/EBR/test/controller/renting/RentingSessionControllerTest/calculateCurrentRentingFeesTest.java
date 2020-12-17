@@ -1,12 +1,8 @@
 package controller.renting.RentingSessionControllerTest;
 
-import controller.renting.SessionScreenController;
-import model.bike.*;
+import controller.SessionScreenController;
 import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
-import model.session.Session;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 

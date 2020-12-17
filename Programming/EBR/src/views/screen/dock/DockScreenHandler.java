@@ -10,7 +10,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.*;
 import model.dock.Dock;
-import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.bike.BikeScreenHandler;
@@ -91,6 +90,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        logo.setOnMouseClicked(e -> homeScreenHandler.show());
         back.setOnMouseClicked(e -> {
             BaseScreenHandler previousScreen = this.getPreviousScreen();
             previousScreen.setScreenTitle(previousScreen.getScreenTitle());
@@ -108,7 +108,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
             for (Bike bike : bikeList) {
 
                 // display the attribute of vboxCart media
-                BikeListItemHandler bikeListItem = new BikeListItemHandler(Configs.BIKE_LIST_ITEM_PATH, this);
+                BikeListItemHandler bikeListItem = new BikeListItemHandler(Path.BIKE_LIST_ITEM_PATH, this);
 
                 bikeListItem.setBike(bike);
 
@@ -168,7 +168,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
     public void BikeScreenTransition(Bike bike) {
         try {
             bike.setDock(dock);
-            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage, Configs.BIKE_PATH, bike);
+            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage, Path.BIKE_PATH, bike);
             bikeScreenHandler.setScreenTitle(bikeScreenHandler.getScreenTitle());
             bikeScreenHandler.setPreviousScreen(this);
             bikeScreenHandler.setHomeScreenHandler(homeScreenHandler);

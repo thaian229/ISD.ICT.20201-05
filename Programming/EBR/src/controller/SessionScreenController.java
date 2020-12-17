@@ -1,4 +1,4 @@
-package controller.renting;
+package controller;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;

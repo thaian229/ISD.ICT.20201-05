@@ -1,4 +1,4 @@
-package controller.returning;
+package controller;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
@@ -36,7 +36,7 @@ public class InvoiceScreenController extends BaseController {
     public void confirmInvoice(Invoice invoice) throws SQLException {
         //user clicked to confirm invoice
     }
-   // private int isValidReturned = 0;
+    // private int isValidReturned = 0;
 
 
     private HashMap<String, String> cardInfo = new HashMap<>();
@@ -50,8 +50,8 @@ public class InvoiceScreenController extends BaseController {
      * @author khang
      */
 
-    public int calculateTotalFees(Invoice invoice){
-        try{
+    public int calculateTotalFees(Invoice invoice) {
+        try {
             LocalDateTime startTime = invoice.getStartTime();
             LocalDateTime endTime = invoice.getEndTime();
             int hoursUsed = (int) Math.ceil(Utils.minusLocalDateTime(startTime, endTime) / 60.0);
@@ -64,7 +64,6 @@ public class InvoiceScreenController extends BaseController {
     }
 
 
-
     /**
      * This method is for calculating the returned deposit
      *
@@ -75,16 +74,15 @@ public class InvoiceScreenController extends BaseController {
 
 
     public int calculateReturned(Invoice invoice) {
-    try {
-        int deposit = invoice.getSession().getBike().getDeposit();
-        int totalFees = invoice.getTotalFees();
-        int returned = deposit - totalFees;
-       // invoice.setReturned(returned);
-        return returned;
-    }
-    catch (NullPointerException e){
-        return 0;
-    }
+        try {
+            int deposit = invoice.getSession().getBike().getDeposit();
+            int totalFees = invoice.getTotalFees();
+            int returned = deposit - totalFees;
+            // invoice.setReturned(returned);
+            return returned;
+        } catch (NullPointerException e) {
+            return 0;
+        }
     }
 
     public long calculateSessionLength(Invoice invoice) {
@@ -98,7 +96,7 @@ public class InvoiceScreenController extends BaseController {
     }
 
     public PaymentTransaction refund(int amount, String contents, String cardNumber, String cardHolderName,
-                                         String expirationDate, String securityCode) {
+                                     String expirationDate, String securityCode) {
         PaymentTransaction returnTransaction = null;
         Map<String, String> result = new HashMap<String, String>();
         result.put("RESULT", "PAYMENT FAILED!");
@@ -119,9 +117,8 @@ public class InvoiceScreenController extends BaseController {
     }
 
 
-
-    public boolean validateReturned(int returned){
-        if(returned < 0 ) return false;
+    public boolean validateReturned(int returned) {
+        if (returned < 0) return false;
         return true;
     }
 

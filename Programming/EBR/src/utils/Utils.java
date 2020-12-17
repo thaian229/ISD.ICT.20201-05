@@ -90,7 +90,6 @@ public class Utils {
      */
     public static long minusLocalDateTime(LocalDateTime before, LocalDateTime after) {
         Duration duration = Duration.between(before, after);
-//        System.out.println(duration.toMinutes());
 		return duration.toMinutes();
     }
 

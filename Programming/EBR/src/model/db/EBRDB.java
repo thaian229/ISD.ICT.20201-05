@@ -1,30 +1,46 @@
 package model.db;
 
 
+import utils.Configs;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.concurrent.Executor;
 
 public class EBRDB {
 
-    private static final String url = "jdbc:postgresql://localhost/ebr";
-    private static final String user = "postgres";
-    private static final String password = "04126152";
+    private static final String url = "jdbc:postgresql://localhost/" + Configs.DB_NAME;
+    private static final String user = Configs.DB_USERNAME;
+    private static final String password = Configs.DB_PASSWORD;
+
+    private static Connection conn;
 
     /**
      * Connect to the PostgreSQL database
      *
      * @return a Connection object
      */
-    public static Connection getConnection() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the PostgreSQL server successfully.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    public static Connection getConnection() throws SQLException {
+        if(conn == null || !conn.isValid(5000)) {
+            try {
+                Class.forName("org.postgresql.Driver");
+                Properties props = new Properties();
+                props.setProperty("user",Configs.DB_USERNAME);
+                props.setProperty("password",Configs.DB_PASSWORD);
+                props.setProperty("tcpKeepAlive","true");
+                props.setProperty("tcp_keepalives_idle","60");
+                props.setProperty("tcp_keepalives_interval","60");
 
+                conn = DriverManager.getConnection(url, props);
+
+                System.out.println(conn.getClientInfo());
+                System.out.println("Connected to the PostgreSQL server successfully.");
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        }
         return conn;
     }
 
@@ -32,7 +48,11 @@ public class EBRDB {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EBRDB.getConnection();
+        try {
+            EBRDB.getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }

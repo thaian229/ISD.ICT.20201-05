@@ -1,18 +1,15 @@
 package views.screen.splash;
 
-import controller.home.HomeScreenController;
+import controller.HomeScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.home.HomeScreenHandler;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,7 +49,7 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
         start.setOnMouseClicked(e -> {
             System.out.println("Button clicked");
             try {
-                HomeScreenHandler homeScreenHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH, new HomeScreenController());
+                HomeScreenHandler homeScreenHandler = new HomeScreenHandler(this.stage, Path.HOME_PATH, new HomeScreenController());
                 homeScreenHandler.displayDockList();
                 homeScreenHandler.setScreenTitle(homeScreenHandler.getScreenTitle());
                 homeScreenHandler.setPreviousScreen(this);

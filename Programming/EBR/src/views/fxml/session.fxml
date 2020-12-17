@@ -89,7 +89,7 @@
                                 <Text fx:id="sessionLength" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <Text fx:id="sessionBattery" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <Text fx:id="sessionUsage" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <Text fx:id="sessionCharge" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                <Text fx:id="sessionCharge" fill="#15b82f" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                             </children>
                         </GridPane>
                         <Line endX="305.0" layoutX="362.0" layoutY="274.0" startX="-305.0" />

@@ -1,6 +1,6 @@
 package returning;
 
-import controller.returning.InvoiceScreenController;
+import controller.InvoiceScreenController;
 import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import org.junit.jupiter.api.BeforeEach;

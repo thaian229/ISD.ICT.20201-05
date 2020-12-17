@@ -1,31 +1,27 @@
 package views.screen.session;
 
 import controller.ReturningDockSelectionController;
-import controller.renting.PaymentScreenController;
-import controller.renting.SessionScreenController;
-import controller.returning.InvoiceScreenController;
+import controller.SessionScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.Bike;
 import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
-import model.invoice.Invoice;
 import model.session.Session;
 import utils.Configs;
 import utils.Path;
+import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.invoice.InvoiceScreenHandler;
-import views.screen.returningDock.ReturningDockListItemHandler;
 import views.screen.returningDock.ReturningDockSelectionHandler;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 /**
@@ -111,17 +107,9 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
     private void setImages() {
         try {
-            File file = new File(this.session.getBike().getImageURL());
-            Image image = new Image(file.toURI().toString());
-            sessionBikeImage.setImage(image);
-
-            file = new File(Path.LOGO_ICON);
-            image = new Image(file.toURI().toString());
-            logo.setImage(image);
-
-            file = new File(Path.BACK_NAV_ICON);
-            image = new Image(file.toURI().toString());
-            back.setImage(image);
+            setImage(sessionBikeImage, this.session.getBike().getImageURL());
+            setImage(logo, Path.LOGO_ICON);
+            setImage(back, Path.BACK_NAV_ICON);
         } catch (Exception exp) {
             exp.printStackTrace();
         }
@@ -131,7 +119,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         try {
             Bike bike = this.session.getBike();
             sessionBarcode.setText(Integer.toString(bike.getBarcode()));
-            sessionStartTime.setText(this.session.getStartTime().toString());
+            sessionStartTime.setText(this.session.getStartTime().format(Utils.DATE_FORMATER_FOR_DISPLAY));
 
             if (this.session.getBike() instanceof StandardElectricalBike) {
                 StandardElectricalBike eBike = (StandardElectricalBike) bike;
@@ -139,14 +127,14 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
                 sessionUsage.setText(Integer.toString(eBike.getTimeLeft()));
             } else if (this.session.getBike() instanceof TwinElectricalBike) {
                 TwinElectricalBike eBike = (TwinElectricalBike) bike;
-                sessionBattery.setText(Float.toString(eBike.getBattery()));
-                sessionUsage.setText(Integer.toString(eBike.getTimeLeft()));
+                sessionBattery.setText(Float.toString(eBike.getBattery()) + "%");
+                sessionUsage.setText(Integer.toString(eBike.getTimeLeft()) + " minutes");
             } else {
                 sessionBattery.setText("");
                 sessionUsage.setText("");
             }
-            sessionLength.setText(Long.toString(controller.calculateSessionLength(this.session)));
-            sessionCharge.setText(bike.getCharge() + "/hour");
+            sessionLength.setText(controller.calculateSessionLength(this.session) + " minutes");
+            sessionCharge.setText(bike.getCharge() + " " + Configs.CURRENCY + "/h");
             sessionRentingFee.setText(controller.calculateCurrentRentingFees(this.session) + " VND");
 
         } catch (NullPointerException exp) {
@@ -156,7 +144,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
     private void goToDockSelection() throws IOException {
         try {
-            ReturningDockSelectionHandler returningDockSelectionHandler = new ReturningDockSelectionHandler(this.stage, Configs.RETURNING_DOCK_SELECTION_SCREEN_PATH, new ReturningDockSelectionController(), session);
+            ReturningDockSelectionHandler returningDockSelectionHandler = new ReturningDockSelectionHandler(this.stage, Path.RETURNING_DOCK_SELECTION_SCREEN_PATH, new ReturningDockSelectionController(), session);
             returningDockSelectionHandler.setPreviousScreen(this);
             returningDockSelectionHandler.setHomeScreenHandler(homeScreenHandler);
             returningDockSelectionHandler.setScreenTitle("Returning Dock Selection");

@@ -1,9 +1,7 @@
 package returning;
 
-import controller.returning.InvoiceScreenController;
-import model.bike.Bike;
+import controller.InvoiceScreenController;
 import model.invoice.Invoice;
-import model.session.SessionManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,8 @@
 package views.screen.home;
 
-import controller.BaseController;
 import controller.DockScreenController;
-import controller.home.HomeScreenController;
-import controller.renting.SessionScreenController;
+import controller.HomeScreenController;
+import controller.SessionScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
 import model.bike.Bike;
 import model.dock.Dock;
 import model.session.Session;
-import utils.Configs;
 import utils.Path;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
@@ -118,7 +116,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
         try {
             for (Dock dock : dockList) {
-                DockListItemHandler dockListItem = new DockListItemHandler(Configs.DOCK_LIST_ITEM_PATH, this, dock);
+                DockListItemHandler dockListItem = new DockListItemHandler(Path.DOCK_LIST_ITEM_PATH, this, dock);
                 vboxDockList.getChildren().add(dockListItem.getContent());
             }
         } catch (IOException e) {
@@ -130,7 +128,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     public void onDockListItemClicked(Dock dock) {
         try {
-            DockScreenHandler dockScreenHandler = new DockScreenHandler(this.stage, Configs.DOCK_PATH, dock);
+            DockScreenHandler dockScreenHandler = new DockScreenHandler(this.stage, Path.DOCK_PATH, dock);
             dockScreenHandler.setBController(new DockScreenController());
             dockScreenHandler.displayBikeList();
             dockScreenHandler.setScreenTitle(dockScreenHandler.getScreenTitle());
@@ -147,7 +145,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         SessionScreenController sessionScreenController = new SessionScreenController();
         try {
             SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
-                    Configs.SESSION_SCREEN_PATH, session, sessionScreenController);
+                    Path.SESSION_SCREEN_PATH, session, sessionScreenController);
             sessionScreenHandler.setHomeScreenHandler(this);
             sessionScreenHandler.setPreviousScreen(this);
             sessionScreenHandler.setScreenTitle("Session Screen");
@@ -160,7 +158,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     public void moveToBikeViewScreen(Bike bike) {
         try {
             BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage,
-                    Configs.BIKE_VIEW_SCREEN_PATH, bike);
+                    Path.BIKE_VIEW_SCREEN_PATH, bike);
             bikeScreenHandler.setHomeScreenHandler(this);
             bikeScreenHandler.setPreviousScreen(this);
             bikeScreenHandler.setScreenTitle("Bike View Screen");

@@ -1,9 +1,7 @@
 package views.screen.returningDock;
 
-import controller.BaseController;
 import controller.ReturningDockSelectionController;
-import controller.home.HomeScreenController;
-import controller.returning.InvoiceScreenController;
+import controller.InvoiceScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -19,17 +17,13 @@ import javafx.stage.Stage;
 import model.bike.BikeManager;
 import model.dock.Dock;
 import javafx.scene.control.Button;
-import model.dock.DockManager;
 import model.invoice.Invoice;
 import model.invoice.InvoiceManager;
 import model.session.Session;
-import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
-import views.screen.home.DockListItemHandler;
 import views.screen.invoice.InvoiceScreenHandler;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -53,6 +47,10 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     private AnchorPane dockInfo;
     @FXML
     private ImageView searchImg;
+    @FXML
+    private ImageView back;
+    @FXML
+    private ImageView logo;
 
     private Dock dock;
     private Session session;
@@ -61,7 +59,9 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dockInfo.setVisible(false);
-        setImage(searchImg, Path.SEARCH_ICON);
+        logo.setOnMouseClicked(e -> homeScreenHandler.show());
+        back.setOnMouseClicked(e -> this.getPreviousScreen().show());
+        this.setImages();
     }
 
     public ReturningDockSelectionHandler(Stage stage, String screenPath, ReturningDockSelectionController returningDockSelectionController, Session session) throws IOException {
@@ -70,6 +70,16 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         this.session = session;
         dockList = this.getBController().getDockList();
         displayDockList();
+    }
+
+    private void setImages() {
+        try {
+            setImage(logo, Path.LOGO_ICON);
+            setImage(back, Path.BACK_NAV_ICON);
+            setImage(searchImg, Path.SEARCH_ICON);
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        }
     }
 
     @Override
@@ -97,7 +107,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
                     vboxDockList.getChildren().add(hbox);
                     hbox = createHBox();
                 }
-                ReturningDockListItemHandler dockListItem = new ReturningDockListItemHandler(Configs.RETURNING_DOCK_LIST_ITEM_PATH, this);
+                ReturningDockListItemHandler dockListItem = new ReturningDockListItemHandler(Path.RETURNING_DOCK_LIST_ITEM_PATH, this);
                 dockListItem.setDock(dock);
                 hbox.getChildren().add(dockListItem.getContent());
                 cnt++;
@@ -136,7 +146,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
             InvoiceScreenHandler invoiceScreenHandler = null;
             try {
                 invoiceScreenHandler = new InvoiceScreenHandler(this.stage,
-                        Configs.INVOICE_SCREEN_PATH, invoice, invoiceScreenController);
+                        Path.INVOICE_SCREEN_PATH, invoice, invoiceScreenController);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
