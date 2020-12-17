@@ -103,7 +103,9 @@ CREATE TABLE public.session (
     bike_id uuid NOT NULL,
     rent_transactionid uuid NOT NULL,
     return_transactionid uuid,
+    current_rent_time INT DEFAULT 0,
     start_time Text,
+    pause_time Text,
     end_time Text,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
