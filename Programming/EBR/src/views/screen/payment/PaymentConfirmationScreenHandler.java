@@ -163,10 +163,14 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
             CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                     Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));
 
-            CreditCardManager.getInstance().saveCreditCard(card);
+            String cardId = CreditCardManager.getInstance().saveCreditCard(card);
+            card.setId(cardId);
+
+            rentTransaction.setCard(card);
 
             // Save Renting Transaction
-            String id = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
+            String transactionId = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
+            rentTransaction.setId(transactionId);
 
             // Create new renting session
             Session session = SessionManager.getInstance().createSession(this.controller.getBike(), card, rentTransaction);

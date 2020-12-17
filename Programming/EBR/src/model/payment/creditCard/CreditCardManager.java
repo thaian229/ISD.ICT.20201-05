@@ -51,15 +51,16 @@ public class CreditCardManager {
             pstmt.setString(1, cardId);
             // Handle result set
             ResultSet rs = pstmt.executeQuery();
-            rs.next();
+            if (rs.next()) {
 
-            return new CreditCard(
-                    rs.getString("id"),
-                    rs.getString("card_num"),
-                    rs.getString("card_owner"),
-                    Integer.parseInt(rs.getString("security_code")),
-                    rs.getString("exp_date")
-            );
+                return new CreditCard(
+                        cardId,
+                        rs.getString("card_num"),
+                        rs.getString("card_owner"),
+                        Integer.parseInt(rs.getString("security_code")),
+                        rs.getString("exp_date")
+                );
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -79,14 +80,15 @@ public class CreditCardManager {
             pstmt.setString(1, cardNumber);
             // Handle result set
             ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            return new CreditCard(
-                    rs.getString("id"),
-                    rs.getString("card_num"),
-                    rs.getString("card_owner"),
-                    Integer.parseInt(rs.getString("security_code")),
-                    rs.getString("exp_date")
-            );
+            if (rs.next()) {
+                return new CreditCard(
+                        rs.getString("id"),
+                        rs.getString("card_num"),
+                        rs.getString("card_owner"),
+                        Integer.parseInt(rs.getString("security_code")),
+                        rs.getString("exp_date")
+                );
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
