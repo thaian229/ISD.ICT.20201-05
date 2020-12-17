@@ -89,6 +89,7 @@ ALTER TABLE public.invoice OWNER TO postgres;
 
 CREATE TABLE public.payment_transaction (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    card_id uuid NOT NULL,
     type text NOT NULL,
     amount numeric NOT NULL,
     method text,
@@ -156,6 +157,9 @@ ALTER TABLE ONLY public.invoice
 
 ALTER TABLE ONLY public.payment_transaction
     ADD CONSTRAINT payment_transaction_pk PRIMARY KEY (id);
+
+ALTER TABLE ONLY public.payment_transaction
+    ADD CONSTRAINT payment_transaction_fk FOREIGN KEY (card_id) REFERENCES public.card(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY public.session
     ADD CONSTRAINT session_pk PRIMARY KEY (id);
