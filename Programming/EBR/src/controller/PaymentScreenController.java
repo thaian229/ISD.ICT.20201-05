@@ -99,8 +99,8 @@ public class PaymentScreenController extends BaseController {
         return( validateCardNumber(creditCardForm.get("cardNumber")) &&
         validateCardOwner(creditCardForm.get("cardOwner")) &&
         validateExpDate(creditCardForm.get("expDate")) &&
-        validateSecurityCode(creditCardForm.get("securityCode")) &&
-        validateCardUnused(creditCardForm.get("cardNumber")));
+        validateSecurityCode(creditCardForm.get("securityCode")));
+//        validateCardUnused(creditCardForm.get("cardNumber")));
     }
 
     public boolean validateCardUnused(String cardNumber) {

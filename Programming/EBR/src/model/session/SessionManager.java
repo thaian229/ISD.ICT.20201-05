@@ -182,7 +182,9 @@ public class SessionManager {
                 String return_transactionid = rs.getString("return_transactionid");
                 String start_time = rs.getString("start_time");
                 String end_time = rs.getString("end_time");
-
+                int last_rent_time_before_lock = rs.getInt("last_rent_time_before_lock");
+                String last_resume_time = rs.getString("last_resume_time");
+                boolean active = rs.getBoolean("active");
                 Session session;
 
                 if (return_transactionid == null || end_time == null) {
@@ -204,11 +206,71 @@ public class SessionManager {
                             PaymentTransactionManager.getInstance().getTransactionById(return_transactionid)
                     );
                 }
+                session.setActive(active);
+                if (last_resume_time == null)
+                    session.setLastResumeTime(LocalDateTime.parse(start_time, Utils.DATE_FORMATER));
+                else
+                    session.setLastResumeTime(LocalDateTime.parse(last_resume_time, Utils.DATE_FORMATER));
+                session.setLastRentTimeBeforeLock(last_rent_time_before_lock);
                 sessions.add(session);
             }
         } catch (NullPointerException | SQLException ex) {
             ex.printStackTrace();
         }
 
+    }
+
+
+    private int pauseSession(Session session) {
+        int realRentingTime = (int) (session.getLastRentTimeBeforeLock() + Utils.minusLocalDateTime(LocalDateTime.now(), session.getLastResumeTime()));
+        session.setLastRentTimeBeforeLock(realRentingTime);
+        session.setActive(false);
+
+        String SQL = "UPDATE session "
+                + "SET (last_rent_time_before_lock, active) = (?, ?) "
+                + "WHERE id = ?::uuid ";
+
+        int affectedRows = 0;
+
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+            pstmt.setInt(1, session.getLastRentTimeBeforeLock());
+            pstmt.setBoolean(2, false);
+            pstmt.setString(3, session.getId());
+
+            affectedRows = pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return affectedRows;
+    }
+
+    private int resumeSession(Session session) {
+        session.setLastResumeTime(LocalDateTime.now());
+        session.setActive(true);
+
+        String SQL = "UPDATE session "
+                + "SET (active, last_resume_time) = (?, ?) "
+                + "WHERE id = ?::uuid ";
+
+        int affectedRows = 0;
+
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+            pstmt.setBoolean(1, false);
+            pstmt.setString(2, session.getLastResumeTime().format(Utils.DATE_FORMATER));
+            pstmt.setString(3, session.getId());
+
+            affectedRows = pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return affectedRows;
+    }
+
+    public void switchSessionState(Session session) {
+        if(session.isActive()) {
+            pauseSession(session);
+        } else {
+            resumeSession(session);
+        }
     }
 }

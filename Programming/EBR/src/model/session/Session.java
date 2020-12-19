@@ -31,6 +31,9 @@ public class Session {
     private CreditCard card;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private LocalDateTime lastResumeTime;
+    private int lastRentTimeBeforeLock;
+    private boolean active;
     private PaymentTransaction rentTransaction;
     private PaymentTransaction returnTransaction;
 
@@ -39,6 +42,7 @@ public class Session {
         this.card = card;
         this.rentTransaction = rentTransaction;
         this.startTime = LocalDateTime.now();
+        this.lastResumeTime = this.startTime;
     }
 
     public Session(String id, Bike bike, CreditCard card, LocalDateTime startTime, PaymentTransaction rentTransaction) {
@@ -109,6 +113,30 @@ public class Session {
 
     public void setReturnTransaction(PaymentTransaction returnTransaction) {
         this.returnTransaction = returnTransaction;
+    }
+
+    public LocalDateTime getLastResumeTime() {
+        return lastResumeTime;
+    }
+
+    public void setLastResumeTime(LocalDateTime lastResumeTime) {
+        this.lastResumeTime = lastResumeTime;
+    }
+
+    public int getLastRentTimeBeforeLock() {
+        return lastRentTimeBeforeLock;
+    }
+
+    public void setLastRentTimeBeforeLock(int lastRentTimeBeforeLock) {
+        this.lastRentTimeBeforeLock = lastRentTimeBeforeLock;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     /**

@@ -1,15 +1,19 @@
 package views.screen.invoice;
 
+import controller.BaseController;
 import controller.InvoiceScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.invoice.Invoice;
 import model.invoice.InvoiceManager;
 import model.payment.creditCard.CreditCard;
+import model.payment.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.SessionManager;
@@ -40,7 +44,7 @@ import java.util.ResourceBundle;
 
 public class InvoiceScreenHandler extends BaseScreenHandler implements Initializable {
     private Invoice invoice;
-    private InvoiceScreenController controller;
+
     @FXML
     ImageView logo;
 
@@ -70,24 +74,72 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
     Text invoiceReturned;
 
     @FXML
-    Button returnHomeButton;
+    TextField cardNumberTextField;
+
+    @FXML
+    TextField cardOwnerTextField;
+
+    @FXML
+    TextField expDateTextField;
+
+    @FXML
+    TextField securityCodeTextField;
+
+    @FXML
+    CheckBox changeCardCheckbox;
+
+    @FXML
+    Button confirmButton;
+
+    private boolean changeCardState;
 
 
     public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice, InvoiceScreenController controller) throws IOException {
         super(stage, screenPath);
         this.invoice = invoice;
-        this.controller = controller;
+        this.setBController(controller) ;
         this.setImages();
         this.setTextFields();
-
-        returnHomeButton.setOnMouseClicked(e -> {
+        this.changeCardState = changeCardCheckbox.isSelected();
+        this.handleCheckBox();
+        confirmButton.setOnMouseClicked(e -> {
             try {
-                handleReturnHome();
+                handleConfirmButton();
                 homeScreenHandler.show();
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
         });
+        changeCardCheckbox.setOnMouseClicked(e -> {
+            handleCheckBox();
+        });
+
+    }
+
+    private void handleCheckBox() {
+        CreditCard card = this.invoice.getCard();
+
+        if (!this.changeCardState) {
+            cardNumberTextField.setText(card.getCardNum());
+            cardOwnerTextField.setText(card.getCardOwner());
+            expDateTextField.setText(card.getExpDate());
+            securityCodeTextField.setText("***");
+            cardNumberTextField.setDisable(!this.changeCardState);
+            cardOwnerTextField.setDisable(!this.changeCardState);
+            expDateTextField.setDisable(!this.changeCardState);
+            securityCodeTextField.setDisable(!this.changeCardState);
+        } else {
+            cardNumberTextField.setText("");
+            cardOwnerTextField.setText("");
+            expDateTextField.setText("");
+            securityCodeTextField.setText("");
+            cardNumberTextField.setDisable(!this.changeCardState);
+            cardOwnerTextField.setDisable(!this.changeCardState);
+            expDateTextField.setDisable(!this.changeCardState);
+            securityCodeTextField.setDisable(!this.changeCardState);
+        }
+
+        this.changeCardState = !this.changeCardState;
     }
 
     @Override
@@ -103,33 +155,50 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
     private void setTextFields() {
         try {
             CreditCard card = this.invoice.getCard();
+
             invoiceCardNumber.setText(card.getCardNum());
             invoiceStartTime.setText(this.invoice.getStartTime().format(Utils.DATE_FORMATER_FOR_DISPLAY));
             invoiceEndTime.setText(this.invoice.getEndTime().format(Utils.DATE_FORMATER_FOR_DISPLAY));
 
-            invoiceSessionLength.setText(controller.calculateSessionLength(this.invoice) + " minutes");
+            invoiceSessionLength.setText(getBController().calculateSessionLength(this.invoice) + " minutes");
             invoiceDeposit.setText(invoice.getDeposit() + " " + Configs.CURRENCY);
-            invoiceTotalFees.setText(controller.calculateTotalFees(this.invoice) + " " + Configs.CURRENCY);
-            invoiceReturned.setText(controller.calculateReturned(this.invoice) + " " + Configs.CURRENCY);
+            invoiceTotalFees.setText(getBController().calculateTotalFees(this.invoice) + " " + Configs.CURRENCY);
+            invoiceReturned.setText(getBController().calculateReturned(this.invoice) + " " + Configs.CURRENCY);
 
         } catch (NullPointerException exp) {
             exp.printStackTrace();
         }
     }
 
-    private void handleReturnHome() throws IOException {
+    private void handleConfirmButton() throws IOException {
 
         String contents = "refund";
-        PaymentTransaction returnTransaction = this.controller.refund(this.controller.calculateReturned(this.invoice), contents,
-                this.invoice.getCard().getCardNum(), this.invoice.getCard().getCardOwner(),
-                this.invoice.getCard().getExpDate(), Integer.toString(this.invoice.getCard().getSecurityCode()));
+        CreditCard tmpCard = this.invoice.getCard();
+
+        if (!this.changeCardState) {
+            String cardOwner = this.cardOwnerTextField.getText();
+            String cardNumber = this.cardNumberTextField.getText();
+            String expDate = this.expDateTextField.getText();
+            String securityCode = this.securityCodeTextField.getText();
+
+            tmpCard = getBController().getCardByCardNum(cardOwner, cardNumber, securityCode, expDate);
+        }
+
+        PaymentTransaction returnTransaction = this.getBController().refund(this.getBController().calculateReturned(this.invoice), contents,
+                tmpCard.getCardNum(), tmpCard.getCardOwner(),
+                tmpCard.getExpDate(), Integer.toString(tmpCard.getSecurityCode()));
 
         returnTransaction.setMethod("Credit Card");
         returnTransaction.setType("return");
-        returnTransaction.setCard(this.invoice.getCard());
+        returnTransaction.setCard(tmpCard);
 
         String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
         SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
-        InvoiceManager.getInstance().finalInvoice(this.invoice, this.controller.calculateTotalFees(this.invoice));
+        InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
+    }
+
+    @Override
+    public InvoiceScreenController getBController() {
+        return (InvoiceScreenController) super.getBController();
     }
 }

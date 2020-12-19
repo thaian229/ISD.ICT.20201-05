@@ -177,7 +177,6 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
             SessionScreenController sessionScreenController = new SessionScreenController();
             SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
                     Path.SESSION_SCREEN_PATH, session, sessionScreenController);
-
             sessionScreenHandler.setHomeScreenHandler(homeScreenHandler);
             sessionScreenHandler.setPreviousScreen(homeScreenHandler);
             sessionScreenHandler.setScreenTitle("Session Screen");

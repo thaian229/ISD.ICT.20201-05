@@ -18,6 +18,7 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.returningDock.ReturningDockSelectionHandler;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -43,13 +44,15 @@ import java.util.ResourceBundle;
 public class SessionScreenHandler extends BaseScreenHandler implements Initializable {
 
     private Session session;
-    private SessionScreenController controller;
 
     @FXML
     ImageView logo;
 
     @FXML
     ImageView back;
+
+    @FXML
+    ImageView lockBikeImg;
 
     @FXML
     ImageView sessionBikeImage;
@@ -85,7 +88,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         super(stage, screenPath);
         this.session = session;
         System.out.println(session.getId());
-        this.controller = controller;
+        this.setBController(controller);
         this.setImages();
         this.setTextFields();
 
@@ -94,6 +97,15 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
                 goToDockSelection();
             } catch (Exception exp) {
                 exp.printStackTrace();
+            }
+        });
+
+        lockBikeImg.setOnMouseClicked(e -> {
+            this.getBController().changeBikeLockState(session);
+            if (!session.isActive()) {
+                setImage(lockBikeImg, Path.PLAY_CIRCLE_ICON);
+            } else {
+                setImage(lockBikeImg, Path.PAUSE_CIRCLE_ICON);
             }
         });
     }
@@ -110,6 +122,11 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
             setImage(sessionBikeImage, this.session.getBike().getImageURL());
             setImage(logo, Path.LOGO_ICON);
             setImage(back, Path.BACK_NAV_ICON);
+            if (!session.isActive()) {
+                setImage(lockBikeImg, Path.PLAY_CIRCLE_ICON);
+            } else {
+                setImage(lockBikeImg, Path.PAUSE_CIRCLE_ICON);
+            }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
@@ -133,9 +150,9 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
                 sessionBattery.setText("");
                 sessionUsage.setText("");
             }
-            sessionLength.setText(controller.calculateSessionLength(this.session) + " minutes");
+            sessionLength.setText(this.getBController().calculateSessionLength(this.session) + " minutes");
             sessionCharge.setText(bike.getCharge() + " " + Configs.CURRENCY + "/h");
-            sessionRentingFee.setText(controller.calculateCurrentRentingFees(this.session) + " VND");
+            sessionRentingFee.setText(this.getBController().calculateCurrentRentingFees(this.session) + " VND");
 
         } catch (NullPointerException exp) {
             exp.printStackTrace();
@@ -154,4 +171,19 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         }
 
     }
+
+    @Override
+    public SessionScreenController getBController() {
+        return (SessionScreenController) super.getBController();
+    }
+
+//    @FXML
+//    void lockBikeImgClickHandler (MouseEvent e) {
+//        this.getBController().changeBikeLockState(session);
+//        if (!session.isActive()) {
+//            setImage(lockBikeImg, Path.PLAY_CIRCLE_ICON);
+//        } else {
+//            setImage(lockBikeImg, Path.PAUSE_CIRCLE_ICON);
+//        }
+//    }
 }

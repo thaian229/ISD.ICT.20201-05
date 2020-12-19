@@ -6,6 +6,7 @@ import controller.BaseController;
 import model.bike.Bike;
 import model.invoice.Invoice;
 import model.payment.creditCard.CreditCard;
+import model.payment.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import subsystem.InterbankSubsystem;
@@ -122,4 +123,14 @@ public class InvoiceScreenController extends BaseController {
         return true;
     }
 
+    public CreditCard getCardByCardNum(String cardOwner, String cardNumber, String securityCode, String expDate) {
+        CreditCard card = CreditCardManager.getInstance().getCardByCardNumber(cardNumber);
+        if (card == null) {
+            card = new CreditCard(cardNumber, cardOwner, Integer.parseInt(securityCode), expDate);
+            CreditCardManager.getInstance().saveCreditCard(card);
+        } else {
+            card.setSecurityCode(Integer.parseInt(securityCode));
+        }
+        return card;
+    }
 }
