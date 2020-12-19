@@ -23,91 +23,93 @@ SET default_table_access_method = heap;
 
 DROP TABLE IF EXISTS public.invoice;
 DROP TABLE IF EXISTS public.session;
-DROP TABLE IF EXISTS public.card;
 DROP TABLE IF EXISTS public.payment_transaction;
+DROP TABLE IF EXISTS public.card;
 DROP TABLE IF EXISTS public.e_bike;
 DROP TABLE IF EXISTS public.bike;
 DROP TABLE IF EXISTS public.dock;
 
 CREATE TABLE public.bike (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    type integer DEFAULT 1 NOT NULL,
-    barcode integer NOT NULL,
-    saddle_num integer DEFAULT 1 NOT NULL,
-    pedal_num integer DEFAULT 1 NOT NULL,
-    rear_seat_num integer DEFAULT 1 NOT NULL,
-    value integer NOT NULL,
-    rental_fees integer NOT NULL,
-    image_url text DEFAULT ''::text,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    description text,
-    dock_id uuid
+                             id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+                             type integer DEFAULT 1 NOT NULL,
+                             barcode integer NOT NULL,
+                             saddle_num integer DEFAULT 1 NOT NULL,
+                             pedal_num integer DEFAULT 1 NOT NULL,
+                             rear_seat_num integer DEFAULT 1 NOT NULL,
+                             value integer NOT NULL,
+                             rental_fees integer NOT NULL,
+                             image_url text DEFAULT ''::text,
+                             created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+                             description text,
+                             dock_id uuid
 );
 
 ALTER TABLE public.bike OWNER TO postgres;
 
 CREATE TABLE public.card (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    card_num text NOT NULL UNIQUE,
-    card_owner text NOT NULL,
-    security_code text NOT NULL,
-    exp_date text NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+                             id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+                             card_num text NOT NULL UNIQUE,
+                             card_owner text NOT NULL,
+                             security_code text NOT NULL,
+                             exp_date text NOT NULL,
+                             created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE public.card OWNER TO postgres;
 
 CREATE TABLE public.dock (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    name text NOT NULL,
-    location text NOT NULL,
-    capacity integer NOT NULL,
-    bike_num integer NOT NULL DEFAULT 0,
-    image_url text DEFAULT ''::text,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+                             id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+                             name text NOT NULL,
+                             location text NOT NULL,
+                             capacity integer NOT NULL,
+                             bike_num integer NOT NULL DEFAULT 0,
+                             image_url text DEFAULT ''::text,
+                             created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE public.dock OWNER TO postgres;
 
 CREATE TABLE public.e_bike (
-    bike_id uuid NOT NULL,
-    battery numeric(3,1) NOT NULL,
-    time_remain integer NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+                               bike_id uuid NOT NULL,
+                               battery numeric(3,1) NOT NULL,
+                               time_remain integer NOT NULL,
+                               created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE public.e_bike OWNER TO postgres;
 
 CREATE TABLE public.invoice (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    session_id uuid NOT NULL,
-    total_charge numeric,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+                                id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+                                session_id uuid NOT NULL,
+                                total_charge numeric,
+                                created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE public.invoice OWNER TO postgres;
 
 CREATE TABLE public.payment_transaction (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    type text NOT NULL,
-    amount numeric NOT NULL,
-    method text,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+                                            id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+                                            card_id uuid NOT NULL,
+                                            type text NOT NULL,
+                                            amount numeric NOT NULL,
+                                            method text,
+                                            created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE public.payment_transaction OWNER TO postgres;
 
 CREATE TABLE public.session (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    card_id uuid NOT NULL,
-    bike_id uuid NOT NULL,
-    rent_transactionid uuid NOT NULL,
-    return_transactionid uuid,
-    current_rent_time INT DEFAULT 0,
-    start_time Text,
-    pause_time Text,
-    end_time Text,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+                                id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+                                card_id uuid NOT NULL,
+                                bike_id uuid NOT NULL,
+                                rent_transactionid uuid NOT NULL,
+                                return_transactionid uuid,
+                                last_rent_time_before_lock INT DEFAULT 0,
+                                active boolean DEFAULT true,
+                                start_time Text,
+                                last_resume_time Text,
+                                end_time Text,
+                                created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE public.session OWNER TO postgres;
@@ -156,6 +158,9 @@ ALTER TABLE ONLY public.invoice
 
 ALTER TABLE ONLY public.payment_transaction
     ADD CONSTRAINT payment_transaction_pk PRIMARY KEY (id);
+
+ALTER TABLE ONLY public.payment_transaction
+    ADD CONSTRAINT payment_transaction_fk FOREIGN KEY (card_id) REFERENCES public.card(id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY public.session
     ADD CONSTRAINT session_pk PRIMARY KEY (id);
