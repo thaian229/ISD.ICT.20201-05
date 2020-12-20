@@ -160,7 +160,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
             invoiceStartTime.setText(this.invoice.getStartTime().format(Utils.DATE_FORMATER_FOR_DISPLAY));
             invoiceEndTime.setText(this.invoice.getEndTime().format(Utils.DATE_FORMATER_FOR_DISPLAY));
 
-            invoiceSessionLength.setText(getBController().calculateSessionLength(this.invoice) + " minutes");
+            invoiceSessionLength.setText(getBController().calculateSessionLength(this.invoice) + " seconds");
             invoiceDeposit.setText(invoice.getDeposit() + " " + Configs.CURRENCY);
             invoiceTotalFees.setText(getBController().calculateTotalFees(this.invoice) + " " + Configs.CURRENCY);
             invoiceReturned.setText(getBController().calculateReturned(this.invoice) + " " + Configs.CURRENCY);

@@ -101,10 +101,10 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             bikeDockName.setText(bike.getDock().getName());
             if (bike instanceof StandardElectricalBike) {
                 bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes");
+                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " seconds");
             } else if (bike instanceof TwinElectricalBike) {
                 bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " minutes");
+                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " seconds");
             } else {
                 bikeBattery.setVisible(false);
                 bikeUsage.setVisible(false);

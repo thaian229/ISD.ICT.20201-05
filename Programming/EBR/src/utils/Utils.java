@@ -98,17 +98,17 @@ public class Utils {
     public static DateTimeFormatter DATE_FORMATER_FOR_DISPLAY = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
-     * calculate duration in minutes
+     * calculate duration in seconds
      *
      * @author mHoang
      * @param before start time
      * @param after end time
      *
-     * @return minutes Long
+     * @return seconds Long
      */
     public static long minusLocalDateTime(LocalDateTime before, LocalDateTime after) {
         Duration duration = Duration.between(before, after);
-		return duration.toMinutes();
+		return duration.toSeconds();
     }
 
 }

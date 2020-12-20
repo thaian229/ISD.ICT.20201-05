@@ -66,6 +66,7 @@ public class SessionManager {
      */
     public Session createSession(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
         Session newSession = new Session(bike, card, rentTransaction);
+        newSession.setActive(true);
         this.insertNewSessions(newSession);
 //        refreshSessionsList();
         sessions.add(newSession);
@@ -222,7 +223,7 @@ public class SessionManager {
 
 
     private int pauseSession(Session session) {
-        int realRentingTime = (int) (session.getLastRentTimeBeforeLock() + Utils.minusLocalDateTime(LocalDateTime.now(), session.getLastResumeTime()));
+        int realRentingTime = (int) (session.getLastRentTimeBeforeLock() + Utils.minusLocalDateTime(session.getLastResumeTime(), LocalDateTime.now()));
         session.setLastRentTimeBeforeLock(realRentingTime);
         session.setActive(false);
 
@@ -233,7 +234,7 @@ public class SessionManager {
         int affectedRows = 0;
 
         try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
-            pstmt.setInt(1, session.getLastRentTimeBeforeLock());
+            pstmt.setInt(1, realRentingTime);
             pstmt.setBoolean(2, false);
             pstmt.setString(3, session.getId());
 
@@ -255,7 +256,7 @@ public class SessionManager {
         int affectedRows = 0;
 
         try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
-            pstmt.setBoolean(1, false);
+            pstmt.setBoolean(1, true);
             pstmt.setString(2, session.getLastResumeTime().format(Utils.DATE_FORMATER));
             pstmt.setString(3, session.getId());
 
@@ -267,7 +268,7 @@ public class SessionManager {
     }
 
     public void switchSessionState(Session session) {
-        if(session.isActive()) {
+        if (session.isActive()) {
             pauseSession(session);
         } else {
             resumeSession(session);

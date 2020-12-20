@@ -53,10 +53,16 @@ public class InvoiceScreenController extends BaseController {
 
     public int calculateTotalFees(Invoice invoice) {
         try {
-            LocalDateTime startTime = invoice.getStartTime();
-            LocalDateTime endTime = invoice.getEndTime();
-            int hoursUsed = (int) Math.ceil(Utils.minusLocalDateTime(startTime, endTime) / 60.0);
-            int totalFees = hoursUsed * invoice.getBike().getCharge();
+//            Bike bike = session.getBike();
+            Long sLength = invoice.getSession().getSessionLength();
+            int totalFees;
+            if (sLength < 10) {
+                totalFees = 0;
+            } else if (sLength >= 10 && sLength < 30) {
+                totalFees = 10000;
+            } else {
+                totalFees = (int) (10000.0 + 3000 * Math.ceil((sLength - 30.0) / 15.0));
+            }
             invoice.setTotalFees(totalFees);
             return totalFees;
         } catch (NullPointerException e) {
@@ -87,13 +93,7 @@ public class InvoiceScreenController extends BaseController {
     }
 
     public long calculateSessionLength(Invoice invoice) {
-        try {
-            LocalDateTime startTime = invoice.getStartTime();
-            LocalDateTime endTime = invoice.getEndTime();
-            return Utils.minusLocalDateTime(startTime, endTime);
-        } catch (NullPointerException e) {
-            return 0;
-        }
+        return invoice.getSession().getSessionLength();
     }
 
     public PaymentTransaction refund(int amount, String contents, String cardNumber, String cardHolderName,

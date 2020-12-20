@@ -40,7 +40,7 @@ public class SessionScreenController extends BaseController {
      * This method is for return a bike to a chosen dock
      *
      * @param session current renting session
-     * @param dock dock that bike will be put in
+     * @param dock    dock that bike will be put in
      * @return true if bike returned successfully
      * @author mHoang
      */
@@ -62,25 +62,22 @@ public class SessionScreenController extends BaseController {
      */
     public int calculateCurrentRentingFees(Session session) {
         try {
-            Bike bike = session.getBike();
-            LocalDateTime startTime = session.getStartTime();
-            LocalDateTime currentTime = LocalDateTime.now();
-            int hoursUsed = (int) Math.ceil(Utils.minusLocalDateTime(startTime, currentTime) / 60.0);
-            int totalCharge = hoursUsed * bike.getCharge();
-            return totalCharge;
+//            Bike bike = session.getBike();
+            Long sLength = session.getSessionLength();
+            if (sLength < 10) {
+                return 0;
+            } else if (sLength >= 10 && sLength < 30) {
+                return 10000;
+            } else {
+                return (int) (10000.0 + 3000 * Math.ceil((sLength - 30.0) / 15.0));
+            }
         } catch (NullPointerException e) {
             return 0;
         }
     }
 
     public long calculateSessionLength(Session session) {
-        try {
-            LocalDateTime startTime = session.getStartTime();
-            LocalDateTime currentTime = LocalDateTime.now();
-            return Utils.minusLocalDateTime(startTime, currentTime);
-        } catch (NullPointerException e) {
-            return 0;
-        }
+        return session.getSessionLength();
     }
 
     public void changeBikeLockState(Session session) {

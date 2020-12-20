@@ -32,7 +32,7 @@ public class Session {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private LocalDateTime lastResumeTime;
-    private int lastRentTimeBeforeLock;
+    private int lastRentTimeBeforeLock = 0;
     private boolean active;
     private PaymentTransaction rentTransaction;
     private PaymentTransaction returnTransaction;
@@ -152,6 +152,16 @@ public class Session {
         info.put("startTime", startTime.format(Utils.DATE_FORMATER));
         info.put("endTime", endTime.format(Utils.DATE_FORMATER));
         return info;
+    }
+
+    public long getSessionLength() {
+        if (this.active && this.getEndTime() == null) {
+            return this.lastRentTimeBeforeLock + Utils.minusLocalDateTime(lastResumeTime, LocalDateTime.now());
+        } else if (!this.active && this.getEndTime() == null) {
+            return this.lastRentTimeBeforeLock;
+        } else {
+            return this.lastRentTimeBeforeLock + Utils.minusLocalDateTime(lastResumeTime, endTime);
+        }
     }
 
     /**

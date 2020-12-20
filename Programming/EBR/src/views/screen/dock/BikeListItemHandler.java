@@ -98,10 +98,10 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         bikeRearSeat.setText("" + bike.getRearSeat());
         if (bike instanceof StandardElectricalBike) {
             bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
-            bikeUsageTime.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes");
+            bikeUsageTime.setText(((StandardElectricalBike) bike).getTimeLeft() + " seconds");
         } else if (bike instanceof TwinElectricalBike) {
             bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
-            bikeUsageTime.setText(((TwinElectricalBike) bike).getTimeLeft() + " minutes");
+            bikeUsageTime.setText(((TwinElectricalBike) bike).getTimeLeft() + " seconds");
         } else {
             bikeElecInfo.setVisible(false);
         }

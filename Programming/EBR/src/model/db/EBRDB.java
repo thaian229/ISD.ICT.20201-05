@@ -34,8 +34,6 @@ public class EBRDB {
                 props.setProperty("tcp_keepalives_interval","60");
 
                 conn = DriverManager.getConnection(url, props);
-
-                System.out.println(conn.getClientInfo());
                 System.out.println("Connected to the PostgreSQL server successfully.");
             } catch (SQLException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
