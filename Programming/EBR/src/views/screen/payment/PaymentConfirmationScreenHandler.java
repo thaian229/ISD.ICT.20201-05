@@ -18,6 +18,8 @@ import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
+import views.screen.BaseScreenHandlerWithTransactionPopup;
+import views.screen.WithTransactionPopupMethods;
 import views.screen.session.SessionScreenHandler;
 
 import java.awt.event.MouseEvent;
@@ -38,7 +40,7 @@ import java.util.ResourceBundle;
  * <p>
  * class name: TT.CNTT ICT 02 - K62
  */
-public class PaymentConfirmationScreenHandler extends BaseScreenHandler implements Initializable {
+public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTransactionPopup implements Initializable {
 
     private PaymentScreenController controller;
 
@@ -153,7 +155,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
             // Save then change screen
             rentTransaction.setMethod("Credit Card");
             rentTransaction.setType("rent");
-            this.transitionToSessionScreen(rentTransaction);
+            PaymentResultPopup.display(this, rentTransaction);
         }
     }
 
@@ -200,4 +202,8 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
         }
     }
 
+    @Override
+    public void continueAfterPopupClosed(PaymentTransaction paymentTransaction) throws IOException {
+        this.transitionToSessionScreen(paymentTransaction);
+    }
 }

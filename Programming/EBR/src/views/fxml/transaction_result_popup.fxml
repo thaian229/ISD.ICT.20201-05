@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="400.0" layoutY="85.0" prefHeight="495.0" prefWidth="760.0" style="-fx-border-color: #0F0F0F; -fx-border-width: 2; -fx-background-color: #ffffff;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="85.0">
+         <children>
+            <Button fx:id="closeBtn" layoutX="354.0" layoutY="441.0" mnemonicParsing="false" onMouseClicked="#closeBtnHandler" text="CLOSE" />
+         </children>
+      </AnchorPane>
+      <Text layoutX="226.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAYMENT TRANSACTION" AnchorPane.leftAnchor="226.0" AnchorPane.rightAnchor="225.55859375">
+         <font>
+            <Font name="Arial Bold" size="28.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
