@@ -49,10 +49,6 @@ import java.util.ResourceBundle;
 
 public class SessionScreenHandler extends BaseScreenHandler implements Initializable {
 
-    private Session session;
-
-    private LocalTime realTime;
-
     @FXML
     ImageView logo;
 
@@ -92,23 +88,32 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
     @FXML
     Button returnBikeButton;
 
+    private Session session;
+
+    private LocalTime realTime;
+
+    private int days = 0;
+
+    private int timePassed = 0;
+
     public SessionScreenHandler(Stage stage, String screenPath, Session session, SessionScreenController controller) throws IOException {
         super(stage, screenPath);
         this.session = session;
         System.out.println(session.getId());
         this.setBController(controller);
         this.setImages();
-        this.realTime = LocalTime.ofSecondOfDay(session.getSessionLength());
+        this.toDayAndTime(session.getSessionLength());
+        setSessionLengthText();
         this.setTextFields();
         System.out.println(session.isActive());
         setImageForLockBikeImg();
 
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            if(session.isActive()) {
-                updateCurrentTime();
-                sessionLength.setText(this.realTime.toString());
-                sessionRentingFee.setText(this.getBController().calculateCurrentRentingFees(this.session) + " VND");
+            if (session.isActive()) {
+                toDayAndTime(session.getSessionLength());
+                setSessionLengthText();
+                sessionRentingFee.setText(this.getBController().calculateCurrentRentingFees(this.session) + " " + Configs.CURRENCY);
             }
         }));
 
@@ -117,7 +122,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
         returnBikeButton.setOnMouseClicked(e -> {
             try {
-                if(this.session.isActive()) {
+                if (this.session.isActive()) {
                     this.getBController().changeBikeLockState(session);
                 }
                 goToDockSelection();
@@ -134,8 +139,18 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         });
     }
 
-    private void updateCurrentTime() {
-        this.realTime = LocalTime.ofSecondOfDay(this.realTime.toSecondOfDay() + 1);
+    private void setSessionLengthText() {
+        if (days == 0) {
+            sessionLength.setText(this.realTime.toString());
+        } else {
+            sessionLength.setText(days + " days, " + this.realTime.toString());
+        }
+        sessionRentingFee.setText(this.getBController().calculateCurrentRentingFees(this.session) + " VND");
+    }
+
+    private void toDayAndTime(long seconds) {
+        this.days = (int) (seconds / 86399);
+        this.realTime = LocalTime.ofSecondOfDay((seconds - days * 86399));
     }
 
     @Override
@@ -174,9 +189,8 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
                 sessionBattery.setText("");
                 sessionUsage.setText("");
             }
-            sessionLength.setText(this.realTime.toString());
+
             sessionCharge.setText(bike.getCharge() + " " + Configs.CURRENCY + "/h");
-            sessionRentingFee.setText(this.getBController().calculateCurrentRentingFees(this.session) + " VND");
 
         } catch (NullPointerException exp) {
             exp.printStackTrace();

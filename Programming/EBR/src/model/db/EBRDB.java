@@ -23,7 +23,7 @@ public class EBRDB {
      * @return a Connection object
      */
     public static Connection getConnection() throws SQLException {
-        if(conn == null || !conn.isValid(5000)) {
+        if(conn == null || !conn.isValid(2000)) {
             try {
                 Class.forName("org.postgresql.Driver");
                 Properties props = new Properties();

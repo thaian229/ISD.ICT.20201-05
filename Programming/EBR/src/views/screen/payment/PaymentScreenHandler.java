@@ -102,8 +102,12 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
 
         // Validate card info then process to confirmation screen
         paymentScreenController.setCardInfo(cardInfo);
-        if(paymentScreenController.validateCreditCardForm(cardInfo)){
+        try {
+            paymentScreenController.validateCreditCardForm(cardInfo);
+            paymentScreenController.validateCardUnused(cardNumber.getText().trim());
             this.goToConfirmationScreen();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

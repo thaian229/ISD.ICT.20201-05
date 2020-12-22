@@ -1,4 +1,6 @@
-package common.exception;
+package common.exception.cardException;
+
+import common.exception.FormException;
 
 public class InvalidCardOwnerFormatException extends FormException {
     public InvalidCardOwnerFormatException() {

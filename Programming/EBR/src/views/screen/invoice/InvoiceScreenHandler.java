@@ -2,6 +2,7 @@ package views.screen.invoice;
 
 import controller.BaseController;
 import controller.InvoiceScreenController;
+import controller.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,6 +25,7 @@ import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -97,7 +99,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
     public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice, InvoiceScreenController controller) throws IOException {
         super(stage, screenPath);
         this.invoice = invoice;
-        this.setBController(controller) ;
+        this.setBController(controller);
         this.setImages();
         this.setTextFields();
         this.changeCardState = changeCardCheckbox.isSelected();
@@ -105,7 +107,6 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
         confirmButton.setOnMouseClicked(e -> {
             try {
                 handleConfirmButton();
-                homeScreenHandler.show();
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
@@ -174,27 +175,40 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
 
         String contents = "refund";
         CreditCard tmpCard = this.invoice.getCard();
+        HashMap<String, String> cardInfo;
+        PaymentScreenController paymentScreenController = new PaymentScreenController(invoice.getBike());
 
-        if (!this.changeCardState) {
-            String cardOwner = this.cardOwnerTextField.getText();
-            String cardNumber = this.cardNumberTextField.getText();
-            String expDate = this.expDateTextField.getText();
-            String securityCode = this.securityCodeTextField.getText();
+        try {
+            if (!this.changeCardState) {
+                String cardOwner = this.cardOwnerTextField.getText();
+                String cardNumber = this.cardNumberTextField.getText();
+                String expDate = this.expDateTextField.getText();
+                String securityCode = this.securityCodeTextField.getText();
+                cardInfo = new HashMap<>();
+                cardInfo.put("cardOwner", cardOwner.trim());
+                cardInfo.put("cardNumber", cardNumber.trim());
+                cardInfo.put("expDate", expDate.trim());
+                cardInfo.put("securityCode", securityCode.trim());
+                paymentScreenController.validateCreditCardForm(cardInfo);
+                tmpCard = getBController().getCardByCardNum(cardOwner, cardNumber, securityCode, expDate);
+            }
+            PaymentTransaction returnTransaction = this.getBController().refund(this.getBController().calculateReturned(this.invoice), contents,
+                    tmpCard.getCardNum(), tmpCard.getCardOwner(),
+                    tmpCard.getExpDate(), Integer.toString(tmpCard.getSecurityCode()));
 
-            tmpCard = getBController().getCardByCardNum(cardOwner, cardNumber, securityCode, expDate);
+            returnTransaction.setMethod("Credit Card");
+            returnTransaction.setType("return");
+            returnTransaction.setCard(tmpCard);
+
+            String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
+            SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
+            InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
+
+            homeScreenHandler.show();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-
-        PaymentTransaction returnTransaction = this.getBController().refund(this.getBController().calculateReturned(this.invoice), contents,
-                tmpCard.getCardNum(), tmpCard.getCardOwner(),
-                tmpCard.getExpDate(), Integer.toString(tmpCard.getSecurityCode()));
-
-        returnTransaction.setMethod("Credit Card");
-        returnTransaction.setType("return");
-        returnTransaction.setCard(tmpCard);
-
-        String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
-        SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
-        InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
     }
 
     @Override

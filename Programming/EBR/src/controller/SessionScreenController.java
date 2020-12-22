@@ -64,12 +64,12 @@ public class SessionScreenController extends BaseController {
         try {
 //            Bike bike = session.getBike();
             Long sLength = session.getSessionLength();
-            if (sLength < 10) {
+            if (sLength < 10*60) {
                 return 0;
-            } else if (sLength >= 10 && sLength < 30) {
+            } else if (sLength >= 10*60 && sLength < 30*60) {
                 return 10000;
             } else {
-                return (int) (10000.0 + 3000 * Math.ceil((sLength - 30.0) / 15.0));
+                return (int) (10000.0 + 3000 * Math.ceil((sLength - 30.0 * 60) / (15.0 * 60.0)));
             }
         } catch (NullPointerException e) {
             return 0;
