@@ -113,7 +113,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             Image img = new Image(fileBikeImage.toURI().toString());
             bikeImage.setImage(img);
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

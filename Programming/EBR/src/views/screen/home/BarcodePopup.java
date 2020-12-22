@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.bike.Bike;
 import model.bike.BikeManager;
+import model.dock.DockManager;
 import model.session.Session;
 import model.session.SessionManager;
 import utils.Path;
@@ -83,6 +84,7 @@ public class BarcodePopup extends BaseScreenHandler implements Initializable {
         // Take barcode
         int barcode = Integer.parseInt(barcodeInput.getText().trim());
         Bike bike = BikeManager.getInstance().getBikeByBarcode(barcode);
+        bike.setDock(DockManager.getInstance().getDockById(bike.getDockId()));
         if (bike == null) {
             barcodeInput.setText("");
             return;
@@ -101,8 +103,6 @@ public class BarcodePopup extends BaseScreenHandler implements Initializable {
             }
         }
 
-        //TODO: dont let the popup disappear if the barcode is invalid
-
         // Move to corresponding screen
         {
             if (isRented) { // rented : to Session View
@@ -114,31 +114,4 @@ public class BarcodePopup extends BaseScreenHandler implements Initializable {
         }
     }
 
-    private void moveToSessionScreen(Session session) {
-        SessionScreenController sessionScreenController = new SessionScreenController();
-        try {
-            SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
-                    Path.SESSION_SCREEN_PATH, session, sessionScreenController);
-
-            sessionScreenHandler.setHomeScreenHandler(this.homeScreenHandler);
-            sessionScreenHandler.setPreviousScreen(this.getPreviousScreen());
-            sessionScreenHandler.setScreenTitle("Session Screen");
-            sessionScreenHandler.show();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
-
-    private void moveToBikeViewScreen(Bike bike) {
-        try {
-            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage,
-                    Path.BIKE_VIEW_SCREEN_PATH, bike);
-            bikeScreenHandler.setHomeScreenHandler(this.homeScreenHandler);
-            bikeScreenHandler.setPreviousScreen(this.getPreviousScreen());
-            bikeScreenHandler.setScreenTitle("Bike View Screen");
-            bikeScreenHandler.show();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
 }

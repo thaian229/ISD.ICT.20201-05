@@ -128,9 +128,14 @@ public class InvoiceScreenController extends BaseController {
         if (card == null) {
             card = new CreditCard(cardNumber, cardOwner, Integer.parseInt(securityCode), expDate);
             CreditCardManager.getInstance().saveCreditCard(card);
-        } else {
+        }
+        else {
             card.setSecurityCode(Integer.parseInt(securityCode));
         }
         return card;
+    }
+
+    public CreditCard getCardByCardNum(String cardNumber) {
+        return CreditCardManager.getInstance().getCardByCardNumber(cardNumber);
     }
 }

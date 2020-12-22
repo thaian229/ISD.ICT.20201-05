@@ -191,6 +191,8 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
                 cardInfo.put("securityCode", securityCode.trim());
                 paymentScreenController.validateCreditCardForm(cardInfo);
                 tmpCard = getBController().getCardByCardNum(cardOwner, cardNumber, securityCode, expDate);
+            } else {
+                tmpCard = getBController().getCardByCardNum(this.invoice.getCard().getCardNum());
             }
             PaymentTransaction returnTransaction = this.getBController().refund(this.getBController().calculateReturned(this.invoice), contents,
                     tmpCard.getCardNum(), tmpCard.getCardOwner(),

@@ -118,7 +118,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         dock.getBikeList().clear();

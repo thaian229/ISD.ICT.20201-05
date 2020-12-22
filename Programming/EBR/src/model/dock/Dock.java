@@ -70,8 +70,11 @@ public class Dock {
     }
 
     public int getNumberOfAvailableBike() {
-        this.numberOfAvailableBike = this.bikeList.size();
         return this.numberOfAvailableBike;
+    }
+
+    public void setNumberOfAvailableBike(int numberOfAvailableBike) {
+        this.numberOfAvailableBike = numberOfAvailableBike;
     }
 
     public String getImageURL() {

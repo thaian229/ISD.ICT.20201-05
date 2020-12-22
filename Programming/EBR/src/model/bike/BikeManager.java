@@ -148,12 +148,16 @@ public class BikeManager {
     }
 
     private StandardBike createStandardBike(ResultSet resultSet) throws SQLException {
-        StandardBike bike = new StandardBike(resultSet.getString("id"),
+        StandardBike bike = new StandardBike(
+                resultSet.getString("id"),
                 resultSet.getInt("barcode"),
                 resultSet.getInt("value"),
-                resultSet.getInt("rental_fees"));
+                resultSet.getInt("rental_fees")
+        );
         bike.setPairOfPedals(resultSet.getInt("pedal_num"));
         bike.setSaddle(resultSet.getInt("saddle_num"));
+        bike.setDockId(resultSet.getString("dock_id"));
+
         bike.setRearSeat(resultSet.getInt("rear_seat_num"));
         bike.setImageURL(resultSet.getString("image_url"));
 
@@ -168,6 +172,8 @@ public class BikeManager {
         bike.setPairOfPedals(resultSet.getInt("pedal_num"));
         bike.setSaddle(resultSet.getInt("saddle_num"));
         bike.setRearSeat(resultSet.getInt("rear_seat_num"));
+        bike.setDockId(resultSet.getString("dock_id"));
+
         bike.setImageURL(resultSet.getString("image_url"));
 
         return bike;
@@ -183,6 +189,7 @@ public class BikeManager {
         bike.setRearSeat(resultSet.getInt("rear_seat_num"));
         bike.setImageURL(resultSet.getString("image_url"));
         bike.setBattery(resultSet.getFloat("battery"));
+        bike.setDockId(resultSet.getString("dock_id"));
         bike.setTimeLeft(resultSet.getInt("time_remain"));
         return bike;
     }
@@ -196,6 +203,7 @@ public class BikeManager {
         bike.setSaddle(resultSet.getInt("saddle_num"));
         bike.setRearSeat(resultSet.getInt("rear_seat_num"));
         bike.setImageURL(resultSet.getString("image_url"));
+        bike.setDockId(resultSet.getString("dock_id"));
         bike.setBattery(resultSet.getFloat("battery"));
         bike.setTimeLeft(resultSet.getInt("time_remain"));
         return bike;

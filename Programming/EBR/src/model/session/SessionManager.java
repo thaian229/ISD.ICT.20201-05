@@ -119,7 +119,7 @@ public class SessionManager {
     }
 
     public ArrayList<Session> getSessions() {
-        this.refreshSessionsList();
+//        this.refreshSessionsList();
         return sessions;
     }
 

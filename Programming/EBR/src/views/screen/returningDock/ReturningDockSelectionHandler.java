@@ -117,13 +117,13 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     private HBox createHBox() {
         HBox hbox = new HBox();
-        Insets insets = new Insets(20, 20,20,20);
+        Insets insets = new Insets(20, 20, 20, 20);
         hbox.setAlignment(Pos.BASELINE_CENTER);
         hbox.setPadding(insets);
         hbox.setSpacing(30);

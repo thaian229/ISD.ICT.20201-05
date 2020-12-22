@@ -185,3 +185,12 @@ ALTER TABLE ONLY public.session
 
 ALTER TABLE ONLY public.session
     ADD CONSTRAINT session_fk4 FOREIGN KEY (return_transactionid) REFERENCES public.payment_transaction(id);
+
+CREATE FUNCTION trigger_function()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+AS $$
+BEGIN
+   -- trigger logic
+END;
+$$

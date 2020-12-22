@@ -122,7 +122,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -172,6 +172,12 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     void searchImgListener(MouseEvent e) {
         System.out.println("clicked");
         this.dockList = this.getBController().getDockListByKeyword(searchField.getText());
+        displayDockList();
+    }
+
+    @Override
+    public void show() {
+        super.show();
         displayDockList();
     }
 }
