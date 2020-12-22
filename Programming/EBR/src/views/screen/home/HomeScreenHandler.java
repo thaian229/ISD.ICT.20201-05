@@ -1,30 +1,29 @@
 package views.screen.home;
 
 import controller.DockScreenController;
-import controller.home.HomeScreenController;
+import controller.HomeScreenController;
+import controller.SessionScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.bike.Bike;
 import model.dock.Dock;
-import utils.Configs;
+import model.session.Session;
 import utils.Path;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.bike.BikeScreenHandler;
 import views.screen.dock.DockScreenHandler;
-import views.screen.popup.PopupScreen;
+import views.screen.session.SessionScreenHandler;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -58,6 +57,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     private ImageView searchImg;
 
     @FXML
+    private TextField searchField;
+
+    @FXML
     private Button barcodeButton;
 
     @FXML
@@ -65,11 +67,17 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     private ArrayList<Dock> dockList;
 
-    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
+    public HomeScreenHandler(Stage stage, String screenPath, HomeScreenController homeScreenController) throws IOException {
         super(stage, screenPath);
         super.screenTitle = "Home Screen";
+        super.setBController(homeScreenController);
+        dockList = this.getBController().getDockList();
     }
 
+    @Override
+    public HomeScreenController getBController() {
+        return (HomeScreenController) super.getBController();
+    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -83,7 +91,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
         barcodeButton.setOnMouseClicked(e -> {
             try {
-                PopupScreen.display();
+                BarcodePopup.display(this);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -107,16 +115,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         vboxDockList.getChildren().clear();
 
         try {
-            dockList = ((HomeScreenController) this.getBController()).getDockList();
-//            dockList = (new HomeScreenController()).getDockList();
-
             for (Dock dock : dockList) {
-
-                // display the attribute of vboxCart media
-                DockListItemHandler dockListItem = new DockListItemHandler(Configs.DOCK_LIST_ITEM_PATH, this);
-                dockListItem.setDock(dock);
-
-                // add spinner
+                DockListItemHandler dockListItem = new DockListItemHandler(Path.DOCK_LIST_ITEM_PATH, this, dock);
                 vboxDockList.getChildren().add(dockListItem.getContent());
             }
         } catch (IOException e) {
@@ -128,7 +128,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     public void onDockListItemClicked(Dock dock) {
         try {
-            DockScreenHandler dockScreenHandler = new DockScreenHandler(this.stage, Configs.DOCK_PATH, dock);
+            DockScreenHandler dockScreenHandler = new DockScreenHandler(this.stage, Path.DOCK_PATH, dock);
             dockScreenHandler.setBController(new DockScreenController());
             dockScreenHandler.displayBikeList();
             dockScreenHandler.setScreenTitle(dockScreenHandler.getScreenTitle());
@@ -141,4 +141,37 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     }
 
 
+    public void moveToSessionScreen(Session session) {
+        SessionScreenController sessionScreenController = new SessionScreenController();
+        try {
+            SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
+                    Path.SESSION_SCREEN_PATH, session, sessionScreenController);
+            sessionScreenHandler.setHomeScreenHandler(this);
+            sessionScreenHandler.setPreviousScreen(this);
+            sessionScreenHandler.setScreenTitle("Session Screen");
+            sessionScreenHandler.show();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    public void moveToBikeViewScreen(Bike bike) {
+        try {
+            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage,
+                    Path.BIKE_VIEW_SCREEN_PATH, bike);
+            bikeScreenHandler.setHomeScreenHandler(this);
+            bikeScreenHandler.setPreviousScreen(this);
+            bikeScreenHandler.setScreenTitle("Bike View Screen");
+            bikeScreenHandler.show();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    @FXML
+    void searchImgListener(MouseEvent e) {
+        System.out.println("clicked");
+        this.dockList = this.getBController().getDockListByKeyword(searchField.getText());
+        displayDockList();
+    }
 }

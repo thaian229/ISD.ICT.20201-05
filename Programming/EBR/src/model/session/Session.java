@@ -11,7 +11,7 @@ import java.util.HashMap;
 /**
  * class for the model Session
  *
- * @author mHoang
+ * @author mHoang, Nguyen Thai An
  * <p>
  * created_at: 4/12/2020
  * <p>
@@ -25,11 +25,15 @@ import java.util.HashMap;
  */
 
 public class Session {
+
     private String id;
     private Bike bike;
     private CreditCard card;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private LocalDateTime lastResumeTime;
+    private int lastRentTimeBeforeLock = 0;
+    private boolean active;
     private PaymentTransaction rentTransaction;
     private PaymentTransaction returnTransaction;
 
@@ -38,13 +42,23 @@ public class Session {
         this.card = card;
         this.rentTransaction = rentTransaction;
         this.startTime = LocalDateTime.now();
+        this.lastResumeTime = this.startTime;
+    }
+
+    public Session(String id, Bike bike, CreditCard card, LocalDateTime startTime, PaymentTransaction rentTransaction) {
+        this.id = id;
+        this.bike = bike;
+        this.card = card;
+        this.startTime = startTime;
+        this.rentTransaction = rentTransaction;
     }
 
     public Session(String id, Bike bike, CreditCard card, LocalDateTime startTime, LocalDateTime endTime, PaymentTransaction rentTransaction, PaymentTransaction returnTransaction) {
+        this.id = id;
         this.bike = bike;
         this.card = card;
-        this.rentTransaction = rentTransaction;
         this.startTime = startTime;
+        this.rentTransaction = rentTransaction;
         this.endTime = endTime;
         this.returnTransaction = returnTransaction;
     }
@@ -101,6 +115,30 @@ public class Session {
         this.returnTransaction = returnTransaction;
     }
 
+    public LocalDateTime getLastResumeTime() {
+        return lastResumeTime;
+    }
+
+    public void setLastResumeTime(LocalDateTime lastResumeTime) {
+        this.lastResumeTime = lastResumeTime;
+    }
+
+    public int getLastRentTimeBeforeLock() {
+        return lastRentTimeBeforeLock;
+    }
+
+    public void setLastRentTimeBeforeLock(int lastRentTimeBeforeLock) {
+        this.lastRentTimeBeforeLock = lastRentTimeBeforeLock;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     /**
      * this method is to provide structured string map for display
      *
@@ -114,6 +152,16 @@ public class Session {
         info.put("startTime", startTime.format(Utils.DATE_FORMATER));
         info.put("endTime", endTime.format(Utils.DATE_FORMATER));
         return info;
+    }
+
+    public long getSessionLength() {
+        if (this.active && this.getEndTime() == null) {
+            return this.lastRentTimeBeforeLock + Utils.minusLocalDateTime(lastResumeTime, LocalDateTime.now());
+        } else if (!this.active && this.getEndTime() == null) {
+            return this.lastRentTimeBeforeLock;
+        } else {
+            return this.lastRentTimeBeforeLock + Utils.minusLocalDateTime(lastResumeTime, endTime);
+        }
     }
 
     /**

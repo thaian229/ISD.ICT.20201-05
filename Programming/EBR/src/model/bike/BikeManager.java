@@ -202,7 +202,6 @@ public class BikeManager {
     }
 
 
-
     /**
      * Get bike by bike's id
      *
@@ -227,5 +226,37 @@ public class BikeManager {
             if (bike.getBarcode() == barcode) return bike;
         }
         return null;
+    }
+
+    public void updateDockOfBike(Bike bike, String dockId) {
+        String SQL = "UPDATE bike "
+                + "SET dock_id = ?::uuid "
+                + "WHERE id = ?::uuid";
+        if (dockId == null || dockId.equals("")) {
+            SQL = "UPDATE bike "
+                    + "SET dock_id = NULL "
+                    + "WHERE id = ?::uuid";
+        }
+
+        // Update
+        try (Connection conn = EBRDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQL,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            // Set up parameters
+            if (dockId == null || dockId.equals("")) {
+                pstmt.setString(1, bike.getId());
+            } else {
+                pstmt.setString(1, dockId);
+                pstmt.setString(2, bike.getId());
+            }
+            // Handle update
+            int affectedRows = pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        if (dockId != null && !dockId.equals("")) {
+            DockManager.getInstance().getDockById(dockId).getBikeList().add(bike);
+        }
     }
 }

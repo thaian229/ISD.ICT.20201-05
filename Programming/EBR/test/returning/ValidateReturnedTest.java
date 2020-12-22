@@ -1,6 +1,6 @@
 package returning;
 
-import controller.returning.InvoiceScreenController;
+import controller.InvoiceScreenController;
 import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +24,7 @@ public class ValidateReturnedTest {
             "-10, false",
             "100000, true"
     })
-    public void validateCardNumberTest(int returned, boolean expected) {
+    public void validateReturnedTest(int returned, boolean expected) {
         assertEquals(expected, invoiceScreenController.validateReturned(returned));
     }
 

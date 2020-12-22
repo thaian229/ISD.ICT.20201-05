@@ -9,10 +9,7 @@ import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import utils.Utils;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -33,8 +30,9 @@ import java.util.ArrayList;
  */
 
 public class SessionManager {
+
     private static SessionManager instance; //singleton
-    private ArrayList<Session> sessions = new ArrayList<>();
+    private final ArrayList<Session> sessions = new ArrayList<>();
 
     /**
      * @author mHoang
@@ -68,16 +66,17 @@ public class SessionManager {
      */
     public Session createSession(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
         Session newSession = new Session(bike, card, rentTransaction);
-        String sessionId = this.insertNewSessions(newSession);
-        newSession.setId(sessionId);
-        refreshSessionsList();
+        newSession.setActive(true);
+        this.insertNewSessions(newSession);
+//        refreshSessionsList();
+        sessions.add(newSession);
         return newSession;
     }
 
     /**
      * This method is to end the session and update in DB
      *
-     * @param session session to be ended
+     * @param session           session to be ended
      * @param returnTransaction transaction to refund deposit after deducting rental fee
      * @return affectedRows number of affected rows in DB
      * @author mHoang
@@ -92,15 +91,12 @@ public class SessionManager {
 
         int affectedRows = 0;
 
-        try (
-                PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
-        ) {
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
             pstmt.setString(1, session.getEndTime().format(Utils.DATE_FORMATER));
-            pstmt.setString(2, returnTransaction.getId());
+            pstmt.setString(2, session.getReturnTransaction().getId());
             pstmt.setString(3, session.getId());
 
             affectedRows = pstmt.executeUpdate();
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -123,6 +119,7 @@ public class SessionManager {
     }
 
     public ArrayList<Session> getSessions() {
+        this.refreshSessionsList();
         return sessions;
     }
 
@@ -139,9 +136,9 @@ public class SessionManager {
         String id = "";
 
         // Insert new row
-        try (
-                PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
-        ) {
+        try (Connection conn = EBRDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQL,
+                     Statement.RETURN_GENERATED_KEYS)) {
             // Set up parameters
             pstmt.setString(1, newSession.getBike().getId());
             pstmt.setString(2, newSession.getCard().getId());
@@ -176,10 +173,8 @@ public class SessionManager {
         String SQL = "SELECT * FROM session";
 
         // Get All Rows
-        try (
-                Statement stmt = EBRDB.getConnection().createStatement();
-                ResultSet rs = stmt.executeQuery(SQL)
-        ) {
+        try (Statement stmt = EBRDB.getConnection().createStatement();
+             ResultSet rs = stmt.executeQuery(SQL)) {
             while (rs.next()) {
                 String id = rs.getString("id");
                 String bike_id = rs.getString("bike_id");
@@ -188,20 +183,95 @@ public class SessionManager {
                 String return_transactionid = rs.getString("return_transactionid");
                 String start_time = rs.getString("start_time");
                 String end_time = rs.getString("end_time");
-                Session session = new Session(
-                        id,
-                        BikeManager.getInstance().getBikeById(bike_id),
-                        CreditCardManager.getInstance().getCardById(card_id),
-                        LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
-                        LocalDateTime.parse(end_time, Utils.DATE_FORMATER),
-                        PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid),
-                        PaymentTransactionManager.getInstance().getTransactionById(return_transactionid)
-                );
+                int last_rent_time_before_lock = rs.getInt("last_rent_time_before_lock");
+                String last_resume_time = rs.getString("last_resume_time");
+                boolean active = rs.getBoolean("active");
+                Session session;
+
+                if (return_transactionid == null || end_time == null) {
+                    session = new Session(
+                            id,
+                            BikeManager.getInstance().getBikeById(bike_id),
+                            CreditCardManager.getInstance().getCardById(card_id),
+                            LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
+                            PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid)
+                    );
+                } else {
+                    session = new Session(
+                            id,
+                            BikeManager.getInstance().getBikeById(bike_id),
+                            CreditCardManager.getInstance().getCardById(card_id),
+                            LocalDateTime.parse(start_time, Utils.DATE_FORMATER),
+                            LocalDateTime.parse(end_time, Utils.DATE_FORMATER),
+                            PaymentTransactionManager.getInstance().getTransactionById(rent_transactionid),
+                            PaymentTransactionManager.getInstance().getTransactionById(return_transactionid)
+                    );
+                }
+                session.setActive(active);
+                if (last_resume_time == null)
+                    session.setLastResumeTime(LocalDateTime.parse(start_time, Utils.DATE_FORMATER));
+                else
+                    session.setLastResumeTime(LocalDateTime.parse(last_resume_time, Utils.DATE_FORMATER));
+                session.setLastRentTimeBeforeLock(last_rent_time_before_lock);
                 sessions.add(session);
             }
         } catch (NullPointerException | SQLException ex) {
             ex.printStackTrace();
         }
 
+    }
+
+
+    private int pauseSession(Session session) {
+        int realRentingTime = (int) (session.getLastRentTimeBeforeLock() + Utils.minusLocalDateTime(session.getLastResumeTime(), LocalDateTime.now()));
+        session.setLastRentTimeBeforeLock(realRentingTime);
+        session.setActive(false);
+
+        String SQL = "UPDATE session "
+                + "SET (last_rent_time_before_lock, active) = (?, ?) "
+                + "WHERE id = ?::uuid ";
+
+        int affectedRows = 0;
+
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+            pstmt.setInt(1, realRentingTime);
+            pstmt.setBoolean(2, false);
+            pstmt.setString(3, session.getId());
+
+            affectedRows = pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return affectedRows;
+    }
+
+    private int resumeSession(Session session) {
+        session.setLastResumeTime(LocalDateTime.now());
+        session.setActive(true);
+
+        String SQL = "UPDATE session "
+                + "SET (active, last_resume_time) = (?, ?) "
+                + "WHERE id = ?::uuid ";
+
+        int affectedRows = 0;
+
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+            pstmt.setBoolean(1, true);
+            pstmt.setString(2, session.getLastResumeTime().format(Utils.DATE_FORMATER));
+            pstmt.setString(3, session.getId());
+
+            affectedRows = pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return affectedRows;
+    }
+
+    public void switchSessionState(Session session) {
+        if (session.isActive()) {
+            pauseSession(session);
+        } else {
+            resumeSession(session);
+        }
     }
 }

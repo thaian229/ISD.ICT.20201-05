@@ -18,6 +18,8 @@ import model.payment.creditCard.CreditCard;
 public class PaymentTransaction {
 
 	private String errorCode;
+
+
 	private CreditCard card;
 	private String transactionId;
 	private String transactionContent;
@@ -82,6 +84,15 @@ public class PaymentTransaction {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public CreditCard getCard() {
+		return card;
+	}
+
+	public void setCard(CreditCard card) {
+		this.card = card;
+	}
+
 
 	public String getMethod() {
 		return method;

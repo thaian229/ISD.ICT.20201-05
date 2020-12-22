@@ -1,18 +1,15 @@
 package views.screen.payment;
 
-import controller.renting.PaymentScreenController;
+import controller.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -76,7 +73,6 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         paymentConfirmButton.setOnMouseClicked(e -> {
             try {
                 handleCardInfoSubmit();
-                goToConfirmationScreen();
             } catch (Exception exp) {
                 exp.printStackTrace();
             }
@@ -85,23 +81,15 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
 
     private void setImages() {
         try {
-            File file = new File(Path.LOGO_ICON);
-            Image image = new Image(file.toURI().toString());
-            logo.setImage(image);
-
-            file = new File(Path.BACK_NAV_ICON);
-            image = new Image(file.toURI().toString());
-            back.setImage(image);
-
-            file = new File(Path.CANCEL_BUTTON_ICON);
-            image = new Image(file.toURI().toString());
-            backButtonImage.setImage(image);
+            setImage(logo, Path.LOGO_ICON);
+            setImage(back, Path.BACK_NAV_ICON);
+            setImage(backButtonImage, Path.CANCEL_BUTTON_ICON);
         } catch (Exception exp) {
             exp.printStackTrace();
         }
     }
 
-    private void handleCardInfoSubmit() {
+    private void handleCardInfoSubmit() throws IOException {
         // Read in all fields
         HashMap<String, String> cardInfo = new HashMap<>();
         cardInfo.put("cardOwner", cardOwner.getText().trim());
@@ -114,14 +102,19 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
 
         // Validate card info then process to confirmation screen
         paymentScreenController.setCardInfo(cardInfo);
-        paymentScreenController.validateCreditCardForm(cardInfo);
+        try {
+            paymentScreenController.validateCreditCardForm(cardInfo);
+            paymentScreenController.validateCardUnused(cardNumber.getText().trim());
+            this.goToConfirmationScreen();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void goToConfirmationScreen() throws IOException {
         // Transition to PaymentConfirmationScreen
         PaymentScreenController paymentScreenController = (PaymentScreenController) getBController();
-        PaymentConfirmationScreenHandler paymentConfirmationScreenHandler = new PaymentConfirmationScreenHandler(this.stage,
-                Configs.PAYMENT_CONFIRMATION_SCREEN_PATH, paymentScreenController);
+        PaymentConfirmationScreenHandler paymentConfirmationScreenHandler = new PaymentConfirmationScreenHandler(this.stage, Path.PAYMENT_CONFIRMATION_SCREEN_PATH, paymentScreenController);
         paymentConfirmationScreenHandler.setPreviousScreen(this);
         paymentConfirmationScreenHandler.setHomeScreenHandler(homeScreenHandler);
         paymentConfirmationScreenHandler.setScreenTitle("Renting Confirmation Screen");

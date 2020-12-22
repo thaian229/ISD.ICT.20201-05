@@ -1,6 +1,6 @@
 package views.screen.bike;
 
-import controller.renting.PaymentScreenController;
+import controller.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,9 +12,9 @@ import model.bike.Bike;
 import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
 import utils.Configs;
+import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
-import views.screen.popup.PopupScreen;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,26 +67,20 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.setImage();
+        this.setImages();
 
         logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e -> getPreviousScreen().show());
-
-        barcodeButton.setOnMouseClicked(e -> {
-            try {
-                PopupScreen.display();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+        back.setOnMouseClicked(e -> {
+            BaseScreenHandler previousScreen = this.getPreviousScreen();
+            previousScreen.setScreenTitle(previousScreen.getScreenTitle());
+            previousScreen.show();
         });
-
-
 
         rentNowButton.setOnMouseClicked(e -> {
             System.out.println("Button clicked");
             try {
                 PaymentScreenController paymentScreenController = new PaymentScreenController(bike);
-                PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH);
+                PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Path.PAYMENT_SCREEN_PATH);
                 paymentScreenHandler.setBController(paymentScreenController);
                 paymentScreenHandler.setHomeScreenHandler(this.homeScreenHandler);
                 paymentScreenHandler.setPreviousScreen(this);
@@ -102,18 +96,16 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     private void displayBike() {
         try {
             bikeBarcode.setText(Integer.toString(bike.getBarcode()));
-            bikeDeposit.setText(Integer.toString(bike.getDeposit()) + " VND");
-            bikeCharge.setText(Integer.toString(bike.getCharge()) + " VND");
+            bikeDeposit.setText(bike.getDeposit() + " " + Configs.CURRENCY);
+            bikeCharge.setText(bike.getCharge() + " " + Configs.CURRENCY);
             bikeDockName.setText(bike.getDock().getName());
             if (bike instanceof StandardElectricalBike) {
                 bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes left");
-            }
-            else if (bike instanceof TwinElectricalBike){
+                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " seconds");
+            } else if (bike instanceof TwinElectricalBike) {
                 bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " minutes left");
-            }
-            else {
+                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " seconds");
+            } else {
                 bikeBattery.setVisible(false);
                 bikeUsage.setVisible(false);
             }
@@ -125,13 +117,8 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         }
     }
 
-    private void setImage() {
-        File file1 = new File(Configs.IMAGE_PATH + "/" + "LOGO.png");
-        Image img1 = new Image(file1.toURI().toString());
-        logo.setImage(img1);
-
-        File file2 = new File(Configs.IMAGE_PATH + "/" + "backButton.png");
-        Image img2 = new Image(file2.toURI().toString());
-        back.setImage(img2);
+    private void setImages() {
+        setImage(logo, Path.LOGO_ICON);
+        setImage(back, Path.BACK_NAV_ICON);
     }
 }

@@ -50,6 +50,7 @@ public class BaseScreenHandler extends views.screen.FXMLScreenHandler {
 		}
 		this.stage.setScene(this.scene);
 		this.stage.show();
+		this.setScreenTitle(this.screenTitle);
 	}
 
 	public void setScreenTitle(String string) {

@@ -1,12 +1,6 @@
 package returning;
 
-import controller.returning.InvoiceScreenController;
-import model.bike.*;
-import model.invoice.Invoice;
-import model.session.SessionManager;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import controller.InvoiceScreenController;
 
 import java.time.LocalDateTime;
 

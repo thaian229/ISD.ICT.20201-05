@@ -2,9 +2,16 @@ package model.invoice;
 
 
 
+import model.bike.BikeManager;
 import model.db.EBRDB;
+import model.payment.creditCard.CreditCardManager;
+import model.payment.transaction.PaymentTransaction;
+import model.payment.transaction.PaymentTransactionManager;
+import model.session.Session;
+import utils.Utils;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -43,7 +50,7 @@ public class InvoiceManager {
      * @return instance InvoiceManager object
      * @author khang
      */
-    public InvoiceManager getInstance(){
+    public static InvoiceManager getInstance(){
         if(instance == null){
             instance = new InvoiceManager();
         }
@@ -52,16 +59,36 @@ public class InvoiceManager {
     /**
      * This method is for create new Invoice object and update it details to the DB
      *
-     * @param id            invoice_id
      * @param session_id    session_id
-     * @param total_charge totalFees
      * @return newInvoice new Invoice object
      * @author khang
      */
-    public Invoice createInvoice(String id, String session_id, int total_charge) {
-        Invoice newInvoice = new Invoice(id,session_id,total_charge);
+    public Invoice createInvoice(String session_id) {
+        Invoice newInvoice = new Invoice(session_id);
+       // newInvoice.setTotalFees(total_charge);
         this.updateInvoiceHistory(newInvoice);
+        this.refreshInvoiceHistory();
         return newInvoice;
+    }
+
+    public int finalInvoice(Invoice invoice, int total_charge) {
+        invoice.setTotalFees(total_charge);
+
+        String SQL = "UPDATE invoice "
+                + "SET (total_charge) = row(?) "
+                + "WHERE id = ?::uuid ";
+
+        int affectedRows = 0;
+
+        try (PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+            pstmt.setInt(1, invoice.getTotalFees());
+            pstmt.setString(2, invoice.getId());
+
+            affectedRows = pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return affectedRows;
     }
     /**
      * for inserting new invoice to DB
@@ -71,18 +98,18 @@ public class InvoiceManager {
      * @author khang
      */
     private String updateInvoiceHistory(Invoice newInvoice) {
-        String SQL = "INSERT INTO session(id, session_id, total_charge) "
-                + "VALUES(?,?,?)";
+        String SQL = "INSERT INTO invoice(session_id) "
+                + "VALUES(?::uuid)";
         String id = "";
 
         // Insert new row
-        try (
-                PreparedStatement pstmt = EBRDB.getConnection().prepareStatement(SQL);
-        ) {
+        try (Connection conn = EBRDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQL,
+                     Statement.RETURN_GENERATED_KEYS)) {
             // Set up parameters
-            pstmt.setString(1, newInvoice.getId());
-            pstmt.setString(2, newInvoice.getSessionId());
-            pstmt.setInt(3, newInvoice.getTotalFees());
+            pstmt.setString(1, newInvoice.getSessionId());
+
+
             // Handle update
             int affectedRows = pstmt.executeUpdate();
             // check the affected rows
@@ -90,7 +117,7 @@ public class InvoiceManager {
                 // get the ID back
                 try (ResultSet rs = pstmt.getGeneratedKeys()) {
                     if (rs.next()) {
-                        id = rs.getString(1);
+                        id = rs.getString("id");
                     }
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
@@ -99,6 +126,7 @@ public class InvoiceManager {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        newInvoice.setId(id);
         return id;
     }
 
@@ -107,24 +135,37 @@ public class InvoiceManager {
      * get invoice history from DB and store them to the list
      */
     public void refreshInvoiceHistory() {
-        this.invoiceHistory.clear();
-
-        // query for invoice history
+        invoiceHistory.clear();
         String SQL = "SELECT * FROM invoice";
 
-        try (Connection conn = EBRDB.getConnection();
-             Statement stmt = conn.createStatement();
+        // Get All Rows
+        try (Statement stmt = EBRDB.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(SQL)) {
             while (rs.next()) {
-                Invoice newInvoice = new Invoice(rs.getString("id"),
-                        rs.getString("session_id"),
-                        rs.getInt("total_charge"));
-                invoiceHistory.add(newInvoice);
+                String id = rs.getString("id");
+                String session_id = rs.getString("session_id");
+                int total_charge = rs.getInt("total_charge");
+
+                Invoice invoice ;
+                invoice = new Invoice(id,session_id,total_charge);
+
+                if (total_charge==0) {
+                    invoice = new Invoice(
+                            id,
+                           session_id
+                    );
+                } else {
+                    invoice = new Invoice(
+                            id,
+                            session_id,
+                            total_charge
+                    );
+                }
+                invoiceHistory.add(invoice);
             }
-        } catch (SQLException ex) {
+        } catch (NullPointerException | SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
 
@@ -154,6 +195,12 @@ public class InvoiceManager {
     public Invoice getInvoiceById(String invoiceId){
         for(Invoice invoice: invoiceHistory){
             if(invoice.getId() == invoiceId) return invoice;
+        }
+        return null;
+    }
+    public Invoice getInvoiceBySessionId(String sessionId){
+        for(Invoice invoice: invoiceHistory){
+            if(invoice.getSessionId() == sessionId) return invoice;
         }
         return null;
     }

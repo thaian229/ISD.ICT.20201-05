@@ -1,4 +1,4 @@
-package controller.returning;
+package controller;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
@@ -6,6 +6,7 @@ import controller.BaseController;
 import model.bike.Bike;
 import model.invoice.Invoice;
 import model.payment.creditCard.CreditCard;
+import model.payment.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import subsystem.InterbankSubsystem;
@@ -36,7 +37,7 @@ public class InvoiceScreenController extends BaseController {
     public void confirmInvoice(Invoice invoice) throws SQLException {
         //user clicked to confirm invoice
     }
-   // private int isValidReturned = 0;
+    // private int isValidReturned = 0;
 
 
     private HashMap<String, String> cardInfo = new HashMap<>();
@@ -50,19 +51,24 @@ public class InvoiceScreenController extends BaseController {
      * @author khang
      */
 
-    public int calculateTotalFees(Invoice invoice){
-        try{
-            LocalDateTime startTime = invoice.getStartTime();
-            LocalDateTime endTime = invoice.getEndTime();
-            int hoursUsed = (int) Math.ceil(Utils.minusLocalDateTime(startTime, endTime) / 60.0);
-            int totalFees = hoursUsed * invoice.getBike().getCharge();
+    public int calculateTotalFees(Invoice invoice) {
+        try {
+//            Bike bike = session.getBike();
+            Long sLength = invoice.getSession().getSessionLength();
+            int totalFees;
+            if (sLength < 10) {
+                totalFees = 0;
+            } else if (sLength >= 10 && sLength < 30) {
+                totalFees = 10000;
+            } else {
+                totalFees = (int) (10000.0 + 3000 * Math.ceil((sLength - 30.0) / 15.0));
+            }
             invoice.setTotalFees(totalFees);
             return totalFees;
         } catch (NullPointerException e) {
             return 0;
         }
     }
-
 
 
     /**
@@ -75,30 +81,23 @@ public class InvoiceScreenController extends BaseController {
 
 
     public int calculateReturned(Invoice invoice) {
-    try {
-        int deposit = invoice.getDepositForTest();
-        int totalFees = invoice.getTotalFees();
-        int returned = deposit - totalFees;
-       // invoice.setReturned(returned);
-        return returned;
-    }
-    catch (NullPointerException e){
-        return 0;
-    }
-    }
-
-    public long calculateSessionLength(Invoice invoice) {
         try {
-            LocalDateTime startTime = invoice.getStartTime();
-            LocalDateTime endTime = invoice.getEndTime();
-            return Utils.minusLocalDateTime(startTime, endTime);
+            int deposit = invoice.getSession().getBike().getDeposit();
+            int totalFees = invoice.getTotalFees();
+            int returned = deposit - totalFees;
+            // invoice.setReturned(returned);
+            return returned;
         } catch (NullPointerException e) {
             return 0;
         }
     }
 
+    public long calculateSessionLength(Invoice invoice) {
+        return invoice.getSession().getSessionLength();
+    }
+
     public PaymentTransaction refund(int amount, String contents, String cardNumber, String cardHolderName,
-                                         String expirationDate, String securityCode) {
+                                     String expirationDate, String securityCode) {
         PaymentTransaction returnTransaction = null;
         Map<String, String> result = new HashMap<String, String>();
         result.put("RESULT", "PAYMENT FAILED!");
@@ -119,10 +118,19 @@ public class InvoiceScreenController extends BaseController {
     }
 
 
-
-    public boolean validateReturned(int returned){
-        if(returned < 0 ) return false;
+    public boolean validateReturned(int returned) {
+        if (returned < 0) return false;
         return true;
     }
 
+    public CreditCard getCardByCardNum(String cardOwner, String cardNumber, String securityCode, String expDate) {
+        CreditCard card = CreditCardManager.getInstance().getCardByCardNumber(cardNumber);
+        if (card == null) {
+            card = new CreditCard(cardNumber, cardOwner, Integer.parseInt(securityCode), expDate);
+            CreditCardManager.getInstance().saveCreditCard(card);
+        } else {
+            card.setSecurityCode(Integer.parseInt(securityCode));
+        }
+        return card;
+    }
 }

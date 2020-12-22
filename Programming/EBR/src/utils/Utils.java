@@ -74,24 +74,41 @@ public class Utils {
         return digest;
     }
 
+    public static String sha256(String message) {
+        String digest = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
+            // converting byte array to Hexadecimal String
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            digest = sb.toString();
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+            Utils.getLogger(Utils.class.getName());
+            digest = "";
+        }
+        return digest;
+    }
+
 
     public static DateTimeFormatter DATE_FORMATER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static DateTimeFormatter DATE_FORMATER_FOR_DISPLAY = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
-     * calculate duration in minutes
+     * calculate duration in seconds
      *
      * @author mHoang
      * @param before start time
      * @param after end time
      *
-     * @return minutes Long
+     * @return seconds Long
      */
     public static long minusLocalDateTime(LocalDateTime before, LocalDateTime after) {
         Duration duration = Duration.between(before, after);
-//        System.out.println(duration.toMinutes());
-		return duration.toMinutes();
+		return duration.toSeconds();
     }
 
 }

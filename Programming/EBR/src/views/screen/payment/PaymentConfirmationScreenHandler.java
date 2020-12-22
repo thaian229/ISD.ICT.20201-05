@@ -1,11 +1,11 @@
 package views.screen.payment;
 
-import controller.renting.PaymentScreenController;
-import controller.renting.SessionScreenController;
+import controller.PaymentScreenController;
+import controller.SessionScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,7 +20,7 @@ import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.session.SessionScreenHandler;
 
-import java.io.File;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -75,6 +75,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
     @FXML
     private ImageView paymentConfirmationCancelButtonImage;
 
+    @FXML
+    private ProgressIndicator submitLoadingIndicator;
+
     public PaymentConfirmationScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
     }
@@ -87,7 +90,16 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
         setBikeImage();
         setTextLabels();
         // set up extra event
-        paymentConfirmationConfirmButton.setOnMouseClicked(e -> {
+        paymentConfirmationConfirmButton.setOnMousePressed(e -> {
+            try {
+                paymentConfirmationConfirmButton.setText("Loading");
+                paymentConfirmationConfirmButton.setDisable(true);
+                submitLoadingIndicator.setVisible(true);
+            } catch (Exception exp) {
+                exp.printStackTrace();
+            }
+        });
+        paymentConfirmationConfirmButton.setOnMouseReleased(e -> {
             try {
                 handleRentingConfirmation();
             } catch (Exception exp) {
@@ -106,22 +118,10 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
 
     private void setBikeImage() {
         try {
-            File file = new File(this.controller.getBike().getImageURL());
-            Image image = new Image(file.toURI().toString());
-            paymentConfirmationBikeImage.setImage(image);
-
-            file = new File(Path.LOGO_ICON);
-            image = new Image(file.toURI().toString());
-            logo.setImage(image);
-
-            file = new File(Path.BACK_NAV_ICON);
-            image = new Image(file.toURI().toString());
-            back.setImage(image);
-
-            file = new File(Path.CANCEL_BUTTON_ICON);
-            image = new Image(file.toURI().toString());
-            paymentConfirmationCancelButtonImage.setImage(image);
-
+            setImage(paymentConfirmationBikeImage, this.controller.getBike().getImageURL());
+            setImage(logo, Path.LOGO_ICON);
+            setImage(back, Path.BACK_NAV_ICON);
+            setImage(paymentConfirmationCancelButtonImage, Path.CANCEL_BUTTON_ICON);
         } catch (Exception exp) {
             exp.printStackTrace();
         }
@@ -131,9 +131,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
         try {
             barcode.setText(Integer.toString(this.controller.getBike().getBarcode()));
             cardNumber.setText(this.controller.getCardInfo().get("cardNumber"));
-            deposit.setText(Integer.toString(this.controller.getBike().getDeposit()));
-            rentalFee.setText(Integer.toString(this.controller.getBike().getCharge()));
-            hold.setText(Integer.toString(this.controller.getBike().getDeposit()));
+            deposit.setText(this.controller.getBike().getDeposit() + " " + Configs.CURRENCY);
+            rentalFee.setText(this.controller.getBike().getCharge() + " " + Configs.CURRENCY);
+            hold.setText(Integer.toString(this.controller.getBike().getDeposit()) + " " + Configs.CURRENCY);
         } catch (NullPointerException exp) {
             exp.printStackTrace();
         }
@@ -145,44 +145,57 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandler implemen
                 this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                 this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
 
-//        if (respond.get("RESULT").equalsIgnoreCase("PAYMENT FAILED!")) {
-//            getPreviousScreen().show();
-//        } else {
-//            homeScreenHandler.show();
-//        }
-
-        // Fake here
-        PaymentTransaction fakeTransaction = new PaymentTransaction("Pay Deposit",
-                this.controller.getBike().getDeposit(), "Credit Card");
-
-        this.transitionToSessionScreen(fakeTransaction);
+        if (rentTransaction == null) {
+            getPreviousScreen().show();
+        } else {
+            // Take bike out of dock
+            this.controller.getBike().takeBikeOutOfDock();
+            // Save then change screen
+            rentTransaction.setMethod("Credit Card");
+            rentTransaction.setType("rent");
+            this.transitionToSessionScreen(rentTransaction);
+        }
     }
 
     private void transitionToSessionScreen(PaymentTransaction rentTransaction) throws IOException {
         try {
-            // Transition to session screen
+            // Create and save card
             CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                     Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));
 
-            // Save card
-            CreditCardManager.getInstance().saveCreditCard(card);
+            String cardId = CreditCardManager.getInstance().saveCreditCard(card);
+            card.setId(cardId);
+
+            rentTransaction.setCard(card);
 
             // Save Renting Transaction
-            String id = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
-            rentTransaction.setId(id);
+            String transactionId = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
+            rentTransaction.setId(transactionId);
 
+            // Create new renting session
             Session session = SessionManager.getInstance().createSession(this.controller.getBike(), card, rentTransaction);
             SessionScreenController sessionScreenController = new SessionScreenController();
             SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
-                    Configs.SESSION_SCREEN_PATH, session, sessionScreenController);
-
-
+                    Path.SESSION_SCREEN_PATH, session, sessionScreenController);
             sessionScreenHandler.setHomeScreenHandler(homeScreenHandler);
             sessionScreenHandler.setPreviousScreen(homeScreenHandler);
             sessionScreenHandler.setScreenTitle("Session Screen");
             sessionScreenHandler.show();
 
         } catch (IOException exp) {
+            exp.printStackTrace();
+        }
+    }
+
+    @FXML
+    void setPaymentConfirmationConfirmButtonClickListener(MouseEvent e) {
+        try {
+            System.out.println("here");
+            paymentConfirmationConfirmButton.setText("Loading");
+            paymentConfirmationConfirmButton.setDisable(true);
+            submitLoadingIndicator.setVisible(true);
+            handleRentingConfirmation();
+        } catch (Exception exp) {
             exp.printStackTrace();
         }
     }

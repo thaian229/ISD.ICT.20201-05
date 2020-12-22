@@ -24,6 +24,7 @@ public class PaymentTransactionManager {
 
     /**
      * singleton instance access
+     *
      * @return PaymentTransactionManager instance
      */
     public static PaymentTransactionManager getInstance() {
@@ -35,13 +36,14 @@ public class PaymentTransactionManager {
 
     /**
      * query Payment Transaction info from database via id
+     *
      * @param transactionId transaction's uuid
      * @return instance of wanted transaction, null if didn't found
      */
     public PaymentTransaction getTransactionById(String transactionId) {
         // query the card
         String SQL = "SELECT * FROM payment_transaction "
-                + "WHERE id = ?";
+                + "WHERE id = ?::uuid";
 
         try (Connection conn = EBRDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQL)) {
@@ -65,12 +67,13 @@ public class PaymentTransactionManager {
 
     /**
      * save transaction into database as new record
+     *
      * @param paymentTransaction transaction to be saved
      * @return uuid of newly added transaction's record
      */
     public String savePaymentTransaction(PaymentTransaction paymentTransaction) {
-        String SQL = "INSERT INTO payment_transaction(type, amount, method) " +
-                "VALUES (?, ?, ?)";
+        String SQL = "INSERT INTO payment_transaction(type, amount, method, card_id) " +
+                "VALUES (?, ?, ?, ?::uuid)";
 
         String id = "save failed";
 
@@ -82,6 +85,7 @@ public class PaymentTransactionManager {
             pstmt.setString(1, paymentTransaction.getType());
             pstmt.setInt(2, paymentTransaction.getAmount());
             pstmt.setString(3, paymentTransaction.getMethod());
+            pstmt.setString(4, paymentTransaction.getCard().getId());
             // Handle update
             int affectedRows = pstmt.executeUpdate();
             // check the affected rows
@@ -95,11 +99,9 @@ public class PaymentTransactionManager {
                     ex.printStackTrace();
                 }
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         paymentTransaction.setId(id);
         return id;
     }

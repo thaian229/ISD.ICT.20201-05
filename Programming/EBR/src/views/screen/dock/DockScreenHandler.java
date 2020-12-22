@@ -4,20 +4,16 @@ import controller.DockScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.*;
 import model.dock.Dock;
-import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandler;
 import views.screen.bike.BikeScreenHandler;
-import views.screen.popup.PopupScreen;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -89,23 +85,16 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         super(stage, screenPath);
         this.dock = dock;
         super.screenTitle = "Dock Screen";
-        this.setImage();
+        this.setImages();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        logo.setOnMouseClicked(e -> homeScreenHandler.show());
         back.setOnMouseClicked(e -> {
             BaseScreenHandler previousScreen = this.getPreviousScreen();
             previousScreen.setScreenTitle(previousScreen.getScreenTitle());
             previousScreen.show();
-        });
-
-        barcodeButton.setOnMouseClicked(e -> {
-            try {
-                PopupScreen.display();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
         });
     }
 
@@ -119,7 +108,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
             for (Bike bike : bikeList) {
 
                 // display the attribute of vboxCart media
-                BikeListItemHandler bikeListItem = new BikeListItemHandler(Configs.BIKE_LIST_ITEM_PATH, this);
+                BikeListItemHandler bikeListItem = new BikeListItemHandler(Path.BIKE_LIST_ITEM_PATH, this);
 
                 bikeListItem.setBike(bike);
 
@@ -137,12 +126,15 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         setDockDetail();
     }
 
-    private void setImage() {
+    private void setImages() {
         setImage(parkingIcon, Path.PARKING_ICON);
         setImage(standardBikeIcon, Path.STANDARD_BIKE_ICON);
         setImage(twinBikeIcon, Path.TWIN_BIKE_ICON);
         setImage(standardEBikeIcon, Path.STANDARD_BIKE_ICON);
         setImage(twinEBikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
+        setImage(logo, Path.LOGO_ICON);
+        setImage(back, Path.BACK_NAV_ICON);
+        setImage(dockImg, dock.getImageURL());
     }
 
     private void setDockDetail() {
@@ -176,7 +168,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
     public void BikeScreenTransition(Bike bike) {
         try {
             bike.setDock(dock);
-            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage, Configs.BIKE_PATH, bike);
+            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage, Path.BIKE_PATH, bike);
             bikeScreenHandler.setScreenTitle(bikeScreenHandler.getScreenTitle());
             bikeScreenHandler.setPreviousScreen(this);
             bikeScreenHandler.setHomeScreenHandler(homeScreenHandler);

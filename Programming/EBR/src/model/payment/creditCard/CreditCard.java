@@ -67,4 +67,8 @@ public class CreditCard {
     public String getExpDate() {
         return expDate;
     }
+
+    public void setSecurityCode(int securityCode) {
+        this.securityCode = securityCode;
+    }
 }

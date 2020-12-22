@@ -1,4 +1,4 @@
-package controller.home;
+package controller;
 
 import controller.BaseController;
 import model.dock.Dock;
@@ -32,5 +32,10 @@ public class HomeScreenController extends BaseController {
      */
     public ArrayList<Dock> getDockList() {
         return DockManager.getInstance().getDockList();
+    }
+
+
+    public ArrayList<Dock> getDockListByKeyword(String text) {
+        return DockManager.getInstance().searchDockByKeyword(text);
     }
 }

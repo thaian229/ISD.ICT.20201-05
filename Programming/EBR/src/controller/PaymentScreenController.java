@@ -1,13 +1,17 @@
-package controller.renting;
+package controller;
 
+import common.exception.cardException.*;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
-import controller.BaseController;
 import model.bike.Bike;
 import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
+import model.session.Session;
+import model.session.SessionManager;
 import subsystem.InterbankSubsystem;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,16 +63,16 @@ public class PaymentScreenController extends BaseController {
     /**
      * Pay Deposit to start Renting bike
      *
-     * @param amount deposit amount
-     * @param contents content of transaction
-     * @param cardNumber card number
+     * @param amount         deposit amount
+     * @param contents       content of transaction
+     * @param cardNumber     card number
      * @param cardHolderName card owner's name
      * @param expirationDate date of expiration of the credit card
-     * @param securityCode CVV code
+     * @param securityCode   CVV code
      * @return respond
      */
     public PaymentTransaction payDeposit(int amount, String contents, String cardNumber, String cardHolderName,
-                                          String expirationDate, String securityCode) {
+                                         String expirationDate, String securityCode) {
         PaymentTransaction rentTransaction = null;
         Map<String, String> result = new HashMap<String, String>();
         result.put("RESULT", "PAYMENT FAILED!");
@@ -92,12 +96,21 @@ public class PaymentScreenController extends BaseController {
      * validating format of card info form
      *
      * @param creditCardForm all fields of form forward from View
+     * @return
      */
-    public void validateCreditCardForm(HashMap<String, String> creditCardForm) {
+    public void validateCreditCardForm(HashMap<String, String> creditCardForm) throws Exception{
         validateCardNumber(creditCardForm.get("cardNumber"));
         validateCardOwner(creditCardForm.get("cardOwner"));
         validateExpDate(creditCardForm.get("expDate"));
         validateSecurityCode(creditCardForm.get("securityCode"));
+    }
+
+    public void validateCardUnused(String cardNumber) {
+        for (Session session : SessionManager.getInstance().getSessions()) {
+            if (session.getEndTime() == null && session.getCard().getCardNum().equals(cardNumber)) {
+                throw new CardUsedException();
+            }
+        }
     }
 
     /**
@@ -106,13 +119,14 @@ public class PaymentScreenController extends BaseController {
      * @param cardNumber string of card number
      * @return validation result
      */
-    public boolean validateCardNumber(String cardNumber) {
+    public void validateCardNumber(String cardNumber) {
         // check card number is not empty
-        if (cardNumber == null) return false;
-        if (cardNumber.length() == 0) return false;
+        if (cardNumber == null) {
+            throw new NullCardNumberException();
+        }
+        if (cardNumber.length() == 0 || !cardNumber.matches("[0-9a-zA-Z_]+"))
+            throw new InvalidCardNumberFormatException();
 
-        // check card number contains only letters, digits and underscores
-        return cardNumber.matches("[0-9a-zA-Z_]+");
     }
 
     /**
@@ -121,13 +135,10 @@ public class PaymentScreenController extends BaseController {
      * @param cardOwner string of card owner
      * @return validation result
      */
-    public boolean validateCardOwner(String cardOwner) {
+    public void validateCardOwner(String cardOwner) {
         // check card owner is not empty
-        if (cardOwner == null) return false;
-        if (cardOwner.length() == 0) return false;
-
-        // check card owner contains only letters, digits and spaces
-        return cardOwner.matches("[0-9a-zA-Z ]+");
+        if (cardOwner == null) throw new NullCardOwnerException();
+        if (cardOwner.length() == 0 || !cardOwner.matches("[0-9a-zA-Z ]+")) throw new InvalidCardOwnerFormatException();
     }
 
     /**
@@ -136,15 +147,14 @@ public class PaymentScreenController extends BaseController {
      * @param securityCode string of security code
      * @return validation result
      */
-    public boolean validateSecurityCode(String securityCode) {
+    public void validateSecurityCode(String securityCode) {
         // check security code is not empty
-        if (securityCode == null) return false;
+        if (securityCode == null) throw new NullSecurityCodeException();
 
         // check security code exactly 3
-        if (securityCode.length() != 3) return false;
-
         // check card owner contains only digits
-        return securityCode.matches("[0-9]+");
+        if (securityCode.length() != 3 || !securityCode.matches("[0-9]+")) throw new InvalidSecurityCodeFormatException();
+
     }
 
     /**
@@ -153,27 +163,21 @@ public class PaymentScreenController extends BaseController {
      * @param expDate string of expiration date
      * @return validation result
      */
-    public boolean validateExpDate(String expDate) throws NullPointerException {
+    public void validateExpDate(String expDate) throws NullPointerException {
         // check expire date is not empty
-        if (expDate == null) return false;
+        if (expDate == null) throw new NullExpDateException();
 
         // check expire date exactly 4
-        if (expDate.length() != 4) return false;
-
-        // check card owner contains only digits
-        if (!expDate.matches("[0-9]+")) return false;
+        if (expDate.length() != 4 || !expDate.matches("[0-9]+")) throw new InvalidExpDateFormatException();
 
         try {
             int month = Integer.parseInt(expDate.substring(0, 2));
             int year = Integer.parseInt(expDate.substring(2, 4));
 
-            if (month < 1 || month > 12 || year < 20 || year > 99) return false;
+            if (month < 1 || month > 12 || year < LocalDateTime.now().getYear() % 100 || year > 99) throw new InvalidExpDateFormatException();
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            return false;
         }
-
-        return true;
     }
 
 }

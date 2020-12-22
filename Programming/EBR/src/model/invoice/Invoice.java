@@ -33,11 +33,14 @@ public class Invoice {
  //  private int returned;
 
 
-
-
     public Invoice(String session_id){
         this.sessionId = session_id;
     }
+    public Invoice(String id, String sessionId){
+        this.id = id;
+        this.sessionId = sessionId;
+    }
+
    public Invoice(String id, String session_id, int total_charge) {
         this.id = id;
         this.sessionId = session_id;
@@ -45,6 +48,10 @@ public class Invoice {
     }
 
 
+
+    public void setId(String id) {
+        this.id = id;
+    }
     /**
      * This method is used to get session by using session_id
      * @return session
@@ -58,7 +65,7 @@ public class Invoice {
      * This method is used to get bike by using session_id
      * @return bike
      */
-    public Bike getBike(){
+    public Bike getBike() {
         return SessionManager.getInstance().getSessionById(sessionId).getBike();
     }
 
@@ -66,7 +73,7 @@ public class Invoice {
      * This method is used to get credit card by using session_id
      * @return card
      */
-    public CreditCard getCard(){
+    public CreditCard getCard() {
         return SessionManager.getInstance().getSessionById(sessionId).getCard();
     }
     public void setTotalFees(int totalFees) {
@@ -95,7 +102,7 @@ public class Invoice {
      * @return endTime
      */
     public LocalDateTime getEndTime() {
-        return SessionManager.getInstance().getSessionById(sessionId).getEndTime();
+        return LocalDateTime.now();
     }
 
     /**

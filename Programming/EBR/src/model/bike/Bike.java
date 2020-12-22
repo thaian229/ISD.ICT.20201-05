@@ -2,8 +2,6 @@ package model.bike;
 
 import model.dock.Dock;
 
-import java.util.Objects;
-
 /**
  * Model for bike
  *
@@ -64,6 +62,16 @@ public class Bike {
         this.value = value;
         this.deposit = value/10;
         this.charge = charge;
+    }
+
+    public void takeBikeOutOfDock() {
+        this.dock.removeBike(this);
+         BikeManager.getInstance().updateDockOfBike(this, "");
+    }
+
+    public void putBikeInDock(Dock dock) {
+        dock.addBike(this);
+        BikeManager.getInstance().updateDockOfBike(this, dock.getId());
     }
 
     public String getId() { return id; }
