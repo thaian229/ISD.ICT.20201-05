@@ -1,8 +1,8 @@
 package controller;
 
-import common.exception.cardException.*;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
+import common.exception.cardException.*;
 import model.bike.Bike;
 import model.payment.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
@@ -10,7 +10,6 @@ import model.session.Session;
 import model.session.SessionManager;
 import subsystem.InterbankSubsystem;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -174,7 +173,7 @@ public class PaymentScreenController extends BaseController {
             int month = Integer.parseInt(expDate.substring(0, 2));
             int year = Integer.parseInt(expDate.substring(2, 4));
 
-            if (month < 1 || month > 12 || year < LocalDateTime.now().getYear() % 100 || year > 99) throw new InvalidExpDateFormatException();
+            if (month < 1 || month > 12 || year < LocalDateTime.now().getYear() % 100 || year > 99) throw new CardExpiredException();
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
