@@ -155,27 +155,17 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
             // Save then change screen
             rentTransaction.setMethod("Credit Card");
             rentTransaction.setType("rent");
-            PaymentResultPopup.display(this, rentTransaction);
+            saveTransaction(rentTransaction);
         }
     }
 
-    private void transitionToSessionScreen(PaymentTransaction rentTransaction) throws IOException {
+
+    private void transitionToSessionScreen(PaymentTransaction rentTransaction) {
         try {
             // Create and save card
-            CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
-                    Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));
-
-            String cardId = CreditCardManager.getInstance().saveCreditCard(card);
-            card.setId(cardId);
-
-            rentTransaction.setCard(card);
-
-            // Save Renting Transaction
-            String transactionId = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
-            rentTransaction.setId(transactionId);
 
             // Create new renting session
-            Session session = SessionManager.getInstance().createSession(this.controller.getBike(), card, rentTransaction);
+            Session session = SessionManager.getInstance().createSession(this.controller.getBike(), rentTransaction.getCard(), rentTransaction);
             SessionScreenController sessionScreenController = new SessionScreenController();
             SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
                     Path.SESSION_SCREEN_PATH, session, sessionScreenController);
@@ -187,6 +177,21 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         } catch (IOException exp) {
             exp.printStackTrace();
         }
+    }
+
+    private void saveTransaction(PaymentTransaction rentTransaction) throws IOException {
+        CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
+                Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));
+
+        String cardId = CreditCardManager.getInstance().saveCreditCard(card);
+        card.setId(cardId);
+
+        rentTransaction.setCard(card);
+
+        // Save Renting Transaction
+        String transactionId = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
+//        rentTransaction.setId(transactionId);
+        PaymentResultPopup.display(this, rentTransaction);
     }
 
     @FXML

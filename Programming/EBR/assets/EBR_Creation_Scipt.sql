@@ -99,12 +99,13 @@ ALTER TABLE public.invoice
 
 CREATE TABLE public.payment_transaction
 (
-    id         uuid                     DEFAULT public.uuid_generate_v4() NOT NULL,
-    card_id    uuid                                                       NOT NULL,
-    type       text                                                       NOT NULL,
-    amount     numeric                                                    NOT NULL,
-    method     text,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+    id             uuid                     DEFAULT public.uuid_generate_v4() NOT NULL,
+    card_id        uuid                                                       NOT NULL,
+    type           text                                                       NOT NULL,
+    amount         numeric                                                    NOT NULL,
+    method         text,
+    transaction_id text                                                       NOT NULL,
+    created_at     timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE public.payment_transaction
@@ -153,7 +154,7 @@ CREATE TRIGGER dock_changes
     AFTER UPDATE
     ON public.bike
     FOR EACH ROW
-    EXECUTE PROCEDURE public.bike_dock_change();
+EXECUTE PROCEDURE public.bike_dock_change();
 
 CREATE OR REPLACE FUNCTION public.insert_new_bike()
     RETURNS TRIGGER

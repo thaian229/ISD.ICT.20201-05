@@ -25,14 +25,12 @@ public class PaymentTransaction {
 	private String transactionContent;
 	private int amount;
 	private String createdAt;
-
 	private String id;
 	private String type;
 	private String method;
 	
 	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
 			int amount, String createdAt) {
-		super();
 		this.errorCode = errorCode;
 		this.card = card;
 		this.transactionId = transactionId;
@@ -48,11 +46,12 @@ public class PaymentTransaction {
 	 * @param amount transfer amount
 	 * @param method payment method
 	 */
-	public PaymentTransaction(String id, String type, int amount, String method) {
+	public PaymentTransaction(String id,String transactionId, String type, int amount, String method) {
 		this.id = id;
 		this.type = type;
 		this.amount = amount;
 		this.method = method;
+		this.transactionId = transactionId;
 	}
 
 	public PaymentTransaction(String type, int amount, String method) {
@@ -100,5 +99,17 @@ public class PaymentTransaction {
 
 	public void setMethod(String method) {
 		this.method = method;
+	}
+
+	public String getTransactionContent() {
+		return transactionContent;
+	}
+
+	public String getTransactionId() {
+		return this.transactionId;
+	}
+
+	public void setTransactionContent(String transactionContent) {
+		this.transactionContent = transactionContent;
 	}
 }

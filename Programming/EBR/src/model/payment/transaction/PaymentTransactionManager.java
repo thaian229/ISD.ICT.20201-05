@@ -53,8 +53,10 @@ public class PaymentTransactionManager {
             ResultSet rs = pstmt.executeQuery();
             rs.next();
 
-            return new PaymentTransaction(
+            return new
+                    PaymentTransaction(
                     rs.getString("id"),
+                    rs.getString("transaction_id"),
                     rs.getString("type"),
                     rs.getInt("amount"),
                     rs.getString("method")
@@ -72,8 +74,8 @@ public class PaymentTransactionManager {
      * @return uuid of newly added transaction's record
      */
     public String savePaymentTransaction(PaymentTransaction paymentTransaction) {
-        String SQL = "INSERT INTO payment_transaction(type, amount, method, card_id) " +
-                "VALUES (?, ?, ?, ?::uuid)";
+        String SQL = "INSERT INTO payment_transaction(type, amount, method, card_id, transaction_id) " +
+                "VALUES (?, ?, ?, ?::uuid, ?)";
 
         String id = "save failed";
 
@@ -86,6 +88,7 @@ public class PaymentTransactionManager {
             pstmt.setInt(2, paymentTransaction.getAmount());
             pstmt.setString(3, paymentTransaction.getMethod());
             pstmt.setString(4, paymentTransaction.getCard().getId());
+            pstmt.setString(5, paymentTransaction.getTransactionId());
             // Handle update
             int affectedRows = pstmt.executeUpdate();
             // check the affected rows
