@@ -1,9 +1,8 @@
 import controller.BarcodeController;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class validateBarcodeInputTest {
     private BarcodeController barcodeController;
@@ -15,15 +14,16 @@ public class validateBarcodeInputTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1224452236,true",
-            "das1144sa5,false",
-            ",false"
+            "1224452236,",
+            "das1144sa5,INVALID: Barcode must contains only number",
+            ",ERROR: Barcode is not filled!"
     })
 
-    void test(String address, boolean expected) {
-        // when
-        boolean isValid = barcodeController.validateBarcodeInput(address);
-        // then
-        assertEquals(expected, isValid);
+    void test(String barcode, String expected) {
+        try {
+            barcodeController.validateBarcodeInput(barcode);
+        } catch (Exception e){
+            Assertions.assertEquals(expected, e.getMessage());
+        }
     }
 }
