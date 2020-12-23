@@ -1,11 +1,13 @@
 package views.screen.payment;
 
+import controller.BaseController;
 import controller.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utils.Path;
 import views.screen.BaseScreenHandler;
@@ -43,6 +45,9 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
     private TextField securityCode;
 
     @FXML
+    private Text errorText;
+
+    @FXML
     private Button paymentCancelButton;
 
     @FXML
@@ -57,10 +62,12 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
     @FXML
     private ImageView back;
 
-    public PaymentScreenHandler(Stage stage, String screenPath) throws IOException {
+
+    public PaymentScreenHandler(Stage stage, String screenPath, PaymentScreenController paymentScreenController) throws IOException {
         super(stage, screenPath);
         super.screenTitle = "Payment Screen";
         this.setImages();
+        this.setBController(paymentScreenController);
     }
 
     @Override
@@ -91,34 +98,35 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
 
     private void handleCardInfoSubmit() throws IOException {
         // Read in all fields
+        errorText.setVisible(false);
         HashMap<String, String> cardInfo = new HashMap<>();
         cardInfo.put("cardOwner", cardOwner.getText().trim());
         cardInfo.put("cardNumber", cardNumber.getText().trim());
         cardInfo.put("expDate", expDate.getText().trim());
         cardInfo.put("securityCode", securityCode.getText().trim());
-
-        // Take controller
-        PaymentScreenController paymentScreenController = (PaymentScreenController) getBController();
-
         // Validate card info then process to confirmation screen
-        paymentScreenController.setCardInfo(cardInfo);
+        this.getBController().setCardInfo(cardInfo);
         try {
-            paymentScreenController.validateCreditCardForm(cardInfo);
-            paymentScreenController.validateCardUnused(cardNumber.getText().trim());
+            this.getBController().validateCreditCardForm(cardInfo);
+            this.getBController().validateCardUnused(cardNumber.getText().trim());
             this.goToConfirmationScreen();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            errorText.setVisible(true);
+            errorText.setText(e.getMessage());
         }
     }
 
     private void goToConfirmationScreen() throws IOException {
         // Transition to PaymentConfirmationScreen
-        PaymentScreenController paymentScreenController = (PaymentScreenController) getBController();
-        PaymentConfirmationScreenHandler paymentConfirmationScreenHandler = new PaymentConfirmationScreenHandler(this.stage, Path.PAYMENT_CONFIRMATION_SCREEN_PATH, paymentScreenController);
+        PaymentConfirmationScreenHandler paymentConfirmationScreenHandler = new PaymentConfirmationScreenHandler(this.stage, Path.PAYMENT_CONFIRMATION_SCREEN_PATH, this.getBController());
         paymentConfirmationScreenHandler.setPreviousScreen(this);
         paymentConfirmationScreenHandler.setHomeScreenHandler(homeScreenHandler);
         paymentConfirmationScreenHandler.setScreenTitle("Renting Confirmation Screen");
         paymentConfirmationScreenHandler.show();
     }
 
+    @Override
+    public PaymentScreenController getBController() {
+        return (PaymentScreenController) super.getBController();
+    }
 }

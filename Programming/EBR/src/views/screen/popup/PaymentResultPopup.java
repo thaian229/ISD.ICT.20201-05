@@ -1,33 +1,21 @@
-package views.screen.payment;
+package views.screen.popup;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.bike.Bike;
-import model.bike.BikeManager;
-import model.dock.DockManager;
 import model.payment.transaction.PaymentTransaction;
-import model.session.Session;
-import model.session.SessionManager;
 import utils.Path;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
-import views.screen.FXMLScreenHandler;
-import views.screen.WithTransactionPopupMethods;
-import views.screen.home.BarcodePopup;
-import views.screen.home.HomeScreenHandler;
-import views.screen.invoice.InvoiceScreenHandler;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PaymentResultPopup extends BaseScreenHandler implements Initializable {
@@ -37,9 +25,6 @@ public class PaymentResultPopup extends BaseScreenHandler implements Initializab
 
     @FXML
     Button closeBtn;
-
-    @FXML
-    Text transactionId;
 
     @FXML
     Text cardNumber;
@@ -54,36 +39,47 @@ public class PaymentResultPopup extends BaseScreenHandler implements Initializab
     Text paymentMethod;
 
     @FXML
-    Text transactionResult;
+    Text transactionResultSuccess;
+
+    @FXML
+    Text transactionResultFail;
 
 
     private BaseScreenHandlerWithTransactionPopup screenHandler;
     private PaymentTransaction paymentTransaction;
 
-    private PaymentResultPopup(Stage stage, BaseScreenHandlerWithTransactionPopup screenHandler, PaymentTransaction paymentTransaction) throws IOException {
+    private PaymentResultPopup(Stage stage, BaseScreenHandlerWithTransactionPopup screenHandler, PaymentTransaction paymentTransaction, String paymentMessage) throws IOException {
         super(stage, Path.PAYMENT_RESULT_POPUP_PATH);
         this.screenHandler = screenHandler;
         this.paymentTransaction = paymentTransaction;
-        setTransactionInfo(paymentTransaction);
+        setTransactionInfo(paymentTransaction, paymentMessage);
     }
 
-    private static PaymentResultPopup popup(PaymentTransaction paymentTransaction, BaseScreenHandlerWithTransactionPopup screenHandler) throws IOException {
-        PaymentResultPopup popup = new PaymentResultPopup(new Stage(), screenHandler, paymentTransaction);
+    private static PaymentResultPopup popup(PaymentTransaction paymentTransaction, BaseScreenHandlerWithTransactionPopup screenHandler, String paymentMessage) throws IOException {
+        PaymentResultPopup popup = new PaymentResultPopup(new Stage(), screenHandler, paymentTransaction, paymentMessage);
         popup.stage.initStyle(StageStyle.UNDECORATED);
         return popup;
     }
 
-    private void setTransactionInfo(PaymentTransaction paymentTransaction) {
-        transactionId.setText(paymentTransaction.getTransactionId());
+    private void setTransactionInfo(PaymentTransaction paymentTransaction, String paymentMessage) {
         cardNumber.setText(paymentTransaction.getCard().getCardNum());
         transactionDetails.setText(paymentTransaction.getTransactionContent());
         amount.setText(Utils.getCurrencyFormat(paymentTransaction.getAmount()));
         paymentMethod.setText(paymentTransaction.getMethod());
-        transactionResult.setText(paymentTransaction.getErrorCode());
+        if (paymentTransaction.getErrorCode().equals("00")) {
+            transactionResultSuccess.setVisible(true);
+            transactionResultFail.setVisible(false);
+            transactionResultSuccess.setText(paymentMessage);
+        } else {
+            transactionResultSuccess.setVisible(false);
+            transactionResultFail.setVisible(true);
+            transactionResultFail.setText(paymentMessage);
+        }
     }
 
-    public static void display(BaseScreenHandlerWithTransactionPopup screenHandler, PaymentTransaction paymentTransaction) throws IOException {
-        popup(paymentTransaction, screenHandler).show();
+    public static void display(BaseScreenHandlerWithTransactionPopup screenHandler, PaymentTransaction paymentTransaction, String paymentMessage) throws IOException {
+        popup(paymentTransaction, screenHandler, paymentMessage).show();
+
     }
 
     @Override
@@ -99,7 +95,8 @@ public class PaymentResultPopup extends BaseScreenHandler implements Initializab
     private void closeBtnHandler() {
         try {
             this.stage.close();
-            screenHandler.continueAfterPopupClosed(this.paymentTransaction);
+            if (this.paymentTransaction.getErrorCode().equals("00"))
+                screenHandler.continueAfterPopupClosed(this.paymentTransaction);
         } catch (IOException e) {
             e.printStackTrace();
         }

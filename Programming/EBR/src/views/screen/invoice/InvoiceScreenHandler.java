@@ -19,10 +19,8 @@ import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
 import utils.Utils;
-import views.screen.BaseScreenHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
-import views.screen.WithTransactionPopupMethods;
-import views.screen.payment.PaymentResultPopup;
+import views.screen.popup.PaymentResultPopup;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,6 +73,9 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
 
     @FXML
     Text invoiceReturned;
+
+    @FXML
+    Text errorText;
 
     @FXML
     TextField cardNumberTextField;
@@ -173,7 +174,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
     }
 
     private void handleConfirmButton() throws IOException {
-
+        errorText.setVisible(false);
         String contents = "refund";
         CreditCard tmpCard = this.invoice.getCard();
         HashMap<String, String> cardInfo;
@@ -206,10 +207,11 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
             String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
             SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
             InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
-            PaymentResultPopup.display(this, returnTransaction);
+            PaymentResultPopup.display(this, returnTransaction, "PAYMENT SUCCESSFUL");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            errorText.setVisible(true);
+            errorText.setText(e.getMessage());
         }
     }
 

@@ -1,5 +1,7 @@
 package views.screen.payment;
 
+import common.exception.PaymentException;
+import common.exception.UnrecognizedException;
 import controller.PaymentScreenController;
 import controller.SessionScreenController;
 import javafx.fxml.FXML;
@@ -17,9 +19,8 @@ import model.session.Session;
 import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
-import views.screen.BaseScreenHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
-import views.screen.WithTransactionPopupMethods;
+import views.screen.popup.PaymentResultPopup;
 import views.screen.session.SessionScreenHandler;
 
 import java.awt.event.MouseEvent;
@@ -143,20 +144,39 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
 
     private void handleRentingConfirmation() throws IOException {
         String contents = "pay order";
-        PaymentTransaction rentTransaction = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,
-                this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
-                this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
+        try{
+            PaymentTransaction rentTransaction = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,
+                    this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
+                    this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
 
-        if (rentTransaction == null) {
-            getPreviousScreen().show();
-        } else {
-            // Take bike out of dock
-            this.controller.getBike().takeBikeOutOfDock();
-            // Save then change screen
-            rentTransaction.setMethod("Credit Card");
-            rentTransaction.setType("rent");
-            saveTransaction(rentTransaction);
+            if (rentTransaction == null) {
+                getPreviousScreen().show();
+            } else {
+                // Take bike out of dock
+                this.controller.getBike().takeBikeOutOfDock();
+                // Save then change screen
+                rentTransaction.setMethod("Credit Card");
+                rentTransaction.setType("rent");
+                saveTransaction(rentTransaction);
+            }
+        } catch (PaymentException | UnrecognizedException e) {
+            
+            //TODO: CATCH EXCEPTION HERE
         }
+//        PaymentTransaction rentTransaction = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,
+//                this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
+//                this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
+//
+//        if (rentTransaction == null) {
+//            getPreviousScreen().show();
+//        } else {
+//            // Take bike out of dock
+//            this.controller.getBike().takeBikeOutOfDock();
+//            // Save then change screen
+//            rentTransaction.setMethod("Credit Card");
+//            rentTransaction.setType("rent");
+//            saveTransaction(rentTransaction);
+//        }
     }
 
 
@@ -191,7 +211,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         // Save Renting Transaction
         String transactionId = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
 //        rentTransaction.setId(transactionId);
-        PaymentResultPopup.display(this, rentTransaction);
+        PaymentResultPopup.display(this, rentTransaction, "PAYMENT SUCCESSFUL");
     }
 
     @FXML

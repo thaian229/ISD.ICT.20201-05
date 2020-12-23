@@ -1,4 +1,4 @@
-package common.exception.cardException;
+package common.exception;
 
 import common.exception.PaymentException;
 

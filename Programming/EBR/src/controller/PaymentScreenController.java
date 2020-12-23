@@ -72,7 +72,7 @@ public class PaymentScreenController extends BaseController {
      * @return respond
      */
     public PaymentTransaction payDeposit(int amount, String contents, String cardNumber, String cardHolderName,
-                                         String expirationDate, String securityCode) {
+                                         String expirationDate, String securityCode) throws PaymentException, UnrecognizedException {
         PaymentTransaction rentTransaction = null;
         Map<String, String> result = new HashMap<String, String>();
         result.put("RESULT", "PAYMENT FAILED!");
@@ -87,6 +87,7 @@ public class PaymentScreenController extends BaseController {
             result.put("MESSAGE", "You have successfully paid the deposit!");
         } catch (PaymentException | UnrecognizedException ex) {
             result.put("MESSAGE", ex.getMessage());
+            throw ex;
         }
         System.out.println(result);
         return rentTransaction;
@@ -121,7 +122,7 @@ public class PaymentScreenController extends BaseController {
      */
     public void validateCardNumber(String cardNumber) {
         // check card number is not empty
-        if (cardNumber == null) {
+        if (cardNumber == null || cardNumber.isBlank()) {
             throw new NullCardNumberException();
         }
         if (cardNumber.length() == 0 || !cardNumber.matches("[0-9a-zA-Z_]+"))
@@ -137,7 +138,7 @@ public class PaymentScreenController extends BaseController {
      */
     public void validateCardOwner(String cardOwner) {
         // check card owner is not empty
-        if (cardOwner == null) throw new NullCardOwnerException();
+        if (cardOwner == null|| cardOwner.isBlank()) throw new NullCardOwnerException();
         if (cardOwner.length() == 0 || !cardOwner.matches("[0-9a-zA-Z ]+")) throw new InvalidCardOwnerFormatException();
     }
 
@@ -149,7 +150,7 @@ public class PaymentScreenController extends BaseController {
      */
     public void validateSecurityCode(String securityCode) {
         // check security code is not empty
-        if (securityCode == null) throw new NullSecurityCodeException();
+        if (securityCode == null|| securityCode.isBlank()) throw new NullSecurityCodeException();
 
         // check security code exactly 3
         // check card owner contains only digits
@@ -165,7 +166,7 @@ public class PaymentScreenController extends BaseController {
      */
     public void validateExpDate(String expDate) throws NullPointerException {
         // check expire date is not empty
-        if (expDate == null) throw new NullExpDateException();
+        if (expDate == null || expDate.isBlank()) throw new NullExpDateException();
 
         // check expire date exactly 4
         if (expDate.length() != 4 || !expDate.matches("[0-9]+")) throw new InvalidExpDateFormatException();

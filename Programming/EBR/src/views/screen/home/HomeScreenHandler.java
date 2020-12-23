@@ -19,6 +19,7 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.bike.BikeScreenHandler;
 import views.screen.dock.DockScreenHandler;
+import views.screen.popup.BarcodePopup;
 import views.screen.session.SessionScreenHandler;
 
 import java.io.IOException;
