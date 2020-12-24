@@ -42,7 +42,9 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     @FXML
     private Button returnBikeBtn;
     @FXML
-    private VBox vboxDockList;
+    private VBox vboxDockList1;
+    @FXML
+    private VBox vboxDockList2;
     @FXML
     private AnchorPane dockInfo;
     @FXML
@@ -96,39 +98,32 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     }
 
     public void displayDockList() {
-        vboxDockList.getChildren().clear();
-        HBox hbox = createHBox();
-        int cnt = 0;
+        vboxDockList1.getChildren().clear();
+        vboxDockList2.getChildren().clear();
         try {
             for (Dock dock : dockList) {
-                if (cnt == 2) {
-                    cnt = 0;
-                    vboxDockList.getChildren().add(hbox);
-                    hbox = createHBox();
-                }
                 ReturningDockListItemHandler dockListItem = new ReturningDockListItemHandler(Path.RETURNING_DOCK_LIST_ITEM_PATH, this);
                 dockListItem.setDock(dock);
-                hbox.getChildren().add(dockListItem.getContent());
-                cnt++;
-            }
-            if (cnt < 2) {
-                vboxDockList.getChildren().add(hbox);
+                if (dockList.indexOf(dock) % 2 == 0)
+                    vboxDockList1.getChildren().add(dockListItem.getContent());
+                else vboxDockList2.getChildren().add(dockListItem.getContent());
+
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    private HBox createHBox() {
-        HBox hbox = new HBox();
-        Insets insets = new Insets(20, 20,20,20);
-        hbox.setAlignment(Pos.BASELINE_CENTER);
-        hbox.setPadding(insets);
-        hbox.setSpacing(30);
-        return hbox;
-    }
+//    private HBox createHBox() {
+//        HBox hbox = new HBox();
+//        Insets insets = new Insets(20, 20, 20, 20);
+//        hbox.setAlignment(Pos.BASELINE_CENTER);
+//        hbox.setPadding(insets);
+//        hbox.setSpacing(30);
+//        return hbox;
+//    }
 
     @FXML
     void searchImgListener(MouseEvent e) {

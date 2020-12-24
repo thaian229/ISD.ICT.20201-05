@@ -97,7 +97,7 @@ public class InvoiceScreenController extends BaseController {
     }
 
     public PaymentTransaction refund(int amount, String contents, String cardNumber, String cardHolderName,
-                                     String expirationDate, String securityCode) {
+                                     String expirationDate, String securityCode) throws PaymentException, UnrecognizedException{
         PaymentTransaction returnTransaction = null;
         Map<String, String> result = new HashMap<String, String>();
         result.put("RESULT", "PAYMENT FAILED!");
@@ -112,6 +112,7 @@ public class InvoiceScreenController extends BaseController {
             result.put("MESSAGE", "You have successfully paid the deposit!");
         } catch (PaymentException | UnrecognizedException ex) {
             result.put("MESSAGE", ex.getMessage());
+            throw ex;
         }
         System.out.println(result);
         return returnTransaction;
@@ -128,9 +129,14 @@ public class InvoiceScreenController extends BaseController {
         if (card == null) {
             card = new CreditCard(cardNumber, cardOwner, Integer.parseInt(securityCode), expDate);
             CreditCardManager.getInstance().saveCreditCard(card);
-        } else {
+        }
+        else {
             card.setSecurityCode(Integer.parseInt(securityCode));
         }
         return card;
+    }
+
+    public CreditCard getCardByCardNum(String cardNumber) {
+        return CreditCardManager.getInstance().getCardByCardNumber(cardNumber);
     }
 }

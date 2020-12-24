@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -28,15 +39,6 @@
         </AnchorPane>
         <AnchorPane layoutX="83.0" layoutY="190.0" prefHeight="540.0" prefWidth="1200.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 6; -fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="83.0" AnchorPane.topAnchor="190.0">
             <children>
-                <ScrollPane prefWidth="760.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                    <content>
-                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefWidth="756.0" style="-fx-background-radius: 6; -fx-background-color: #F5F5F5;">
-                            <children>
-                                <VBox fx:id="vboxDockList" minHeight="-Infinity" minWidth="-Infinity" prefWidth="756.0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </ScrollPane>
                 <Pane layoutX="10.0" layoutY="17.0" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #F0F0F0; -fx-border-radius: 2; -fx-border-color: #5F5F5F;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                     <children>
                         <TextField fx:id="searchField" layoutX="59.0" layoutY="3.0" prefHeight="24.0" prefWidth="250.0" promptText="Search" style="-fx-background-color: #F0F0F0;">
@@ -94,6 +96,23 @@
                         <Text fx:id="dockAddress" layoutX="55.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="asdasdasdasd asda sda sd asd as d as da sd a sd as d asd asd as d as da sd as d as d as d asd" wrappingWidth="300.0" AnchorPane.leftAnchor="55.0" />
                     </children>
                 </AnchorPane>
+            <ScrollPane layoutX="431.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="425.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefWidth="757.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                                      <VBox fx:id="vboxDockList1" alignment="CENTER" spacing="30.0" />
+                              <VBox fx:id="vboxDockList2" alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="30.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
             </children>
         </AnchorPane>
         <Text fill="#8c36c0" layoutX="332.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT DOCK FOR RETURNING">

@@ -80,8 +80,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             System.out.println("Button clicked");
             try {
                 PaymentScreenController paymentScreenController = new PaymentScreenController(bike);
-                PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Path.PAYMENT_SCREEN_PATH);
-                paymentScreenHandler.setBController(paymentScreenController);
+                PaymentScreenHandler paymentScreenHandler = new PaymentScreenHandler(this.stage, Path.PAYMENT_SCREEN_PATH, paymentScreenController);
                 paymentScreenHandler.setHomeScreenHandler(this.homeScreenHandler);
                 paymentScreenHandler.setPreviousScreen(this);
                 paymentScreenHandler.setScreenTitle("Payment Screen");
@@ -113,7 +112,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
             Image img = new Image(fileBikeImage.toURI().toString());
             bikeImage.setImage(img);
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

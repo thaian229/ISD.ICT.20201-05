@@ -4,6 +4,6 @@ import common.exception.FormException;
 
 public class NullCardOwnerException extends FormException {
     public NullCardOwnerException() {
-        super("ERROR: Card owner is not filled!");
+        super("Card owner is not filled!");
     }
 }

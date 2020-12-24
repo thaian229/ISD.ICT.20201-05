@@ -205,6 +205,7 @@
                                </children>
                            </GridPane>
                         <CheckBox fx:id="changeCardCheckbox" layoutX="55.0" layoutY="387.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="287.0" text="USE DIFFERENT CARD FOR RETURNING MONEY" textAlignment="CENTER" textFill="#949494" />
+                         <Text fx:id="errorText" fill="RED" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR" textAlignment="CENTER" visible="false" wrappingWidth="396.0" />
                        </children>
                    </Pane>
                   <Text fill="#8c36c0" layoutX="55.0" layoutY="107.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="PAYMENT CARD" textAlignment="CENTER" wrappingWidth="300.0">
@@ -220,7 +221,8 @@
                </font>
                 </Button>
             <Line endX="160.9182586669922" endY="453.0" layoutX="939.0" layoutY="215.0" startX="160.91897583007812" startY="-178.0" stroke="#909090" AnchorPane.rightAnchor="428.16668701171875" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8c36c0" height="284.0" layoutX="-27.0" layoutY="454.0" stroke="#fae715" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="5.0" width="434.0" AnchorPane.leftAnchor="-27.0" />
+
+             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8c36c0" height="284.0" layoutX="-27.0" layoutY="454.0" stroke="#fae715" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="5.0" width="434.0" AnchorPane.leftAnchor="-27.0" />
          </children>
       </AnchorPane>
     </children>

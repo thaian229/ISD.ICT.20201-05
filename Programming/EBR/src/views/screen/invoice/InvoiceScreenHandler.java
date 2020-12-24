@@ -1,6 +1,5 @@
 package views.screen.invoice;
 
-import controller.BaseController;
 import controller.InvoiceScreenController;
 import controller.PaymentScreenController;
 import javafx.fxml.FXML;
@@ -14,14 +13,15 @@ import javafx.stage.Stage;
 import model.invoice.Invoice;
 import model.invoice.InvoiceManager;
 import model.payment.creditCard.CreditCard;
-import model.payment.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
 import utils.Utils;
-import views.screen.BaseScreenHandler;
+import views.screen.BaseScreenHandlerWithTransactionPopup;
+import views.screen.popup.AlertPopup;
+import views.screen.popup.PaymentResultPopup;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,7 +44,7 @@ import java.util.ResourceBundle;
  * helpers: teacher's teaching assistants
  */
 
-public class InvoiceScreenHandler extends BaseScreenHandler implements Initializable {
+public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup implements Initializable {
     private Invoice invoice;
 
     @FXML
@@ -74,6 +74,9 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
 
     @FXML
     Text invoiceReturned;
+
+    @FXML
+    Text errorText;
 
     @FXML
     TextField cardNumberTextField;
@@ -172,7 +175,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
     }
 
     private void handleConfirmButton() throws IOException {
-
+        errorText.setVisible(false);
         String contents = "refund";
         CreditCard tmpCard = this.invoice.getCard();
         HashMap<String, String> cardInfo;
@@ -191,6 +194,8 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
                 cardInfo.put("securityCode", securityCode.trim());
                 paymentScreenController.validateCreditCardForm(cardInfo);
                 tmpCard = getBController().getCardByCardNum(cardOwner, cardNumber, securityCode, expDate);
+            } else {
+                tmpCard = getBController().getCardByCardNum(this.invoice.getCard().getCardNum());
             }
             PaymentTransaction returnTransaction = this.getBController().refund(this.getBController().calculateReturned(this.invoice), contents,
                     tmpCard.getCardNum(), tmpCard.getCardOwner(),
@@ -203,16 +208,20 @@ public class InvoiceScreenHandler extends BaseScreenHandler implements Initializ
             String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
             SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
             InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
-
-            homeScreenHandler.show();
+            PaymentResultPopup.display(this, returnTransaction, "PAYMENT SUCCESSFUL");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            AlertPopup.error(e.getMessage());
         }
     }
 
     @Override
     public InvoiceScreenController getBController() {
         return (InvoiceScreenController) super.getBController();
+    }
+
+    @Override
+    public void continueAfterPopupClosed(PaymentTransaction paymentTransaction) throws IOException {
+        homeScreenHandler.show();
     }
 }

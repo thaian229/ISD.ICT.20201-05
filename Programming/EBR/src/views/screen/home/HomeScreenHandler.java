@@ -19,6 +19,7 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.bike.BikeScreenHandler;
 import views.screen.dock.DockScreenHandler;
+import views.screen.popup.BarcodePopup;
 import views.screen.session.SessionScreenHandler;
 
 import java.io.IOException;
@@ -63,7 +64,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     private Button barcodeButton;
 
     @FXML
-    private VBox vboxDockList;
+    private VBox vboxDockList1;
+
+    @FXML
+    private VBox vboxDockList2;
 
     private ArrayList<Dock> dockList;
 
@@ -112,17 +116,20 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
      * display list of docks in the home screen
      */
     public void displayDockList() {
-        vboxDockList.getChildren().clear();
-
+        vboxDockList1.getChildren().clear();
+        vboxDockList2.getChildren().clear();
         try {
             for (Dock dock : dockList) {
                 DockListItemHandler dockListItem = new DockListItemHandler(Path.DOCK_LIST_ITEM_PATH, this, dock);
-                vboxDockList.getChildren().add(dockListItem.getContent());
+                if (dockList.indexOf(dock) % 2 == 0)
+                    vboxDockList1.getChildren().add(dockListItem.getContent());
+                else vboxDockList2.getChildren().add(dockListItem.getContent());
+
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -172,6 +179,12 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     void searchImgListener(MouseEvent e) {
         System.out.println("clicked");
         this.dockList = this.getBController().getDockListByKeyword(searchField.getText());
+        displayDockList();
+    }
+
+    @Override
+    public void show() {
+        super.show();
         displayDockList();
     }
 }

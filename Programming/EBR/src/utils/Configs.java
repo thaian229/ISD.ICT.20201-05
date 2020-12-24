@@ -16,6 +16,6 @@ public class Configs {
 	public static final String DB_USERNAME = "postgres";
 	public static final String DB_PASSWORD = "ben10154111999";
 
-	public static String CURRENCY = "VND";
+    public static String CURRENCY = "VND";
 	public static float PERCENT_VAT = 10;
 }

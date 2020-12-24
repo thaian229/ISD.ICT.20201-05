@@ -82,11 +82,22 @@ public class CreditCardManager {
             // Handle result set
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
+                int sc = 0;
+                for (int i = 0; i <= 9; i++) {
+                    for (int j = 0; j <= 9; j++) {
+                        for (int l = 0; l <= 9; l++) {
+                            if (rs.getString("security_code").equals(Utils.sha256("" + i + j + l))) {
+                                sc = 100*i + 10*j + l;
+                                System.out.println(sc);
+                            }
+                        }
+                    }
+                }
                 return new CreditCard(
                         rs.getString("id"),
                         rs.getString("card_num"),
                         rs.getString("card_owner"),
-                        000,
+                        sc,
                         rs.getString("exp_date")
                 );
             }

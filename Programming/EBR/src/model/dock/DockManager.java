@@ -52,7 +52,7 @@ public class DockManager {
         this.dockList.clear();
         System.out.println("refreshing");
         // query for all Docks
-        String SQL = "SELECT * FROM dock";
+        String SQL = "SELECT * FROM dock ORDER BY dock.name";
 
         try (Connection conn = EBRDB.getConnection();
              Statement stmt = conn.createStatement();
@@ -63,6 +63,7 @@ public class DockManager {
                         rs.getString("location"),
                         rs.getInt("capacity"),
                         rs.getString("image_url"));
+                dock.setNumberOfAvailableBike(rs.getInt("taken_slot"));
                 dockList.add(dock);
             }
         } catch (SQLException ex) {
