@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -74,7 +75,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
 
 
     @FXML
-    private VBox vboxBikeList;
+    private HBox hboxBikeList;
 
     private final Dock dock;
 
@@ -100,20 +101,18 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
 
 
     public void displayBikeList() {
-        vboxBikeList.getChildren().clear();
+        hboxBikeList.getChildren().clear();
 
         try {
             this.bikeList = ((DockScreenController) this.getBController()).getBikeListOfDock(dock.getId());
 
             for (Bike bike : bikeList) {
 
-                // display the attribute of vboxCart media
                 BikeListItemHandler bikeListItem = new BikeListItemHandler(Path.BIKE_LIST_ITEM_PATH, this);
 
                 bikeListItem.setBike(bike);
 
-                // add spinner
-                vboxBikeList.getChildren().add(bikeListItem.getContent());
+                hboxBikeList.getChildren().add(bikeListItem.getContent());
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

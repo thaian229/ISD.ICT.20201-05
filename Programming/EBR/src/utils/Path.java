@@ -52,4 +52,6 @@ public class Path {
     public static final String RETURNING_DOCK_LIST_ITEM_PATH = "/views/fxml/returning_dock_list_item.fxml";
     public static final String RETURNING_DOCK_SELECTION_SCREEN_PATH = "/views/fxml/returning_dock_selection.fxml";
     public static final String PAYMENT_RESULT_POPUP_PATH = "/views/fxml/transaction_result_popup.fxml";
+    public static final String ALERT_POPUP_PATH = "/views/fxml/alert_popup.fxml";
+
 }

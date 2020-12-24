@@ -20,6 +20,7 @@ import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
+import views.screen.popup.AlertPopup;
 import views.screen.popup.PaymentResultPopup;
 import views.screen.session.SessionScreenHandler;
 
@@ -160,7 +161,8 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
                 saveTransaction(rentTransaction);
             }
         } catch (PaymentException | UnrecognizedException e) {
-            
+            this.getPreviousScreen().show();
+            AlertPopup.error(e.getMessage());
             //TODO: CATCH EXCEPTION HERE
         }
 //        PaymentTransaction rentTransaction = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,

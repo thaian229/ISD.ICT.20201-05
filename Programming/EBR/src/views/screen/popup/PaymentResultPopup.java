@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PaymentResultPopup extends BaseScreenHandler implements Initializable {
+public class PaymentResultPopup extends Popup implements Initializable {
 
     @FXML
     ImageView logo;

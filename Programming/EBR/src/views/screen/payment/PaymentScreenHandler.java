@@ -108,7 +108,7 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         this.getBController().setCardInfo(cardInfo);
         try {
             this.getBController().validateCreditCardForm(cardInfo);
-            this.getBController().validateCardUnused(cardNumber.getText().trim());
+//            this.getBController().validateCardUnused(cardNumber.getText().trim());
             this.goToConfirmationScreen();
         } catch (Exception e) {
             errorText.setVisible(true);

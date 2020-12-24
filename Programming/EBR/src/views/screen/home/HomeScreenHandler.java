@@ -64,7 +64,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     private Button barcodeButton;
 
     @FXML
-    private VBox vboxDockList;
+    private VBox vboxDockList1;
+
+    @FXML
+    private VBox vboxDockList2;
 
     private ArrayList<Dock> dockList;
 
@@ -113,12 +116,15 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
      * display list of docks in the home screen
      */
     public void displayDockList() {
-        vboxDockList.getChildren().clear();
-
+        vboxDockList1.getChildren().clear();
+        vboxDockList2.getChildren().clear();
         try {
             for (Dock dock : dockList) {
                 DockListItemHandler dockListItem = new DockListItemHandler(Path.DOCK_LIST_ITEM_PATH, this, dock);
-                vboxDockList.getChildren().add(dockListItem.getContent());
+                if (dockList.indexOf(dock) % 2 == 0)
+                    vboxDockList1.getChildren().add(dockListItem.getContent());
+                else vboxDockList2.getChildren().add(dockListItem.getContent());
+
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

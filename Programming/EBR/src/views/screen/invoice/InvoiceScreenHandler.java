@@ -20,6 +20,7 @@ import utils.Configs;
 import utils.Path;
 import utils.Utils;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
+import views.screen.popup.AlertPopup;
 import views.screen.popup.PaymentResultPopup;
 
 import java.io.IOException;
@@ -210,8 +211,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
             PaymentResultPopup.display(this, returnTransaction, "PAYMENT SUCCESSFUL");
 
         } catch (Exception e) {
-            errorText.setVisible(true);
-            errorText.setText(e.getMessage());
+            AlertPopup.error(e.getMessage());
         }
     }
 

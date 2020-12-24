@@ -42,7 +42,7 @@ import java.util.ResourceBundle;
  * helpers: teacher's teaching assistants
  */
 
-public class BarcodePopup extends BaseScreenHandler implements Initializable {
+public class BarcodePopup extends Popup implements Initializable {
 
 
     @FXML

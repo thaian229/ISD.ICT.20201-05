@@ -15,28 +15,16 @@ import java.io.IOException;
 
 public class BikeListItemHandler extends FXMLScreenHandler {
     @FXML
-    private Text bikeName;
+    private Text bikeType;
 
     @FXML
-    private Text bikeSaddle;
-
-    @FXML
-    private Text bikePedal;
-
-    @FXML
-    private Text bikeRearSeat;
+    private Text bikeCode;
 
     @FXML
     private Button rentButton;
 
     @FXML
     private Text bikeBattery;
-
-    @FXML
-    private Text bikeUsageTime;
-
-    @FXML
-    private GridPane bikeElecInfo;
 
     @FXML
     private ImageView bikeImg;
@@ -46,10 +34,6 @@ public class BikeListItemHandler extends FXMLScreenHandler {
 
     @FXML
     private ImageView batteryIcon;
-
-    @FXML
-    private ImageView clockIcon;
-
 
 
     private DockScreenHandler dockScreenHandler;
@@ -68,8 +52,7 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         });
     }
 
-    private void setImage() {
-        setImage(clockIcon, Path.CLOCK_ICON);
+    private void setImages() {
         setImage(batteryIcon, Path.BATTERY_ICON);
         System.out.println();
         if (bike instanceof StandardBike) {
@@ -85,33 +68,39 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         }
     }
 
+    private void setBikeType() {
+        System.out.println();
+        if (bike instanceof StandardBike) {
+            bikeType.setText("Standard Bike");
+        } else if (bike instanceof TwinBike) {
+            bikeType.setText("Twin Bike");
+        } else if (bike instanceof StandardElectricalBike) {
+            bikeType.setText("E-Bike");
+        } else if (bike instanceof TwinElectricalBike) {
+            bikeType.setText("Twin E-Bike");
+        } else {
+            bikeType.setText("NO DATA");
+        }
+    }
+
     public void setBike(Bike bike) {
         this.bike = bike;
+        this.setBikeType();
         this.setBikeInfo();
-        this.setImage();
+        this.setImages();
     }
 
     private void setBikeInfo() {
-        bikeName.setText("" + bike.getBarcode());
-        bikePedal.setText("" + bike.getPairOfPedals());
-        bikeSaddle.setText("" + bike.getSaddle());
-        bikeRearSeat.setText("" + bike.getRearSeat());
+        bikeCode.setText("" + bike.getBarcode());
         if (bike instanceof StandardElectricalBike) {
             bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
-            bikeUsageTime.setText(((StandardElectricalBike) bike).getTimeLeft() + " seconds");
         } else if (bike instanceof TwinElectricalBike) {
             bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
-            bikeUsageTime.setText(((TwinElectricalBike) bike).getTimeLeft() + " seconds");
         } else {
-            bikeElecInfo.setVisible(false);
+            bikeBattery.setVisible(false);
+            batteryIcon.setVisible(false);
         }
-        this.setBikeImage();
-    }
-
-    private void setBikeImage() {
-        File file = new File(bike.getImageURL());
-        Image img = new Image(file.toURI().toString());
-        bikeImg.setImage(img);
+        setImage(bikeImg, bike.getImageURL());
     }
 
 }
