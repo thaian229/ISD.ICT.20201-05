@@ -23,7 +23,6 @@ import java.util.HashMap;
  * <p>
  * helpers: teacher's teaching assistants
  */
-
 public class Session {
 
     private String id;
@@ -45,6 +44,14 @@ public class Session {
         this.lastResumeTime = this.startTime;
     }
 
+    /**
+     * Most used constructor
+     * @param id session id
+     * @param bike {@link Bike} bike rented in this session
+     * @param card {@link CreditCard} card used for pay deposit
+     * @param startTime {@link LocalDateTime} session start time
+     * @param rentTransaction {@link PaymentTransaction} pay deposit transaction
+     */
     public Session(String id, Bike bike, CreditCard card, LocalDateTime startTime, PaymentTransaction rentTransaction) {
         this.id = id;
         this.bike = bike;

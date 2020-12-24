@@ -4,14 +4,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.payment.transaction.PaymentTransaction;
 import utils.Path;
 import utils.Utils;
-import views.screen.BaseScreenHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
 
 import java.io.IOException;
@@ -55,12 +53,25 @@ public class PaymentResultPopup extends Popup implements Initializable {
         setTransactionInfo(paymentTransaction, paymentMessage);
     }
 
+    /**
+     * Init then return new Payment result popup
+     * @param paymentTransaction {@link PaymentTransaction}
+     * @param screenHandler {@link BaseScreenHandlerWithTransactionPopup}
+     * @param paymentMessage message result
+     * @return {@link PaymentTransaction} newly created popup
+     * @throws IOException IO errors
+     */
     private static PaymentResultPopup popup(PaymentTransaction paymentTransaction, BaseScreenHandlerWithTransactionPopup screenHandler, String paymentMessage) throws IOException {
         PaymentResultPopup popup = new PaymentResultPopup(new Stage(), screenHandler, paymentTransaction, paymentMessage);
         popup.stage.initStyle(StageStyle.UNDECORATED);
         return popup;
     }
 
+    /**
+     * set value for text display
+     * @param paymentTransaction {@link PaymentTransaction}
+     * @param paymentMessage result message of the payment
+     */
     private void setTransactionInfo(PaymentTransaction paymentTransaction, String paymentMessage) {
         cardNumber.setText(paymentTransaction.getCard().getCardNum());
         transactionDetails.setText(paymentTransaction.getTransactionContent());
@@ -77,9 +88,15 @@ public class PaymentResultPopup extends Popup implements Initializable {
         }
     }
 
+    /**
+     * Create new then display the popup
+     * @param screenHandler {@link BaseScreenHandlerWithTransactionPopup}
+     * @param paymentTransaction {@link PaymentTransaction paymentTransaction}
+     * @param paymentMessage message go with the payment result
+     * @throws IOException IO errors
+     */
     public static void display(BaseScreenHandlerWithTransactionPopup screenHandler, PaymentTransaction paymentTransaction, String paymentMessage) throws IOException {
         popup(paymentTransaction, screenHandler, paymentMessage).show();
-
     }
 
     @Override

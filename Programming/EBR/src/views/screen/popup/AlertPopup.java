@@ -7,14 +7,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import utils.Configs;
 import utils.Path;
-import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
 
 /**
- * class for ...
+ * class for Popup message
  *
  * @author mHoang
  * <p>
@@ -40,6 +38,13 @@ public class AlertPopup extends Popup {
         super(stage, Path.ALERT_POPUP_PATH);
     }
 
+    /**
+     * Create new popup alert
+     * @param message message to be shown
+     * @param undecorated display render type
+     * @return {@link AlertPopup alertPopup}
+     * @throws IOException IO error
+     */
     private static AlertPopup popup(String message, Boolean undecorated) throws IOException{
         AlertPopup popup = new AlertPopup(new Stage());
         if (undecorated) popup.stage.initStyle(StageStyle.UNDECORATED);
@@ -48,6 +53,11 @@ public class AlertPopup extends Popup {
         return popup;
     }
 
+    /**
+     * show error text
+     * @param message error message
+     * @throws IOException IO error
+     */
     public static void error(String message) throws IOException{
         popup(message, true).show(true);
     }
@@ -56,16 +66,28 @@ public class AlertPopup extends Popup {
         return popup(message, true);
     }
 
-    public void show(Boolean autoclose) {
+    /**
+     * show then auto close the popup
+     * @param autoClose auto-close or not
+     */
+    public void show(Boolean autoClose) {
         super.show();
-        if (autoclose) close(2);
+        if (autoClose) close(2);
     }
 
+    /**
+     * show then auto close the popup
+     * @param time delay close time in seconds
+     */
     public void show(double time) {
         super.show();
         close(time);
     }
 
+    /**
+     * close the popup
+     * @param time time to close
+     */
     public void close(double time){
         PauseTransition delay = new PauseTransition(Duration.seconds(time));
         delay.setOnFinished( event -> stage.close() );

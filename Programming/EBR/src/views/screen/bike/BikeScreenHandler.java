@@ -21,6 +21,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handler for dock list item
+ *
+ * @author Bui Tu Hoang
+ * <p>
+ * created_at: 1/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
 public class BikeScreenHandler extends BaseScreenHandler implements Initializable {
 
     @FXML
@@ -58,6 +73,13 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
 
     private Bike bike;
 
+    /**
+     * Constructor and initial setup for screen
+     * @param stage {@link Stage}
+     * @param screenPath path to fxml
+     * @param bike {@link Bike} bike to be display
+     * @throws IOException IO errors
+     */
     public BikeScreenHandler(Stage stage, String screenPath, Bike bike) throws IOException {
         super(stage, screenPath);
         this.bike = bike;
@@ -92,6 +114,9 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         });
     }
 
+    /**
+     * Show bike info
+     */
     private void displayBike() {
         try {
             bikeBarcode.setText(Integer.toString(bike.getBarcode()));

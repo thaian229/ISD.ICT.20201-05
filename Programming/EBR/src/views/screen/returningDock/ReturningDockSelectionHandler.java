@@ -1,22 +1,19 @@
 package views.screen.returningDock;
 
-import controller.ReturningDockSelectionController;
 import controller.InvoiceScreenController;
+import controller.ReturningDockSelectionController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.BikeManager;
 import model.dock.Dock;
-import javafx.scene.control.Button;
 import model.invoice.Invoice;
 import model.invoice.InvoiceManager;
 import model.session.Session;
@@ -29,6 +26,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Handler for dock displaying of Returning Dock Screen
+ *
+ * @author mhoang
+ * <p>
+ * created_at: 12/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ */
 public class ReturningDockSelectionHandler extends BaseScreenHandler implements Initializable {
 
     @FXML
@@ -66,6 +76,14 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         this.setImages();
     }
 
+    /**
+     * constructor
+     * @param stage {@link Stage stage}
+     * @param screenPath path to .fxml file
+     * @param returningDockSelectionController controller for the screen
+     * @param session current working session
+     * @throws IOException IO error
+     */
     public ReturningDockSelectionHandler(Stage stage, String screenPath, ReturningDockSelectionController returningDockSelectionController, Session session) throws IOException {
         super(stage, screenPath);
         setBController(returningDockSelectionController);
@@ -74,6 +92,9 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         displayDockList();
     }
 
+    /**
+     * set images for logo, button
+     */
     private void setImages() {
         try {
             setImage(logo, Path.LOGO_ICON);
@@ -89,6 +110,10 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         return (ReturningDockSelectionController) super.getBController();
     }
 
+    /**
+     * handle event click on dock item
+     * @param dock {@link Dock dock}
+     */
     public void onDockListItemClicked(Dock dock) {
         this.dock = dock;
         dockInfo.setVisible(true);
@@ -97,6 +122,9 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         dockEmptySlots.setText(Integer.toString(dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
     }
 
+    /**
+     * show all available dock
+     */
     public void displayDockList() {
         vboxDockList1.getChildren().clear();
         vboxDockList2.getChildren().clear();
@@ -125,12 +153,20 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
 //        return hbox;
 //    }
 
+    /**
+     * handle search dock
+     * @param e {@link MouseEvent mouseEvent}
+     */
     @FXML
     void searchImgListener(MouseEvent e) {
         this.dockList = this.getBController().getDockListByKeyword(searchField.getText());
         displayDockList();
     }
 
+    /**
+     * handle return button clicked
+     * @param e {@link MouseEvent mouseEvent}
+     */
     @FXML
     void returnBikeBtnListener(MouseEvent e) {
         if (dock != null) {

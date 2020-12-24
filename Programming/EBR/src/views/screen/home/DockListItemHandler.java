@@ -1,16 +1,13 @@
 package views.screen.home;
 
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.dock.Dock;
-import utils.Configs;
 import views.screen.FXMLScreenHandler;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -28,7 +25,6 @@ import java.io.IOException;
  * <p>
  * helpers: teacher's teaching assistants
  */
-
 public class DockListItemHandler extends FXMLScreenHandler {
 
     @FXML

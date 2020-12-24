@@ -74,6 +74,13 @@ public class Utils {
         return digest;
     }
 
+    /**
+     * hash by SHA256 function
+     *
+     * @author mhoang
+     * @param message message to be hashed
+     * @return hashed value
+     */
     public static String sha256(String message) {
         String digest = null;
         try {

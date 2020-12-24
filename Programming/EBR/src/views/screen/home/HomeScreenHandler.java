@@ -43,7 +43,6 @@ import java.util.logging.Logger;
  * <p>
  * helpers: teacher's teaching assistants
  */
-
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
@@ -133,6 +132,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         }
     }
 
+    /**
+     * move to dock that being clicked
+     * @param dock {@link Dock} dock to be shown
+     */
     public void onDockListItemClicked(Dock dock) {
         try {
             DockScreenHandler dockScreenHandler = new DockScreenHandler(this.stage, Path.DOCK_PATH, dock);
@@ -147,7 +150,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         }
     }
 
-
+    /**
+     * move to session screen
+     * @param session {@link Session}
+     */
     public void moveToSessionScreen(Session session) {
         SessionScreenController sessionScreenController = new SessionScreenController();
         try {
@@ -162,6 +168,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         }
     }
 
+    /**
+     * move to bike screen
+     * @param bike {@link Bike}
+     */
     public void moveToBikeViewScreen(Bike bike) {
         try {
             BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage,
