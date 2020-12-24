@@ -28,7 +28,6 @@ import java.util.ArrayList;
  * <p>
  * helpers: teacher's teaching assistants
  */
-
 public class SessionManager {
 
     private static SessionManager instance; //singleton
@@ -58,10 +57,10 @@ public class SessionManager {
     /**
      * This method is for create new Session object and update it details to the DB
      *
-     * @param bike            Bike
-     * @param card            Card
-     * @param rentTransaction PaymentTransaction
-     * @return newSession new Session object
+     * @param bike {@link Bike} Bike
+     * @param card {@link CreditCard} Card
+     * @param rentTransaction {@link PaymentTransaction} PaymentTransaction
+     * @return {@link Session} newSession new Session object
      * @author mHoang
      */
     public Session createSession(Bike bike, CreditCard card, PaymentTransaction rentTransaction) {
@@ -76,8 +75,8 @@ public class SessionManager {
     /**
      * This method is to end the session and update in DB
      *
-     * @param session           session to be ended
-     * @param returnTransaction transaction to refund deposit after deducting rental fee
+     * @param session {@link Session} session to be ended
+     * @param returnTransaction {@link PaymentTransaction} transaction to refund deposit after deducting rental fee
      * @return affectedRows number of affected rows in DB
      * @author mHoang
      */
@@ -126,9 +125,9 @@ public class SessionManager {
     /**
      * for inserting new session to DB
      *
-     * @param newSession instance of session to be inserted
+     * @param newSession {@link Session} instance of session to be inserted
      * @return id new record id
-     * @author mHoang
+     * @author mHoang, thaian
      */
     private String insertNewSessions(Session newSession) {
         String SQL = "INSERT INTO session(bike_id, card_id, rent_transactionid, start_time) "
@@ -222,6 +221,11 @@ public class SessionManager {
     }
 
 
+    /**
+     * Pause a renting session
+     * @param session {@link Session}
+     * @return number of affected row in database
+     */
     private int pauseSession(Session session) {
         int realRentingTime = (int) (session.getLastRentTimeBeforeLock() + Utils.minusLocalDateTime(session.getLastResumeTime(), LocalDateTime.now()));
         session.setLastRentTimeBeforeLock(realRentingTime);
@@ -245,6 +249,11 @@ public class SessionManager {
         return affectedRows;
     }
 
+    /**
+     * Resume a paused renting session
+     * @param session {@link Session}
+     * @return number of affected row in database
+     */
     private int resumeSession(Session session) {
         session.setLastResumeTime(LocalDateTime.now());
         session.setActive(true);
@@ -267,6 +276,10 @@ public class SessionManager {
         return affectedRows;
     }
 
+    /**
+     * pause / resume a session
+     * @param session {@link Session}
+     */
     public void switchSessionState(Session session) {
         if (session.isActive()) {
             pauseSession(session);

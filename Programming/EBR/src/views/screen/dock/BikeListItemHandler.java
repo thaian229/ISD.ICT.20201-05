@@ -2,17 +2,29 @@ package views.screen.dock;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import model.bike.*;
 import utils.Path;
 import views.screen.FXMLScreenHandler;
 
-import java.io.File;
 import java.io.IOException;
 
+/**
+ * Handler to display bike in the bike list of dock screen
+ *
+ * @author mHoang
+ * <p>
+ * created_at: 6/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
 public class BikeListItemHandler extends FXMLScreenHandler {
     @FXML
     private Text bikeType;
@@ -44,6 +56,12 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         super(screenPath);
     }
 
+    /**
+     * Constructor and initial setup for screen
+     * @param screenPath path to fxml file
+     * @param dockScreenHandler {@link DockScreenHandler}
+     * @throws IOException IO errors
+     */
     public BikeListItemHandler(String screenPath, DockScreenHandler dockScreenHandler) throws IOException {
         super(screenPath);
         this.dockScreenHandler = dockScreenHandler;
@@ -52,6 +70,9 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         });
     }
 
+    /**
+     * set all images
+     */
     private void setImages() {
         setImage(batteryIcon, Path.BATTERY_ICON);
         System.out.println();
@@ -90,6 +111,9 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         this.setImages();
     }
 
+    /**
+     * update view of bike info
+     */
     private void setBikeInfo() {
         bikeCode.setText("" + bike.getBarcode());
         if (bike instanceof StandardElectricalBike) {

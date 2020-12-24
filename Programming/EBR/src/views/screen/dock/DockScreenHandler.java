@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.*;
@@ -20,6 +19,21 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Handler for Dock View Screen
+ *
+ * @author mHoang
+ * <p>
+ * created_at: 6/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
 public class DockScreenHandler extends BaseScreenHandler implements Initializable {
 
     @FXML
@@ -99,7 +113,9 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         });
     }
 
-
+    /**
+     * Show all bikes in dock
+     */
     public void displayBikeList() {
         hboxBikeList.getChildren().clear();
 
@@ -136,6 +152,9 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         setImage(dockImg, dock.getImageURL());
     }
 
+    /**
+     * set all label and text fields value
+     */
     private void setDockDetail() {
         dockName.setText(dock.getName());
         dockAddress.setText(dock.getLocation());
@@ -164,6 +183,10 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         dockTwinEBikeNum.setText("" + teb);
     }
 
+    /**
+     * move to bike screen
+     * @param bike {@link Bike} bike to be shown
+     */
     public void BikeScreenTransition(Bike bike) {
         try {
             bike.setDock(dock);

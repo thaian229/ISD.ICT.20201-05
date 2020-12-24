@@ -3,7 +3,6 @@ package views.screen.popup;
 import common.exception.BarcodeNotFoundException;
 import common.exception.InvalidBarcodeFormatException;
 import controller.BarcodePopupController;
-import controller.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,12 +12,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.bike.Bike;
-import model.bike.BikeManager;
 import model.dock.DockManager;
 import model.session.Session;
 import model.session.SessionManager;
 import utils.Path;
-import views.screen.BaseScreenHandler;
 import views.screen.home.HomeScreenHandler;
 
 import java.io.IOException;
@@ -27,7 +24,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * class for ...
+ * class for Barcode Popup
  *
  * @author mHoang
  * <p>
@@ -65,12 +62,23 @@ public class BarcodePopup extends Popup implements Initializable {
         this.setBController(new BarcodePopupController());
     }
 
+    /**
+     * Init popup then return the popup
+     * @param homeScreenHandler {@link HomeScreenHandler homeScreenHandler}
+     * @return {@link BarcodePopup} the new Barcode Popup
+     * @throws IOException IO error
+     */
     private static BarcodePopup popup(HomeScreenHandler homeScreenHandler) throws IOException {
         BarcodePopup popup = new BarcodePopup(new Stage(), homeScreenHandler);
         popup.stage.initStyle(StageStyle.DECORATED);
         return popup;
     }
 
+    /**
+     * show the barcode popup
+     * @param homeScreenHandler {@link HomeScreenHandler homeScreenHandler}
+     * @throws IOException IO error
+     */
     public static void display(HomeScreenHandler homeScreenHandler) throws IOException {
         popup(homeScreenHandler).show();
     }
@@ -87,6 +95,9 @@ public class BarcodePopup extends Popup implements Initializable {
         });
     }
 
+    /**
+     * Read in barcode, validate then move to corresponding screen
+     */
     private void handleBarcodeEnter() {
         errorText.setVisible(false);
         // Take barcode
