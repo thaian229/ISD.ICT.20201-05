@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author khang
  * <p>
- * created_at: 4/12/2020
+ * created_at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -36,7 +36,6 @@ public class InvoiceManager {
     private static InvoiceManager instance;
     private ArrayList<Invoice> invoiceHistory = new ArrayList<>();
     /**
-     * @author khang
      * This constructor will refresh the Invoice list when the object is initialized
      */
     public InvoiceManager(){
@@ -46,9 +45,7 @@ public class InvoiceManager {
 
     /**
      * This is the InvoiceManager provider
-     *
      * @return instance InvoiceManager object
-     * @author khang
      */
     public static InvoiceManager getInstance(){
         if(instance == null){
@@ -57,11 +54,9 @@ public class InvoiceManager {
         return instance;
     }
     /**
-     * This method is for create new Invoice object and update it details to the DB
-     *
-     * @param session_id    session_id
-     * @return newInvoice new Invoice object
-     * @author khang
+     * This method is for create new Invoice using session id and update it to the DB
+     * @param session_id session_id
+     * @return new Invoice object
      */
     public Invoice createInvoice(String session_id) {
         Invoice newInvoice = new Invoice(session_id);
@@ -71,6 +66,12 @@ public class InvoiceManager {
         return newInvoice;
     }
 
+    /**
+     * Complete invoice by adding its total_charge to the DB
+     * @param invoice chosen invoice
+     * @param total_charge total charge of the session corresponding to chosen invoice
+     * @return affected rows number of affected row in the DB
+     */
     public int finalInvoice(Invoice invoice, int total_charge) {
         invoice.setTotalFees(total_charge);
 
@@ -92,10 +93,8 @@ public class InvoiceManager {
     }
     /**
      * for inserting new invoice to DB
-     *
-     * @param newInvoice
-     * @return id new record id
-     * @author khang
+     * @param newInvoice new invoice
+     * @return new record id
      */
     private String updateInvoiceHistory(Invoice newInvoice) {
         String SQL = "INSERT INTO invoice(session_id) "
@@ -131,7 +130,6 @@ public class InvoiceManager {
     }
 
     /**
-     * @author khang
      * get invoice history from DB and store them to the list
      */
     public void refreshInvoiceHistory() {

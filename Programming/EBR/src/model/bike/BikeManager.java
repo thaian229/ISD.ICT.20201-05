@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * Model to manage all bikes and handle database connections
  * that related to bikes' info
  *
- * @author Bui Tu Hoang
+ * @author Bui Tu Hoang, mHoang99
  * <p>
- * creted at: 24/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -28,6 +28,9 @@ public class BikeManager {
     public static final int STANDARD_ELECTRICAL_BIKE_CODE = 3;
     public static final int TWIN_ELECTRICAL_BIKE_CODE = 4;
 
+    /**
+     * Constructor
+     */
 
     public BikeManager() {
         this.bikeList = new ArrayList<>();
@@ -36,7 +39,6 @@ public class BikeManager {
 
     /**
      * Get the instance of BikeManager
-     *
      * @return BikeManager instance
      */
     public static BikeManager getInstance() {
@@ -56,7 +58,6 @@ public class BikeManager {
 
     /**
      * Add a bike to bike list
-     *
      * @param bike Instance of bike to be put in
      */
     public void addBike(Bike bike) {
@@ -108,6 +109,11 @@ public class BikeManager {
         }
     }
 
+    /**
+     * Get bike list in chosen dock
+     * @param dockId id of chosen dock
+     * @return list of bikes in dock
+     */
     public ArrayList<Bike> getBikeListInDock(String dockId) {
         String sql = "SELECT * FROM bike\n" +
                 "LEFT JOIN e_bike on bike.id = e_bike.bike_id\n" +
@@ -147,6 +153,12 @@ public class BikeManager {
         return bikeListOfDock;
     }
 
+    /**
+     * Create standard bike
+     * @param resultSet result
+     * @return standard bike
+     * @throws SQLException SQL error
+     */
     private StandardBike createStandardBike(ResultSet resultSet) throws SQLException {
         StandardBike bike = new StandardBike(
                 resultSet.getString("id"),
@@ -163,7 +175,12 @@ public class BikeManager {
 
         return bike;
     }
-
+    /**
+     * Create twin bike
+     * @param resultSet result
+     * @return twin bike
+     * @throws SQLException SQL error
+     */
     private TwinBike createTwinBike(ResultSet resultSet) throws SQLException {
         TwinBike bike = new TwinBike(resultSet.getString("id"),
                 resultSet.getInt("barcode"),
@@ -178,7 +195,12 @@ public class BikeManager {
 
         return bike;
     }
-
+    /**
+     * Create standard electrical bike
+     * @param resultSet result
+     * @return standard electrical bike
+     * @throws SQLException SQL error
+     */
     private StandardElectricalBike createStandardElectricalBike(ResultSet resultSet) throws SQLException {
         StandardElectricalBike bike = new StandardElectricalBike(resultSet.getString("id"),
                 resultSet.getInt("barcode"),
@@ -193,7 +215,12 @@ public class BikeManager {
         bike.setTimeLeft(resultSet.getInt("time_remain"));
         return bike;
     }
-
+    /**
+     * Create twin electrical bike
+     * @param resultSet result
+     * @return twin electrical bike
+     * @throws SQLException SQL error
+     */
     private TwinElectricalBike createTwinElectricalBike(ResultSet resultSet) throws SQLException {
         TwinElectricalBike bike = new TwinElectricalBike(resultSet.getString("id"),
                 resultSet.getInt("barcode"),
@@ -212,7 +239,6 @@ public class BikeManager {
 
     /**
      * Get bike by bike's id
-     *
      * @param id Bike's id
      * @return instance of that bike, null if not found
      */
@@ -225,7 +251,6 @@ public class BikeManager {
 
     /**
      * Get bike by bike's barcode
-     *
      * @param barcode Bike's barcode
      * @return instance of that bike, null if not found
      */
@@ -236,6 +261,11 @@ public class BikeManager {
         return null;
     }
 
+    /**
+     * Update dock of bike after renting or returning this bike
+     * @param bike bike in use
+     * @param dockId dock's id
+     */
     public void updateDockOfBike(Bike bike, String dockId) {
         String SQL = "UPDATE bike "
                 + "SET dock_id = ?::uuid "

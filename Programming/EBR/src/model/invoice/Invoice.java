@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  *
  * @author khang
  * <p>
- * created_at: 4/12/2020
+ * created_at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -32,15 +32,30 @@ public class Invoice {
    private int totalFees;
  //  private int returned;
 
-
+    /**
+     * Constructor using session id
+     * @param session_id id of chosen session
+     */
     public Invoice(String session_id){
         this.sessionId = session_id;
     }
+
+    /**
+     * Constructor
+     * @param id invoice id
+     * @param sessionId session id
+     */
     public Invoice(String id, String sessionId){
         this.id = id;
         this.sessionId = sessionId;
     }
 
+    /**
+     * Constructor
+     * @param id invoice id
+     * @param session_id session id
+     * @param total_charge total charge of renting session
+     */
    public Invoice(String id, String session_id, int total_charge) {
         this.id = id;
         this.sessionId = session_id;
@@ -130,22 +145,9 @@ public class Invoice {
         return SessionManager.getInstance().getSessionById(sessionId).getReturnTransaction();
     }
 
-//    public int getReturned() {
-//        return returned;
-//    }
-//
-//    public void setReturned(int returned) {
-//        this.returned = returned;
-//    }
 
-    /**
-     * This method is for comparing 2 Invoice objects
-     *
-     * @param o object
-     * @return true if equals
-     * @author khang
-     */
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -157,43 +159,6 @@ public class Invoice {
 
 
 
-    //For test
-
-
-    private int depositForTest;
-    private Bike bikeForTest;
-    private LocalDateTime startTimeForTest;
-    private LocalDateTime endTimeForTest;
-
-    public void setDepositForTest(int depositForTest){
-        this.depositForTest = depositForTest;
-    }
-    public int getDepositForTest(){
-        return depositForTest;
-    }
-    public void setBikeForTest(Bike bikeForTest){
-        this.bikeForTest = bikeForTest;
-    }
-
-    public Bike getBikeForTest(){
-        return bikeForTest;
-    }
-
-    public LocalDateTime getStartTimeForTest() {
-        return startTimeForTest;
-    }
-
-    public void setStartTimeForTest(LocalDateTime startTimeForTest) {
-        this.startTimeForTest = startTimeForTest;
-    }
-
-    public LocalDateTime getEndTimeForTest() {
-        return endTimeForTest;
-    }
-
-    public void setEndTimeForTest(LocalDateTime endTimeForTest) {
-        this.endTimeForTest = endTimeForTest;
-    }
 
 
 

@@ -38,11 +38,9 @@ public class SessionScreenController extends BaseController {
 
     /**
      * This method is for return a bike to a chosen dock
-     *
      * @param session current renting session
      * @param dock    dock that bike will be put in
      * @return true if bike returned successfully
-     * @author mHoang
      */
     public boolean returnBike(Session session, Dock dock) {
         try {
@@ -55,10 +53,8 @@ public class SessionScreenController extends BaseController {
 
     /**
      * This method is for calculating the current renting fees
-     *
      * @param session session to be computed fees
-     * @return totalCharge - the amount of money that customer has to pay until now
-     * @author mHoang
+     * @return amount of money that customer has to pay until now
      */
     public int calculateCurrentRentingFees(Session session) {
         try {
@@ -80,6 +76,10 @@ public class SessionScreenController extends BaseController {
         return session.getSessionLength();
     }
 
+    /**
+     * This method is used to change lock state of bike
+     * @param session session in use
+     */
     public void changeBikeLockState(Session session) {
         SessionManager.getInstance().switchSessionState(session);
     }

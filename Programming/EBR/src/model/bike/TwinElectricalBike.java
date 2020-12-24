@@ -5,7 +5,7 @@ package model.bike;
  *
  * @author Bui Tu Hoang
  * <p>
- * creted at: 24/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>

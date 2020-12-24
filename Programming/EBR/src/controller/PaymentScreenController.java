@@ -21,24 +21,35 @@ import java.util.Map;
  *
  * @author Nguyen Thai An
  * <p>
- * creted at: 25/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
  * teacher's name: Dr. Nguyen Thi Thu Trang
  * <p>
  * class name: TT.CNTT ICT 02 - K62
+ * <p>
+ * helpers: teacher's teaching assistants
  */
 public class PaymentScreenController extends BaseController {
 
     private Bike bike;
     private HashMap<String, String> cardInfo;
 
+    /**
+     * Constructor
+     * @param bike bike in use
+     */
     public PaymentScreenController(Bike bike) {
         this.bike = bike;
         cardInfo = new HashMap<>();
     }
 
+    /**
+     * Constructor
+     * @param bike bike in use
+     * @param cardInfo all field of card in use
+     */
     public PaymentScreenController(Bike bike, HashMap<String, String> cardInfo) {
         this.bike = bike;
         this.cardInfo = cardInfo;
@@ -70,6 +81,8 @@ public class PaymentScreenController extends BaseController {
      * @param expirationDate date of expiration of the credit card
      * @param securityCode   CVV code
      * @return respond
+     * @throws PaymentException payment error
+     * @throws UnrecognizedException unrecognized error
      */
     public PaymentTransaction payDeposit(int amount, String contents, String cardNumber, String cardHolderName,
                                          String expirationDate, String securityCode) throws PaymentException, UnrecognizedException {
@@ -95,9 +108,7 @@ public class PaymentScreenController extends BaseController {
 
     /**
      * validating format of card info form
-     *
      * @param creditCardForm all fields of form forward from View
-     * @return
      */
     public void validateCreditCardForm(HashMap<String, String> creditCardForm) throws Exception{
         validateCardNumber(creditCardForm.get("cardNumber"));
@@ -105,6 +116,7 @@ public class PaymentScreenController extends BaseController {
         validateExpDate(creditCardForm.get("expDate"));
         validateSecurityCode(creditCardForm.get("securityCode"));
     }
+
 
     public void validateCardUnused(String cardNumber) {
         for (Session session : SessionManager.getInstance().getSessions()) {
@@ -116,9 +128,9 @@ public class PaymentScreenController extends BaseController {
 
     /**
      * validate card number only contains digits, letters and underscore
-     *
      * @param cardNumber string of card number
-     * @return validation result
+     * @throws NullCardNumberException null card number
+     * @throws InvalidCardNumberFormatException wrong card number format
      */
     public void validateCardNumber(String cardNumber) {
         // check card number is not empty
@@ -132,9 +144,9 @@ public class PaymentScreenController extends BaseController {
 
     /**
      * validate card owner only contains digits, letters and spaces
-     *
      * @param cardOwner string of card owner
-     * @return validation result
+     * @throws NullCardOwnerException card owner is null
+     * @throws InvalidCardOwnerFormatException wrong card owner format
      */
     public void validateCardOwner(String cardOwner) {
         // check card owner is not empty
@@ -144,9 +156,9 @@ public class PaymentScreenController extends BaseController {
 
     /**
      * validate security code only contains digits and length is 3
-     *
      * @param securityCode string of security code
-     * @return validation result
+     * @throws NullSecurityCodeException security code is null
+     * @throws InvalidSecurityCodeFormatException wrong security code format
      */
     public void validateSecurityCode(String securityCode) {
         // check security code is not empty
@@ -160,9 +172,9 @@ public class PaymentScreenController extends BaseController {
 
     /**
      * validate expiration date has correct format MMyy and not yet reached
-     *
      * @param expDate string of expiration date
-     * @return validation result
+     * @throws NullExpDateException expiration date is null
+     * @throws InvalidExpDateFormatException wrong expiration date format
      */
     public void validateExpDate(String expDate) throws NullPointerException {
         // check expire date is not empty

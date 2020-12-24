@@ -7,7 +7,7 @@ import model.dock.Dock;
  *
  * @author Bui Tu Hoang
  * <p>
- * creted at: 24/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -64,11 +64,18 @@ public class Bike {
         this.charge = charge;
     }
 
+    /**
+     * This method is used to take bike out of dock
+     */
     public void takeBikeOutOfDock() {
         this.dock.removeBike(this);
          BikeManager.getInstance().updateDockOfBike(this, "");
     }
 
+    /**
+     * This method is used to put bike into dock
+     * @param dock chosen dock
+     */
     public void putBikeInDock(Dock dock) {
         dock.addBike(this);
         BikeManager.getInstance().updateDockOfBike(this, dock.getId());

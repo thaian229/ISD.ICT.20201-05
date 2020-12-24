@@ -88,7 +88,11 @@ public class DockManager {
         return null;
     }
 
-
+    /**
+     * Search dock by its name or address
+     * @param nameOrAddress dock's name or dock's address
+     * @return searched dock
+     */
     public ArrayList<Dock> searchDockByKeyword(String nameOrAddress) {
         ArrayList<Dock> searchedDock = new ArrayList<>();
         for (Dock dock : dockList) {
