@@ -146,15 +146,15 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         int tb = 0;
         int eb = 0;
         int teb = 0;
-        for(Bike bike : dock.getBikeList()) {
-            if(bike instanceof StandardBike) {
-                sb += 1;
-            } else if (bike instanceof TwinBike) {
+        for (Bike bike : dock.getBikeList()) {
+            if (bike instanceof TwinBike) {
                 tb += 1;
-            } else if (bike instanceof StandardElectricalBike) {
-                eb += 1;
+            } else if (bike instanceof StandardBike) {
+                sb += 1;
             } else if (bike instanceof TwinElectricalBike) {
                 teb += 1;
+            } else if (bike instanceof StandardElectricalBike) {
+                eb += 1;
             }
         }
 

@@ -179,10 +179,6 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
             if (this.session.getBike() instanceof StandardElectricalBike) {
                 StandardElectricalBike eBike = (StandardElectricalBike) bike;
-                sessionBattery.setText(Float.toString(eBike.getBattery()));
-                sessionUsage.setText(Integer.toString(eBike.getTimeLeft()));
-            } else if (this.session.getBike() instanceof TwinElectricalBike) {
-                TwinElectricalBike eBike = (TwinElectricalBike) bike;
                 sessionBattery.setText(eBike.getBattery() + "%");
                 sessionUsage.setText(eBike.getTimeLeft() + " minutes");
             } else {

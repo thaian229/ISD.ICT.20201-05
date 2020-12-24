@@ -7,7 +7,6 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="51.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
@@ -29,14 +28,14 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
-      <Pane layoutX="111.0" layoutY="234.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="81.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="240.0">
+      <Pane layoutX="103.0" layoutY="237.0" maxHeight="-Infinity" prefHeight="40.0" prefWidth="96.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="237.0">
          <children>
-            <Text fx:id="bikeBattery" fill="#0fd086" layoutX="20.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="75%" textAlignment="CENTER" wrappingWidth="61.0">
+            <Text fx:id="bikeBattery" fill="#0fd086" layoutX="25.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="75%" textAlignment="RIGHT" wrappingWidth="60.0">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Text>
-            <ImageView fx:id="batteryIcon" fitHeight="20.0" fitWidth="20.0" layoutX="3.0" layoutY="8.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="batteryIcon" fitHeight="20.0" fitWidth="20.0" layoutX="4.0" layoutY="10.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../assets/images/icons/battery_icon.png" />
                </image>

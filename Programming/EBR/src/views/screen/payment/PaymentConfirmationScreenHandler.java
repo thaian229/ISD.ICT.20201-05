@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -53,7 +54,15 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
     private Text barcode;
 
     @FXML
-    private Text cardNumber;
+    private TextField cardNumber;
+    @FXML
+    private TextField cardOwner;
+    @FXML
+    private Text bikeType;
+    @FXML
+    private TextField expDate;
+    @FXML
+    private TextField securityCode;
 
     @FXML
     private Text deposit;
@@ -135,9 +144,13 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         try {
             barcode.setText(Integer.toString(this.controller.getBike().getBarcode()));
             cardNumber.setText(this.controller.getCardInfo().get("cardNumber"));
+            cardOwner.setText(this.controller.getCardInfo().get("cardOwner"));
+            expDate.setText(this.controller.getCardInfo().get("expDate"));
+            securityCode.setText(this.controller.getCardInfo().get("securityCode"));
+            bikeType.setText(this.controller.getBike().getBikeType());
             deposit.setText(this.controller.getBike().getDeposit() + " " + Configs.CURRENCY);
             rentalFee.setText(this.controller.getBike().getCharge() + " " + Configs.CURRENCY);
-            hold.setText(Integer.toString(this.controller.getBike().getDeposit()) + " " + Configs.CURRENCY);
+            hold.setText(this.controller.getBike().getDeposit() + " " + Configs.CURRENCY);
         } catch (NullPointerException exp) {
             exp.printStackTrace();
         }
@@ -145,7 +158,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
 
     private void handleRentingConfirmation() throws IOException {
         String contents = "pay order";
-        try{
+        try {
             PaymentTransaction rentTransaction = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,
                     this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                     this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
@@ -163,22 +176,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         } catch (PaymentException | UnrecognizedException e) {
             this.getPreviousScreen().show();
             AlertPopup.error(e.getMessage());
-            //TODO: CATCH EXCEPTION HERE
         }
-//        PaymentTransaction rentTransaction = this.controller.payDeposit(this.controller.getBike().getDeposit(), contents,
-//                this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
-//                this.controller.getCardInfo().get("expDate"), this.controller.getCardInfo().get("securityCode"));
-//
-//        if (rentTransaction == null) {
-//            getPreviousScreen().show();
-//        } else {
-//            // Take bike out of dock
-//            this.controller.getBike().takeBikeOutOfDock();
-//            // Save then change screen
-//            rentTransaction.setMethod("Credit Card");
-//            rentTransaction.setType("rent");
-//            saveTransaction(rentTransaction);
-//        }
     }
 
 

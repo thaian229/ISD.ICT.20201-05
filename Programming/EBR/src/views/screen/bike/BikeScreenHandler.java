@@ -51,7 +51,24 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     private Text bikeCharge;
 
     @FXML
+    private Text saddleNum;
+
+    @FXML
+    private Text pedalsNum;
+
+    @FXML
+    private Text rearSeatNum;
+
+    @FXML
     private ImageView bikeImage;
+    @FXML
+    private ImageView saddleImg;
+    @FXML
+    private ImageView pedalsImg;
+    @FXML
+    private ImageView rearSeatImg;
+    @FXML
+    private ImageView batteryImg;
 
     @FXML
     private Button rentNowButton;
@@ -62,13 +79,12 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         super(stage, screenPath);
         this.bike = bike;
         super.screenTitle = "Bike Screen";
+        this.setImages();
         displayBike();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.setImages();
-
         logo.setOnMouseClicked(e -> homeScreenHandler.show());
         back.setOnMouseClicked(e -> {
             BaseScreenHandler previousScreen = this.getPreviousScreen();
@@ -96,21 +112,19 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         try {
             bikeBarcode.setText(Integer.toString(bike.getBarcode()));
             bikeDeposit.setText(bike.getDeposit() + " " + Configs.CURRENCY);
-            bikeCharge.setText(bike.getCharge() + " " + Configs.CURRENCY);
+            bikeCharge.setText(bike.getCharge() + " " + Configs.CURRENCY + "/h");
             bikeDockName.setText(bike.getDock().getName());
+            pedalsNum.setText(bike.getPairOfPedals() + "");
+            saddleNum.setText(bike.getSaddle() + "");
+            rearSeatNum.setText(bike.getRearSeat() + "");
             if (bike instanceof StandardElectricalBike) {
                 bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " seconds");
-            } else if (bike instanceof TwinElectricalBike) {
-                bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
-                bikeUsage.setText(((TwinElectricalBike) bike).getTimeLeft() + " seconds");
+                bikeUsage.setText(((StandardElectricalBike) bike).getTimeLeft() + " minutes");
             } else {
                 bikeBattery.setVisible(false);
                 bikeUsage.setVisible(false);
+                batteryImg.setVisible(false);
             }
-            File fileBikeImage = new File(bike.getImageURL());
-            Image img = new Image(fileBikeImage.toURI().toString());
-            bikeImage.setImage(img);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -119,5 +133,10 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     private void setImages() {
         setImage(logo, Path.LOGO_ICON);
         setImage(back, Path.BACK_NAV_ICON);
+        setImage(saddleImg, Path.SADDLE_ICON);
+        setImage(pedalsImg, Path.PEDALS_ICON);
+        setImage(rearSeatImg, Path.REAR_SEAT_ICON);
+        setImage(batteryImg, Path.BATTERY_ICON);
+        setImage(bikeImage, bike.getImageURL());
     }
 }

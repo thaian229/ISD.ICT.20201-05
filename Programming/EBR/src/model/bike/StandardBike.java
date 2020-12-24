@@ -56,4 +56,9 @@ public class StandardBike extends Bike {
         this.deposit = value/10;
         this.charge = charge;
     }
+
+    @Override
+    public String getBikeType() {
+        return "Standard Bike";
+    }
 }

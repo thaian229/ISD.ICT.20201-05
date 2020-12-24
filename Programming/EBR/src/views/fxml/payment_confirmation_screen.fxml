@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -27,16 +37,16 @@
                 <DropShadow />
             </effect>
         </AnchorPane>
-        <Pane layoutX="448.0" layoutY="148.0" prefHeight="570.0" prefWidth="470.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 15;">
+        <Pane layoutX="198.0" layoutY="132.0" prefHeight="570.0" prefWidth="970.0" style="-fx-border-color: #FAE715; -fx-border-width: 3; -fx-border-radius: 15;" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="132.0">
             <children>
-            <ImageView fx:id="paymentConfirmationBikeImage" fitWidth="250.0" layoutX="110.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="paymentConfirmationBikeImage" fitWidth="300.0" layoutX="75.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../assets/images/bikes/StandardBike.png" />
                </image></ImageView>
-                <GridPane layoutX="63.0" layoutY="215.0" prefHeight="138.0" prefWidth="343.0">
+                <GridPane layoutX="90.0" layoutY="284.0" prefHeight="238.0" prefWidth="343.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="154.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="189.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -45,108 +55,71 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Pane>
-                     <children>
-                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BARCODE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Text>
-                     </children></Pane>
-                  <Pane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
-                     <children>
-                        <Text fx:id="barcode" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXX">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
-                     <children>
-                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CARD NUMBER">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="44.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <Text fx:id="cardNumber" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="121139_group5_2020">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="182.0" layoutY="44.0" GridPane.rowIndex="2">
-                     <children>
-                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEPOSIT">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="79.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <Text fx:id="deposit" fill="#15b82f" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="182.0" layoutY="79.0" GridPane.rowIndex="3">
-                     <children>
-                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHARGE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="113.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <children>
-                        <Text fx:id="rentalFee" fill="#15b82f" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
+                  <Text opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="BARCODE">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="barcode" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXX" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Arial Bold Italic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKE TYPE" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="bikeType" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="Standard Bike" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial Bold Italic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="DEPOSIT" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="deposit" fill="#15b82f" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Arial Bold Italic" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="CHARGE" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="rentalFee" fill="#15b82f" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Arial Bold Italic" size="18.0" />
+                     </font>
+                  </Text>
                     </children>
                 </GridPane>
-                <Line endX="168.5999755859375" layoutX="233.0" layoutY="379.0" startX="-165.0" />
-            <GridPane layoutX="68.0" layoutY="394.0" prefHeight="50.0" prefWidth="335.0">
+                <Line endX="163.0" endY="80.0" layoutX="312.0" layoutY="435.0" startX="163.0" startY="-375.0" stroke="#c7c7c7" />
+            <GridPane layoutX="541.0" layoutY="378.0" prefHeight="50.0" prefWidth="335.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="90.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="245.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="127.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="208.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Pane prefHeight="50.0" prefWidth="132.0">
-                     <children>
-                        <Text layoutX="6.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOLD:">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Text>
-                     </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <children>
-                        <Text fx:id="hold" fill="#15b82f" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" textAlignment="CENTER" wrappingWidth="245.0000000000001">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Text>
-                     </children></Pane>
+                  <Text opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="AMOUNT">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="hold" fill="#15b82f" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" textAlignment="RIGHT" wrappingWidth="210.0" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
                </children>
             </GridPane>
-                <GridPane layoutX="68.0" layoutY="472.0" prefHeight="50.0" prefWidth="335.0">
+                <GridPane layoutX="541.0" layoutY="452.0" prefHeight="50.0" prefWidth="335.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.20001220703125" minWidth="10.0" prefWidth="62.4000244140625" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.20001220703125" minWidth="10.0" prefWidth="272.5999755859375" />
@@ -173,9 +146,9 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <children>
-                                <Button fx:id="paymentConfirmationConfirmButton" mnemonicParsing="false" prefHeight="52.0" prefWidth="275.0" style="-fx-background-color: #8C36C0; -fx-border-radius: 6; -fx-background-radius: 6;" text="CONTINUE" textAlignment="CENTER" textFill="WHITE">
+                                <Button fx:id="paymentConfirmationConfirmButton" mnemonicParsing="false" prefHeight="52.0" prefWidth="275.0" style="-fx-background-color: #8C36C0; -fx-border-radius: 6; -fx-background-radius: 6;" text="CONFIRM PAYMENT" textAlignment="CENTER" textFill="WHITE">
                                     <font>
-                                        <Font size="15.0" />
+                                        <Font name="Arial Bold" size="18.0" />
                                     </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -186,6 +159,88 @@
                         </Pane>
                     </children>
                 </GridPane>
+                <GridPane layoutX="535.0" layoutY="74.0" prefHeight="260.0" prefWidth="343.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Pane>
+                            <children>
+                                <TextField fx:id="cardOwner" disable="true" layoutY="40.0" prefHeight="36.0" prefWidth="343.0" promptText="Group 5" style="-fx-border-color: #AAAAAA; -fx-border-width: 2; -fx-border-radius: 3;" text="Group 5">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </TextField>
+                                <Label layoutY="14.0" text="Card Owner" textFill="#505050">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </Pane>
+                        <Pane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+                            <children>
+                                <TextField fx:id="cardNumber" disable="true" layoutY="40.0" prefHeight="36.0" prefWidth="343.0" promptText="121319_group5_2020" style="-fx-border-color: #AAAAAA; -fx-border-width: 2; -fx-border-radius: 3;" text="121319_group5_2020">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </TextField>
+                                <Label layoutY="14.0" text="Card Number" textFill="#505050">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="305.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../assets/images/icons/credit_card_icon.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                            <children>
+                                <Pane prefHeight="80.0" prefWidth="168.0">
+                                    <children>
+                                        <TextField fx:id="expDate" disable="true" layoutY="40.0" prefHeight="36.0" prefWidth="151.0" promptText="1125" style="-fx-border-color: #AAAAAA; -fx-border-width: 2; -fx-border-radius: 3;" text="1125">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </TextField>
+                                        <Label layoutY="14.0" text="EXP Date" textFill="#505050">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane>
+                                    <children>
+                                        <TextField fx:id="securityCode" disable="true" layoutX="4.0" layoutY="40.0" prefHeight="36.0" prefWidth="168.0" promptText="721" style="-fx-border-color: #AAAAAA; -fx-border-width: 2; -fx-border-radius: 3;" text="721">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </TextField>
+                                        <Label layoutX="4.0" layoutY="14.0" text="Security Code" textFill="#505050">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+                <Text fx:id="errorText" fill="RED" layoutX="497.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="423.0">
+                    <font>
+                        <Font name="Arial Bold" size="18.0" />
+                    </font>
+                </Text>
             </children>
         </Pane>
     </children>
