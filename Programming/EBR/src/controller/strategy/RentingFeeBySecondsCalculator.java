@@ -18,6 +18,7 @@ import model.session.Session;
  * class name: TT.CNTT ICT 02 - K62
  */
 public class RentingFeeBySecondsCalculator extends RentingFeeCalculator {
+
     @Override
     public int calculateCurrentRentingFees(Session session) {
         Bike bike = session.getBike();

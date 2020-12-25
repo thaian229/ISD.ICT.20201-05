@@ -17,7 +17,17 @@ import model.session.Session;
  * class name: TT.CNTT ICT 02 - K62
  */
 public abstract class RentingFeeCalculator {
+    /**
+     *
+     * @param session {@link Session} session to be calculated for
+     * @return calculated fees
+     */
     public abstract int calculateCurrentRentingFees(Session session);
 
+    /**
+     *
+     * @param invoice {@link Invoice} invoice to be calculated for
+     * @return calculated fees
+     */
     public abstract int calculateTotalFees(Invoice invoice);
 }
