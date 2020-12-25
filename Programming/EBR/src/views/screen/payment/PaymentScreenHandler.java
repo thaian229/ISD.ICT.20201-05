@@ -67,7 +67,7 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         super.screenTitle = "Payment Screen";
         this.setImages();
         this.setBController(paymentScreenController);
-        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, false, true, true).getContent());
     }
 
     @Override

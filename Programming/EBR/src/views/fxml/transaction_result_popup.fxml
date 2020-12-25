@@ -15,47 +15,47 @@
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Text>
-            <Text fill="#acacac" layoutX="274.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Number" textAlignment="CENTER" underline="true" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="120.0">
+            <Text fill="#acacac" layoutX="274.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CARD NUMBER" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="120.0">
                <font>
-                  <Font name="Arial Italic" size="18.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Text fill="#acacac" layoutX="249.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction Details" underline="true" AnchorPane.leftAnchor="249.0" AnchorPane.topAnchor="200.0">
+            <Text fill="#acacac" layoutX="223.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRANSACTION DETAILS" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="200.0">
                <font>
-                  <Font name="Arial Italic" size="18.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Text fill="#acacac" layoutX="295.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" underline="true" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="280.0">
+            <Text fill="#acacac" layoutX="288.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMOUNT" AnchorPane.leftAnchor="288.0" AnchorPane.topAnchor="280.0">
                <font>
-                  <Font name="Arial Italic" size="18.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Text fill="#acacac" layoutX="264.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Method" underline="true" AnchorPane.leftAnchor="264.0" AnchorPane.topAnchor="360.0">
+            <Text fill="#acacac" layoutX="241.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAYMENT METHOD" AnchorPane.leftAnchor="241.0" AnchorPane.topAnchor="360.0">
                <font>
-                  <Font name="Arial Italic" size="18.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="paymentMethod" layoutX="1.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="400.0">
-               <font>
-                  <Font name="Arial" size="20.0" />
-               </font>
-            </Text>
-            <Text fx:id="amount" layoutX="1.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="320.0">
+            <Text fx:id="paymentMethod" layoutX="1.0" layoutY="368.0" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="400.0">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="transactionDetails" layoutX="1.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="240.0">
+            <Text fx:id="amount" layoutX="1.0" layoutY="308.0" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="320.0">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="cardNumber" layoutX="1.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="160.0">
+            <Text fx:id="transactionDetails" layoutX="1.0" layoutY="248.0" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="240.0">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Text>
-            <Button fx:id="closeBtn" alignment="CENTER" layoutX="248.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#closeBtnHandler" prefHeight="52.0" prefWidth="160.0" style="-fx-background-color: #8c36c0; -fx-border-color: #C1C1C1; -fx-border-radius: 5; -fx-border-width: 2; -fx-background-radius: 5;" text="CLOSE" textAlignment="CENTER" textFill="WHITE">
+            <Text fx:id="cardNumber" layoutX="1.0" layoutY="188.0" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="160.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Text>
+            <Button fx:id="closeBtn" alignment="CENTER" layoutX="248.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#closeBtnHandler" prefHeight="52.0" prefWidth="160.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 8;" text="CLOSE" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>

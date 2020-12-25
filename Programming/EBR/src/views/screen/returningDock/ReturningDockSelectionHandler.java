@@ -90,7 +90,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         this.session = session;
         dockList = this.getBController().getDockList();
         displayDockList();
-        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, false, false, false).getContent());
     }
 
     /**
@@ -114,7 +114,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         dockInfo.setVisible(true);
         setImage(dockImg, dock.getImageURL());
         dockAddress.setText(dock.getLocation());
-        dockEmptySlots.setText(Integer.toString(dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
+        dockEmptySlots.setText(Integer.toString(dock.getCapacity()-dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
     }
 
     /**
@@ -139,15 +139,6 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         }
     }
 
-//    private HBox createHBox() {
-//        HBox hbox = new HBox();
-//        Insets insets = new Insets(20, 20, 20, 20);
-//        hbox.setAlignment(Pos.BASELINE_CENTER);
-//        hbox.setPadding(insets);
-//        hbox.setSpacing(30);
-//        return hbox;
-//    }
-
     /**
      * handle search dock
      * @param e {@link MouseEvent mouseEvent}
@@ -165,8 +156,8 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     @FXML
     void returnBikeBtnListener(MouseEvent e) {
         if (dock != null) {
-            BikeManager.getInstance().getBikeById(this.session.getBike().getId()).putBikeInDock(this.dock);
-            Invoice invoice = InvoiceManager.getInstance().createInvoice(session.getId());
+            getBController().returnBikeToDock(this.session.getBike(), this.dock);
+            Invoice invoice = getBController().createInvoice(session.getId());
             InvoiceScreenController invoiceScreenController = new InvoiceScreenController();
             InvoiceScreenHandler invoiceScreenHandler = null;
             try {

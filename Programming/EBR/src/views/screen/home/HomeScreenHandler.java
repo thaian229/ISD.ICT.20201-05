@@ -73,7 +73,7 @@ public class HomeScreenHandler extends BaseScreenHandlerWithBarcodePopup impleme
         super.screenTitle = "Home Screen";
         super.setBController(homeScreenController);
         dockList = this.getBController().getDockList();
-        navbar.getChildren().add(new NavBarHandler(this, true).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, true, false, false).getContent());
     }
 
     @Override

@@ -113,7 +113,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         this.setTextFields();
         System.out.println(session.isActive());
         setImageForLockBikeImg();
-        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, false, true, true).getContent());
 
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {

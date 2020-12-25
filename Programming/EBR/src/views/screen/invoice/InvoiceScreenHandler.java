@@ -117,7 +117,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
         this.setTextFields();
         this.changeCardState = changeCardCheckbox.isSelected();
         this.handleCheckBox();
-        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, false, false, false).getContent());
 
         confirmButton.setOnMouseClicked(e -> {
             try {

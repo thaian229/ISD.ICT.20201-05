@@ -57,11 +57,11 @@
          </image>
       </ImageView>
    </children>
-   <effect>
-      <DropShadow blurType="GAUSSIAN" height="15.0" offsetX="-1.5" offsetY="1.5" radius="7.0" spread="0.71" width="15.0">
-         <color>
-            <Color red="0.5833333134651184" blue="1.0" opacity="0.5099999904632568" />
-         </color>
-      </DropShadow>
-   </effect>
+<!--   <effect>-->
+<!--      <DropShadow blurType="GAUSSIAN" height="15.0" offsetX="-1.5" offsetY="1.5" radius="7.0" spread="0.71" width="15.0">-->
+<!--         <color>-->
+<!--            <Color red="0.5833333134651184" blue="1.0" opacity="0.5099999904632568" />-->
+<!--         </color>-->
+<!--      </DropShadow>-->
+<!--   </effect>-->
 </AnchorPane>

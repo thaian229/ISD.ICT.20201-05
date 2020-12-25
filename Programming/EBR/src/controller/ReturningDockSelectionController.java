@@ -1,7 +1,11 @@
 package controller;
 
+import model.bike.Bike;
+import model.bike.BikeManager;
 import model.dock.Dock;
 import model.dock.DockManager;
+import model.invoice.Invoice;
+import model.invoice.InvoiceManager;
 
 import java.util.ArrayList;
 
@@ -35,5 +39,13 @@ public class ReturningDockSelectionController extends BaseController{
      */
     public ArrayList<Dock> getDockListByKeyword(String keyword) {
         return DockManager.getInstance().searchDockByKeyword(keyword);
+    }
+
+    public Invoice createInvoice(String id) {
+        return InvoiceManager.getInstance().createInvoice(id);
+    }
+
+    public void returnBikeToDock(Bike bike, Dock dock) {
+        BikeManager.getInstance().getBikeById(bike.getId()).putBikeInDock(dock);
     }
 }

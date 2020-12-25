@@ -74,7 +74,7 @@ public class ReturningDockListItemHandler extends FXMLScreenHandler {
      */
     private void setDockInfo() {
         dockName.setText(dock.getName());
-        dockParkingSlots.setText(Integer.toString(dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
+        dockParkingSlots.setText(Integer.toString(dock.getCapacity() - dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
         setImage(dockImg, dock.getImageURL());
     }
 }

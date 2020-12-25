@@ -39,12 +39,16 @@ public class NavBarHandler extends FXMLScreenHandler {
 
     private BaseScreenHandler parentScreenHandler;
 
-    public NavBarHandler(BaseScreenHandler screenHandler, boolean buttonVisibility) throws IOException {
+    public NavBarHandler(BaseScreenHandler screenHandler, boolean buttonVisibility,  boolean backVisibility,  boolean homeEnable) throws IOException {
         super(Path.NAVBAR_PATH);
         this.parentScreenHandler = screenHandler;
         setImage(logo, Path.LOGO_ICON);
         setImage(back, Path.BACK_NAV_ICON);
         barcodeButton.setVisible(buttonVisibility);
+        barcodeButton.setDisable(!buttonVisibility);
+        logo.setDisable(!homeEnable);
+        back.setVisible(backVisibility);
+        back.setDisable(!backVisibility);
     }
 
     @FXML

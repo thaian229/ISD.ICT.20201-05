@@ -108,7 +108,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         // set all text and image
         setBikeImage();
         setTextLabels();
-        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, false, true, true).getContent());
 
         // set up extra event
         paymentConfirmationConfirmButton.setOnMousePressed(e -> {

@@ -101,7 +101,7 @@ public class DockScreenHandler extends BaseScreenHandlerWithBarcodePopup {
         this.dock = dock;
         super.screenTitle = "Dock Screen";
         this.setImages();
-        navbar.getChildren().add(new NavBarHandler(this, true).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, true, true, true).getContent());
     }
 
     /**

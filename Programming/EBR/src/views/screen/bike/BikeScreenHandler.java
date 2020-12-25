@@ -102,7 +102,7 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         super.screenTitle = "Bike Screen";
         this.setImages();
         displayBike();
-        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+        navbar.getChildren().add(new NavBarHandler(this, false, true, true).getContent());
     }
 
     @Override
