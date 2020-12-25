@@ -13,15 +13,7 @@ package model.bike;
  * <p>
  * class name: TT.CNTT ICT 02 - K62
  */
-public class TwinBike extends Bike{
-    public TwinBike(int barcode) {
-        this.barcode = barcode;
-        this.saddle = 2;
-        this.rearSeat = 1;
-        this.pairOfPedals = 2;
-        this.deposit = 3000000;
-        this.charge = 20000;
-    }
+public class TwinBike extends StandardBike{
 
     /**
      * Constructor
@@ -30,13 +22,11 @@ public class TwinBike extends Bike{
      * @param charge Twin bike's renting fee
      */
     public TwinBike(int barcode, int value, int charge) {
-        this.barcode = barcode;
+        super(barcode, value, charge);
         this.saddle = 2;
         this.rearSeat = 1;
         this.pairOfPedals = 2;
-        this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
     }
 
     /**
@@ -47,13 +37,14 @@ public class TwinBike extends Bike{
      * @param charge Twin bike's renting fee
      */
     public TwinBike(String id, int barcode, int value, int charge) {
-        this.id = id;
-        this.barcode = barcode;
+        super(id, barcode, value, charge);
         this.saddle = 2;
         this.rearSeat = 1;
         this.pairOfPedals = 2;
-        this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
+    }
+    @Override
+    public String getBikeType() {
+        return "Twin Bike";
     }
 }

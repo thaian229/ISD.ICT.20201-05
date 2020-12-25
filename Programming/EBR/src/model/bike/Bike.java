@@ -125,6 +125,10 @@ public class Bike {
 
     public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 
+    public String getBikeType() {
+        return "Bike";
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Bike) {

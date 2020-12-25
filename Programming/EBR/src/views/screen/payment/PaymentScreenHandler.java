@@ -1,5 +1,7 @@
 package views.screen.payment;
 
+import common.exception.FormException;
+import controller.BaseController;
 import controller.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -113,9 +115,11 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
             this.getBController().validateCreditCardForm(cardInfo);
 //            this.getBController().validateCardUnused(cardNumber.getText().trim());
             this.goToConfirmationScreen();
-        } catch (Exception e) {
+        } catch (FormException e) {
             errorText.setVisible(true);
             errorText.setText(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -26,110 +32,142 @@
             <DropShadow />
          </effect>
       </AnchorPane>
-        <Pane layoutX="245.0" layoutY="123.0" prefHeight="570.0" prefWidth="875.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 15; -fx-border-style: solid; -fx-border-color: FAE715; -fx-border-width: 3;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="123.0">
+        <Pane layoutX="245.0" layoutY="201.0" prefHeight="492.0" prefWidth="876.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 15; -fx-border-style: solid; -fx-border-color: #FAE715; -fx-border-width: 4; -fx-background-radius: 15;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="201.0">
             <children>
-                <Text fill="#8c36c0" layoutX="209.0" layoutY="98.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKE INFORMATION" textAlignment="CENTER">
+                  <GridPane layoutX="480.0" layoutY="54.0" prefHeight="273.0" prefWidth="341.0">
+                      <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="157.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="184.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                      <children>
+                          <Text opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKE CODE" wrappingWidth="167.6552734375">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                          </Text>
+                          <Text opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="LOCATION" GridPane.rowIndex="1">
+                              <font>
+                                  <Font name="Arial" size="24.0" />
+                              </font>
+                          </Text>
+                          <Text opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="DEPOSIT" GridPane.rowIndex="2">
+                              <font>
+                                  <Font name="Arial" size="24.0" />
+                              </font>
+                          </Text>
+                          <Text fx:id="bikeBarcode" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXXXX" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Arial Bold Italic" size="24.0" />
+                     </font>
+                  </Text>
+                          <Text fx:id="bikeDockName" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="DOCK NAME" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial Bold Italic" size="24.0" />
+                     </font>
+                  </Text>
+                          <Text fx:id="bikeDeposit" fill="#8c36c0" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Arial Bold Italic" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="10.0" layoutY="190.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="CHARGE" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Text>
+                          <Text fx:id="bikeCharge" fill="#16b85ff3" opacity="0.9" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <font>
+                                  <Font name="Arial Bold Italic" size="24.0" />
+                              </font>
+                          </Text>
+                      </children>
+                  </GridPane>
+                  <ImageView fx:id="bikeImage" fitHeight="300.0" fitWidth="400.0" layoutX="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../../../assets/images/bikes/StandardBike.png" />
+                      </image>
+                  </ImageView>
+                  <Line endX="305.3333740234375" layoutX="515.0" layoutY="367.0" startX="-460.0" />
+                    <Text fx:id="bikeBattery" layoutX="751.0" layoutY="416.0" opacity="0.6" stroke="#d647cc" strokeType="OUTSIDE" strokeWidth="0.0" text="75%" textAlignment="RIGHT" wrappingWidth="70.0">
                <font>
-                  <Font name="Arial Bold" size="48.0" />
+                  <Font name="Arial Bold Italic" size="24.0" />
                </font>
-                </Text>
-                <Pane layoutX="77.0" layoutY="108.0" prefHeight="355.0" prefWidth="723.0" style="-fx-background-color: white;">
-                    <children>
-                        <ImageView fx:id="bikeImage" fitHeight="174.0" fitWidth="259.0" layoutX="409.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../../assets/images/xe-dap-1-159482394547294562988-51-0-526-908-crop-1594824063607285632499.png" />
-                            </image>
-                        </ImageView>
-                        <GridPane layoutX="66.0" layoutY="37.0" prefHeight="201.0" prefWidth="311.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="187.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="124.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BIKE CODE" wrappingWidth="120.6552734375">
-                           <font>
-                              <Font name="Arial Black" size="14.0" />
-                           </font>
-                                </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LOCATION" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="Arial Black" size="14.0" />
-                                    </font>
-                                </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BATTERY" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="Arial Black" size="14.0" />
-                                    </font>
-                                </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="USAGE" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="Arial Black" size="14.0" />
-                                    </font>
-                                </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DEPOSIT" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="Arial Black" size="14.0" />
-                                    </font>
-                                </Text>
-                                <Text fx:id="bikeBarcode" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXXXXX" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font></Text>
-                                <Text fx:id="bikeDockName" strokeType="OUTSIDE" strokeWidth="0.0" text="DOCK NAME" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font></Text>
-                                <Text fx:id="bikeBattery" strokeType="OUTSIDE" strokeWidth="0.0" text="75%" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font></Text>
-                                <Text fx:id="bikeUsage" strokeType="OUTSIDE" strokeWidth="0.0" text="6 HOURS LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font></Text>
-                                <Text fx:id="bikeDeposit" strokeType="OUTSIDE" strokeWidth="0.0" text="10,000,000 VND" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font></Text>
-                            </children>
-                        </GridPane>
-                        <Line endX="305.0" layoutX="362.0" layoutY="274.0" startX="-305.0" />
-                        <GridPane layoutX="86.0" layoutY="294.0" prefHeight="30.0" prefWidth="554.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.0" minWidth="0.0" prefWidth="239.0" />
-                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="434.0" minWidth="0.0" prefWidth="372.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CHARGE:">
-                                    <font>
-                                        <Font name="Arial Bold" size="24.0" />
-                                    </font>
-                                </Text>
-                                <Text fx:id="bikeCharge" fill="#16b85ff3" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000 VND/h" textAlignment="RIGHT" wrappingWidth="344.013671875" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="Arial" size="36.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </GridPane>
-                    </children>
-                </Pane>
-                <Button fx:id="rentNowButton" alignment="CENTER" layoutX="287.0" layoutY="463.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RENT NOW" textAlignment="CENTER" textFill="WHITE">
+            </Text>
+                    <Text fx:id="bikeUsage" layoutX="521.0" layoutY="451.0" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="6 HOURS REMAINING" textAlignment="RIGHT" wrappingWidth="300.0">
                <font>
-                  <Font name="Arial Bold" size="24.0" />
+                  <Font name="Arial Italic" size="18.0" />
                </font>
-                </Button>
+            </Text>
+            <GridPane layoutX="77.0" layoutY="393.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="saddleImg" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../assets/images/icons/saddle_icon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="pedalsImg" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@../../../assets/images/icons/pedals_icon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="rearSeatImg" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                     <image>
+                        <Image url="@../../../assets/images/icons/rear_seat_icon.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="saddleNum" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pedalsNum" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.columnIndex="3">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="rearSeatNum" opacity="0.6" strokeType="OUTSIDE" strokeWidth="0.0" text="1" GridPane.columnIndex="5">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </GridPane>
+            <ImageView fx:id="batteryImg" fitHeight="40.0" fitWidth="40.0" layoutX="700.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/images/icons/battery_icon.png" />
+               </image>
+            </ImageView>
             </children>
+         <effect>
+            <DropShadow color="#fae715" height="30.0" radius="14.5" spread="0.3" width="30.0" />
+         </effect>
         </Pane>
+          <Text fill="#8c36c0" layoutX="448.0" layoutY="148.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKE INFORMATION" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Bold" size="48.0" />
+         </font>
+          </Text>
+          <Button fx:id="rentNowButton" alignment="CENTER" layoutX="537.0" layoutY="726.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="304.0" style="-fx-background-color: #8c36c0; -fx-background-radius: 6; -fx-cursor: hand;" text="RENT NOW" textAlignment="CENTER" textFill="WHITE" AnchorPane.topAnchor="665.0">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+          </Button>
     </children>
 </AnchorPane>

@@ -76,37 +76,22 @@ public class BikeListItemHandler extends FXMLScreenHandler {
     private void setImages() {
         setImage(batteryIcon, Path.BATTERY_ICON);
         System.out.println();
-        if (bike instanceof StandardBike) {
-            setImage(bikeIcon, Path.STANDARD_BIKE_ICON);
-        } else if (bike instanceof TwinBike) {
+        if (bike instanceof TwinBike) {
             setImage(bikeIcon, Path.TWIN_BIKE_ICON);
-        } else if (bike instanceof StandardElectricalBike) {
-            setImage(bikeIcon, Path.STANDARD_ELECTRICAL_BIKE_ICON);
+        } else if (bike instanceof StandardBike) {
+            setImage(bikeIcon, Path.STANDARD_BIKE_ICON);
         } else if (bike instanceof TwinElectricalBike) {
             setImage(bikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
+        } else if (bike instanceof StandardElectricalBike) {
+            setImage(bikeIcon, Path.STANDARD_ELECTRICAL_BIKE_ICON);
         } else {
             setImage(bikeIcon, Path.STANDARD_BIKE_ICON);
-        }
-    }
-
-    private void setBikeType() {
-        System.out.println();
-        if (bike instanceof StandardBike) {
-            bikeType.setText("Standard Bike");
-        } else if (bike instanceof TwinBike) {
-            bikeType.setText("Twin Bike");
-        } else if (bike instanceof StandardElectricalBike) {
-            bikeType.setText("E-Bike");
-        } else if (bike instanceof TwinElectricalBike) {
-            bikeType.setText("Twin E-Bike");
-        } else {
-            bikeType.setText("NO DATA");
         }
     }
 
     public void setBike(Bike bike) {
         this.bike = bike;
-        this.setBikeType();
+        bikeType.setText(bike.getBikeType());
         this.setBikeInfo();
         this.setImages();
     }
@@ -118,8 +103,6 @@ public class BikeListItemHandler extends FXMLScreenHandler {
         bikeCode.setText("" + bike.getBarcode());
         if (bike instanceof StandardElectricalBike) {
             bikeBattery.setText(((StandardElectricalBike) bike).getBattery() + "%");
-        } else if (bike instanceof TwinElectricalBike) {
-            bikeBattery.setText(((TwinElectricalBike) bike).getBattery() + "%");
         } else {
             bikeBattery.setVisible(false);
             batteryIcon.setVisible(false);

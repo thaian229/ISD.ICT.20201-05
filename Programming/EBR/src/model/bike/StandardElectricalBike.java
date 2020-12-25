@@ -14,8 +14,8 @@ package model.bike;
  * class name: TT.CNTT ICT 02 - K62
  */
 public class StandardElectricalBike extends Bike {
-    private float battery;
-    private int timeLeft;
+    protected float battery;
+    protected int timeLeft;
 
     /**
      * Constructor
@@ -63,4 +63,8 @@ public class StandardElectricalBike extends Bike {
 
     public void setTimeLeft(int timeLeft) { this.timeLeft = timeLeft; }
 
+    @Override
+    public String getBikeType() {
+        return "E-Bike";
+    }
 }

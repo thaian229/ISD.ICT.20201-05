@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 public class AlertPopup extends Popup {
     @FXML
-    ImageView tickicon;
+    ImageView icon;
 
     @FXML
     Label message;
@@ -36,6 +36,7 @@ public class AlertPopup extends Popup {
 
     public AlertPopup(Stage stage) throws IOException {
         super(stage, Path.ALERT_POPUP_PATH);
+        setImage(icon, Path.X_ICON);
     }
 
     /**
@@ -49,7 +50,6 @@ public class AlertPopup extends Popup {
         AlertPopup popup = new AlertPopup(new Stage());
         if (undecorated) popup.stage.initStyle(StageStyle.UNDECORATED);
         popup.message.setText(message);
-//        popup.setImage(imagepath);
         return popup;
     }
 
@@ -60,10 +60,6 @@ public class AlertPopup extends Popup {
      */
     public static void error(String message) throws IOException{
         popup(message, true).show(true);
-    }
-
-    public static AlertPopup loading(String message) throws IOException{
-        return popup(message, true);
     }
 
     /**

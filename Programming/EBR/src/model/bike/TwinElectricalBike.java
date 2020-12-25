@@ -13,9 +13,7 @@ package model.bike;
  * <p>
  * class name: TT.CNTT ICT 02 - K62
  */
-public class TwinElectricalBike extends Bike{
-    private float battery;
-    private int timeLeft;
+public class TwinElectricalBike extends StandardElectricalBike{
 
     /**
      * Constructor
@@ -24,13 +22,11 @@ public class TwinElectricalBike extends Bike{
      * @param charge Twin electrical bike's renting fee
      */
     public TwinElectricalBike(int barcode, int value, int charge){
-        this.barcode = barcode;
+        super(barcode, value, charge);
         this.saddle = 1;
         this.rearSeat = 1;
         this.pairOfPedals = 1;
-        this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
         this.battery = 100;
         this.timeLeft = 360;
     }
@@ -43,25 +39,18 @@ public class TwinElectricalBike extends Bike{
      * @param charge Twin electrical bike's renting fee
      */
     public TwinElectricalBike(String id, int barcode, int value, int charge){
-        this.id = id;
-        this.barcode = barcode;
+        super(id, barcode, value, charge);
         this.saddle = 1;
         this.rearSeat = 1;
         this.pairOfPedals = 1;
-        this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
         this.battery = 100;
         this. timeLeft = 360;
     }
 
-    public float getBattery() { return battery; }
-
-    public void setBattery(float battery) { this.battery = battery; }
-
-    public int getTimeLeft() { return timeLeft; }
-
-    public void setTimeLeft(int timeLeft) { this.timeLeft = timeLeft; }
-
+    @Override
+    public String getBikeType() {
+        return "Twin E-Bike";
+    }
 }
 

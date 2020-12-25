@@ -33,6 +33,10 @@ public class Path {
     public static final String BACK_NAV_ICON = "assets/images/backButton.png";
     public static final String CANCEL_BUTTON_ICON = "assets/images/rotate-ccw.png";
     public static final String SEARCH_ICON = "assets/images/icons/search_icon.png";
+    public static final String SADDLE_ICON = "assets/images/icons/saddle_icon.png";
+    public static final String PEDALS_ICON = "assets/images/icons/pedals_icon.png";
+    public static final String REAR_SEAT_ICON = "assets/images/icons/rear_seat_icon.png";
+    public static final String X_ICON = "assets/images/icons/X_icon.png";
 
     // fxmls path
     public static final String IMAGE_PATH = "assets/images";
