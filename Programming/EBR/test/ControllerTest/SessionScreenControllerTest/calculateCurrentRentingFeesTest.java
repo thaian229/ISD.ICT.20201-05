@@ -33,6 +33,7 @@ public class calculateCurrentRentingFeesTest {
         session.setStartTime(now.minusMinutes(7));
         session.setLastResumeTime(session.getStartTime());
         session.setActive(true);
+        System.out.println(session.getSessionLength());
         Assertions.assertEquals(0, sessionScreenController.calculateCurrentRentingFees(session));
     }
 

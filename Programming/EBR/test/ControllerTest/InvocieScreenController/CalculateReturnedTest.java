@@ -32,9 +32,9 @@ public class CalculateReturnedTest {
     @CsvSource({
             "100000, 20000, 80000",
             "100000, 50000, 50000",
-            "100000, 30000, 70000"
+            "100000, 130000, -30000"
     })
-    public void Test(int bikeDeposit, int totalCharge, int expected) {
+    public void calculateReturnedTest(int bikeDeposit, int totalCharge, int expected) {
         bike.setDeposit(bikeDeposit);
         session = SessionManager.getInstance().createSession(bike, card, tmpTransaction);
         Invoice invoice = new Invoice("1",session.getId(),totalCharge);
