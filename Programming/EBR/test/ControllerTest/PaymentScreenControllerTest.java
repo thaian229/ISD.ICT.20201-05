@@ -1,4 +1,4 @@
-package controller.renting;
+package ControllerTest;
 
 import controller.PaymentScreenController;
 import model.bike.StandardBike;
@@ -21,7 +21,7 @@ public class PaymentScreenControllerTest {
     @CsvSource({
             "121319_group5_2020,",
             " , ERROR: Card number is not filled!",
-            "113546 Hello, 'INVALID: Card number must contains only letters, digits and underscores!'"
+            "113546 Hello, 'Card number must contains only letters, digits and underscores!'"
     })
     public void validateCardNumberTest(String cardNumber, String expected) {
         try {

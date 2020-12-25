@@ -1,4 +1,4 @@
-package controller.renting.RentingSessionControllerTest;
+package ControllerTest.SessionScreenControllerTest;
 
 import controller.SessionScreenController;
 import model.bike.*;

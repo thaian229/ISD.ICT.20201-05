@@ -1,3 +1,5 @@
+package ControllerTest.BarcodeControllerTest;
+
 import controller.BarcodeController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +17,7 @@ public class validateBarcodeInputTest {
     @ParameterizedTest
     @CsvSource({
             "1224452236,",
-            "das1144sa5,INVALID: Barcode must contains only number",
+            "das1144sa5, Barcode must contains only number",
             ",ERROR: Barcode is not filled!"
     })
 

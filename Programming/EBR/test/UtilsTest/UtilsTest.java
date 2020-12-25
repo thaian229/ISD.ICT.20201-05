@@ -1,7 +1,8 @@
-package utils;
+package UtilsTest;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import utils.Utils;
 
 import java.time.LocalDateTime;
 
