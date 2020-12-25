@@ -2,7 +2,7 @@ package ControllerTest.SessionScreenControllerTest;
 
 import controller.SessionScreenController;
 import model.bike.*;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import org.junit.jupiter.api.Assertions;
@@ -48,16 +48,6 @@ public class calculateCurrentRentingFeesTest {
 
     @Test
     public void Test3() {
-        Bike bike = new TwinBike(03);
-        Session session = new Session(bike, card, tmpTransaction);
-        session.setStartTime(now.minusMinutes(40));
-        session.setLastResumeTime(session.getStartTime());
-        session.setActive(true);
-        Assertions.assertEquals(13000, sessionScreenController.calculateCurrentRentingFees(session));
-    }
-
-    @Test
-    public void Test4() {
         Bike bike = new TwinElectricalBike(04,04,04);
         Session session = new Session(bike, card, tmpTransaction);
         session.setStartTime(now.minusMinutes(52));
@@ -67,7 +57,7 @@ public class calculateCurrentRentingFeesTest {
     }
 
     @Test
-    public void Test5() {
+    public void Test4() {
         Bike bike = new StandardBike(01);
         Session session = new Session(bike, card, tmpTransaction);
         session.setStartTime(now.minusMinutes(61));

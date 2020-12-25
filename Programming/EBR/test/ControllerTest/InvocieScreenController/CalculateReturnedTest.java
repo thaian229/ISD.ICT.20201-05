@@ -4,7 +4,7 @@ import controller.InvoiceScreenController;
 import model.bike.Bike;
 import model.bike.StandardBike;
 import model.invoice.Invoice;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import model.session.SessionManager;
