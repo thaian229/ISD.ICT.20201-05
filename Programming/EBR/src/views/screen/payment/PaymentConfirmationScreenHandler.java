@@ -90,10 +90,6 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
     @FXML
     private ProgressIndicator submitLoadingIndicator;
 
-    public PaymentConfirmationScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath);
-    }
-
     /**
      * Create and setup new Handler
      * @param stage {@link Stage}
@@ -105,6 +101,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         super(stage, screenPath);
         this.setBController(controller);
         this.controller = controller;
+        super.screenTitle = "Payment Confirmation";
         // set all text and image
         setBikeImage();
         setTextLabels();
@@ -208,7 +205,7 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
                     Path.SESSION_SCREEN_PATH, session, sessionScreenController);
             sessionScreenHandler.setHomeScreenHandler(homeScreenHandler);
             sessionScreenHandler.setPreviousScreen(homeScreenHandler);
-            sessionScreenHandler.setScreenTitle("Session Screen");
+            sessionScreenHandler.setScreenTitle(this.getScreenTitle());
             sessionScreenHandler.show();
 
         } catch (IOException exp) {

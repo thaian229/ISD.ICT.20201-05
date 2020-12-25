@@ -106,6 +106,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         super(stage, screenPath);
         this.session = session;
         System.out.println(session.getId());
+        super.screenTitle = "Session Screen";
         this.setBController(controller);
         this.setImages();
         this.toDayAndTime(session.getSessionLength());
@@ -225,7 +226,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
             ReturningDockSelectionHandler returningDockSelectionHandler = new ReturningDockSelectionHandler(this.stage, Path.RETURNING_DOCK_SELECTION_SCREEN_PATH, new ReturningDockSelectionController(), session);
             returningDockSelectionHandler.setPreviousScreen(this);
             returningDockSelectionHandler.setHomeScreenHandler(homeScreenHandler);
-            returningDockSelectionHandler.setScreenTitle("Returning Dock Selection");
+            returningDockSelectionHandler.setScreenTitle(returningDockSelectionHandler.getScreenTitle());
             returningDockSelectionHandler.show();
         } catch (IOException exp) {
             exp.printStackTrace();

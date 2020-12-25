@@ -78,15 +78,18 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
 
     /**
      * constructor
-     * @param stage {@link Stage stage}
-     * @param screenPath path to .fxml file
+     *
+     * @param stage                            {@link Stage stage}
+     * @param screenPath                       path to .fxml file
      * @param returningDockSelectionController controller for the screen
-     * @param session current working session
+     * @param session                          current working session
      * @throws IOException IO error
      */
     public ReturningDockSelectionHandler(Stage stage, String screenPath, ReturningDockSelectionController returningDockSelectionController, Session session) throws IOException {
         super(stage, screenPath);
         setBController(returningDockSelectionController);
+        super.screenTitle = "Returning Dock Selection Screen";
+
         this.session = session;
         dockList = this.getBController().getDockList();
         displayDockList();
@@ -107,6 +110,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
 
     /**
      * handle event click on dock item
+     *
      * @param dock {@link Dock dock}
      */
     public void onDockListItemClicked(Dock dock) {
@@ -114,7 +118,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         dockInfo.setVisible(true);
         setImage(dockImg, dock.getImageURL());
         dockAddress.setText(dock.getLocation());
-        dockEmptySlots.setText(Integer.toString(dock.getCapacity()-dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
+        dockEmptySlots.setText(Integer.toString(dock.getCapacity() - dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
     }
 
     /**
@@ -141,6 +145,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
 
     /**
      * handle search dock
+     *
      * @param e {@link MouseEvent mouseEvent}
      */
     @FXML
@@ -151,6 +156,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
 
     /**
      * handle return button clicked
+     *
      * @param e {@link MouseEvent mouseEvent}
      */
     @FXML
@@ -168,7 +174,7 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
             }
             invoiceScreenHandler.setPreviousScreen(this);
             invoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
-            invoiceScreenHandler.setScreenTitle("Invoice Screen");
+            invoiceScreenHandler.setScreenTitle(invoiceScreenHandler.getScreenTitle());
             invoiceScreenHandler.show();
         }
     }

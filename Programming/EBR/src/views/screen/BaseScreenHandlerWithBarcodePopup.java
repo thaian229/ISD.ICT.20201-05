@@ -37,7 +37,7 @@ public class BaseScreenHandlerWithBarcodePopup extends BaseScreenHandler {
                     Path.SESSION_SCREEN_PATH, session, sessionScreenController);
             sessionScreenHandler.setHomeScreenHandler(this.homeScreenHandler);
             sessionScreenHandler.setPreviousScreen(this);
-            sessionScreenHandler.setScreenTitle("Session Screen");
+            sessionScreenHandler.setScreenTitle(sessionScreenHandler.getScreenTitle());
             sessionScreenHandler.show();
         } catch (IOException ioException) {
             ioException.printStackTrace();
@@ -50,7 +50,7 @@ public class BaseScreenHandlerWithBarcodePopup extends BaseScreenHandler {
                     Path.BIKE_VIEW_SCREEN_PATH, bike);
             bikeScreenHandler.setHomeScreenHandler(this.homeScreenHandler);
             bikeScreenHandler.setPreviousScreen(this);
-            bikeScreenHandler.setScreenTitle("Bike View Screen");
+            bikeScreenHandler.setScreenTitle(bikeScreenHandler.getScreenTitle());
             bikeScreenHandler.show();
         } catch (IOException ioException) {
             ioException.printStackTrace();

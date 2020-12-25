@@ -127,7 +127,7 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         PaymentConfirmationScreenHandler paymentConfirmationScreenHandler = new PaymentConfirmationScreenHandler(this.stage, Path.PAYMENT_CONFIRMATION_SCREEN_PATH, this.getBController());
         paymentConfirmationScreenHandler.setPreviousScreen(this);
         paymentConfirmationScreenHandler.setHomeScreenHandler(homeScreenHandler);
-        paymentConfirmationScreenHandler.setScreenTitle("Renting Confirmation Screen");
+        paymentConfirmationScreenHandler.setScreenTitle(paymentConfirmationScreenHandler.getScreenTitle());
         paymentConfirmationScreenHandler.show();
     }
 

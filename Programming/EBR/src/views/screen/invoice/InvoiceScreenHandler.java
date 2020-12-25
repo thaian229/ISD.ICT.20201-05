@@ -81,6 +81,9 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
     Text errorText;
 
     @FXML
+    Text amountLabelText;
+
+    @FXML
     TextField cardNumberTextField;
 
     @FXML
@@ -103,9 +106,10 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
 
     /**
      * Create new invoice screen and do initial setup
-     * @param stage {@link Stage}
+     *
+     * @param stage      {@link Stage}
      * @param screenPath path to fxml
-     * @param invoice {@link Invoice}
+     * @param invoice    {@link Invoice}
      * @param controller {@link InvoiceScreenController}
      * @throws IOException IO error
      */
@@ -113,6 +117,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
         super(stage, screenPath);
         this.invoice = invoice;
         this.setBController(controller);
+        super.screenTitle = "Invoice Screen";
         this.setImages();
         this.setTextFields();
         this.changeCardState = changeCardCheckbox.isSelected();
@@ -174,11 +179,17 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
             invoiceCardNumber.setText(card.getCardNum());
             invoiceStartTime.setText(this.invoice.getStartTime().format(Utils.DATE_FORMATER_FOR_DISPLAY));
             invoiceEndTime.setText(this.invoice.getEndTime().format(Utils.DATE_FORMATER_FOR_DISPLAY));
-
             invoiceSessionLength.setText(getBController().calculateSessionLength(this.invoice) + " seconds");
             invoiceDeposit.setText(invoice.getDeposit() + " " + Configs.CURRENCY);
             invoiceTotalFees.setText(getBController().calculateTotalFees(this.invoice) + " " + Configs.CURRENCY);
-            invoiceReturned.setText(getBController().calculateReturned(this.invoice) + " " + Configs.CURRENCY);
+
+            int amount = this.getBController().calculateReturned(this.invoice);
+            if (amount >= 0)
+                invoiceReturned.setText(amount + " " + Configs.CURRENCY);
+            else {
+                invoiceReturned.setText(-amount + " " + Configs.CURRENCY);
+                amountLabelText.setText("PAY AMOUNT");
+            }
 
         } catch (NullPointerException exp) {
             exp.printStackTrace();
@@ -187,11 +198,11 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
 
     /**
      * Start returning bike process
+     *
      * @throws IOException IO errors
      */
     private void handleConfirmButton() throws IOException {
         errorText.setVisible(false);
-        String contents = "refund";
         CreditCard tmpCard = this.invoice.getCard();
         HashMap<String, String> cardInfo;
         PaymentScreenController paymentScreenController = new PaymentScreenController(invoice.getBike());
@@ -212,28 +223,27 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
             } else {
                 tmpCard = getBController().getCardByCardNum(this.invoice.getCard().getCardNum());
             }
-            PaymentTransaction returnTransaction = this.getBController().refund(this.getBController().calculateReturned(this.invoice), contents,
-                    tmpCard.getCardNum(), tmpCard.getCardOwner(),
-                    tmpCard.getExpDate(), Integer.toString(tmpCard.getSecurityCode()));
 
+            int amount = this.getBController().calculateReturned(this.invoice);
+            PaymentTransaction returnTransaction;
+
+            returnTransaction = this.getBController().makeTransaction(amount, tmpCard);
             returnTransaction.setMethod("Credit Card");
             returnTransaction.setType("return");
             returnTransaction.setCard(tmpCard);
+
 
             String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
             SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
             InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
             PaymentResultPopup.display(this, returnTransaction, "PAYMENT SUCCESSFUL");
 
-        }
-        catch (FormException e) {
+        } catch (FormException e) {
             errorText.setText(e.getMessage());
             errorText.setVisible(true);
-        }
-        catch (PaymentException e) {
+        } catch (PaymentException e) {
             AlertPopup.error(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

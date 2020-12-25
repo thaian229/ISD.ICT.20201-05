@@ -9,6 +9,7 @@ import model.invoice.Invoice;
 import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.paymentCard.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
+import model.payment.transaction.PaymentTransactionManager;
 import subsystem.InterbankSubsystem;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -161,5 +162,40 @@ public class InvoiceScreenController extends BaseController {
 
     public void validateCreditCardForm(HashMap<String, String> cardInfo) throws FormException {
         CardFormController.validateCreditCardForm(cardInfo);
+    }
+
+    public PaymentTransaction pay(int amount, String contents, String cardNumber, String cardHolderName,
+                                  String expirationDate, String securityCode) {
+        PaymentTransaction returnTransaction = null;
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("RESULT", "PAYMENT FAILED!");
+        try {
+            CreditCard card = new CreditCard(cardNumber, cardHolderName, Integer.parseInt(securityCode),
+                    expirationDate);
+
+            InterbankSubsystem interbank = new InterbankSubsystem();
+            returnTransaction = interbank.payOrder(card, amount, contents);
+
+            result.put("RESULT", "PAYMENT SUCCESSFUL!");
+            result.put("MESSAGE", "You have successfully paid the deposit!");
+        } catch (PaymentException | UnrecognizedException ex) {
+            result.put("MESSAGE", ex.getMessage());
+            throw ex;
+        }
+        System.out.println(result);
+        return returnTransaction;
+    }
+
+    public PaymentTransaction makeTransaction(int amount, CreditCard card) {
+        if (amount >= 0) {
+            return this.refund(amount, "refund",
+                    card.getCardNum(), card.getCardOwner(),
+                    card.getExpDate(), Integer.toString(card.getSecurityCode()));
+
+        } else {
+            return this.pay(-amount, "pay over amount",
+                    card.getCardNum(), card.getCardOwner(),
+                    card.getExpDate(), Integer.toString(card.getSecurityCode()));
+        }
     }
 }

@@ -94,7 +94,7 @@
                                   <Font name="Arial" size="36.0" />
                               </font>
                           </Text>
-                          <Text fx:id="returned" layoutX="161.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RETURNS" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="161.68359375">
+                          <Text fx:id="returned" layoutX="142.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RETURNS" textAlignment="CENTER" wrappingWidth="216.1337890625" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="106.0">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
