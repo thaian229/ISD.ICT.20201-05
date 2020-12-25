@@ -34,7 +34,6 @@ public class BaseScreenHandlerWithTransactionPopup extends BaseScreenHandler {
      * @param paymentTransaction transaction to be shown
      * @throws IOException IO error
      */
-    @Override
     public void continueAfterPopupClosed(PaymentTransaction paymentTransaction) throws IOException {
 
     }

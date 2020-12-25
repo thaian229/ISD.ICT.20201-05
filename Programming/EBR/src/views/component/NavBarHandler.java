@@ -56,9 +56,12 @@ public class NavBarHandler extends FXMLScreenHandler {
 
     @FXML
     void logoClickHandler(MouseEvent e) {
+        try {
             BaseScreenHandler homeScreen = parentScreenHandler.getHomeScreenHandler();
             homeScreen.setScreenTitle(homeScreen.getScreenTitle());
             homeScreen.show();
+        } catch (NullPointerException ex) {
+        }
     }
 
     @FXML

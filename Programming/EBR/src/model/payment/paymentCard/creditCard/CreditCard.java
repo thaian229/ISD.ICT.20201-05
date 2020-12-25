@@ -16,7 +16,7 @@ import model.payment.paymentCard.PaymentCard;
  * class name: TT.CNTT ICT 02 - K62
  */
 public class CreditCard extends PaymentCard {
-
+    private String id;
     private String cardNum;
     private String cardOwner;
     private int securityCode;
@@ -42,6 +42,26 @@ public class CreditCard extends PaymentCard {
         this.cardNum = cardNum;
         this.cardOwner = cardOwner;
         this.securityCode = securityCode;
+        this.expDate = expDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
+
+    public void setCardOwner(String cardOwner) {
+        this.cardOwner = cardOwner;
+    }
+
+    public void setExpDate(String expDate) {
         this.expDate = expDate;
     }
 

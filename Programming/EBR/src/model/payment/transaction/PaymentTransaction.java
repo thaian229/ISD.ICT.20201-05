@@ -19,8 +19,6 @@ import model.payment.paymentCard.creditCard.CreditCard;
 public class PaymentTransaction {
 
 	private String errorCode;
-
-
 	private PaymentCard card;
 	private String transactionId;
 	private String transactionContent;

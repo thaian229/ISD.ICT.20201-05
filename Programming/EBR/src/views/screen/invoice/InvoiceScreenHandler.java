@@ -1,5 +1,7 @@
 package views.screen.invoice;
 
+import common.exception.PaymentException;
+import common.exception.cardException.FormException;
 import controller.InvoiceScreenController;
 import controller.PaymentScreenController;
 import javafx.fxml.FXML;
@@ -223,8 +225,16 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
             InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
             PaymentResultPopup.display(this, returnTransaction, "PAYMENT SUCCESSFUL");
 
-        } catch (Exception e) {
+        }
+        catch (FormException e) {
+            errorText.setText(e.getMessage());
+            errorText.setVisible(true);
+        }
+        catch (PaymentException e) {
             AlertPopup.error(e.getMessage());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
