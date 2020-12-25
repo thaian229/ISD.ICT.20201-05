@@ -1,8 +1,8 @@
 package controller;
 
-import model.bike.Bike;
+import common.exception.InvalidBarcodeFormatException;
+import common.exception.NullBarcodeException;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -32,11 +32,11 @@ public class BarcodeController extends BaseController{
      */
     public boolean validateBarcodeInput(String barcode) {
         // check the barcode input is not null
-        if(barcode == null) return  false;
+        if(barcode == null) throw new NullBarcodeException();
 
         // Check if barcode input contains only number
         for(int i=0; i<barcode.length(); i++){
-            if(Character.isDigit(barcode.charAt(i)) == false) return false;
+            if(Character.isDigit(barcode.charAt(i)) == false) throw new InvalidBarcodeFormatException();
         }
 
         return true;
