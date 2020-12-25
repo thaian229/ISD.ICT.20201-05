@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.concurrent.Executor;
 /**
  * Model to manage all connection to database
  *
@@ -23,7 +22,7 @@ import java.util.concurrent.Executor;
  */
 public class EBRDB {
 
-    private static final String url = "jdbc:postgresql://localhost:3333/" + Configs.DB_NAME;
+    private static final String url = "jdbc:postgresql://localhost/" + Configs.DB_NAME;
     private static final String user = Configs.DB_USERNAME;
     private static final String password = Configs.DB_PASSWORD;
 

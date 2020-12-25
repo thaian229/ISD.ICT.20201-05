@@ -1,22 +1,10 @@
 package controller;
 
-import common.exception.PaymentException;
-import common.exception.UnrecognizedException;
-import controller.BaseController;
-import model.bike.Bike;
-import model.bike.BikeManager;
+import controller.strategy.RentingFeeBySecondsCalculator;
+import controller.strategy.RentingFeeCalculator;
 import model.dock.Dock;
-import model.invoice.Invoice;
-import model.payment.creditCard.CreditCard;
-import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import model.session.SessionManager;
-import subsystem.InterbankSubsystem;
-import utils.Utils;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * class for controller of the session screen
@@ -35,6 +23,12 @@ import java.util.Map;
  */
 
 public class SessionScreenController extends BaseController {
+
+    private RentingFeeCalculator feeCalculator = new RentingFeeBySecondsCalculator();
+
+    public void setFeeCalculator(RentingFeeCalculator feeCalculator) {
+        this.feeCalculator = feeCalculator;
+    }
 
     /**
      * This method is for return a bike to a chosen dock
@@ -57,19 +51,7 @@ public class SessionScreenController extends BaseController {
      * @return amount of money that customer has to pay until now
      */
     public int calculateCurrentRentingFees(Session session) {
-        try {
-//            Bike bike = session.getBike();
-            Long sLength = session.getSessionLength();
-            if (sLength < 10*60) {
-                return 0;
-            } else if (sLength >= 10*60 && sLength < 30*60) {
-                return 10000;
-            } else {
-                return (int) (10000.0 + 3000 * Math.ceil((sLength - 30.0 * 60) / (15.0 * 60.0)));
-            }
-        } catch (NullPointerException e) {
-            return 0;
-        }
+        return feeCalculator.calculateCurrentRentingFees(session);
     }
 
     public long calculateSessionLength(Session session) {

@@ -2,16 +2,9 @@ package model.invoice;
 
 
 
-import model.bike.BikeManager;
 import model.db.EBRDB;
-import model.payment.creditCard.CreditCardManager;
-import model.payment.transaction.PaymentTransaction;
-import model.payment.transaction.PaymentTransactionManager;
-import model.session.Session;
-import utils.Utils;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 

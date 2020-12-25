@@ -1,7 +1,7 @@
 package model.session;
 
 import model.bike.Bike;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import utils.Utils;
 

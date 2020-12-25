@@ -1,4 +1,6 @@
-package model.payment.creditCard;
+package model.payment.paymentCard.creditCard;
+
+import model.payment.paymentCard.PaymentCard;
 
 /**
  * Model for credit card
@@ -13,7 +15,7 @@ package model.payment.creditCard;
  * <p>
  * class name: TT.CNTT ICT 02 - K62
  */
-public class CreditCard {
+public class CreditCard extends PaymentCard {
 
     private String id;
     private String cardNum;

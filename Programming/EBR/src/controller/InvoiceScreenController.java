@@ -2,18 +2,14 @@ package controller;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
-import controller.BaseController;
-import model.bike.Bike;
+import controller.strategy.RentingFeeBySecondsCalculator;
+import controller.strategy.RentingFeeCalculator;
 import model.invoice.Invoice;
-import model.payment.creditCard.CreditCard;
-import model.payment.creditCard.CreditCardManager;
+import model.payment.paymentCard.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
-import model.session.Session;
 import subsystem.InterbankSubsystem;
-import utils.Utils;
 
-import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +30,14 @@ import java.util.Map;
  */
 
 public class InvoiceScreenController extends BaseController {
-//    public void confirmInvoice(Invoice invoice) throws SQLException {
+
+    RentingFeeCalculator feeCalculator = new RentingFeeBySecondsCalculator();
+
+    public void setFeeCalculator(RentingFeeCalculator feeCalculator) {
+        this.feeCalculator = feeCalculator;
+    }
+
+    //    public void confirmInvoice(Invoice invoice) throws SQLException {
 //        //user clicked to confirm invoice
 //    }
 //    // private int isValidReturned = 0;
@@ -50,22 +53,7 @@ public class InvoiceScreenController extends BaseController {
      */
 
     public int calculateTotalFees(Invoice invoice) {
-        try {
-//            Bike bike = session.getBike();
-            Long sLength = invoice.getSession().getSessionLength();
-            int totalFees;
-            if (sLength < 10) {
-                totalFees = 0;
-            } else if (sLength >= 10 && sLength < 30) {
-                totalFees = 10000;
-            } else {
-                totalFees = (int) (10000.0 + 3000 * Math.ceil((sLength - 30.0) / 15.0));
-            }
-            invoice.setTotalFees(totalFees);
-            return totalFees;
-        } catch (NullPointerException e) {
-            return 0;
-        }
+        return feeCalculator.calculateTotalFees(invoice);
     }
 
 

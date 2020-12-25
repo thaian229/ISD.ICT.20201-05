@@ -1,4 +1,4 @@
-package model.payment.creditCard;
+package model.payment.paymentCard.creditCard;
 
 
 import model.db.EBRDB;

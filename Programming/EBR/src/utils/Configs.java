@@ -14,7 +14,7 @@ public class Configs {
 	// database Configs
 	public static final String DB_NAME = "EBR";
 	public static final String DB_USERNAME = "postgres";
-	public static final String DB_PASSWORD = "Bim12345%";
+	public static final String DB_PASSWORD = "22114455";
 
     public static String CURRENCY = "VND";
 	public static float PERCENT_VAT = 10;

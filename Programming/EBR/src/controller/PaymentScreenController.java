@@ -4,13 +4,12 @@ import common.exception.cardException.*;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
 import model.bike.Bike;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import model.session.SessionManager;
 import subsystem.InterbankSubsystem;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;

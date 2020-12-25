@@ -2,7 +2,7 @@ package subsystem.interbank;
 
 import common.exception.*;
 import common.exception.InvalidCardException;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import utils.Configs;
 import utils.MyMap;

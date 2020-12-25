@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.invoice.Invoice;
 import model.invoice.InvoiceManager;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.SessionManager;

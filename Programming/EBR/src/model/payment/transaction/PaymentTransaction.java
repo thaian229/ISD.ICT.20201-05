@@ -1,6 +1,7 @@
 package model.payment.transaction;
 
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.PaymentCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 
 /**
  * Model to store Payment Transaction's info
@@ -20,7 +21,7 @@ public class PaymentTransaction {
 	private String errorCode;
 
 
-	private CreditCard card;
+	private PaymentCard card;
 	private String transactionId;
 	private String transactionContent;
 	private int amount;
@@ -29,7 +30,7 @@ public class PaymentTransaction {
 	private String type;
 	private String method;
 	
-	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
+	public PaymentTransaction(String errorCode, PaymentCard card, String transactionId, String transactionContent,
 			int amount, String createdAt) {
 		this.errorCode = errorCode;
 		this.card = card;
@@ -85,10 +86,10 @@ public class PaymentTransaction {
 	}
 
 	public CreditCard getCard() {
-		return card;
+		return (CreditCard) card;
 	}
 
-	public void setCard(CreditCard card) {
+	public void setCard(PaymentCard card) {
 		this.card = card;
 	}
 

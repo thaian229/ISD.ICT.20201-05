@@ -13,7 +13,7 @@ package model.bike;
  * <p>
  * class name: TT.CNTT ICT 02 - K62
  */
-public class TwinBike extends StandardBike{
+public class TwinBike extends StandardBike {
 
     /**
      * Constructor

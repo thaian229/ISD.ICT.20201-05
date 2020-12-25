@@ -25,7 +25,7 @@ public class Bike {
     protected String dockId;
     protected int value;
     protected int deposit;
-    protected int charge;
+    protected int charge = 10000;
     protected String imageURL;
 
     public Bike() { }
@@ -36,14 +36,14 @@ public class Bike {
      * @param value Bike's value
      * @param charge Bike's renting fee
      */
-    public Bike(int barcode, int value, int charge){
+    public Bike(int barcode, int value, int charge) {
         this.barcode = barcode;
         this.saddle = 1;
         this.rearSeat = 1;
         this.pairOfPedals = 1;
         this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
+        // this.charge = charge;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Bike {
         this.pairOfPedals = 1;
         this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
+        // this.charge = charge;
     }
 
     /**
@@ -119,7 +119,7 @@ public class Bike {
 
     public int getCharge() { return charge; }
 
-    public void setCharge(int charge) { this.charge = charge; }
+    // public void setCharge(int charge) { this.charge = charge; }
 
     public String getImageURL() { return imageURL; }
 

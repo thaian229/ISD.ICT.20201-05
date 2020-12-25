@@ -8,7 +8,7 @@ model.bike
 model.db
 model.dock
 model.invoice
-model.payment.creditCard
+model.payment.paymentCard.creditCard
 model.payment.transaction
 model.session
 returning

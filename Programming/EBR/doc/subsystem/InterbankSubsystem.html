@@ -156,7 +156,7 @@ implements <a href="InterbankInterface.html" title="interface in subsystem">Inte
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code><a href="../model/payment/transaction/PaymentTransaction.html" title="class in model.payment.transaction">PaymentTransaction</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#payOrder(model.payment.creditCard.CreditCard,int,java.lang.String)">payOrder</a></span>&#8203;(<a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.creditCard">CreditCard</a>&nbsp;card,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#payOrder(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">payOrder</a></span>&#8203;(<a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.paymentCard.creditCard">CreditCard</a>&nbsp;card,
 int&nbsp;amount,
 java.lang.String&nbsp;contents)</code></th>
 <td class="colLast">
@@ -165,7 +165,7 @@ java.lang.String&nbsp;contents)</code></th>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code><a href="../model/payment/transaction/PaymentTransaction.html" title="class in model.payment.transaction">PaymentTransaction</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#refund(model.payment.creditCard.CreditCard,int,java.lang.String)">refund</a></span>&#8203;(<a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.creditCard">CreditCard</a>&nbsp;card,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#refund(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">refund</a></span>&#8203;(<a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.paymentCard.creditCard">CreditCard</a>&nbsp;card,
 int&nbsp;amount,
 java.lang.String&nbsp;contents)</code></th>
 <td class="colLast">
@@ -214,17 +214,17 @@ java.lang.String&nbsp;contents)</code></th>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="payOrder(model.payment.creditCard.CreditCard,int,java.lang.String)">payOrder</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../model/payment/transaction/PaymentTransaction.html" title="class in model.payment.transaction">PaymentTransaction</a></span>&nbsp;<span class="memberName">payOrder</span>&#8203;(<span class="arguments"><a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.creditCard">CreditCard</a>&nbsp;card,
+<h3><a id="payOrder(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">payOrder</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../model/payment/transaction/PaymentTransaction.html" title="class in model.payment.transaction">PaymentTransaction</a></span>&nbsp;<span class="memberName">payOrder</span>&#8203;(<span class="arguments"><a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.paymentCard.creditCard">CreditCard</a>&nbsp;card,
 int&nbsp;amount,
 java.lang.String&nbsp;contents)</span>
                             throws <span class="exceptions"><a href="../common/exception/PaymentException.html" title="class in common.exception">PaymentException</a>,
 <a href="../common/exception/UnrecognizedException.html" title="class in common.exception">UnrecognizedException</a></span></div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="InterbankInterface.html#payOrder(model.payment.creditCard.CreditCard,int,java.lang.String)">InterbankInterface</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="InterbankInterface.html#payOrder(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">InterbankInterface</a></code></span></div>
 <div class="block">Pay order, and then return the payment transaction</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="InterbankInterface.html#payOrder(model.payment.creditCard.CreditCard,int,java.lang.String)">payOrder</a></code>&nbsp;in interface&nbsp;<code><a href="InterbankInterface.html" title="interface in subsystem">InterbankInterface</a></code></dd>
+<dd><code><a href="InterbankInterface.html#payOrder(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">payOrder</a></code>&nbsp;in interface&nbsp;<code><a href="InterbankInterface.html" title="interface in subsystem">InterbankInterface</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>card</code> - - the credit card used for payment</dd>
 <dd><code>amount</code> - - the amount to pay</dd>
@@ -237,24 +237,24 @@ java.lang.String&nbsp;contents)</span>
 <dd><code><a href="../common/exception/UnrecognizedException.html" title="class in common.exception">UnrecognizedException</a></code> - if responded with an unknown error code or
                                something goes wrong</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="InterbankInterface.html#payOrder(model.payment.creditCard.CreditCard,int,java.lang.String)"><code>InterbankInterface.payOrder(CreditCard, int,
+<dd><a href="InterbankInterface.html#payOrder(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)"><code>InterbankInterface.payOrder(CreditCard, int,
       String)</code></a></dd>
 </dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="refund(model.payment.creditCard.CreditCard,int,java.lang.String)">refund</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../model/payment/transaction/PaymentTransaction.html" title="class in model.payment.transaction">PaymentTransaction</a></span>&nbsp;<span class="memberName">refund</span>&#8203;(<span class="arguments"><a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.creditCard">CreditCard</a>&nbsp;card,
+<h3><a id="refund(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">refund</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../model/payment/transaction/PaymentTransaction.html" title="class in model.payment.transaction">PaymentTransaction</a></span>&nbsp;<span class="memberName">refund</span>&#8203;(<span class="arguments"><a href="../model/payment/creditCard/CreditCard.html" title="class in model.payment.paymentCard.creditCard">CreditCard</a>&nbsp;card,
 int&nbsp;amount,
 java.lang.String&nbsp;contents)</span>
                           throws <span class="exceptions"><a href="../common/exception/PaymentException.html" title="class in common.exception">PaymentException</a>,
 <a href="../common/exception/UnrecognizedException.html" title="class in common.exception">UnrecognizedException</a></span></div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="InterbankInterface.html#refund(model.payment.creditCard.CreditCard,int,java.lang.String)">InterbankInterface</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="InterbankInterface.html#refund(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">InterbankInterface</a></code></span></div>
 <div class="block">Refund, and then return the payment transaction</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="InterbankInterface.html#refund(model.payment.creditCard.CreditCard,int,java.lang.String)">refund</a></code>&nbsp;in interface&nbsp;<code><a href="InterbankInterface.html" title="interface in subsystem">InterbankInterface</a></code></dd>
+<dd><code><a href="InterbankInterface.html#refund(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)">refund</a></code>&nbsp;in interface&nbsp;<code><a href="InterbankInterface.html" title="interface in subsystem">InterbankInterface</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>card</code> - - the credit card which would be refunded to</dd>
 <dd><code>amount</code> - - the amount to refund</dd>
@@ -267,7 +267,7 @@ java.lang.String&nbsp;contents)</span>
 <dd><code><a href="../common/exception/UnrecognizedException.html" title="class in common.exception">UnrecognizedException</a></code> - if responded with an unknown error code or
                                something goes wrong</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="InterbankInterface.html#refund(model.payment.creditCard.CreditCard,int,java.lang.String)"><code>InterbankInterface.refund(CreditCard, int,
+<dd><a href="InterbankInterface.html#refund(model.payment.paymentCard.creditCard.CreditCard,int,java.lang.String)"><code>InterbankInterface.refund(CreditCard, int,
       String)</code></a></dd>
 </dl>
 </section>
