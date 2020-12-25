@@ -9,9 +9,9 @@ import java.util.ArrayList;
 /**
  * class for controller of the home screen
  *
- * @author mHoang
+ * @author mHoang99
  * <p>
- * created_at: 4/12/2020
+ * created_at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -22,19 +22,26 @@ import java.util.ArrayList;
  * helpers: teacher's teaching assistants
  */
 public class HomeScreenController extends BaseController {
+
+    /**
+     * Constructor
+     */
     public HomeScreenController() {
     }
 
     /**
      * This method is used to get list of docks for the home screen to display
-     * @author mHoang
-     * @return list of dock
+     * @return list of docks
      */
     public ArrayList<Dock> getDockList() {
         return DockManager.getInstance().getDockList();
     }
 
-
+    /**
+     * This method is used to get list of docks for the home screen to display by using keyword
+     * @param text keyword
+     * @return list of docks corresponding to keyword
+     */
     public ArrayList<Dock> getDockListByKeyword(String text) {
         return DockManager.getInstance().searchDockByKeyword(text);
     }

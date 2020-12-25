@@ -9,11 +9,31 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
+/**
+ * Class for calling http request
+ *
+ * @author Nguyen Thai An, hieud
+ * <p>
+ * creted at: 25/11/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class API {
 
     public static DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 
+    /**
+     * Get request
+     * @param url {@link URL url}
+     * @param token token use in authorization
+     * @return Http respond
+     * @throws Exception errors
+     */
     public static String get(String url, String token) throws Exception {
         LOGGER.info("Request URL: " + url + "\n");
         URL line_api_url = new URL(url);
@@ -34,6 +54,13 @@ public class API {
         return respone.substring(0, respone.length() - 1).toString();
     }
 
+    /**
+     * Post request to banking API
+     * @param url {@link URL}
+     * @param data body of the http request
+     * @return Http respond
+     * @throws IOException IO errors
+     */
     public static String post(String url, String data
 //			, String token
     ) throws IOException {
@@ -63,6 +90,12 @@ public class API {
         return response.toString();
     }
 
+    /**
+     * Change the Http request's method to PATCH
+     * @param method name of method
+     * @param connection {@link HttpURLConnection} connection to be changed method
+     * @throws IOException IO errors
+     */
     private static void setRequestMethod(String method, HttpURLConnection connection) throws IOException {
         try {
             connection.setRequestMethod(method);

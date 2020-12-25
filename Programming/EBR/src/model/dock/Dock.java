@@ -117,6 +117,14 @@ public class Dock {
         this.numberOfAvailableBike = bikeList.size();
     }
 
+    public void clearBikeList() {
+        this.bikeList.clear();
+    }
+
+    public void addListOfBikes(ArrayList<Bike> list) {
+        this.bikeList.addAll(list);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Dock) {

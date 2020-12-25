@@ -99,6 +99,14 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
     private boolean changeCardState;
 
 
+    /**
+     * Create new invoice screen and do initial setup
+     * @param stage {@link Stage}
+     * @param screenPath path to fxml
+     * @param invoice {@link Invoice}
+     * @param controller {@link InvoiceScreenController}
+     * @throws IOException IO error
+     */
     public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice, InvoiceScreenController controller) throws IOException {
         super(stage, screenPath);
         this.invoice = invoice;
@@ -119,9 +127,11 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
         changeCardCheckbox.setOnMouseClicked(e -> {
             handleCheckBox();
         });
-
     }
 
+    /**
+     * switch between new or old card info
+     */
     private void handleCheckBox() {
         CreditCard card = this.invoice.getCard();
 
@@ -152,6 +162,9 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
         setImage(invoiceBikeImage, this.invoice.getBike().getImageURL());
     }
 
+    /**
+     * set value for all text fields
+     */
     private void setTextFields() {
         try {
             CreditCard card = this.invoice.getCard();
@@ -170,6 +183,10 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
         }
     }
 
+    /**
+     * Start returning bike process
+     * @throws IOException IO errors
+     */
     private void handleConfirmButton() throws IOException {
         errorText.setVisible(false);
         String contents = "refund";

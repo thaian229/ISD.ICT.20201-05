@@ -6,10 +6,24 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.dock.Dock;
 import views.screen.FXMLScreenHandler;
-import views.screen.home.HomeScreenHandler;
 
 import java.io.IOException;
 
+/**
+ * Handler for dock displaying of Returning Dock Screen
+ *
+ * @author mhoang
+ * <p>
+ * created_at: 12/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
 public class ReturningDockListItemHandler extends FXMLScreenHandler {
     @FXML
     private Text dockName;
@@ -23,6 +37,12 @@ public class ReturningDockListItemHandler extends FXMLScreenHandler {
     private ReturningDockSelectionHandler returningDockSelectionHandler;
     private Dock dock;
 
+    /**
+     * constructor
+     * @param screenPath path to .fxml file
+     * @param returningDockSelectionHandler parent screen
+     * @throws IOException IO error
+     */
     public ReturningDockListItemHandler(String screenPath, ReturningDockSelectionHandler returningDockSelectionHandler) throws IOException {
         super(screenPath);
         this.returningDockSelectionHandler = returningDockSelectionHandler;

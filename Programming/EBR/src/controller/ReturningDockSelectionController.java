@@ -8,9 +8,9 @@ import java.util.ArrayList;
 /**
  * controller for returning dock selection
  *
- * @author mHoang99
+ * @author khang
  * <p>
- * creted at: 03/12/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -20,11 +20,19 @@ import java.util.ArrayList;
  */
 
 public class ReturningDockSelectionController extends BaseController{
-
+    /**
+     * This method is used to get dock list
+     * @return list of dock
+     */
     public ArrayList<Dock> getDockList() {
         return DockManager.getInstance().getDockList();
     }
 
+    /**
+     * This method is used to get dock list by using keyword
+     * @param keyword - keyword
+     * @return list of dock corresponding to keyword
+     */
     public ArrayList<Dock> getDockListByKeyword(String keyword) {
         return DockManager.getInstance().searchDockByKeyword(keyword);
     }

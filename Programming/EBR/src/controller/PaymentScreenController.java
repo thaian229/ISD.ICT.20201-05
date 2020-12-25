@@ -10,6 +10,7 @@ import model.session.Session;
 import model.session.SessionManager;
 import subsystem.InterbankSubsystem;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,24 +20,35 @@ import java.util.Map;
  *
  * @author Nguyen Thai An
  * <p>
- * creted at: 25/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
  * teacher's name: Dr. Nguyen Thi Thu Trang
  * <p>
  * class name: TT.CNTT ICT 02 - K62
+ * <p>
+ * helpers: teacher's teaching assistants
  */
 public class PaymentScreenController extends BaseController {
 
     private Bike bike;
     private HashMap<String, String> cardInfo;
 
+    /**
+     * Constructor
+     * @param bike bike in use
+     */
     public PaymentScreenController(Bike bike) {
         this.bike = bike;
         cardInfo = new HashMap<>();
     }
 
+    /**
+     * Constructor
+     * @param bike bike in use
+     * @param cardInfo all field of card in use
+     */
     public PaymentScreenController(Bike bike, HashMap<String, String> cardInfo) {
         this.bike = bike;
         this.cardInfo = cardInfo;
@@ -68,6 +80,8 @@ public class PaymentScreenController extends BaseController {
      * @param expirationDate date of expiration of the credit card
      * @param securityCode   CVV code
      * @return respond
+     * @throws PaymentException payment error
+     * @throws UnrecognizedException unrecognized error
      */
     public PaymentTransaction payDeposit(int amount, String contents, String cardNumber, String cardHolderName,
                                          String expirationDate, String securityCode) throws PaymentException, UnrecognizedException {
@@ -93,13 +107,12 @@ public class PaymentScreenController extends BaseController {
 
     /**
      * validating format of card info form
-     *
      * @param creditCardForm all fields of form forward from View
-     * @return
      */
     public void validateCreditCardForm(HashMap<String, String> creditCardForm) throws FormException{
         CardFormController.validateCreditCardForm(creditCardForm);
     }
+
 
     public void validateCardUnused(String cardNumber) {
         for (Session session : SessionManager.getInstance().getSessions()) {

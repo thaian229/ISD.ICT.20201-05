@@ -5,7 +5,7 @@ package model.bike;
  *
  * @author Bui Tu Hoang
  * <p>
- * creted at: 24/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -38,7 +38,7 @@ public class TwinElectricalBike extends StandardElectricalBike{
      * @param value Twin electrical bike's value
      * @param charge Twin electrical bike's renting fee
      */
-    public TwinElectricalBike(String id, int barcode, int value, int charge){
+    public TwinElectricalBike(String id, int barcode, int value, int charge) {
         super(id, barcode, value, charge);
         this.saddle = 1;
         this.rearSeat = 1;

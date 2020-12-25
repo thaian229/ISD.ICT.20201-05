@@ -5,7 +5,7 @@ package model.bike;
  *
  * @author Bui Tu Hoang
  * <p>
- * creted at: 24/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -13,7 +13,7 @@ package model.bike;
  * <p>
  * class name: TT.CNTT ICT 02 - K62
  */
-public class TwinBike extends StandardBike{
+public class TwinBike extends StandardBike {
 
     /**
      * Constructor

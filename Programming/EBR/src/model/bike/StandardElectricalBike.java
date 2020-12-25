@@ -5,7 +5,7 @@ package model.bike;
  *
  * @author Bui Tu Hoang
  * <p>
- * creted at: 24/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -16,6 +16,7 @@ package model.bike;
 public class StandardElectricalBike extends Bike {
     protected float battery;
     protected int timeLeft;
+    protected int charge = 20000;
 
     /**
      * Constructor
@@ -23,14 +24,14 @@ public class StandardElectricalBike extends Bike {
      * @param value Standard electrical bike's value
      * @param charge Standard electrical bike's renting fee
      */
-    public StandardElectricalBike(int barcode, int value, int charge){
+    public StandardElectricalBike(int barcode, int value, int charge) {
         this.barcode = barcode;
         this.saddle = 1;
         this.rearSeat = 1;
         this.pairOfPedals = 1;
         this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
+        // this.charge = charge;
         this.battery = 100;
         this. timeLeft = 360;
     }
@@ -42,7 +43,7 @@ public class StandardElectricalBike extends Bike {
      * @param value Standard electrical bike's value
      * @param charge Standard electrical bike's renting fee
      */
-    public StandardElectricalBike(String id, int barcode, int value, int charge){
+    public StandardElectricalBike(String id, int barcode, int value, int charge) {
         this.id = id;
         this.barcode = barcode;
         this.saddle = 1;
@@ -50,7 +51,7 @@ public class StandardElectricalBike extends Bike {
         this.pairOfPedals = 1;
         this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
+        // this.charge = charge;
         this.battery = (float) 100;
         this. timeLeft = 360;
     }
@@ -58,6 +59,11 @@ public class StandardElectricalBike extends Bike {
     public float getBattery() { return battery; }
 
     public void setBattery(float battery) { this.battery = battery; }
+
+    @Override
+    public int getCharge() {
+        return this.charge;
+    }
 
     public int getTimeLeft() { return timeLeft; }
 

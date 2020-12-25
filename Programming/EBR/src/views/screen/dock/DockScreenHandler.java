@@ -22,7 +22,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+/**
+ * Handler for Dock View Screen
+ *
+ * @author mHoang
+ * <p>
+ * created_at: 6/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 K62
+ * <p>
+ * helpers: teacher's teaching assistants
+ */
 public class DockScreenHandler extends BaseScreenHandlerWithBarcodePopup {
 
     @FXML
@@ -90,7 +104,9 @@ public class DockScreenHandler extends BaseScreenHandlerWithBarcodePopup {
         navbar.getChildren().add(new NavBarHandler(this, true).getContent());
     }
 
-
+    /**
+     * Show all bikes in dock
+     */
     public void displayBikeList() {
         hboxBikeList.getChildren().clear();
 
@@ -111,8 +127,8 @@ public class DockScreenHandler extends BaseScreenHandlerWithBarcodePopup {
             e.printStackTrace();
         }
 
-        dock.getBikeList().clear();
-        dock.getBikeList().addAll(this.bikeList);
+        dock.clearBikeList();
+        dock.addListOfBikes(this.bikeList);
         setDockDetail();
     }
 
@@ -125,6 +141,9 @@ public class DockScreenHandler extends BaseScreenHandlerWithBarcodePopup {
         setImage(dockImg, dock.getImageURL());
     }
 
+    /**
+     * set all label and text fields value
+     */
     private void setDockDetail() {
         dockName.setText(dock.getName());
         dockAddress.setText(dock.getLocation());
@@ -153,6 +172,10 @@ public class DockScreenHandler extends BaseScreenHandlerWithBarcodePopup {
         dockTwinEBikeNum.setText("" + teb);
     }
 
+    /**
+     * move to bike screen
+     * @param bike {@link Bike} bike to be shown
+     */
     public void BikeScreenTransition(Bike bike) {
         try {
             bike.setDock(dock);

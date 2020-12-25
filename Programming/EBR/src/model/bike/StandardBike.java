@@ -5,7 +5,7 @@ package model.bike;
  *
  * @author Bui Tu Hoang
  * <p>
- * creted at: 24/11/2020
+ * creted at: 20/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -20,7 +20,7 @@ public class StandardBike extends Bike {
         this.rearSeat = 1;
         this.pairOfPedals = 1;
         this.deposit = 1000000;
-        this.charge = 25000;
+        // this.charge = 10000;
     }
 
     /**
@@ -36,7 +36,7 @@ public class StandardBike extends Bike {
         this.pairOfPedals = 1;
         this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
+        // this.charge = charge;
     }
 
     /**
@@ -54,7 +54,7 @@ public class StandardBike extends Bike {
         this.pairOfPedals = 1;
         this.value = value;
         this.deposit = value/10;
-        this.charge = charge;
+        // this.charge = charge;
     }
 
     @Override

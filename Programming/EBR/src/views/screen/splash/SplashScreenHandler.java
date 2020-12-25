@@ -38,11 +38,22 @@ public class SplashScreenHandler extends BaseScreenHandler implements Initializa
     @FXML
     Button start;
 
+    /**
+     * constructor
+     * @param stage {@link Stage}
+     * @param screenPath path to .fxml file
+     * @throws IOException IO error
+     */
     public SplashScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         super.screenTitle = "Splash Screen";
     }
 
+    /**
+     * call on init
+     * @param location image path for big logo
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setImage(bigLogo, Path.BIG_LOGO_ICON);

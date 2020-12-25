@@ -6,7 +6,7 @@ import views.screen.BaseScreenHandler;
 import java.io.IOException;
 
 /**
- * class for ...
+ * Base class for all popup screen
  *
  * @author mHoang
  * <p>
@@ -24,6 +24,4 @@ public class Popup extends BaseScreenHandler {
     public Popup(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
     }
-
-
 }

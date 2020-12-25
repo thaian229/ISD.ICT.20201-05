@@ -115,6 +115,10 @@ public class HomeScreenHandler extends BaseScreenHandlerWithBarcodePopup impleme
         }
     }
 
+    /**
+     * move to dock that being clicked
+     * @param dock {@link Dock} dock to be shown
+     */
     public void onDockListItemClicked(Dock dock) {
         try {
             DockScreenHandler dockScreenHandler = new DockScreenHandler(this.stage, Path.DOCK_PATH, dock);

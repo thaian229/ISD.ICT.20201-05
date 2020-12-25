@@ -94,6 +94,13 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         super(stage, screenPath);
     }
 
+    /**
+     * Create and setup new Handler
+     * @param stage {@link Stage}
+     * @param screenPath path to .fxml file
+     * @param controller {@link PaymentScreenController}
+     * @throws IOException IO errors
+     */
     public PaymentConfirmationScreenHandler(Stage stage, String screenPath, PaymentScreenController controller) throws IOException {
         super(stage, screenPath);
         this.setBController(controller);
@@ -128,6 +135,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         paymentConfirmationCancelButton.setOnMouseClicked(e -> homeScreenHandler.show());
     }
 
+    /**
+     * set image for bike
+     */
     private void setBikeImage() {
         try {
             setImage(paymentConfirmationBikeImage, this.controller.getBike().getImageURL());
@@ -137,6 +147,9 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         }
     }
 
+    /**
+     * set value for all labels
+     */
     private void setTextLabels() {
         try {
             barcode.setText(Integer.toString(this.controller.getBike().getBarcode()));
@@ -153,6 +166,10 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         }
     }
 
+    /**
+     * Make transaction for renting and save
+     * @throws IOException IO errors
+     */
     private void handleRentingConfirmation() throws IOException {
         String contents = "pay order";
         try {
@@ -176,7 +193,10 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         }
     }
 
-
+    /**
+     * create and start new renting session, then go to session screen
+     * @param rentTransaction {@link PaymentTransaction} pay deposit transaction
+     */
     private void transitionToSessionScreen(PaymentTransaction rentTransaction) {
         try {
             // Create and save card
@@ -196,6 +216,11 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         }
     }
 
+    /**
+     * Save the transaction via Manager class
+     * @param rentTransaction {@link PaymentTransaction}
+     * @throws IOException IO errors
+     */
     private void saveTransaction(PaymentTransaction rentTransaction) throws IOException {
         CreditCard card = new CreditCard(this.controller.getCardInfo().get("cardNumber"), this.controller.getCardInfo().get("cardOwner"),
                 Integer.parseInt(this.controller.getCardInfo().get("securityCode")), this.controller.getCardInfo().get("expDate"));

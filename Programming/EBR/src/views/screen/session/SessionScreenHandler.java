@@ -23,14 +23,9 @@ import views.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.returningDock.ReturningDockSelectionHandler;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 /**
@@ -48,7 +43,6 @@ import java.util.ResourceBundle;
  * <p>
  * helpers: teacher's teaching assistants
  */
-
 public class SessionScreenHandler extends BaseScreenHandler implements Initializable {
     @FXML
     ImageView lockBikeImg;
@@ -100,6 +94,14 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
     private int timePassed = 0;
 
+    /**
+     * Constructor and setup the screen
+     * @param stage {@link Stage stage}
+     * @param screenPath path to .fxml
+     * @param session {@link Session session} session the screen works on
+     * @param controller {@link SessionScreenController sessionScreenController} Controller of this screen
+     * @throws IOException IO error
+     */
     public SessionScreenHandler(Stage stage, String screenPath, Session session, SessionScreenController controller) throws IOException {
         super(stage, screenPath);
         this.session = session;
@@ -144,6 +146,9 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         });
     }
 
+    /**
+     * Set up all text field for displaying
+     */
     private void setSessionLengthText() {
         if (days == 0) {
             sessionLength.setText(this.realTime.toString());
@@ -153,16 +158,28 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         sessionRentingFee.setText(this.getBController().calculateCurrentRentingFees(this.session) + " VND");
     }
 
+    /**
+     * transform second to days and time
+     * @param seconds number of seconds
+     */
     private void toDayAndTime(long seconds) {
         this.days = (int) (seconds / 86399);
         this.realTime = LocalTime.ofSecondOfDay((seconds - days * 86399));
     }
 
+    /**
+     *
+     * @param url {@link URL URL}
+     * @param resourceBundle {@link ResourceBundle ResourceBundle}
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionCloseButton.setOnMouseClicked(e -> homeScreenHandler.show());
     }
 
+    /**
+     * set image of bike on session screen
+     */
     private void setImages() {
         try {
             setImage(sessionBikeImage, this.session.getBike().getImageURL());
@@ -172,6 +189,9 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
 
+    /**
+     * update text fields value
+     */
     private void setTextFields() {
         try {
             Bike bike = this.session.getBike();
@@ -196,6 +216,10 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
 
+    /**
+     * Go to dock screen
+     * @throws IOException IO error
+     */
     private void goToDockSelection() throws IOException {
         try {
             ReturningDockSelectionHandler returningDockSelectionHandler = new ReturningDockSelectionHandler(this.stage, Path.RETURNING_DOCK_SELECTION_SCREEN_PATH, new ReturningDockSelectionController(), session);
@@ -209,11 +233,18 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
     }
 
+    /**
+     *
+     * @return {@link SessionScreenController SessionScreenController}
+     */
     @Override
     public SessionScreenController getBController() {
         return (SessionScreenController) super.getBController();
     }
 
+    /**
+     * set image for lock button
+     */
     private void setImageForLockBikeImg() {
         if (!session.isActive()) {
             setImage(lockBikeImg, Path.PLAY_CIRCLE_ICON);

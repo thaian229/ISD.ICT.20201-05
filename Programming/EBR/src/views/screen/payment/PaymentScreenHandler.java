@@ -92,6 +92,10 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
 
+    /**
+     * Read in and validate all card info, then move to next screen
+     * @throws IOException IO errors
+     */
     private void handleCardInfoSubmit() throws IOException {
         // Read in all fields
         errorText.setVisible(false);
@@ -114,6 +118,10 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         }
     }
 
+    /**
+     * Go to Confirmation screen
+     * @throws IOException IO errors
+     */
     private void goToConfirmationScreen() throws IOException {
         // Transition to PaymentConfirmationScreen
         PaymentConfirmationScreenHandler paymentConfirmationScreenHandler = new PaymentConfirmationScreenHandler(this.stage, Path.PAYMENT_CONFIRMATION_SCREEN_PATH, this.getBController());

@@ -7,8 +7,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.concurrent.Executor;
-
+/**
+ * Model to manage all connection to database
+ *
+ * @author mHoang99, Nguyen Thai An
+ * <p>
+ * creted at: 20/12/2020
+ * <p>
+ * project name: EBR
+ * <p>
+ * teacher's name: Dr. Nguyen Thi Thu Trang
+ * <p>
+ * class name: TT.CNTT ICT 02 - K62
+ */
 public class EBRDB {
 
     private static final String url = "jdbc:postgresql://localhost/" + Configs.DB_NAME;
@@ -19,7 +30,6 @@ public class EBRDB {
 
     /**
      * Connect to the PostgreSQL database
-     *
      * @return a Connection object
      */
     public static Connection getConnection() throws SQLException {
