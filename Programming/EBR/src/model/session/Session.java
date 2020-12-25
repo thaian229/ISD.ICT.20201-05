@@ -1,7 +1,8 @@
 package model.session;
 
 import model.bike.Bike;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.PaymentCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import utils.Utils;
 
@@ -148,7 +149,6 @@ public class Session {
     public HashMap<String, String> getSessionInfo() {
         HashMap<String, String> info = new HashMap<String, String>();
         info.put("bike", "" + bike.getBarcode());
-        info.put("card", card.getCardNum());
         info.put("startTime", startTime.format(Utils.DATE_FORMATER));
         info.put("endTime", endTime.format(Utils.DATE_FORMATER));
         return info;

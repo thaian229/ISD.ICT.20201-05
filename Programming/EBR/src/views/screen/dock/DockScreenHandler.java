@@ -6,13 +6,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.*;
 import model.dock.Dock;
 import utils.Path;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
+import views.screen.BaseScreenHandlerWithBarcodePopup;
 import views.screen.bike.BikeScreenHandler;
 
 import java.io.IOException;
@@ -20,13 +23,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class DockScreenHandler extends BaseScreenHandler implements Initializable {
+public class DockScreenHandler extends BaseScreenHandlerWithBarcodePopup {
 
     @FXML
-    private ImageView logo;
-
-    @FXML
-    private ImageView back;
+    private Pane navbar;
 
     @FXML
     private ImageView searchImg;
@@ -87,16 +87,7 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         this.dock = dock;
         super.screenTitle = "Dock Screen";
         this.setImages();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e -> {
-            BaseScreenHandler previousScreen = this.getPreviousScreen();
-            previousScreen.setScreenTitle(previousScreen.getScreenTitle());
-            previousScreen.show();
-        });
+        navbar.getChildren().add(new NavBarHandler(this, true).getContent());
     }
 
 
@@ -131,8 +122,6 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
         setImage(twinBikeIcon, Path.TWIN_BIKE_ICON);
         setImage(standardEBikeIcon, Path.STANDARD_BIKE_ICON);
         setImage(twinEBikeIcon, Path.TWIN_ELECTRICAL_BIKE_ICON);
-        setImage(logo, Path.LOGO_ICON);
-        setImage(back, Path.BACK_NAV_ICON);
         setImage(dockImg, dock.getImageURL());
     }
 

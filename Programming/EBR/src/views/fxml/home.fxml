@@ -10,80 +10,63 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <AnchorPane layoutX="-9.0" layoutY="-9.0" maxHeight="-Infinity" prefHeight="60.0" prefWidth="1376.0" style="-fx-background-color: #8C36C0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <ImageView fx:id="logo" fitHeight="60.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-                    <image>
-                        <Image url="@../../../assets/images/LOGO.png" />
-                    </image>
-                </ImageView>
-                <Button fx:id="barcodeButton" alignment="CENTER" contentDisplay="CENTER" maxWidth="170.0" minWidth="170.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: #FAE715; -fx-cursor: hand;" text="ENTER BARCODE" textAlignment="CENTER" textFill="#8c36c0" AnchorPane.leftAnchor="1096.0" AnchorPane.topAnchor="11.0">
-                    <font>
-                        <Font name="Arial Bold" size="14.0" />
-                    </font>
-                </Button>
-                <ImageView fx:id="back" fitHeight="60.0" fitWidth="176.0" layoutX="360.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" translateX="946.0">
-                    <image>
-                        <Image url="@../../../assets/images/backButton.png" />
-                    </image>
-                </ImageView>
-            </children>
-            <effect>
-                <DropShadow />
-            </effect>
-        </AnchorPane>
         <ScrollPane fitToHeight="true" layoutX="305.0" layoutY="225.0" prefWidth="756.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
             <content>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;">
                     <children>
-                    <Text fill="#8c36c0" layoutX="305.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOCKS" AnchorPane.leftAnchor="305.0" AnchorPane.topAnchor="68.203125">
-                        <font>
-                            <Font name="System Bold" size="48.0" />
-                        </font>
-                    </Text>
-                    <Pane layoutX="516.0" layoutY="84.0" prefHeight="40.0" prefWidth="556.0" style="-fx-background-color: #F0F0F0; -fx-border-radius: 2;" AnchorPane.topAnchor="84.0">
-                        <children>
-                            <TextField fx:id="searchField" layoutX="50.0" layoutY="1.0" prefHeight="24.0" prefWidth="444.0" promptText="Search" style="-fx-background-color: #F0F0F0;">
-                                <font>
-                                    <Font size="18.0" />
-                                </font>
-                            </TextField>
-                            <ImageView fx:id="searchImg" fitHeight="24.0" fitWidth="24.0" layoutX="26.0" layoutY="8.0" onMouseClicked="#searchImgListener" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@../../../assets/images/icons/search_icon.png" />
-                                </image>
-                                <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                </cursor>
-                            </ImageView>
-                        </children>
-                    </Pane>
-                  <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="1306.0" spacing="50.0" style="-fx-border-color: #8C36C0; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: #F5F5F5;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0">
-                     <children>
-                        <VBox fx:id="vboxDockList1" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
-                           <opaqueInsets>
-                              <Insets left="50.0" right="50.0" />
-                           </opaqueInsets>
-                        </VBox>
-                        <VBox fx:id="vboxDockList2" alignment="CENTER" layoutX="93.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
-                           <opaqueInsets>
-                              <Insets left="50.0" right="50.0" />
-                           </opaqueInsets>
-                        </VBox>
-                     </children>
-                     <opaqueInsets>
-                        <Insets bottom="20.0" top="20.0" />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="40.0" top="40.0" />
-                     </padding>
-                  </HBox>
+                        <Text fill="#8c36c0" layoutX="305.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOCKS" AnchorPane.leftAnchor="305.0" AnchorPane.topAnchor="68.203125">
+                            <font>
+                                <Font name="System Bold" size="48.0" />
+                            </font>
+                        </Text>
+                        <Pane layoutX="516.0" layoutY="84.0" prefHeight="40.0" prefWidth="556.0" style="-fx-background-color: #F0F0F0; -fx-border-radius: 2;" AnchorPane.topAnchor="84.0">
+                            <children>
+                                <TextField fx:id="searchField" layoutX="50.0" layoutY="1.0" prefHeight="24.0" prefWidth="444.0" promptText="Search" style="-fx-background-color: #F0F0F0;">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </TextField>
+                                <ImageView fx:id="searchImg" fitHeight="24.0" fitWidth="24.0" layoutX="26.0" layoutY="8.0" onMouseClicked="#searchImgListener" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../assets/images/icons/search_icon.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="1306.0" spacing="50.0" style="-fx-border-color: #8C36C0; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: #F5F5F5;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0">
+                            <children>
+                                <VBox fx:id="vboxDockList1" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
+                                    <opaqueInsets>
+                                        <Insets left="50.0" right="50.0" />
+                                    </opaqueInsets>
+                                </VBox>
+                                <VBox fx:id="vboxDockList2" alignment="CENTER" layoutX="93.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
+                                    <opaqueInsets>
+                                        <Insets left="50.0" right="50.0" />
+                                    </opaqueInsets>
+                                </VBox>
+                            </children>
+                            <opaqueInsets>
+                                <Insets bottom="20.0" top="20.0" />
+                            </opaqueInsets>
+                            <padding>
+                                <Insets bottom="40.0" top="40.0" />
+                            </padding>
+                        </HBox>
                     </children>
-               <padding>
-                  <Insets bottom="20.0" />
-               </padding>
+                    <padding>
+                        <Insets bottom="20.0" />
+                    </padding>
                 </AnchorPane>
             </content>
         </ScrollPane>
+        <Pane fx:id="navbar" prefHeight="60.0" prefWidth="1366.0" style="-fx-background-color: #8c36c0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <effect>
+                <DropShadow />
+            </effect>
+        </Pane>
     </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -18,6 +19,7 @@ import model.session.Session;
 import utils.Configs;
 import utils.Path;
 import utils.Utils;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.returningDock.ReturningDockSelectionHandler;
 
@@ -48,13 +50,6 @@ import java.util.ResourceBundle;
  */
 
 public class SessionScreenHandler extends BaseScreenHandler implements Initializable {
-
-    @FXML
-    ImageView logo;
-
-    @FXML
-    ImageView back;
-
     @FXML
     ImageView lockBikeImg;
 
@@ -77,6 +72,12 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
     Text sessionUsage;
 
     @FXML
+    Text usageLabel;
+
+    @FXML
+    Text batteryLabel;
+
+    @FXML
     Text sessionCharge;
 
     @FXML
@@ -87,6 +88,9 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
     @FXML
     Button returnBikeButton;
+
+    @FXML
+    private Pane navbar;
 
     private Session session;
 
@@ -107,6 +111,7 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
         this.setTextFields();
         System.out.println(session.isActive());
         setImageForLockBikeImg();
+        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
 
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
@@ -155,16 +160,12 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e -> this.getPreviousScreen().show());
         sessionCloseButton.setOnMouseClicked(e -> homeScreenHandler.show());
     }
 
     private void setImages() {
         try {
             setImage(sessionBikeImage, this.session.getBike().getImageURL());
-            setImage(logo, Path.LOGO_ICON);
-            setImage(back, Path.BACK_NAV_ICON);
             setImageForLockBikeImg();
         } catch (Exception exp) {
             exp.printStackTrace();
@@ -182,8 +183,10 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
                 sessionBattery.setText(eBike.getBattery() + "%");
                 sessionUsage.setText(eBike.getTimeLeft() + " minutes");
             } else {
-                sessionBattery.setText("");
-                sessionUsage.setText("");
+                sessionBattery.setVisible(false);
+                sessionUsage.setVisible(false);
+                batteryLabel.setVisible(false);
+                usageLabel.setVisible(false);
             }
 
             sessionCharge.setText(bike.getCharge() + " " + Configs.CURRENCY + "/h");
@@ -218,13 +221,5 @@ public class SessionScreenHandler extends BaseScreenHandler implements Initializ
             setImage(lockBikeImg, Path.PAUSE_CIRCLE_ICON);
         }
     }
-//    @FXML
-//    void lockBikeImgClickHandler (MouseEvent e) {
-//        this.getBController().changeBikeLockState(session);
-//        if (!session.isActive()) {
-//            setImage(lockBikeImg, Path.PLAY_CIRCLE_ICON);
-//        } else {
-//            setImage(lockBikeImg, Path.PAUSE_CIRCLE_ICON);
-//        }
-//    }
+
 }

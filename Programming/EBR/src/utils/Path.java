@@ -58,4 +58,5 @@ public class Path {
     public static final String PAYMENT_RESULT_POPUP_PATH = "/views/fxml/transaction_result_popup.fxml";
     public static final String ALERT_POPUP_PATH = "/views/fxml/alert_popup.fxml";
 
+    public static final String NAVBAR_PATH = "/views/fxml/navbar.fxml";
 }

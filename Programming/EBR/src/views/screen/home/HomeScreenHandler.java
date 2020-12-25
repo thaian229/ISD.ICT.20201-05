@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.bike.Bike;
@@ -16,7 +17,9 @@ import model.dock.Dock;
 import model.session.Session;
 import utils.Path;
 import utils.Utils;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
+import views.screen.BaseScreenHandlerWithBarcodePopup;
 import views.screen.bike.BikeScreenHandler;
 import views.screen.dock.DockScreenHandler;
 import views.screen.popup.BarcodePopup;
@@ -44,24 +47,18 @@ import java.util.logging.Logger;
  * helpers: teacher's teaching assistants
  */
 
-public class HomeScreenHandler extends BaseScreenHandler implements Initializable {
+public class HomeScreenHandler extends BaseScreenHandlerWithBarcodePopup implements Initializable {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
 
     @FXML
-    private ImageView logo;
-
-    @FXML
-    private ImageView back;
+    private Pane navbar;
 
     @FXML
     private ImageView searchImg;
 
     @FXML
     private TextField searchField;
-
-    @FXML
-    private Button barcodeButton;
 
     @FXML
     private VBox vboxDockList1;
@@ -76,6 +73,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         super.screenTitle = "Home Screen";
         super.setBController(homeScreenController);
         dockList = this.getBController().getDockList();
+        navbar.getChildren().add(new NavBarHandler(this, true).getContent());
     }
 
     @Override
@@ -86,28 +84,12 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         this.setImages();
-
-        back.setOnMouseClicked(e -> {
-            BaseScreenHandler previousScreen = this.getPreviousScreen();
-            previousScreen.setScreenTitle(previousScreen.getScreenTitle());
-            previousScreen.show();
-        });
-
-        barcodeButton.setOnMouseClicked(e -> {
-            try {
-                BarcodePopup.display(this);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
     }
 
     /**
      * set image for home screen
      */
     private void setImages() {
-        setImage(logo, Path.LOGO_ICON);
-        setImage(back, Path.BACK_NAV_ICON);
         setImage(searchImg, Path.SEARCH_ICON);
     }
 
@@ -147,33 +129,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         }
     }
 
-
-    public void moveToSessionScreen(Session session) {
-        SessionScreenController sessionScreenController = new SessionScreenController();
-        try {
-            SessionScreenHandler sessionScreenHandler = new SessionScreenHandler(this.stage,
-                    Path.SESSION_SCREEN_PATH, session, sessionScreenController);
-            sessionScreenHandler.setHomeScreenHandler(this);
-            sessionScreenHandler.setPreviousScreen(this);
-            sessionScreenHandler.setScreenTitle("Session Screen");
-            sessionScreenHandler.show();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
-
-    public void moveToBikeViewScreen(Bike bike) {
-        try {
-            BikeScreenHandler bikeScreenHandler = new BikeScreenHandler(this.stage,
-                    Path.BIKE_VIEW_SCREEN_PATH, bike);
-            bikeScreenHandler.setHomeScreenHandler(this);
-            bikeScreenHandler.setPreviousScreen(this);
-            bikeScreenHandler.setScreenTitle("Bike View Screen");
-            bikeScreenHandler.show();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
 
     @FXML
     void searchImgListener(MouseEvent e) {

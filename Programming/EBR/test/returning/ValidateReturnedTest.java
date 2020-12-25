@@ -1,7 +1,7 @@
 package returning;
 
 import controller.InvoiceScreenController;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

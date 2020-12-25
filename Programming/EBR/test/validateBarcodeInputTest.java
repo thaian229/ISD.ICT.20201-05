@@ -1,4 +1,6 @@
+import common.exception.InvalidBarcodeFormatException;
 import controller.BarcodeController;
+import controller.BarcodePopupController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -6,11 +8,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class validateBarcodeInputTest {
-    private BarcodeController barcodeController;
+    private BarcodePopupController barcodeController;
 
     @BeforeEach
     void setUp() throws Exception {
-        barcodeController = new BarcodeController();
+        barcodeController = new BarcodePopupController();
     }
 
     @ParameterizedTest
@@ -20,9 +22,17 @@ public class validateBarcodeInputTest {
             ",false"
     })
 
-    void test(String address, boolean expected) {
+    void test(String barcode, boolean expected) {
+        int bc;
+        boolean isValid;
         // when
-        boolean isValid = barcodeController.validateBarcodeInput(address);
+        try {
+            bc = barcodeController.validateBarcodeInput(barcode);
+            isValid = true;
+        } catch (InvalidBarcodeFormatException e) {
+            isValid = false;
+        }
+
         // then
         assertEquals(expected, isValid);
     }

@@ -8,17 +8,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.invoice.Invoice;
 import model.invoice.InvoiceManager;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
 import utils.Utils;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
 import views.screen.popup.AlertPopup;
 import views.screen.popup.PaymentResultPopup;
@@ -44,12 +46,10 @@ import java.util.ResourceBundle;
  * helpers: teacher's teaching assistants
  */
 
-public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup implements Initializable {
+public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup {
     private Invoice invoice;
-
     @FXML
-    ImageView logo;
-
+    private Pane navbar;
     @FXML
     ImageView invoiceBikeImage;
 
@@ -107,6 +107,8 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
         this.setTextFields();
         this.changeCardState = changeCardCheckbox.isSelected();
         this.handleCheckBox();
+        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+
         confirmButton.setOnMouseClicked(e -> {
             try {
                 handleConfirmButton();
@@ -146,13 +148,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
         this.changeCardState = !this.changeCardState;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        logo.setOnMouseClicked(e -> homeScreenHandler.show());
-    }
-
     private void setImages() {
-        setImage(logo, Path.LOGO_ICON);
         setImage(invoiceBikeImage, this.invoice.getBike().getImageURL());
     }
 
@@ -192,7 +188,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
                 cardInfo.put("cardNumber", cardNumber.trim());
                 cardInfo.put("expDate", expDate.trim());
                 cardInfo.put("securityCode", securityCode.trim());
-                paymentScreenController.validateCreditCardForm(cardInfo);
+                this.getBController().validateCreditCardForm(cardInfo);
                 tmpCard = getBController().getCardByCardNum(cardOwner, cardNumber, securityCode, expDate);
             } else {
                 tmpCard = getBController().getCardByCardNum(this.invoice.getCard().getCardNum());

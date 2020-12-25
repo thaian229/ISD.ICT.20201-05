@@ -17,6 +17,8 @@ public class BaseScreenHandler extends views.screen.FXMLScreenHandler {
 
 	private BaseScreenHandler prev;
 	protected final Stage stage;
+
+
 	protected HomeScreenHandler homeScreenHandler;
 	protected Hashtable<String, String> messages;
 	private BaseController bController;
@@ -73,4 +75,7 @@ public class BaseScreenHandler extends views.screen.FXMLScreenHandler {
 		this.homeScreenHandler = HomeScreenHandler;
 	}
 
+	public HomeScreenHandler getHomeScreenHandler() {
+		return homeScreenHandler;
+	}
 }

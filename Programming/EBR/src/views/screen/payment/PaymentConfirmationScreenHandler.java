@@ -10,16 +10,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.payment.creditCard.CreditCard;
-import model.payment.creditCard.CreditCardManager;
+import model.payment.paymentCard.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
 import model.session.Session;
 import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
 import views.screen.popup.AlertPopup;
 import views.screen.popup.PaymentResultPopup;
@@ -46,6 +48,9 @@ import java.util.ResourceBundle;
 public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTransactionPopup implements Initializable {
 
     private PaymentScreenController controller;
+
+    @FXML
+    private Pane navbar;
 
     @FXML
     private ImageView paymentConfirmationBikeImage;
@@ -80,12 +85,6 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
     private Button paymentConfirmationConfirmButton;
 
     @FXML
-    private ImageView logo;
-
-    @FXML
-    private ImageView back;
-
-    @FXML
     private ImageView paymentConfirmationCancelButtonImage;
 
     @FXML
@@ -102,6 +101,8 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
         // set all text and image
         setBikeImage();
         setTextLabels();
+        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
+
         // set up extra event
         paymentConfirmationConfirmButton.setOnMousePressed(e -> {
             try {
@@ -124,16 +125,12 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // set event listener
-        logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e -> getPreviousScreen().show());
         paymentConfirmationCancelButton.setOnMouseClicked(e -> homeScreenHandler.show());
     }
 
     private void setBikeImage() {
         try {
             setImage(paymentConfirmationBikeImage, this.controller.getBike().getImageURL());
-            setImage(logo, Path.LOGO_ICON);
-            setImage(back, Path.BACK_NAV_ICON);
             setImage(paymentConfirmationCancelButtonImage, Path.CANCEL_BUTTON_ICON);
         } catch (Exception exp) {
             exp.printStackTrace();

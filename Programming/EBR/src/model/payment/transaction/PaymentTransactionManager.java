@@ -2,6 +2,7 @@ package model.payment.transaction;
 
 
 import model.db.EBRDB;
+import model.payment.paymentCard.creditCard.CreditCard;
 
 import java.sql.*;
 

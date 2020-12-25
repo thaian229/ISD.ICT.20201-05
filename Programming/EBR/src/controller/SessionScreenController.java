@@ -1,22 +1,8 @@
 package controller;
 
-import common.exception.PaymentException;
-import common.exception.UnrecognizedException;
-import controller.BaseController;
-import model.bike.Bike;
-import model.bike.BikeManager;
 import model.dock.Dock;
-import model.invoice.Invoice;
-import model.payment.creditCard.CreditCard;
-import model.payment.transaction.PaymentTransaction;
 import model.session.Session;
 import model.session.SessionManager;
-import subsystem.InterbankSubsystem;
-import utils.Utils;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * class for controller of the session screen

@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ import model.invoice.Invoice;
 import model.invoice.InvoiceManager;
 import model.session.Session;
 import utils.Path;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.invoice.InvoiceScreenHandler;
 
@@ -49,10 +51,9 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     private AnchorPane dockInfo;
     @FXML
     private ImageView searchImg;
+
     @FXML
-    private ImageView back;
-    @FXML
-    private ImageView logo;
+    private Pane navbar;
 
     private Dock dock;
     private Session session;
@@ -61,8 +62,6 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dockInfo.setVisible(false);
-        logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e -> this.getPreviousScreen().show());
         this.setImages();
     }
 
@@ -72,16 +71,11 @@ public class ReturningDockSelectionHandler extends BaseScreenHandler implements 
         this.session = session;
         dockList = this.getBController().getDockList();
         displayDockList();
+        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
     }
 
     private void setImages() {
-        try {
-            setImage(logo, Path.LOGO_ICON);
-            setImage(back, Path.BACK_NAV_ICON);
-            setImage(searchImg, Path.SEARCH_ICON);
-        } catch (Exception exp) {
-            exp.printStackTrace();
-        }
+        setImage(searchImg, Path.SEARCH_ICON);
     }
 
     @Override

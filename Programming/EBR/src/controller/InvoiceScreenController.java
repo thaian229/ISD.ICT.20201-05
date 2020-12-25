@@ -2,18 +2,14 @@ package controller;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
-import controller.BaseController;
-import model.bike.Bike;
+import common.exception.cardException.FormException;
 import model.invoice.Invoice;
-import model.payment.creditCard.CreditCard;
-import model.payment.creditCard.CreditCardManager;
+import model.payment.paymentCard.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
-import model.session.Session;
 import subsystem.InterbankSubsystem;
-import utils.Utils;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -138,5 +134,9 @@ public class InvoiceScreenController extends BaseController {
 
     public CreditCard getCardByCardNum(String cardNumber) {
         return CreditCardManager.getInstance().getCardByCardNumber(cardNumber);
+    }
+
+    public void validateCreditCardForm(HashMap<String, String> cardInfo) throws FormException {
+        CardFormController.validateCreditCardForm(cardInfo);
     }
 }

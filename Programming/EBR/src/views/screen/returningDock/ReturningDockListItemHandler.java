@@ -2,6 +2,7 @@ package views.screen.returningDock;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.dock.Dock;
 import views.screen.FXMLScreenHandler;
@@ -53,7 +54,7 @@ public class ReturningDockListItemHandler extends FXMLScreenHandler {
      */
     private void setDockInfo() {
         dockName.setText(dock.getName());
-        dockParkingSlots.setText(Integer.toString(dock.getNumberOfAvailableBike()) + '/' + Integer.toString(dock.getCapacity()));
+        dockParkingSlots.setText(Integer.toString(dock.getNumberOfAvailableBike()) + '/' + dock.getCapacity());
         setImage(dockImg, dock.getImageURL());
     }
 }

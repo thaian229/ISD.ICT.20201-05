@@ -1,16 +1,17 @@
 package views.screen.payment;
 
-import common.exception.FormException;
-import controller.BaseController;
+import common.exception.cardException.FormException;
 import controller.PaymentScreenController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utils.Path;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
@@ -34,6 +35,9 @@ import java.util.ResourceBundle;
 public class PaymentScreenHandler extends BaseScreenHandler implements Initializable {
 
     @FXML
+    private Pane navbar;
+
+    @FXML
     private TextField cardOwner;
 
     @FXML
@@ -55,13 +59,7 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
     private Button paymentConfirmButton;
 
     @FXML
-    private ImageView logo;
-
-    @FXML
     private ImageView backButtonImage;
-
-    @FXML
-    private ImageView back;
 
 
     public PaymentScreenHandler(Stage stage, String screenPath, PaymentScreenController paymentScreenController) throws IOException {
@@ -69,12 +67,11 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         super.screenTitle = "Payment Screen";
         this.setImages();
         this.setBController(paymentScreenController);
+        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e -> getPreviousScreen().show());
         paymentCancelButton.setOnMouseClicked(e -> homeScreenHandler.show());
         backButtonImage.setOnMouseClicked(e -> homeScreenHandler.show());
 
@@ -89,8 +86,6 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
 
     private void setImages() {
         try {
-            setImage(logo, Path.LOGO_ICON);
-            setImage(back, Path.BACK_NAV_ICON);
             setImage(backButtonImage, Path.CANCEL_BUTTON_ICON);
         } catch (Exception exp) {
             exp.printStackTrace();
@@ -109,7 +104,7 @@ public class PaymentScreenHandler extends BaseScreenHandler implements Initializ
         this.getBController().setCardInfo(cardInfo);
         try {
             this.getBController().validateCreditCardForm(cardInfo);
-//            this.getBController().validateCardUnused(cardNumber.getText().trim());
+            this.getBController().validateCardUnused(cardNumber.getText().trim());
             this.goToConfirmationScreen();
         } catch (FormException e) {
             errorText.setVisible(true);

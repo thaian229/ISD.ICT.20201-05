@@ -19,6 +19,7 @@ import model.session.Session;
 import model.session.SessionManager;
 import utils.Path;
 import views.screen.BaseScreenHandler;
+import views.screen.BaseScreenHandlerWithBarcodePopup;
 import views.screen.home.HomeScreenHandler;
 
 import java.io.IOException;
@@ -57,21 +58,21 @@ public class BarcodePopup extends Popup implements Initializable {
     @FXML
     Text errorText;
 
-    HomeScreenHandler homeScreenHandler;
+    BaseScreenHandlerWithBarcodePopup homeScreenHandler;
 
-    public BarcodePopup(Stage stage, HomeScreenHandler homeScreenHandler) throws IOException {
+    public BarcodePopup(Stage stage, BaseScreenHandlerWithBarcodePopup homeScreenHandler) throws IOException {
         super(stage, Path.POPUP_PATH);
         this.homeScreenHandler = homeScreenHandler;
         this.setBController(new BarcodePopupController());
     }
 
-    private static BarcodePopup popup(HomeScreenHandler homeScreenHandler) throws IOException {
+    private static BarcodePopup popup(BaseScreenHandlerWithBarcodePopup homeScreenHandler) throws IOException {
         BarcodePopup popup = new BarcodePopup(new Stage(), homeScreenHandler);
         popup.stage.initStyle(StageStyle.DECORATED);
         return popup;
     }
 
-    public static void display(HomeScreenHandler homeScreenHandler) throws IOException {
+    public static void display(BaseScreenHandlerWithBarcodePopup homeScreenHandler) throws IOException {
         popup(homeScreenHandler).show();
     }
 

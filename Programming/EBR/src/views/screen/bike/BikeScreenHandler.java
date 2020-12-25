@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.Bike;
@@ -13,6 +14,7 @@ import model.bike.StandardElectricalBike;
 import model.bike.TwinElectricalBike;
 import utils.Configs;
 import utils.Path;
+import views.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
 
@@ -22,12 +24,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BikeScreenHandler extends BaseScreenHandler implements Initializable {
-
-    @FXML
-    private ImageView logo;
-
-    @FXML
-    private ImageView back;
 
     @FXML
     private Button barcodeButton;
@@ -73,6 +69,9 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     @FXML
     private Button rentNowButton;
 
+    @FXML
+    private Pane navbar;
+
     private Bike bike;
 
     public BikeScreenHandler(Stage stage, String screenPath, Bike bike) throws IOException {
@@ -81,17 +80,11 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
         super.screenTitle = "Bike Screen";
         this.setImages();
         displayBike();
+        navbar.getChildren().add(new NavBarHandler(this, false).getContent());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logo.setOnMouseClicked(e -> homeScreenHandler.show());
-        back.setOnMouseClicked(e -> {
-            BaseScreenHandler previousScreen = this.getPreviousScreen();
-            previousScreen.setScreenTitle(previousScreen.getScreenTitle());
-            previousScreen.show();
-        });
-
         rentNowButton.setOnMouseClicked(e -> {
             System.out.println("Button clicked");
             try {
@@ -131,8 +124,6 @@ public class BikeScreenHandler extends BaseScreenHandler implements Initializabl
     }
 
     private void setImages() {
-        setImage(logo, Path.LOGO_ICON);
-        setImage(back, Path.BACK_NAV_ICON);
         setImage(saddleImg, Path.SADDLE_ICON);
         setImage(pedalsImg, Path.PEDALS_ICON);
         setImage(rearSeatImg, Path.REAR_SEAT_ICON);

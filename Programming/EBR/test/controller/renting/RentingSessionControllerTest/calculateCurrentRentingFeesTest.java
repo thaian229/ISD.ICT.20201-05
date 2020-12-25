@@ -1,7 +1,7 @@
 package controller.renting.RentingSessionControllerTest;
 
 import controller.SessionScreenController;
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
 
 import java.time.LocalDateTime;

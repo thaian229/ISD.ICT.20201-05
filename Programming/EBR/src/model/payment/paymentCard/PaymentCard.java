@@ -1,11 +1,11 @@
-package common.exception.cardException;
+package model.payment.paymentCard;
 
 /**
  * class for ...
  *
  * @author mHoang
  * <p>
- * created_at: 21/12/2020
+ * created_at: 25/12/2020
  * <p>
  * project name: EBR
  * <p>
@@ -15,8 +15,15 @@ package common.exception.cardException;
  * <p>
  * helpers: teacher's teaching assistants
  */
-public class CardUsedException extends FormException {
-    public CardUsedException() {
-        super("Card used for another session");
+public class PaymentCard {
+    protected String id;
+
+    public String getId() {
+        return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

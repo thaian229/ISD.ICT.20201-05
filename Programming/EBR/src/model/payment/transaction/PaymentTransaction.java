@@ -1,6 +1,7 @@
 package model.payment.transaction;
 
-import model.payment.creditCard.CreditCard;
+import model.payment.paymentCard.PaymentCard;
+import model.payment.paymentCard.creditCard.CreditCard;
 
 /**
  * Model to store Payment Transaction's info
