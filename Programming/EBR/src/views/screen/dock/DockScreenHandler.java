@@ -136,8 +136,8 @@ public class DockScreenHandler extends BaseScreenHandler implements Initializabl
             e.printStackTrace();
         }
 
-        dock.getBikeList().clear();
-        dock.getBikeList().addAll(this.bikeList);
+        dock.clearBikeList();
+        dock.addListOfBikes(this.bikeList);
         setDockDetail();
     }
 

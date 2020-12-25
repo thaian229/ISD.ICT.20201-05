@@ -294,7 +294,7 @@ public class BikeManager {
         }
 
         if (dockId != null && !dockId.equals("")) {
-            DockManager.getInstance().getDockById(dockId).getBikeList().add(bike);
+            DockManager.getInstance().getDockById(dockId).addBike(bike);
         }
     }
 }
