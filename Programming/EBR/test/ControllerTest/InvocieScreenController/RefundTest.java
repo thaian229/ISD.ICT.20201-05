@@ -1,11 +1,9 @@
-package returning;
+package ControllerTest.InvocieScreenController;
 
 import controller.InvoiceScreenController;
 import model.payment.transaction.PaymentTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This class controls the flow of place rush  order usecase in our AIMS project
