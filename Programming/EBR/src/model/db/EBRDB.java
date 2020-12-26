@@ -31,6 +31,7 @@ public class EBRDB {
     /**
      * Connect to the PostgreSQL database
      * @return a Connection object
+     * @throws SQLException sql errors
      */
     public static Connection getConnection() throws SQLException {
         if(conn == null || !conn.isValid(2000)) {

@@ -5,6 +5,12 @@ import utils.API;
 
 public class InterbankBoundary {
 
+	/**
+	 * call API to make HTTP request
+	 * @param url {@link java.net.URL}
+	 * @param data body of request
+	 * @return Http respond
+	 */
 	String query(String url, String data) {
 		String response = null;
 		try {

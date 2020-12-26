@@ -5,7 +5,7 @@ import model.payment.transaction.PaymentTransaction;
 
 import java.io.IOException;
 /**
- * transaction result popup
+ * base screen handler for transaction result popup
  *
  * @author mhong99
  * <p>

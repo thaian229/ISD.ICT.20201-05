@@ -1,8 +1,6 @@
 package controller;
 
 import common.exception.cardException.*;
-import model.session.Session;
-import model.session.SessionManager;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -27,7 +25,6 @@ public class CardFormController {
      * validating format of card info form
      *
      * @param creditCardForm all fields of form forward from View
-     * @return
      */
     public static void validateCreditCardForm(HashMap<String, String> creditCardForm) throws FormException{
         validateCardOwner(creditCardForm.get("cardOwner"));
@@ -40,7 +37,6 @@ public class CardFormController {
      * validate card number only contains digits, letters and underscore
      *
      * @param cardNumber string of card number
-     * @return validation result
      */
     public static void validateCardNumber(String cardNumber) {
         // check card number is not empty
@@ -56,7 +52,6 @@ public class CardFormController {
      * validate card owner only contains digits, letters and spaces
      *
      * @param cardOwner string of card owner
-     * @return validation result
      */
     public static void validateCardOwner(String cardOwner) {
         // check card owner is not empty
@@ -68,7 +63,6 @@ public class CardFormController {
      * validate security code only contains digits and length is 3
      *
      * @param securityCode string of security code
-     * @return validation result
      */
     public static void validateSecurityCode(String securityCode) {
         // check security code is not empty
@@ -84,7 +78,6 @@ public class CardFormController {
      * validate expiration date has correct format MMyy and not yet reached
      *
      * @param expDate string of expiration date
-     * @return validation result
      */
     public static void validateExpDate(String expDate) throws NullPointerException {
         // check expire date is not empty

@@ -20,6 +20,15 @@ public class InterbankSubsystemController {
 
     private static final InterbankBoundary interbankBoundary = new InterbankBoundary();
 
+    /**
+     * Make refund transaction
+     * @param card card to make transaction
+     * @param amount amount of money
+     * @param contents transaction content
+     * @return {@link PaymentTransaction}
+     * @throws PaymentException payment errors
+     * @throws UnrecognizedException unexpected errors
+     */
     public PaymentTransaction refund(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
         // set up transaction
         Map<String, Object> transaction = new MyMap();
@@ -58,6 +67,15 @@ public class InterbankSubsystemController {
         return makePaymentTransaction(response);
     }
 
+    /**
+     * Make pay transaction
+     * @param card card to make transaction
+     * @param amount amount of money
+     * @param contents transaction content
+     * @return {@link PaymentTransaction}
+     * @throws PaymentException payment errors
+     * @throws UnrecognizedException unexpected errors
+     */
     public PaymentTransaction payDeposit(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
         // set up transaction
         Map<String, Object> transaction = new MyMap();

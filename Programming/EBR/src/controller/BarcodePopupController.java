@@ -25,6 +25,7 @@ public class BarcodePopupController extends BaseController {
 
     /**
      * This method is used to validate barcode input
+     * @param barcode barcode to be checked
      * @return true if barcode is valid
      * @throws InvalidBarcodeFormatException wrong barcode format
      */

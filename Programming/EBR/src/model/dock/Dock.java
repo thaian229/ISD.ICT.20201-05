@@ -117,10 +117,17 @@ public class Dock {
         this.numberOfAvailableBike = bikeList.size();
     }
 
+    /**
+     * Clear all current bike list
+     */
     public void clearBikeList() {
         this.bikeList.clear();
     }
 
+    /**
+     * Add a collection of bikes into current bike list
+     * @param list {@link ArrayList} bikes to be added
+     */
     public void addListOfBikes(ArrayList<Bike> list) {
         this.bikeList.addAll(list);
     }

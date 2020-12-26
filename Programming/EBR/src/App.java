@@ -10,6 +10,10 @@ import java.io.IOException;
 
 public class App extends Application {
 
+    /**
+     * Method JavaFx call on start up
+     * @param primaryStage {@link Stage} main stage of javaFx application
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -33,6 +37,10 @@ public class App extends Application {
         }
     }
 
+    /**
+     * Software entry point
+     * @param args all environment passed variable
+     */
     public static void main(String[] args) {
         launch(args);
     }

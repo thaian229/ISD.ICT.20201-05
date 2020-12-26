@@ -1,7 +1,7 @@
 package model.payment.paymentCard;
 
 /**
- * description
+ * parent class for all payment method
  *
  * @author Nguyen Thai An
  * <p>

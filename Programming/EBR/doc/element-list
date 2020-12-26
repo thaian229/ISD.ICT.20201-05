@@ -4,10 +4,12 @@ common.exception.cardException
 controller
 controller.renting
 controller.renting.RentingSessionControllerTest
+controller.strategy
 model.bike
 model.db
 model.dock
 model.invoice
+model.payment.paymentCard
 model.payment.paymentCard.creditCard
 model.payment.transaction
 model.session
@@ -17,6 +19,7 @@ subsystem.interbank
 utils
 views.screen
 views.screen.bike
+views.screen.component
 views.screen.dock
 views.screen.home
 views.screen.invoice

@@ -39,6 +39,14 @@ public class NavBarHandler extends FXMLScreenHandler {
 
     private BaseScreenHandler parentScreenHandler;
 
+    /**
+     * Constructor for the nav bar
+     * @param screenHandler responsible handler
+     * @param buttonVisibility true/false to show/hide optional button
+     * @param backVisibility show/hide back button
+     * @param homeEnable show/hide home button
+     * @throws IOException IO errors
+     */
     public NavBarHandler(BaseScreenHandler screenHandler, boolean buttonVisibility,  boolean backVisibility,  boolean homeEnable) throws IOException {
         super(Path.NAVBAR_PATH);
         this.parentScreenHandler = screenHandler;
@@ -51,6 +59,10 @@ public class NavBarHandler extends FXMLScreenHandler {
         back.setDisable(!backVisibility);
     }
 
+    /**
+     * go to previous screen
+     * @param e {@link MouseEvent}
+     */
     @FXML
     void backClickHandler(MouseEvent e) {
             BaseScreenHandler previousScreen = parentScreenHandler.getPreviousScreen();
@@ -58,6 +70,10 @@ public class NavBarHandler extends FXMLScreenHandler {
             previousScreen.show();
     }
 
+    /**
+     * go to home screen
+     * @param e {@link MouseEvent}
+     */
     @FXML
     void logoClickHandler(MouseEvent e) {
         try {
@@ -68,6 +84,10 @@ public class NavBarHandler extends FXMLScreenHandler {
         }
     }
 
+    /**
+     * bring up barcode popup
+     * @param e {@link MouseEvent}
+     */
     @FXML
     void barcodeButtonClickHandler(MouseEvent e) {
         if(parentScreenHandler instanceof BaseScreenHandlerWithBarcodePopup) {
@@ -77,11 +97,5 @@ public class NavBarHandler extends FXMLScreenHandler {
                 exception.printStackTrace();
             }
         }
-
-
     }
-
-
-
-
 }

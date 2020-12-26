@@ -89,9 +89,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * 2 double quote.
 	 * 
 	 * @author hieudm
-	 * @param 
-	 * str - {@link String String}
-	 * idx - the index of the open quote
+	 * @param str {@link String String}
+	 * @param  idx the index of the open quote
 	 * @return the term as {@link String String}
 	 * @throws IllegalArgumentException invalid arguments
 	 */

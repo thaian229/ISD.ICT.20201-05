@@ -40,12 +40,13 @@ public class PaymentTransaction {
 
 	/**
 	 * constructor for create from database's info
-	 * @param id transaction's uuid
+	 * @param id uuid
+	 * @param transactionId id of transaction
 	 * @param type its type
 	 * @param amount transfer amount
 	 * @param method payment method
 	 */
-	public PaymentTransaction(String id,String transactionId, String type, int amount, String method) {
+	public PaymentTransaction(String id, String transactionId, String type, int amount, String method) {
 		this.id = id;
 		this.type = type;
 		this.amount = amount;

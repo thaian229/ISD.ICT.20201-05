@@ -11,7 +11,7 @@ import views.screen.session.SessionScreenHandler;
 import java.io.IOException;
 
 /**
- * class for ...
+ * base class for screen has barcode popup
  *
  * @author mHoang
  * <p>
