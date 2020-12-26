@@ -38,12 +38,12 @@
                         </Pane>
                         <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="1306.0" spacing="50.0" style="-fx-border-color: #8C36C0; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: #F5F5F5;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0">
                             <children>
-                                <VBox fx:id="vboxDockList1" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
+                                <VBox fx:id="vboxDockList1" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
                                     <opaqueInsets>
                                         <Insets left="50.0" right="50.0" />
                                     </opaqueInsets>
                                 </VBox>
-                                <VBox fx:id="vboxDockList2" alignment="CENTER" layoutX="93.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
+                                <VBox fx:id="vboxDockList2" alignment="TOP_CENTER" layoutX="93.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="50.0">
                                     <opaqueInsets>
                                         <Insets left="50.0" right="50.0" />
                                     </opaqueInsets>
