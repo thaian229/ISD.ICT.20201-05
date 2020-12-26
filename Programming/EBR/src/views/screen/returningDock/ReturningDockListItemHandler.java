@@ -51,11 +51,6 @@ public class ReturningDockListItemHandler extends FXMLScreenHandler {
         });
     }
 
-    public ReturningDockListItemHandler(String screenPath) throws IOException {
-        super(screenPath);
-    }
-
-
     /**
      * set the dock for handler and its info
      *

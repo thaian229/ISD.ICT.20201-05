@@ -41,15 +41,6 @@ public class InvoiceScreenController extends BaseController {
         this.feeCalculator = feeCalculator;
     }
 
-    //    public void confirmInvoice(Invoice invoice) throws SQLException {
-//        //user clicked to confirm invoice
-//    }
-//    // private int isValidReturned = 0;
-
-
-//    private HashMap<String, String> cardInfo = new HashMap<>();
-
-
     /**
      * This method is for calculating the total renting fees
      * @param invoice invoice to be computed fee
@@ -167,7 +158,7 @@ public class InvoiceScreenController extends BaseController {
     }
 
     public PaymentTransaction pay(int amount, String contents, String cardNumber, String cardHolderName,
-                                  String expirationDate, String securityCode) {
+                                  String expirationDate, String securityCode) throws PaymentException, UnrecognizedException{
         PaymentTransaction returnTransaction = null;
         Map<String, String> result = new HashMap<String, String>();
         result.put("RESULT", "PAYMENT FAILED!");
@@ -188,7 +179,7 @@ public class InvoiceScreenController extends BaseController {
         return returnTransaction;
     }
 
-    public PaymentTransaction makeTransaction(int amount, CreditCard card) {
+    public PaymentTransaction makeTransaction(int amount, CreditCard card)  throws PaymentException, UnrecognizedException {
         if (amount >= 0) {
             return this.refund(amount, "refund",
                     card.getCardNum(), card.getCardOwner(),
@@ -201,7 +192,7 @@ public class InvoiceScreenController extends BaseController {
         }
     }
 
-    public void returnBikeTransactions(Invoice invoice, PaymentTransaction returnTransaction) {
+    public void returnBikeProcessing(Invoice invoice, PaymentTransaction returnTransaction) {
         String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
         SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(invoice.getSessionId()), returnTransaction);
         InvoiceManager.getInstance().finalInvoice(invoice, this.calculateTotalFees(invoice));

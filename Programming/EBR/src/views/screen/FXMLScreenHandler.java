@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Base class for FXML handler
  *
- * @author mhong99
+ * @author mhoang99
  * <p>
  * creted at: 20/11/2020
  * <p>

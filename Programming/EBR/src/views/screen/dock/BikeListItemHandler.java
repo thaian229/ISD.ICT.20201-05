@@ -52,10 +52,6 @@ public class BikeListItemHandler extends FXMLScreenHandler {
 
     private Bike bike;
 
-    public BikeListItemHandler(String screenPath) throws IOException {
-        super(screenPath);
-    }
-
     /**
      * Constructor and initial setup for screen
      * @param screenPath path to fxml file

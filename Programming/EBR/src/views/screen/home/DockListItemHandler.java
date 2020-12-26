@@ -45,10 +45,6 @@ public class DockListItemHandler extends FXMLScreenHandler {
     private HomeScreenHandler homeScreen;
     private Dock dock;
 
-    public DockListItemHandler(String screenPath) throws IOException {
-        super(screenPath);
-    }
-
     public DockListItemHandler(String screenPath, HomeScreenHandler homeScreen, Dock dock) throws IOException {
         super(screenPath);
         this.homeScreen = homeScreen;

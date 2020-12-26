@@ -12,9 +12,9 @@ public class Configs {
 	public static final String RESET_URL = "https://ecopark-system-api.herokuapp.com/api/card/reset";
 
 	// database Configs
-	public static final String DB_NAME = "EBR";
-	public static final String DB_USERNAME = "postgres";
-	public static final String DB_PASSWORD = "22114455";
+	public static final String DB_NAME = "tqvcknvy";
+	public static final String DB_USERNAME = "tqvcknvy";
+	public static final String DB_PASSWORD = "0vdl180Q2Cv2Rbginla9-ccaxye-gL-S";
 
     public static String CURRENCY = "VND";
 	public static float PERCENT_VAT = 10;
