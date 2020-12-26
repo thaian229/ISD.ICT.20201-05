@@ -33,7 +33,7 @@
                     <children>
                         <ImageView fx:id="dockImg" fitHeight="250.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                             <image>
-                                <Image url="@../../../assets/images/Dock.jpg" />
+                                <Image url="@../../../assets/images/docks/Dock.jpg" />
                             </image>
                         </ImageView>
                         <GridPane layoutX="21.0" layoutY="327.0" prefHeight="39.0" prefWidth="186.0">
@@ -81,8 +81,8 @@
                      <children>
                         <HBox alignment="TOP_CENTER" prefWidth="757.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                                      <VBox fx:id="vboxDockList1" alignment="CENTER" spacing="30.0" />
-                              <VBox fx:id="vboxDockList2" alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="30.0" />
+                                      <VBox fx:id="vboxDockList1" alignment="TOP_CENTER" spacing="30.0" />
+                              <VBox fx:id="vboxDockList2" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" spacing="30.0" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" top="10.0" />
