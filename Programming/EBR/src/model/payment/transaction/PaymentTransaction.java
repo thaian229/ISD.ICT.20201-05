@@ -53,12 +53,6 @@ public class PaymentTransaction {
 		this.method = method;
 		this.transactionId = transactionId;
 	}
-
-	public PaymentTransaction(String type, int amount, String method) {
-		this.type = type;
-		this.amount = amount;
-		this.method = method;
-	}
 	
 	public String getErrorCode() {
 		return errorCode;

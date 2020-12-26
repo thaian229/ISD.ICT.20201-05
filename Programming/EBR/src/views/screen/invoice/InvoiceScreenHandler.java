@@ -226,7 +226,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
             returnTransaction.setCard(tmpCard);
 
 
-            this.getBController().returnBikeTransactions(this.invoice, returnTransaction);
+            this.getBController().returnBikeProcessing(this.invoice, returnTransaction);
             PaymentResultPopup.display(this, returnTransaction, "PAYMENT SUCCESSFUL");
 
         } catch (FormException e) {

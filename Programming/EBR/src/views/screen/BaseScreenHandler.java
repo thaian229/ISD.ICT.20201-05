@@ -27,10 +27,7 @@ public class BaseScreenHandler extends views.screen.FXMLScreenHandler {
 
 	private BaseScreenHandler prev;
 	protected final Stage stage;
-
-
 	protected HomeScreenHandler homeScreenHandler;
-	protected Hashtable<String, String> messages;
 	private BaseController bController;
 	protected String screenTitle = "";
 
@@ -103,14 +100,6 @@ public class BaseScreenHandler extends views.screen.FXMLScreenHandler {
 	 */
 	public BaseController getBController(){
 		return this.bController;
-	}
-
-	/**
-	 * Store message / info
-	 * @param messages {@link Hashtable} info to be set / sent
-	 */
-	public void forward(Hashtable messages) {
-		this.messages = messages;
 	}
 
 	/**

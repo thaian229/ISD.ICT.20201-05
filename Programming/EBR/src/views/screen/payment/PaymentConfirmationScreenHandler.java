@@ -229,7 +229,6 @@ public class PaymentConfirmationScreenHandler extends BaseScreenHandlerWithTrans
 
         // Save Renting Transaction
         String transactionId = PaymentTransactionManager.getInstance().savePaymentTransaction(rentTransaction);
-//        rentTransaction.setId(transactionId);
         PaymentResultPopup.display(this, rentTransaction, "PAYMENT SUCCESSFUL");
     }
 

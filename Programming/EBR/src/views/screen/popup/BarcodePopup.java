@@ -56,35 +56,35 @@ public class BarcodePopup extends Popup implements Initializable {
     @FXML
     Text errorText;
 
-    BaseScreenHandlerWithBarcodePopup homeScreenHandler;
+    BaseScreenHandlerWithBarcodePopup parentScreenHandler;
 
-    public BarcodePopup(Stage stage, BaseScreenHandlerWithBarcodePopup homeScreenHandler) throws IOException {
+    public BarcodePopup(Stage stage, BaseScreenHandlerWithBarcodePopup parentScreenHandler) throws IOException {
         super(stage, Path.POPUP_PATH);
-        this.homeScreenHandler = homeScreenHandler;
+        this.parentScreenHandler = parentScreenHandler;
         this.setBController(new BarcodePopupController());
     }
 
     /**
      * Init popup then return the popup
-     * @param homeScreenHandler {@link BaseScreenHandlerWithBarcodePopup homeScreenHandler}
+     * @param parentScreenHandler {@link BaseScreenHandlerWithBarcodePopup parentScreenHandler}
      * @return {@link BarcodePopup} the new Barcode Popup
      * @throws IOException IO error
      */
 
-    private static BarcodePopup popup(BaseScreenHandlerWithBarcodePopup homeScreenHandler) throws IOException {
-        BarcodePopup popup = new BarcodePopup(new Stage(), homeScreenHandler);
+    private static BarcodePopup popup(BaseScreenHandlerWithBarcodePopup parentScreenHandler) throws IOException {
+        BarcodePopup popup = new BarcodePopup(new Stage(), parentScreenHandler);
         popup.stage.initStyle(StageStyle.DECORATED);
         return popup;
     }
 
     /**
      * show the barcode popup
-     * @param homeScreenHandler {@link HomeScreenHandler homeScreenHandler}
+     * @param parentScreenHandler {@link HomeScreenHandler parentScreenHandler}
      * @throws IOException IO error
      */
 
-    public static void display(BaseScreenHandlerWithBarcodePopup homeScreenHandler) throws IOException {
-        popup(homeScreenHandler).show();
+    public static void display(BaseScreenHandlerWithBarcodePopup parentScreenHandler) throws IOException {
+        popup(parentScreenHandler).show();
     }
 
     private void setImages() {
@@ -131,9 +131,9 @@ public class BarcodePopup extends Popup implements Initializable {
             // Move to corresponding screen
             {
                 if (isRented) { // rented : to Session View
-                    homeScreenHandler.moveToSessionScreen(rentedSession);
+                    parentScreenHandler.moveToSessionScreen(rentedSession);
                 } else {    // not rent yet : to Bike View Screen
-                    homeScreenHandler.moveToBikeViewScreen(bike);
+                    parentScreenHandler.moveToBikeViewScreen(bike);
                 }
                 this.stage.close();
             }
