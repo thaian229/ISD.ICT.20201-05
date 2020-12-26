@@ -1,3 +1,31 @@
+# LAB 11 AND 12 - DESIGN PRINCIPLES AND DESIGN PATTERNS
+## Tasks
+Finalize EBR software. (refactoring, fix-bugs, UI overhaul)\
+Refactoring part of codes to make better designs following SOLID and using Design Pattern.\
+Updating all exist design documents and prepare final submission
+
+## Contributions
+#### 1. Nguyen Thai An:
+Refactoring codes and make report.\
+Updating SDD, SRS, Javadoc.
+
+#### 2. Bui Tu Hoang
+Updating Test plan, Unit Test.\
+Help preparing slides.
+
+#### 3. Vu Minh Hoang
+Refactorin codes, UI Overhaul.\
+Updating Screen Design documents and class desgin documents.
+
+#### 4. Nguyen Manh Khang
+Prepare installation guide and help preparing slides.\
+Updating Class and Database Design documents.
+
+## Revisions
+Cross-review between pairs: An-mHoang, Tu Hoang - Khang, An - Khang.
+
+---
+
 # LAB 10 - DESIGN CONCEPTS
 ## Tasks
 Continue implementing EBR software. (handlers and adding new Screen)\
