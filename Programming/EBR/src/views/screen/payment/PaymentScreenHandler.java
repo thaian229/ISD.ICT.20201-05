@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utils.Path;
-import views.component.NavBarHandler;
+import views.screen.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
 
 import java.io.IOException;

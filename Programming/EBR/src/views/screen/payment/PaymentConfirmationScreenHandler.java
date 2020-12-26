@@ -21,7 +21,7 @@ import model.session.Session;
 import model.session.SessionManager;
 import utils.Configs;
 import utils.Path;
-import views.component.NavBarHandler;
+import views.screen.component.NavBarHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
 import views.screen.popup.AlertPopup;
 import views.screen.popup.PaymentResultPopup;

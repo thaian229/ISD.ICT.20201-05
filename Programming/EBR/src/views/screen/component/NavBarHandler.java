@@ -1,4 +1,4 @@
-package views.component;
+package views.screen.component;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -5,7 +5,6 @@ import common.exception.cardException.FormException;
 import controller.InvoiceScreenController;
 import controller.PaymentScreenController;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -14,23 +13,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.invoice.Invoice;
-import model.invoice.InvoiceManager;
 import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.transaction.PaymentTransaction;
-import model.payment.transaction.PaymentTransactionManager;
-import model.session.SessionManager;
 import utils.Configs;
-import utils.Path;
 import utils.Utils;
-import views.component.NavBarHandler;
+import views.screen.component.NavBarHandler;
 import views.screen.BaseScreenHandlerWithTransactionPopup;
 import views.screen.popup.AlertPopup;
 import views.screen.popup.PaymentResultPopup;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 /**
  * Handler for the Invoice Screen
@@ -233,9 +226,7 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
             returnTransaction.setCard(tmpCard);
 
 
-            String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
-            SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(this.invoice.getSessionId()), returnTransaction);
-            InvoiceManager.getInstance().finalInvoice(this.invoice, this.getBController().calculateTotalFees(this.invoice));
+            this.getBController().returnBikeTransactions(this.invoice, returnTransaction);
             PaymentResultPopup.display(this, returnTransaction, "PAYMENT SUCCESSFUL");
 
         } catch (FormException e) {

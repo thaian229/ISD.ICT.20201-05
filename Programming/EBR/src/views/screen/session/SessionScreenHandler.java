@@ -14,12 +14,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.bike.Bike;
 import model.bike.StandardElectricalBike;
-import model.bike.TwinElectricalBike;
 import model.session.Session;
 import utils.Configs;
 import utils.Path;
 import utils.Utils;
-import views.component.NavBarHandler;
+import views.screen.component.NavBarHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.returningDock.ReturningDockSelectionHandler;
 

@@ -39,7 +39,6 @@ public class Path {
     public static final String X_ICON = "assets/images/icons/X_icon.png";
 
     // fxmls path
-    public static final String IMAGE_PATH = "assets/images";
     public static final String BLANK_SCREEN_PATH = "/views/fxml/blank.fxml";
     public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice.fxml";
     public static final String SESSION_SCREEN_PATH = "/views/fxml/session.fxml";
@@ -57,6 +56,5 @@ public class Path {
     public static final String RETURNING_DOCK_SELECTION_SCREEN_PATH = "/views/fxml/returning_dock_selection.fxml";
     public static final String PAYMENT_RESULT_POPUP_PATH = "/views/fxml/transaction_result_popup.fxml";
     public static final String ALERT_POPUP_PATH = "/views/fxml/alert_popup.fxml";
-
     public static final String NAVBAR_PATH = "/views/fxml/navbar.fxml";
 }

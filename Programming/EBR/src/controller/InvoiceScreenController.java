@@ -6,10 +6,12 @@ import common.exception.cardException.FormException;
 import controller.strategy.RentingFeeBySecondsCalculator;
 import controller.strategy.RentingFeeCalculator;
 import model.invoice.Invoice;
+import model.invoice.InvoiceManager;
 import model.payment.paymentCard.creditCard.CreditCard;
 import model.payment.paymentCard.creditCard.CreditCardManager;
 import model.payment.transaction.PaymentTransaction;
 import model.payment.transaction.PaymentTransactionManager;
+import model.session.SessionManager;
 import subsystem.InterbankSubsystem;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -197,5 +199,11 @@ public class InvoiceScreenController extends BaseController {
                     card.getCardNum(), card.getCardOwner(),
                     card.getExpDate(), Integer.toString(card.getSecurityCode()));
         }
+    }
+
+    public void returnBikeTransactions(Invoice invoice, PaymentTransaction returnTransaction) {
+        String id = PaymentTransactionManager.getInstance().savePaymentTransaction(returnTransaction);
+        SessionManager.getInstance().endSession(SessionManager.getInstance().getSessionById(invoice.getSessionId()), returnTransaction);
+        InvoiceManager.getInstance().finalInvoice(invoice, this.calculateTotalFees(invoice));
     }
 }

@@ -2,26 +2,22 @@ package views.screen.dock;
 
 import controller.DockScreenController;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.bike.*;
 import model.dock.Dock;
 import utils.Path;
-import views.component.NavBarHandler;
-import views.screen.BaseScreenHandler;
+import views.screen.component.NavBarHandler;
 import views.screen.BaseScreenHandlerWithBarcodePopup;
 import views.screen.bike.BikeScreenHandler;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+
 /**
  * Handler for Dock View Screen
  *

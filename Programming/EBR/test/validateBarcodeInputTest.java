@@ -1,5 +1,4 @@
 import common.exception.InvalidBarcodeFormatException;
-import controller.BarcodeController;
 import controller.BarcodePopupController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
