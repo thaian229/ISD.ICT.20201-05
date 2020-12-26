@@ -1,11 +1,10 @@
-package returning;
+package controllerTest.InvocieScreenController;
 
 import controller.InvoiceScreenController;
 import model.payment.transaction.PaymentTransaction;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This class controls the flow of place rush  order usecase in our AIMS project
@@ -29,15 +28,24 @@ public class RefundTest {
         invoiceScreenController = new InvoiceScreenController();
     }
     @Test
-    public void Test1() {
-//        Invoice invoice = new Invoice(invoiceId,sessionId,20000);
-//        invoice.setDepositForTest(100000);
-//        assertEquals(80000, invoiceScreenController.calculateReturned(invoice));
+    public void refundTest1() {
         String contents = "refund";
         PaymentTransaction returnTransaction = this.invoiceScreenController.refund(1000000000, contents,
                 "121319_group5_2020", "Group 5",
                 "1125", "721");
 
+    }
+
+    @Test
+    public void refundTest2() {
+        String contents = "refund";
+        try{
+            PaymentTransaction returnTransaction = this.invoiceScreenController.refund(1000000000, contents,
+                    "121319_group5_2020", "Group 5",
+                    "1124", "721");
+        }catch (Exception e) {
+            Assertions.assertEquals("ERROR: Invalid card!", e.getMessage());
+        }
     }
 
 }

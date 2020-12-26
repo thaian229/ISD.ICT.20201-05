@@ -2,6 +2,7 @@ package controller;
 
 import common.exception.BarcodeNotFoundException;
 import common.exception.InvalidBarcodeFormatException;
+import common.exception.NullBarcodeException;
 import model.bike.Bike;
 import model.bike.BikeManager;
 
@@ -30,8 +31,9 @@ public class BarcodePopupController extends BaseController {
      * @throws InvalidBarcodeFormatException wrong barcode format
      */
 
-    public int validateBarcodeInput(String barcode) throws InvalidBarcodeFormatException {
+    public int validateBarcodeInput(String barcode) throws InvalidBarcodeFormatException, NullBarcodeException {
         try {
+            if (barcode == null) throw new NullBarcodeException();
             return Integer.parseInt(barcode);
         } catch (NumberFormatException e) {
             throw new InvalidBarcodeFormatException();
