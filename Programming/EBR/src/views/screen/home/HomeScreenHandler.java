@@ -63,6 +63,7 @@ public class HomeScreenHandler extends BaseScreenHandlerWithBarcodePopup impleme
     public HomeScreenHandler(Stage stage, String screenPath, HomeScreenController homeScreenController) throws IOException {
         super(stage, screenPath);
         super.screenTitle = "Home Screen";
+        super.setHomeScreenHandler(this);
         super.setBController(homeScreenController);
         dockList = this.getBController().getDockList();
         navbar.getChildren().add(new NavBarHandler(this, true, false, false).getContent());
