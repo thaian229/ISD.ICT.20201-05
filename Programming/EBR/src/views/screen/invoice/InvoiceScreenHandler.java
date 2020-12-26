@@ -246,6 +246,6 @@ public class InvoiceScreenHandler extends BaseScreenHandlerWithTransactionPopup 
 
     @Override
     public void continueAfterPopupClosed(PaymentTransaction paymentTransaction) throws IOException {
-        homeScreenHandler.show();
+            homeScreenHandler.show();
     }
 }
