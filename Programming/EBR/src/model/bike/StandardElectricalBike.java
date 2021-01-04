@@ -1,5 +1,9 @@
 package model.bike;
 
+import controller.strategy.RentingFeeForEBikeCalculator;
+import controller.strategy.RentingFeeForStandardBikeCalculator;
+import controller.strategy.RentingFeeForTwinBikeCalculator;
+
 /**
  * Model for standard electrical bike
  *
@@ -34,6 +38,7 @@ public class StandardElectricalBike extends Bike {
         // this.charge = charge;
         this.battery = 100;
         this. timeLeft = 360;
+        feeCalculator = new RentingFeeForEBikeCalculator();
     }
 
     /**
@@ -54,6 +59,7 @@ public class StandardElectricalBike extends Bike {
         // this.charge = charge;
         this.battery = (float) 100;
         this. timeLeft = 360;
+        feeCalculator = new RentingFeeForEBikeCalculator();
     }
 
     public float getBattery() { return battery; }
