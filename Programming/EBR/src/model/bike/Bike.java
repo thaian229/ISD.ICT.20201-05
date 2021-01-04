@@ -1,5 +1,7 @@
 package model.bike;
 
+import controller.SessionScreenController;
+import controller.strategy.RentingFeeCalculator;
 import model.dock.Dock;
 
 /**
@@ -27,6 +29,7 @@ public class Bike {
     protected int deposit;
     protected int charge = 10000;
     protected String imageURL;
+    protected RentingFeeCalculator feeCalculator;
 
     public Bike() { }
 
@@ -138,4 +141,7 @@ public class Bike {
         return false;
     }
 
+    public RentingFeeCalculator getFeeCalculator() {
+        return feeCalculator;
+    }
 }

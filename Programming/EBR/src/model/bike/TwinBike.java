@@ -1,5 +1,8 @@
 package model.bike;
 
+import controller.strategy.RentingFeeForStandardBikeCalculator;
+import controller.strategy.RentingFeeForTwinBikeCalculator;
+
 /**
  * Model for twin bike
  *
@@ -27,6 +30,7 @@ public class TwinBike extends StandardBike {
         this.rearSeat = 1;
         this.pairOfPedals = 2;
         this.deposit = value/10;
+        feeCalculator = new RentingFeeForTwinBikeCalculator();
     }
 
     /**
@@ -42,6 +46,7 @@ public class TwinBike extends StandardBike {
         this.rearSeat = 1;
         this.pairOfPedals = 2;
         this.deposit = value/10;
+        feeCalculator = new RentingFeeForTwinBikeCalculator();
     }
     @Override
     public String getBikeType() {

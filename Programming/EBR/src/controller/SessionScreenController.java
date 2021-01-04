@@ -23,13 +23,6 @@ import model.session.SessionManager;
  */
 
 public class SessionScreenController extends BaseController {
-
-    private RentingFeeCalculator feeCalculator = new RentingFeeBySecondsCalculator();
-
-    public void setFeeCalculator(RentingFeeCalculator feeCalculator) {
-        this.feeCalculator = feeCalculator;
-    }
-
     /**
      * This method is for return a bike to a chosen dock
      * @param session current renting session
@@ -51,7 +44,7 @@ public class SessionScreenController extends BaseController {
      * @return amount of money that customer has to pay until now
      */
     public int calculateCurrentRentingFees(Session session) {
-        return feeCalculator.calculateCurrentRentingFees(session);
+        return session.getBike().getFeeCalculator().calculateCurrentRentingFees(session);
     }
 
     public long calculateSessionLength(Session session) {

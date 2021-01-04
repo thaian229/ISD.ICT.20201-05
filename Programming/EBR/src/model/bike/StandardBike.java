@@ -1,5 +1,7 @@
 package model.bike;
 
+import controller.strategy.RentingFeeForStandardBikeCalculator;
+
 /**
  * Model for standard bike
  *
@@ -14,6 +16,7 @@ package model.bike;
  * class name: TT.CNTT ICT 02 - K62
  */
 public class StandardBike extends Bike {
+
     public StandardBike(int barcode) {
         this.barcode = barcode;
         this.saddle = 1;
@@ -21,6 +24,7 @@ public class StandardBike extends Bike {
         this.pairOfPedals = 1;
         this.deposit = 1000000;
         // this.charge = 10000;
+        feeCalculator = new RentingFeeForStandardBikeCalculator();
     }
 
     /**
@@ -37,6 +41,7 @@ public class StandardBike extends Bike {
         this.value = value;
         this.deposit = value/10;
         // this.charge = charge;
+        feeCalculator = new RentingFeeForStandardBikeCalculator();
     }
 
     /**
@@ -55,6 +60,7 @@ public class StandardBike extends Bike {
         this.value = value;
         this.deposit = value/10;
         // this.charge = charge;
+        feeCalculator = new RentingFeeForStandardBikeCalculator();
     }
 
     @Override

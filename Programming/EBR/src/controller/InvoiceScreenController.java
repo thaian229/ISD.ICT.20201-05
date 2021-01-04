@@ -35,12 +35,6 @@ import java.util.Map;
 
 public class InvoiceScreenController extends BaseController {
 
-    RentingFeeCalculator feeCalculator = new RentingFeeBySecondsCalculator();
-
-    public void setFeeCalculator(RentingFeeCalculator feeCalculator) {
-        this.feeCalculator = feeCalculator;
-    }
-
     /**
      * This method is for calculating the total renting fees
      * @param invoice invoice to be computed fee
@@ -48,9 +42,8 @@ public class InvoiceScreenController extends BaseController {
      */
 
     public int calculateTotalFees(Invoice invoice) {
-        return feeCalculator.calculateTotalFees(invoice);
+        return invoice.getBike().getFeeCalculator().calculateTotalFees(invoice);
     }
-
 
     /**
      * This method is for calculating the returned deposit

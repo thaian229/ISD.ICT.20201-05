@@ -1,5 +1,8 @@
 package model.bike;
 
+import controller.strategy.RentingFeeForEBikeCalculator;
+import controller.strategy.RentingFeeForTwinEBikeCalculator;
+
 /**
  * Model for twin electrical bike
  *
@@ -29,6 +32,7 @@ public class TwinElectricalBike extends StandardElectricalBike{
         this.deposit = value/10;
         this.battery = 100;
         this.timeLeft = 360;
+        feeCalculator = new RentingFeeForTwinEBikeCalculator();
     }
 
     /**
@@ -46,6 +50,7 @@ public class TwinElectricalBike extends StandardElectricalBike{
         this.deposit = value/10;
         this.battery = 100;
         this. timeLeft = 360;
+        feeCalculator = new RentingFeeForTwinEBikeCalculator();
     }
 
     @Override
