@@ -1,3 +1,20 @@
+# AFTER FINAL SUBMISSION
+## Tasks
+Updating Interaction and Class Diagrams.  
+Changing code to make rental fee calculation binds with each type of bike.
+
+## Contributions
+#### 1. Nguyen Thai An:
+Updating Interaction and Class Diagrams.
+
+#### 2. Vu Minh Hoang
+Changing code to make rental fee calculation binds with each type of bike.
+
+## Revisions
+Cross-review between An and Minh Hoang.
+
+---
+
 # LAB 11 AND 12 - DESIGN PRINCIPLES AND DESIGN PATTERNS
 ## Tasks
 Finalize EBR software. (refactoring, fix-bugs, UI overhaul)\
